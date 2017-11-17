@@ -3,7 +3,7 @@
     <ul class='w3-ul w3-striped'>
       <li class='deep-purple w3-text-white w3-xlarge w3-center'>
         <img src="secured/assets/img/profile.jpg" class="w3-circle" style="width:120px"></img>
-        <b><br/>Admin options</b>
+        <b><br/>Navigation</b>
       </li>
       <button id="loadDashboardBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn w3-medium deep-purple-text darken-2 w3-light-grey"><i class="fa fa-home w3-margin-right "></i><b>Dashboard</b></button>
 
