@@ -4,7 +4,7 @@
       display: flex;
       min-height: 100vh;
       flex-direction: column;
-      font-family:system-ui;
+      font-family: 'Roboto', sans-serif;
 
     }
 
@@ -44,7 +44,7 @@
   <div class="section"></div>
       <div class="container ">
         <div class=" z-depth-1 grey w3-col s12 m6 l5 lighten-4 row w3-right " style="display: inline-block; padding: 7px 7px 0px 7px; border: 1px solid #EEE;">
-            <h2 class="w3-text-indigo w3-animate-zoom w3-bottombar w3-center w3-border-pink w3-hide-small" style="font-family:system-ui;">Monetize</h2>
+            <h2 class="w3-text-indigo w3-animate-zoom w3-bottombar w3-center w3-border-pink w3-hide-small" style="font-family: 'Roboto', sans-serif;">Monetize</h2>
             <label class="w3-text-indigo w3-animate-zoom w3-bottombar w3-center w3-border-pink w3-hide-large w3-hide-medium w3-xxlarge" style="">Monetize</label>
           <form class="col s12" method="post" action="javascript:void(0)">
             <div class='row'>

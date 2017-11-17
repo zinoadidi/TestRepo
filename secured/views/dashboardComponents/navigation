@@ -1,7 +1,8 @@
-   <div class="w3-sidebar w3-bar-block w3-striped w3-card-4 w3-animate-left w3-flat-clouds w3-top w3-bottombar border-purple" style="display:none;" id="mySidebar" >
+  
+   <div class="w3-sidebar w3-bar-block w3-striped w3-card-4 w3-animate-left w3-flat-clouds w3-top w3-bottombar border-purple" style="display:none; overflow:hidden" id="mySidebar" >
  
     <ul class='w3-ul w3-striped'>
-      <li class='deep-purple w3-text-white w3-xlarge w3-center'>
+      <li class=' w3-text-white w3-xlarge w3-center' id='profileArea' style="">
         <img src="secured/assets/img/profile.jpg" class="w3-circle" style="width:120px"></img>
         <b><br/>Navigation</b>
       </li>

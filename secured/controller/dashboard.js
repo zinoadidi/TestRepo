@@ -1,4 +1,7 @@
 startLoad();
+var navMan = {
+    status:'closed'
+}
 $(document).ready(function(){ 
     $( document ).ajaxStart(function() {
         startLoad();
@@ -22,6 +25,7 @@ function loadDefaults(){
 }
 
 function w3_open() {
+  navMan.status = 'open';
   document.getElementById("dashboadHeaderDiv").style.position = "relative";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "0";
   document.getElementById("mySidebar").style.zIndex = "1";
@@ -31,6 +35,7 @@ function w3_open() {
   document.getElementById("closeNav").style.display = 'inline-block';
 }
 function w3_close() { 
+  navMan.status = 'close';
   $('#mySidebar').hide("slide", { direction: "left" }, 200);
   //document.getElementById("dashboadHeaderDiv").style.zIndex = "10";
   //document.getElementById("mySidebar").style.zIndex = "0";
@@ -43,10 +48,15 @@ function w3_close() {
 }
 
 function monitorClicks(el){
-    var $mySidebar = document.getElementById("mySidebar");
-    if(el.id && (el.id =='dashboardDisplayDiv')){
-        if($mySidebar.style.display == 'block'){
+    console.log(el.id);
+    if(el.id == 'dashboardDisplayDiv' || el.id == null){
+        if(navMan.status == 'open'){
             w3_close()
-        }
+          }else{
+            
+          }
     }
+  
+
+
 }
