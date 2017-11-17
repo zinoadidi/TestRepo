@@ -1,0 +1,26 @@
+
+    <div id="dashboardDiv">
+        <div id="dashboardNavDiv"></div>
+        <div zclass="w3-main" id="main">
+            <div id="dashboadHeaderDiv" class=""></div>
+            <div>  
+            <div class="w3-spin loadingbar" style="position:fixed; top:20%; right:10%;z-index:1000">
+                <span class = "fa fa-spinner w3-jumbo w3-text-indigo "></span>
+            </div>
+            <div id="dashboardDisplayDiv" style="margin-top: 60px"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="secured/assets/js/jquery-ui/jquery-ui.min.js"></script>                          <!-- Load jQuery -->
+    <script src="secured/assets/fileupload/jquery.iframe-transport.js"></script>
+    <script src="secured/assets/fileupload/jquery.ui.widget.js"></script>
+    <script src="secured/assets/fileupload/jquery.fileupload.js"></script>
+    <script src="secured/assets/ajax/libs/vue.js"></script>
+    <script src="secured/assets/js/moment.js"></script>
+    <script type="text/javascript" src="secured/assets/DataTables/datatables.min.js"></script>
+    <script src="secured/assets/ajax/libs/Chart.min.js"></script>
+
+    <script type="text/javascript" src="secured/controller/dashboard.js"></script>
+

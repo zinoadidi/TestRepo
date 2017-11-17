@@ -1,0 +1,11 @@
+
+<div class="w3-card w3-top deep-purple " style="">
+	<button class="w3-button w3-text-white w3-xlarge deep-purple darken-2 " style='' onclick="w3_open()" id="openNav">&#9776;</button>
+	<button class="w3-button w3-text-white w3-xlarge deep-purple w3-hover-purple" onclick="w3_close()" id="closeNav" style="display:none">&#9776;</button>
+    <h4 class='w3-left w3-text-white w3-top' style="font-family:system-ui; margin-top:1%; display:inline-block; margin-left:10px"><b>MONETIZE</b></h4>
+</div>
+<style>
+	body{
+		font-family:system-ui;
+	}
+</style>

@@ -1,0 +1,75 @@
+<div id="viewSingleContentAppDiv">
+<div class='w3-card w3-bottombar w3-border-deep-purple' ><b><small><h5 class='w3-center deep-purple-text w3-margin-top' id="pageTitle"></h5></small></b></div>
+<div class="w3-responsive  w3-margin-left w3-padding ">
+  <table class="w3-table w3-hoverable w3-striped w3-card-4 hover strip table m-n w3-col m12 l12 s12  " id="contentsListTable">
+    <thead class="m12 l12 s12">
+    	<tr class="deep-purple w3-text-white">
+        <th>SN</th>
+        <th>Title</th>
+        <th>Created By</th>
+        <th>email</th>
+        <th>Phone</th>
+        <th>Category</th>
+        <th>Creation Date</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody class="m12 l12 s12"></tbody>
+    <tfoot class="m12 l12 s12"></tfoot>
+  </table>
+</div>
+
+<div class="w3-container">
+  <div id="viewSingleContentModal" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="">
+      <header class="w3-container w3-bottombar w3-border-grey deep-purple lighten-1"> 
+      
+      <label id="SingleContentTitleDiv" class="white-text  w3-center w3-margin-top w3-xlarge w3-padding">{{vm.title}} by {{vm.createdBy.firstName}}</label>
+      <span onclick="document.getElementById('viewSingleContentModal').style.display='none'" class="w3-button w3-display-topright white-text w3-large deep-purple lighten-1 ">&times;</span>
+      </header>
+	    <div class="w3-section" >
+        <div class="w3-container w3-white">
+          <div class="w3-col m8 l8 s8">
+            <table class="w3-table-all w3-striped w3-small w3-hoverable w3-col" id="SingleContentDetailDiv" style="max-width:600px !important">
+            </table>
+          </div>
+          <div class="w3-col m4 s4 l4 w3-center w3-ul"><li></li>
+            <li>
+              <label class="w3-large w3-margin deep-purple-text">Content Files</label>
+              <button class="w3-block w3-button deep-purple lighten-1 white-text w3-margin-bottom w3-padding" onclick="verifyContent(null,'approve')">View Cover Image</button>
+              <button class="w3-block w3-button deep-purple lighten-1 white-text" onclick="verifyContent(null,'approve')">View Content Media</button>
+            </li>
+            <li>
+              <label class="w3-large deep-purple-text">Approve Content</label>
+              <textarea class="w3-input" placeholder="message..." v-model="vm.approveMsg"></textarea>
+              <button class="w3-block w3-button deep-purple lighten-1 white-text" onclick="verifyContent(null,'approve')">Approve</button>
+            </li>
+            <li>
+               <label class="w3-large deep-purple-text">Reject Content</label>
+              <textarea class="w3-input" placeholder="message..." v-model='vm.rejectMsg'></textarea>
+              <button class="w3-block w3-button deep-purple lighten-1 white-text" onclick="verifyContent(null,'reject')">Reject</button>
+            </li>
+            <li>
+              <button onclick="document.getElementById('viewSingleContentModal').style.display='none'" type="button" class="w3-right w3-button deep-purple white-text w3-margin-top">close</button>
+            </li>
+            <li></li>
+          </div>
+        </div>
+	      
+	    </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript" src="secured/controller/contents.js"></script>
+<script>listContents(null,sessionStorage.contentType);</script>
+<script>
+  temporaryApp = new Vue({
+      el: '#viewSingleContentAppDiv',
+      data: {
+          vm: new Content(null)
+      }
+  });
+</script>

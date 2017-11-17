@@ -1,0 +1,124 @@
+   <div class="w3-sidebar w3-bar-block w3-striped w3-card-4 w3-animate-left w3-flat-clouds w3-top w3-bottombar border-purple" style="display:none;" id="mySidebar" >
+ 
+    <ul class='w3-ul w3-striped'>
+      <li class='deep-purple w3-text-white w3-xlarge w3-center'>
+        <img src="secured/assets/img/profile.jpg" class="w3-circle" style="width:120px"></img>
+        <b><br/>Admin options</b>
+      </li>
+      <button id="loadDashboardBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn w3-medium deep-purple-text darken-2 w3-light-grey"><i class="fa fa-home w3-margin-right "></i><b>Dashboard</b></button>
+
+      <!-- client options -->
+        <button id="clientOptionsBtn" class="w3-bar-item w3-button w3-hover-grey w3-medium deep-purple-text darken-2" onclick="navDropDown('clientOptionsNav')"><i class="fa fa-users w3-margin-right "></i><b>Client and Users</b></button>
+        <div id="clientOptionsNav" class="w3-hide">
+          <button id="viewClientsBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>View Clients</b></button>
+          <button id="viewUsersBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>View Users</b></button>
+        </div>
+
+      <!-- content providers options -->
+        <button id="contentProvidersOptionsBtn" class="w3-bar-item w3-button w3-hover-grey w3-medium deep-purple-text darken-2" onclick="navDropDown('contentProvidersOptionsNav')"><i class="fa fa-users w3-margin-right "></i><b>Content Providers</b></button>
+        <div id="contentProvidersOptionsNav" class="w3-hide">
+          <button id="viewProvidersBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>View Providers</b></button>
+        </div>
+
+      <!-- content options -->
+        <button id="contentOptionsBtn" class="w3-bar-item w3-button w3-hover-grey w3-medium deep-purple-text darken-2" onclick="navDropDown('contentOptionsNav')"><i class="fa fa-users w3-margin-right"></i><b>Content Options</b></button>
+        
+        <div id="contentOptionsNav" class="w3-hide">
+          <button id ="addContentBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>Add Contents</b></button>
+
+          <button id="viewAllContentsBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>All Contents</b></button>
+
+          <button id="viewPendingContentsBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>Pending Contents</b></button>
+
+          <button id="viewApprovedContentsBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>Approved Contents</b></button>
+
+          <button id="viewRejectedContentsBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-users w3-margin-right "></i><b>Rejected Contents</b></button>
+
+        </div>
+
+      <!-- Category options -->
+        <button id="categoryOptionsBtn" class="w3-bar-item w3-button w3-hover-grey w3-medium deep-purple-text darken-2" onclick="navDropDown('categoryOptionsNav')"><i class="fa fa-users w3-margin-right "></i><b>Category Options</b></button>
+        
+        <div id="categoryOptionsNav" class="w3-hide">
+          <button id="addCategoryBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-plus w3-margin-right "></i><b>Add Categories</b></button> 
+          <button id="viewCategoryBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-book w3-margin-right "></i><b>View Categories</b></button> 
+          <button id="addContentTypeBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-plus w3-margin-right "></i><b>Add Content Type</b></button> 
+          <button id="viewContentTypeBtn" class="w3-bar-item w3-button w3-hover-grey menuItemBtn deep-purple-text darken-2 w3-margin-left"><i class="fa fa-book w3-margin-right "></i><b>View Content Type</b></button> 
+        </div>
+  
+       <button id="logoutBtn" class="w3-bar-item w3-button w3-hover-grey w3-medium deep-purple-text darken-2"><i class="fa fa-home w3-margin-right "></i><b>Logout</b></button>
+    </ul>
+    </div>
+           
+    <script>
+
+        function navDropDown(id) {
+            var x = document.getElementById(id);
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+                x.previousElementSibling.className += " w3-grey";
+            } else { 
+                x.className = x.className.replace(" w3-show", "");
+                x.previousElementSibling.className = 
+                x.previousElementSibling.className.replace(" w3-grey", "");
+                x.previousElementSibling.style.backgroundColor = '#ecf0f1';
+            }
+        }
+        $('.menuItemBtn').click(function(){
+          $('.menuItemBtn').removeClass('w3-light-grey');
+          $(this).addClass('w3-light-grey');
+        });
+        $('#loadDashboardBtn').click(function(){
+          loadComponent('dashboard','stats','dashboardDisplayDiv');
+        });
+        $('#addCategoryBtn').click(function(){
+            loadComponent('categories','create','dashboardDisplayDiv');
+
+        });
+        $('#viewCategoryBtn').click(function(){
+            loadComponent('categories','view','dashboardDisplayDiv');
+        });
+
+        $('#addContentTypeBtn').click(function(){
+            loadComponent('content-type','create','dashboardDisplayDiv');
+
+        });
+        $('#viewContentTypeBtn').click(function(){
+            loadComponent('content-type','view','dashboardDisplayDiv');
+        });
+
+        $('#viewUsersBtn').click(function(){
+            loadComponent('users','view/all','dashboardDisplayDiv');
+        });
+        $('#viewClientsBtn').click(function(){
+            loadComponent('users','view/clients','dashboardDisplayDiv');
+        });
+        $('#viewProvidersBtn').click(function(){
+            loadComponent('users','view/providers','dashboardDisplayDiv');
+        });
+        $('#addContentBtn').click(function(){
+            loadComponent('contents','create','dashboardDisplayDiv');
+        });
+        $('#viewAllContentsBtn').click(function(){
+            sessionStorage.contentType = 'all';
+            loadComponent('contents','view','dashboardDisplayDiv');
+        });
+        $('#viewPendingContentsBtn').click(function(){
+            sessionStorage.contentType = 'pending';
+            loadComponent('contents','view','dashboardDisplayDiv');
+        });
+        $('#viewApprovedContentsBtn').click(function(){
+            sessionStorage.contentType = 'approved';
+            loadComponent('contents','view','dashboardDisplayDiv');
+        });
+        $('#viewRejectedContentsBtn').click(function(){
+            sessionStorage.contentType = 'rejected';
+            loadComponent('contents','view','dashboardDisplayDiv');
+        });
+        $('#logoutBtn').click(function(){
+            logout();
+        });
+    </script>
+                
+             
+                
