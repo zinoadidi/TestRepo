@@ -11,23 +11,29 @@
 		<!-- Styles -->
 		<style type="text/css">
 			#loadingDiv {
-			  background-color: #222;
+			  background-color: #4A3657;
 			}
 			#preloader {
 			    position: fixed;
 			    top: 0;
 			    left: 0;
 			    width: 100%;
-			    height: 100%;
+				height: 100%;
+				background-color: #4A3657;
+			}
+			#loadingImg{
+			    position: fixed;
+				left: 42%;
+			    top: 40%;
 			}
 			#loader {
 			    display: block;
 			    position: relative;
-			    left: 50%;
-			    top: 50%;
-			    width: 150px;
-			    height: 150px;
-			    margin: -75px 0 0 -75px;
+				left: 44%;
+			    top: 55%;
+			    width: 45px;
+			    height: 45px;
+			    
 			    border-radius: 50%;
 			    border: 3px solid transparent;
 			    border-top-color: #9370DB;
@@ -99,8 +105,12 @@
 	</body>
 
 	<footer>
-		<div id="loadingbar" style="z-index: 50; position: fixed;" class="w3-top loadingbar">
+		<div id="loadingbar" style="z-index: 1000; position: fixed;" class="w3-top loadingbar">
+			
 			<div id="preloader" >
+			  <img src='img/logo.png' height="70" id="loadingImg" class="w3-hide-large w3-hide-medium">
+			  <img src='img/logo.png' height="120" id="loadingImg" class="w3-hide-small w3-hide-large">
+			  <img src='img/logo.png' height="200" id="loadingImg" class="w3-hide-small w3-hide-medium">
 			  <div id="loader"></div>
 			</div>	
 		</div>

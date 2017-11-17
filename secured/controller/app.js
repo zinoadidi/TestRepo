@@ -1,4 +1,5 @@
     $(document).ready(function(){ 
+       
         //load extra files
         checklogin();   
 
