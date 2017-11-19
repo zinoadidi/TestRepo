@@ -1,8 +1,10 @@
 
-<div class="w3-card w3-top background-color" style="">
+<div class="w3-card w3-top background-color " style="">
 	<button class="w3-button w3-text-white w3-xlarge darken-2 w3-ripple" style='' onclick="w3_open()" id="openNav">&#9776;</button>
 	<button class="w3-button w3-text-white w3-xlarge w3-hover-purple" onclick="w3_close()" id="closeNav" style="display:none">&#9776;</button>
-    <h4 class='w3-left w3-text-white w3-top' style="margin-top:1%; display:inline-block; margin-left:10px">PAYDAY</h4>
+    <span class='w3-text-white w3-top w3-margin w3-padding' style="margin-top:5%; display:inline-block;left:30%;">
+	<img src='img/logo.png' height="120" id="" >
+	</span>
 </div>
 <style>
 	body{

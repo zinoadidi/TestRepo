@@ -5,15 +5,12 @@
         <div zclass="w3-main" id="main">
             <div id="dashboadHeaderDiv" class=""></div>
             <div>  
-            <div class="w3-spin loadingbar" style="position:fixed; top:20%; right:10%;z-index:1000">
-                <span class = "fa fa-spinner w3-jumbo w3-text-indigo "></span>
+            <div class="loadingbar" style="position:fixed; top:45%; right:45%;z-index:1000">
+                <div>
+                    <div id="loader" class="w3-spin"></div>
+                </div>
             </div>
-            <div id="loadingbar" >
-			  <img src='img/logo.png' height="70" id="loadingImg" class="w3-hide-large w3-hide-medium">
-			  <img src='img/logo.png' height="120" id="loadingImg" class="w3-hide-small w3-hide-large">
-			  <img src='img/logo.png' height="200" id="loadingImg" class="w3-hide-small w3-hide-medium">
-			  <div id="loader"></div>
-			</div>	
+            
             <div id="dashboardDisplayDiv" style="margin-top: 60px"></div>
             </div>
         </div>

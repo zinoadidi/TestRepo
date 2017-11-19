@@ -25,14 +25,15 @@ function loadDefaults(){
 }
 
 function w3_open() {
-  navMan.status = 'open';
+    setTimeout(function () { navMan.status = 'open' }, 300);
   document.getElementById("dashboadHeaderDiv").style.position = "relative";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "0";
   document.getElementById("mySidebar").style.zIndex = "1";
-  document.getElementById("mySidebar").style.width = "75%";
+  document.getElementById("mySidebar").style.width = "50vw";
   document.getElementById("mySidebar").style.display = "block";
   document.getElementById("openNav").style.display = 'none';
   document.getElementById("closeNav").style.display = 'inline-block';
+  
 }
 function w3_close() { 
   navMan.status = 'close';
@@ -48,13 +49,13 @@ function w3_close() {
 }
 
 function monitorClicks(el){
-    console.log(el.id);
-    if(el.id == 'dashboardDisplayDiv' || el.id == null){
-        if(navMan.status == 'open'){
+    //console.log(el.id)
+    if (el.id == 'dashboardNavDiv' || el.id == 'dashboadHeaderDiv'){
+        if (el.id == 'dashboadHeaderDiv' && navMan.status == 'open'){
             w3_close()
-          }else{
-            
           }
+    }else{
+        w3_close()
     }
   
 

@@ -1,9 +1,19 @@
 #profileArea{
-    background-image: url("secured/assets/img/arm-bg.jpg");
+    background-image: url("../img/arm-bg.jpg");
     background-color: #281332;
     background-size: contain;
+    background-repeat: no-repeat
 }
 
 .background-color{
     background-color: #281332;
+}
+
+#mySidebar{
+    background-color: #bbb;
+}
+
+.navFontSize{
+    font-size:4vw !important;
+    font-weight: 800 !important;
 }
