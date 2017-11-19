@@ -4,13 +4,20 @@
     background-size: contain;
     background-repeat: no-repeat
 }
+.img-background{
+    /* background-image: url("../img/dashboard-bg.jpg"); */
+    background-color: #53475f;
+    background-size:cover;
+    background-position: center; 
+    background-repeat: no-repeat
+}
 
 .background-color{
     background-color: #281332;
 }
 
 #mySidebar{
-    background-color: #bbb;
+    background-color: #dadad5;
 }
 
 .navFontSize{
@@ -24,6 +31,10 @@ navBtnOpen{
 .header{
     height:auto; 
     
+}
+
+.nav-text-color{
+
 }
 
 .force-center{
