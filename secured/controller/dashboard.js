@@ -27,8 +27,8 @@ function loadDefaults(){
 function w3_open() {
     setTimeout(function () { navMan.status = 'open' }, 300);
   document.getElementById("dashboadHeaderDiv").style.position = "relative";
-  document.getElementById("dashboadHeaderDiv").style.zIndex = "0";
-  document.getElementById("mySidebar").style.zIndex = "1";
+  document.getElementById("dashboadHeaderDiv").style.zIndex = "9";
+  document.getElementById("mySidebar").style.zIndex = "10";
   document.getElementById("mySidebar").style.width = "50vw";
   document.getElementById("mySidebar").style.display = "block";
   document.getElementById("openNav").style.display = 'none';
@@ -38,8 +38,8 @@ function w3_open() {
 function w3_close() { 
   navMan.status = 'close';
   $('#mySidebar').hide("slide", { direction: "left" }, 200);
-  //document.getElementById("dashboadHeaderDiv").style.zIndex = "10";
-  //document.getElementById("mySidebar").style.zIndex = "0";
+  document.getElementById("dashboadHeaderDiv").style.zIndex = "10";
+  document.getElementById("mySidebar").style.zIndex = "9";
   document.getElementById("main").style.marginLeft = "0%";
   document.getElementById("dashboadHeaderDiv").style.position = "fixed";  
   //document.getElementById("mySidebar").style.display = "none";

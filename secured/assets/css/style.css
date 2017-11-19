@@ -17,3 +17,17 @@
     font-size:4vw !important;
     font-weight: 800 !important;
 }
+navBtnOpen{
+    font-size:7vw !important;
+    font-weight: 800 !important;
+}
+.header{
+    height:auto; 
+    
+}
+
+.force-center{
+    position: absolute;
+    left:45%;
+    right:45%;
+}
