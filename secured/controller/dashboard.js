@@ -38,8 +38,8 @@ function w3_open() {
 function w3_close() { 
   navMan.status = 'close';
   $('#mySidebar').hide("slide", { direction: "left" }, 200);
+  document.getElementById("mySidebar").style.zIndex = "11";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "10";
-  document.getElementById("mySidebar").style.zIndex = "9";
   document.getElementById("main").style.marginLeft = "0%";
   document.getElementById("dashboadHeaderDiv").style.position = "fixed";  
   //document.getElementById("mySidebar").style.display = "none";
