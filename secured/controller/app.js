@@ -26,6 +26,8 @@
 
     /* Basic Functions */
     function login(data){
+        alert();
+
         if (data) {
             var result = data;
             if (result.success == true){
@@ -43,28 +45,34 @@
             }            
             return false;
         }
-        var email = document.getElementById('loginUser').value;
-        var pass = document.getElementById('loginPass').value; 
+        var email = document.getElementById('Username').value;
+        var pass = document.getElementById('Password').value; 
+        
         var data = {
-            "email":email,
-            "password":pass
+            "Username":email,
+            "Password":pass
         };
-        sendAPIData('user/authenticate',data,'login');
+        if (validateObj(data)){
+            renda.postData('/authenticate/login',data,'login');
+            
+        }else{
+            return false;
+        }
         return false;  
     }
 
     function checklogin(){
       if (typeof(Storage) !== "undefined") {
             if(sessionStorage.loggedin){ 
-                if (currentPage == 'dashboard') {
+                if (renda.Config.currentPage == 'dashboard') {
                     return false;
                 }else{
-                    loadPage('dashboard');
+                    renda.page('dashboard');
                 }
                 return false;
             }else{
-                if (currentPage == 'dashboard' || currentPage == '') {
-                    loadPage('login');
+                if (renda.Config.currentPage == 'dashboard' || renda.Config.currentPage == '') {
+                    renda.page('login');
                     
                     return false;
                 }else{

@@ -38,3 +38,10 @@ function Content(obj){
 
 }
 
+function User(obj){
+    this.createdBy = obj == null ? '' : obj.createdBy;
+    this.approveMsg = obj == null ? '' : obj.approveMsg;
+    this.rejectMsg = obj == null ? '' : obj.rejectMsg;
+
+}
+
