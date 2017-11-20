@@ -106,7 +106,6 @@
 
 	<footer>
 		<div id="loadingbar" style="z-index: 1000; position: fixed;" class="w3-top loadingbar">
-			
 			<div id="preloader" >
 			  <img src='img/logo.png' height="70" id="loadingImg" class="w3-hide-large w3-hide-medium">
 			  <img src='img/logo.png' height="120" id="loadingImg" class="w3-hide-small w3-hide-large">
@@ -116,19 +115,21 @@
 		</div>
 		
 		<!-- scripts -->
-		<script src="secured/assets/js/jquery-3.2.1.min.js"></script>		
+		<script src="secured/assets/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript">
 			$(document).bind("mobileinit", function() {
 				$.support.cors = true;
 				$.mobile.allowCrossDomainPages = true;
 			});
 		</script>
-		
+		<script src="secured/assets/js/renda/renda.js"></script>		
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+
 		<script src="secured/model/constants.js"></script>
 		<script src="secured/model/models.js"></script>
 		<script src="secured/route/routes.js"></script>
+		<script src="secured/model/config.js"></script>
 		<script src="secured/controller/app.js"></script>	
 		<script src="secured/assets/js/toastr.js"></script>
 		<script src="secured/assets/js/jwt-decode.min.js"></script>

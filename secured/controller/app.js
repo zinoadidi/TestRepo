@@ -56,15 +56,15 @@
     function checklogin(){
       if (typeof(Storage) !== "undefined") {
             if(sessionStorage.loggedin){ 
-                if (currentPage == 'dashboard') {
+                if (renda.Config.currentPage == 'dashboard') {
                     return false;
                 }else{
-                    loadPage('dashboard');
+                    renda.page('dashboard');
                 }
                 return false;
             }else{
-                if (currentPage == 'dashboard' || currentPage == '') {
-                    loadPage('login');
+                if (renda.Config.currentPage == 'dashboard' || renda.Config.currentPage == '') {
+                    renda.page('login');
                     
                     return false;
                 }else{
