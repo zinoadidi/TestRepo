@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
 /*---- General Styles -----*/
-@font-face {
+/* @font-face {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-style: normal;
@@ -47,10 +47,10 @@
     font-weight: 500;
     font-style: normal;
 }
-
+*/
 * {
     -webkit-backface-visibility: hidden;
-}
+} 
 
 *:after, *:before {
     box-sizing: border-box;
@@ -64,7 +64,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 900;
-    background-color: #372d45;
+    background: #281332;
 }
 
 img {
@@ -78,8 +78,8 @@ a {
 }
 
 div {
-    background-size: cover;
-    background-position: center;
+    /*background-size: cover;*/
+    /*background-position: center;*/
 }
 
 a:hover {
@@ -101,7 +101,7 @@ a:focus {
     background: #48354f; color: white;
     border: 1px solid #efefef; padding: 10px 20px;
     margin-bottom: 15px; border-radius: 5px;
-    font-weight: 700; font-family: "Lato", sans-serif;
+    font-weight: 700; font-family: 'Roboto', sans-serif;
 }
 .btn {
     display: block;
@@ -187,7 +187,7 @@ header #login-button-holder a span {
     margin-top: 30px;
 }
 nav {
-  margin-left: 50px;  font-family: "Lato", sans-serif;
+  margin-left: 50px;  font-family: 'Roboto', sans-serif;
   float: right; margin-top: 30px;
 }
 /* line 50, ../sass/screen.scss */
@@ -341,7 +341,7 @@ nav ul li:last-child{
 }
 
 footer {
-    background-color: #f9f9f9;
+    background-color: #281332;
     height: 150px;
 }
 
@@ -354,8 +354,9 @@ footer {
     padding-bottom: 30px;
     position: absolute;
     top: 0;
-    background: url('../images/login_page_background.jpg') no-repeat center;
+    /*background: url('../images/login_page_background.jpg') no-repeat center;*/
     background-size: cover;
+    background: #281332;
     color: #ffffff;
 }
 
@@ -364,7 +365,7 @@ footer {
 }
 
 .login-main-container header, .register-main-container header, .setup-main-container header {
-    /*height: 100px;*/
+    height: 100px;
     color: #ffffff;
     overflow: hidden;
     /*padding-top: 30px;*/
@@ -396,8 +397,8 @@ footer {
 }
 
 .login-main-container .login-form-container .welcome-text, .register-main-container .register-form-container .welcome-text {
-    font-size: 4.5vw;
-    /*padding: 15px;*/
+    font-size: 3.5vw;
+    padding: 15px;
     font-weight: 400;
     margin-top: 40px;
     font-family: 'Roboto', sans-serif !important;
@@ -429,11 +430,13 @@ footer {
     
 }
 #gender-icon-holder {
-    background-image: url('../images/male-and-female.png');
+    
 }
-
 #marital-icon-holder {
-    background-image: url('../images/marital.png'); transform: initial;
+    background-image: url('../images/marital.png');
+        background-size: cover;
+    background-position: center;
+
 }
 
 #age-icon-holder {
@@ -511,7 +514,7 @@ footer {
     margin-top:-13px; display:block; text-decoration: underline;
 }
 .login-main-container .login-form-container .form-holder .alert{
-   /* font-family: "Lato", sans-serif; font-weight: 700;*/
+   /* font-family: 'Roboto', sans-serif; font-weight: 700;*/
 }
 /*--- Register Form Container ---*/
 .update-forms-holder{
@@ -627,7 +630,7 @@ footer {
 
 .setup-form-container .welcome-text{
     font-size: 18px; padding: 15px; margin-top: 10px;
-    font-family: "Lato", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 .goal_single.alert-info{
     padding:6px 35px 6px 10px; font-weight: 400; border-radius: 0px;
@@ -674,10 +677,10 @@ footer {
 }
 .faqs-title{
     color: #fff; padding: 10px 0; text-align: center;
-    background: #000; margin-top: 30px; font-family: "Lato", sans-serif;
+    background: #000; margin-top: 30px; font-family: 'Roboto', sans-serif;
 }
 #faqs{
-    color: #fff; margin: 30px auto 50px;  font-family: "Lato", sans-serif;
+    color: #fff; margin: 30px auto 50px;  font-family: 'Roboto', sans-serif;
 }
 .faqs{
     width: 50%;
@@ -696,11 +699,11 @@ footer {
 #faqs h3.active { color:#fff; }
 #faqs div { 
     height:0; overflow:hidden; position:relative; padding: 10px; font-weight: 300;
-    background: white; color: #000; font-family: "Lato", sans-serif;
+    background: white; color: #000; font-family: 'Roboto', sans-serif;
 }
 #faqs div p,#faqs div li { 
     padding:0; margin-bottom:0px; line-height: 25px; font-size: 15px;
-    font-weight: 400; font-family: "Lato", sans-serif;
+    font-weight: 400; font-family: 'Roboto', sans-serif;
 }
 .faqs h1{
     font-size: 22px; text-align: center; margin-bottom: 10px; margin-top: 30px;
@@ -781,7 +784,7 @@ ul.goal_tile{
 }
 .goal_tile li .desc{
     background: #1a1a1a; border-radius: 0px 0px 4px 4px;
-    color: #fff; font-family: "Lato", sans-serif;
+    color: #fff; font-family: 'Roboto', sans-serif;
     padding: 13px 10px; font-size: 16px;
     -moz-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
@@ -804,7 +807,7 @@ ul.goal_tile{
     display: inline-block; color: #000;
     font-size: 14px; position: relative;
     overflow: hidden; line-height: 1.4;
-    font-family: "Lato", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 .general_title a span{
     position: absolute; width: 100%; left: 0px;
@@ -832,7 +835,7 @@ ul.goal_tile{
 }
 .centralize_div{
     margin: 0 auto; float: none;
-    font-family: "Lato", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 .panel-remove-card{
     margin-top: 30px; float: left; 
@@ -918,12 +921,12 @@ ul.goal_tile{
     font-weight: 700;
 }
 .setup-main-container .setup-form-container .form-field-holder .text-field select option{
-    color: #000 !important;  font-family: "Lato", sans-serif;
+    color: #000 !important;  font-family: 'Roboto', sans-serif;
 }
 .setup-main-container .setup-form-container textarea,
 .setup-main-container .setup-form-container .form-field-holder .text-field input,
 .login-main-container .login-form-container .form-field-holder .text-field input{
-    font-family: "Lato", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 .setup-main-container .setup-form-container textarea::-webkit-input-placeholder,
 .setup-main-container .setup-form-container .form-field-holder .text-field input::-webkit-input-placeholder,
@@ -952,7 +955,7 @@ ul.goal_tile{
   color: black;
 }
 .notifications-list-container ul {
-    overflow: hidden; width: 100%; font-family: "Lato", sans-serif;
+    overflow: hidden; width: 100%; font-family: 'Roboto', sans-serif;
     list-style: none; color: #333; padding: 0; font-weight: 400;
 }
 .notifications-list-container ul li{
@@ -1052,9 +1055,3 @@ a.rp_link{
 
 
 
-/*Zino Adidi Styles*/
-
-.input-text-medium{
-    font-size: 4.0vw !important;
-    font-weight: 500;
-}

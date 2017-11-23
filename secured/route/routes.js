@@ -1,6 +1,6 @@
 function loadPage(page){
 	startLoad();
-	var url = monetizeViewBaseUrl+page;
+	var url = 'secured/views/pages/'+page+'.html';
     $.get(url,
     {
     },

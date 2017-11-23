@@ -1,33 +1,36 @@
-#profileArea{
-    background-image: url("../img/arm-bg.jpg");
-    background-color: #281332;
+#profileArea{ 
+    /*background-image: url("../img/arm-bg.jpg");*/
+    background-color: #29313C;
     background-size: contain;
     background-repeat: no-repeat
 }
 .img-background{
     /* background-image: url("../img/dashboard-bg.jpg"); */
-    background-color: #53475f;
+    background-color: #F1F4F8;
     background-size:cover;
     background-position: center; 
     background-repeat: no-repeat
 }
 
 .background-color{
-    background-color: #281332;
+    background-color: #F1F4F8;
 }
 
 #mySidebar{
-    background-color: #53475f;
+    background-color: #29313C;
 }
 
 .navFontSize{
-    font-size:4vw !important;
-    font-weight: 800 !important;
+    font-size:3.5vw !important;
+    font-weight: 500 !important;
 }
-navBtnOpen{
+.r-nav-item{
+    /*padding:1.5px 16px !important*/
+}
+/*navBtnOpen{
     font-size:7vw !important;
     font-weight: 800 !important;
-}
+}*/
 .header{
     height:auto; 
     
@@ -41,4 +44,60 @@ navBtnOpen{
     position: absolute;
     left:45%;
     right:45%;
+}
+html, body {height: 100%;}
+#display {min-height: 100%;background: #F1F4F8 !important}
+/*Zino Adidi Styles*/
+
+.input-text-medium{
+    font-size: 4.0vw !important;
+    font-weight: 500;
+}
+
+.input-text-large{
+    font-size: 4.0vw !important;
+    font-weight: 500;
+}
+input{
+    padding-left: 10px;
+    
+}
+
+.input-text-small{
+    font-size: 2.0vw !important;
+    font-weight: 250;
+}
+.input-text-fixed{
+    font-size: 1.0em !important;
+    font-weight: 300;
+}
+.padding-left: {
+    padding-left: 10px !important;
+    
+}
+
+.icon-mod{
+    background-size: cover;
+    background-position: center;
+    font-size: 3.0em !important;
+}
+
+.font-size-3em{
+
+}
+
+.dash-tab-current{
+
+}
+
+.header-color{
+    background:#2B333E;
+}
+
+.display-block{
+ display: block;
+}
+
+.display-inline{
+ display: inline-block;
 }
