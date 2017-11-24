@@ -26,6 +26,7 @@ function Dashboard(obj){
 function Goal(obj){
     this.GoalId = obj == null ? '' : obj.GoalId;
     this.AppUserId = obj == null ? '' : obj.AppUserId;
+    this.UserId = obj == null ? '' : obj.UserId;
     this.ItemName = obj == null ? '' : obj.ItemName;
     this.ItemDescription = obj == null ? '' : obj.ItemDescription;
     this.GoalAmount = obj == null ? '' : obj.GoalAmount;
@@ -69,7 +70,6 @@ function User(obj){
     this.SecurityQuestion = obj == null ? '' : obj.SecurityQuestion;
     this.SecurityAnswer = obj == null ? '' : obj.SecurityAnswer;
     this.Surname = obj == null ? '' : obj.Surname;
-
 }
 
 var payday = {
@@ -84,4 +84,21 @@ function updateUserData(){
 var commonData = {
     User:new User(null),
     Dashboard: new Dashboard(null)
+}
+function updateDataFromApi(data){
+    if (data) { 
+        stats(data,1)
+        let result = JSON.parse(data);
+        if (result.status == 200){
+                sessionStorage.UserInfo = JSON.stringify(result)
+                updateUserData() 
+
+        }else{
+        }        
+        return false;
+    }else{
+        renda.get('/dashboardData/'+sessionStorage.UserId,'updateDataFromApi');
+    }
+    
+    return false;  
 }

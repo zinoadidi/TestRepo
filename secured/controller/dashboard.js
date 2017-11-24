@@ -22,7 +22,7 @@ function loadDefaults(){
 }
 
 function w3_open() {
-    setTimeout(function () { navMan.status = 'open' }, 200);
+  setTimeout(function () { navMan.status = 'open' }, 100);
   document.getElementById("dashboadHeaderDiv").style.position = "relative";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "9";
   document.getElementById("mySidebar").style.zIndex = "10";
@@ -51,18 +51,15 @@ function monitorClicks(el){
     ){
     return false;
   }
+  if (el.id == 'dashboardNavDiv') {
+    return false;
+  }
   if (el.id == 'display' || el.id == 'dashboardDisplayDiv') {
     if(navMan.status == 'open' || document.getElementById("mySidebar").style.display == "block"){
       w3_close()
     }
   }
-    console.log(el.id)
-   
-    if (el.id == 'dashboardNavDiv'){
-      w3_close()
-      console.log('dfdfdfasd');
-      navMan.selected = 'false';
-    }
+  
 
 
 }

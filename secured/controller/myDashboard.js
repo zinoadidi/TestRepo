@@ -1,30 +1,33 @@
+ var dashboardApp = ''
+ var navApp = ''
+ updateDataFromApi(null)
+ $(document).ready(function(){ 
+	dashboardApp = new Vue({
+	  el: '#myDashboard',
+	  data: {
+	      	commonData:commonData
+	  }
+	});
+	navApp = new Vue({
+	  el: '#mySidebar',
+	  data: {
+	      	commonData:commonData
+	  }
+	});
+	var testDash = String(sessionStorage.dashboardData)
+	if ( testDash != 'undefined' && testDash != 'null' && testDash != ''){
+		stats(sessionStorage.dashboardData,'existing');
+	}else{
+		startLoad()
+		renda.get('/dashboardData/'+sessionStorage.UserId,'stats',1);
+	}
 
-dashboardApp = new Vue({
-  el: '#myDashboard',
-  data: {
-      	commonData:commonData
-  }
 });
-var navApp = new Vue({
-  el: '#mySidebar',
-  data: {
-      	commonData:commonData
-  }
-});
-
 /*request stat data*/
-var testDash = String(sessionStorage.dashboardData)
-if ( testDash != 'undefined' && testDash != 'null' && testDash != ''){
-	stats(sessionStorage.dashboardData,'existing');
-}else{
-	startLoad()
-	renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
-}
 
 function stats(data,option){
 	if (data) {
-
-		if (option == 'new') {
+		if (option == 1) {
 			data = JSON.parse(data);
 			sessionStorage.dashboardData = JSON.stringify(data);
 			commonData.Dashboard = data['data']

@@ -1,117 +1,60 @@
-
-/*declare temporary vue object*/
-
-function validateCategoryForm(){
-    var errorFound = 0;
-    var obj = {
-        'name':temporaryApp.vm.name,
-        'description':temporaryApp.vm.description,
-        'picture':temporaryApp.vm.fileId
-    };
-    console.log(obj);
-
-    $.each( obj, function( key, value ) {
-        if (value) {
-            if (value == null || value == '' || value.lenght == 0) {
-                toastr.error('Please fill in detail for: '+key);
-                errorFound ++;
-            }   
-        }else{
-            
-                toastr.error('Please fill in detail for: '+key);
-                errorFound ++;
-            
-        }
-
-    });
-    console.log(temporaryApp.vm);
-    if (errorFound>0) {
-        return false;
-    }else{
-        createCategory();
-    }
-
-}
-
-function createCategory(data){
-    if (data) {
-        var result = data;
-        if (result.success == true){
+renda.loader('stop')
+function register(data){
+    if (data) { 
+        let result = JSON.parse(data);
+        //let result = USERDATA;
+        console.dir(result);
+        if (result.status == 200){
+            if(result.message == ''){
+                result.message = 'Login successful.';
+            }
             toastr.success(result.message); 
-            loadComponent('dashboard','categories/create','dashboardDisplayDiv');
-        }else{
-            toastr.error(result.message); 
-        }            
-        return false;
-    }else{
-        temporaryApp.vm.userId = sessionStorage.userid;
-        var data = {
-            "userId": temporaryApp.vm.userId,
-            "name": temporaryApp.vm.name,
-            "description": temporaryApp.vm.description,
-            "fileId": temporaryApp.vm.fileId
-        }
-        console.log(data);
-        sendAPIData('category/create',data,'createCategory');
-    }
-}
+            //decode token
+            sessionStorage.UserId = result.data['UserId'];
+            sessionStorage._id = result.data['UserId'];
+            sessionStorage.UserInfo = JSON.stringify(result)
+            updateUserData()
+            sessionStorage.loggedin = true;
 
-function listUsers(data,type){
-    if (data) {
-        var result = data;
-        if (result.success == true){
-            var item = '';
-            var count=0;
-            var users = [];
-            var Users = null;
-            if(result.data.users){
-                Users = result.data.users;
+            // confirm user state
+                if (String(result['data']['ProgressStatus']) == 'KYC Submitted'){
+                    renda.page('dashboard')
+                    return false;
+                }
+                if (String(result['data']['Status']) !== 'active') {
+                    renda.page('register_otp')
+                    return false;
+                } 
+                if (
+                    result['data']['ProgressStatus'] == null || result['data']['ProgressStatus'] == 'null' ||
+                    result['data']['ProgressStatus'] == 'Stage 1 Completed' || result['data']['ProgressStatus'] == 'Stage 2 Completed' ||
+                    result['data']['BVN'] == null || result['data']['Gender'] == null
+                ){
+                    renda.page('setup_profile')
+                    return false;                                
+                }                   
+            }else{
+                toastr.error(result['message']);    
+                if(result['status'] == 204){
+                    renda.page('register_otp')
+                    return false;
+                }
             }
-            if(result.data.clients){
-                Users = result.data.clients;
-            }
-            $.each(Users, function (key, data) {
-                count +=1;
-                if (data) {
-                    if(data.firstName==null || data.firstName ==''){data.firstName = 'Not Provided';}
-                    if(data.lastName==null || data.lastName ==''){data.lastName = 'Not Provided';}
-                    if(data.phoneNo==null || data.phoneNo ==''){data.phoneNo = 'Not Provided';}
-                    if(data.username==null || data.username ==''){data.username = 'Not Provided';}
-                    users.push({
-                        'sn':count,
-                        'firstName':data.firstName,
-                        'lastName':data.lastName,
-                        'phoneNo':data.phoneNo,
-                        'username':data.username
-                    }); 
-
-                }else{
-                }     
-            });
-            console.log(users);
-            var columns =  [
-                { data: 'sn'},
-                { data: 'firstName' },
-                { data: 'lastName' },
-                { data: 'phoneNo' },
-                { data: 'username' }
-            ];
-            populateDataTable(users,columns,'usersListTable');
-        
-        }else{
-            toastr.error(result.message); 
-        }            
-        return false;
-    }else{
-        if (type == 'allUsers') {
-            requestAPIData('user/all','listUsers');
-        }
-        if (type == 'allClients') {
-            requestAPIData('client/all','listUsers');
-        }
-        if (type == 'allCreators') {
-            requestAPIData('user/role/59cd177e85beea380e856a88/count/all','listUsers');
-        }
+        stopLoad()            
         return false;
     }
+    let email = document.getElementById('Username').value;
+    let pass = document.getElementById('Password').value; 
+    
+    data = {
+        "Username":email,
+        "Password":pass
+    };
+    if (validateObj(data)){
+        startLoad()
+        renda.post('/authenticate/login',JSON.stringify(data),'login');
+    }else{
+        return false;
+    }
+    return false;  
 }

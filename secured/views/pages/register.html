@@ -1,6 +1,4 @@
- 
-    
-    
+  
     <style>
         .progress {
             height: 2px;
@@ -203,7 +201,6 @@
 		    top: 0;
 		}
     </style>
-
       <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	  <script type="text/javascript" src="assets/js/jquery.validate.js"></script>
 	  <script type="text/javascript" src="assets/js/jquery-ui.js"></script>
@@ -212,60 +209,43 @@
 	  </head>
     <section>
         <div class="main-container login-main-container col-lg-12">
-            <header>
+        	<header>
                 <div id="help-icon-holder">
                 </div>
             </header>
-            <div class="login-form-container center" style="" id="login_form_container">
             <div class="center logo-holder">
                 <a href="javascript:void(0)"> <img class="img-responsive center" src="assets/images/logo_white.png"></a>
             </div>
-            <p class="welcome-text w3-card w3-border-bottom w3-border-black">Login in to your account</p>
+           
+            <div class="center register-divs" id="selectDiv">
+            	<p class="welcome-text center w3-padding w3-margin w3-text-white" style="font-size: 3vw;">
+                   <span class="w3-block">New to payday investor? Register Now!</span>
+            		<span>Choose form our registration option.</span>         
+                </p>
+            
+                <form method="post">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
+                            <button class="w3-button input-text-large" style="background: #5bc0de">NEW TO ARM?</button>
+                        </div>
+                        <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
+                            <button class="w3-button input-text-large" style="background: #337ab7">Existing ARM Client??</button>
+                       
+                        </div>
+                        <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
 
-            <div class="form-holder center">
+                </form>
 
-            <div >
-                <div class="row" style="">
-                    <div class="col-lg-4"></div>
-                    <div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12">
-                        <div class="form-icon-holder  col-lg-2 col-md-2 col-sm-2 col-xs-2" id="username-icon-holder">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-xs-10 col-lg-10 col-sm-10 col-md-10  text-field" id="username-field">
-                            <input type="email" placeholder="Enter Your Email" value="" id="Username" required="" class="input-text-medium">
-                        </div>
-                    </div>
-                    <div class="col-lg-4"></div>
-                </div>
-                <div class="row" style="margin-bottom: 0px !important;">
-                    <div class="col-lg-4"></div>
-                    <div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12">
-                        <div class="form-icon-holder col-lg-2 col-md-2 col-sm-2 col-xs-2" id="password-icon-holder">
-                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-xs-10 col-lg-10 col-sm-10 col-md-10 text-field" id="password-field">
-                            <input type="password" placeholder="Enter Your Password" id="Password" class="input-text-medium">
-                        </div>
-                    </div>
-                    <div class="col-lg-4"></div>
-                </div>
-                <div class="row" style="margin-bottom: 0px !important;">
-                    <div class="col-lg-4"></div>
-                    <div class="form-group col-xs-12 col-lg-4 col-sm-12 col-md-12  text-right">
-                        <button class="w3-button w3-transparent" style="padding:0; margin:0">Forgot password?</button>
-                    </div>
-                    <div class="col-lg-4"></div>
-                </div>
-                <div class="form-group submit-button-holder" onclick="login()">
-                    <button type="submit" id="loginBtn" >LOGIN</button>
-                </div>
-                 <div class="form-group submit-button-holder">
-                    <button type="submit" class="w3-button" onclick="renda.page('register')">REGISTER</button>
-                </div>
+                <a class="register-here-link col-lg-12 col-md-12 col-sm-12 col-xs-12" href="http://127.0.0.1:8000/login"><p>Have an account? Login Here!</p></a>
+
+
             </div>
-	        </div>
-
-		    </div>
 		</div>
 	</section>
 
@@ -289,3 +269,4 @@ renda.loader('stop')
     <link href="assets/css/sweetalert.min.css" rel="stylesheet">
     <link href="assets/css/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="secured/controller/users.js"></script>

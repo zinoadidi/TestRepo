@@ -53,9 +53,12 @@ html, body {height: 100%;}
     font-size: 4.0vw !important;
     font-weight: 500;
 }
-
+.input-text-goal{
+    font-size: 3.3vw !important;
+    font-weight: 400;
+}
 .input-text-large{
-    font-size: 4.0vw !important;
+    font-size: 6.0vw !important;
     font-weight: 500;
 }
 input{
@@ -101,3 +104,14 @@ input{
 .display-inline{
  display: inline-block;
 }
+
+.single-goal{
+    width: 45% !important;
+    display: inline-block;
+}
+.floating-btn{
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+}
+

@@ -1,4 +1,4 @@
-  
+   
    <div class="w3-sidebar w3-bar-block w3-striped w3-card-4 w3-animate-left w3-top w3-bottombar border-purple" style="display:none; overflow:hidden" id="mySidebar" >
  
     <ul class='w3-ul w3-striped'>
@@ -11,10 +11,10 @@
             <br/><small>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
         </span>
       </li>
-      <button id="loadDashboardBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 " onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class="fa fa-home w3-margin-right "></i><span class="navFontSize">Dashboard</span></button>
+      <button id="loadDashboardBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 " onclick="loadPage('dashboard')"><i class="fa fa-home w3-margin-right "></i><span class="navFontSize">Dashboard</span></button>
 
       <!-- client options -->
-        <button id="loadGoalManagementBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('content-type','view','dashboardDisplayDiv');"><i class=" fa fa-home w3-margin-right "></i><span class="navFontSize">Goal Management</span></button>
+        <button id="loadGoalManagementBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('goals','view','dashboardDisplayDiv');"><i class=" fa fa-home w3-margin-right "></i><span class="navFontSize">Goal Management</span></button>
 
       <!-- content providers options -->
         <button id="loadInvestment101Btn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('content-type','create','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">Investment 101</span></button>
@@ -33,7 +33,7 @@
 
         <button id="categoryOptionsBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">FAQs</span></button>
 
-       <button id="logoutBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2"><i class="fa fa-home w3-margin-right "></i><span class="navFontSize">Logout</span></button>
+       <button id="logoutBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2"><i class="fa fa-home w3-margin-right "></i><span class="navFontSize" onclick="logout();">Logout</span></button>
     </ul>
     </div>
            
@@ -54,9 +54,7 @@
         $('.menuItemBtn').click(function(){
           $('.menuItemBtn').removeClass('w3-light-grey');
           $(this).addClass('w3-light-grey');
-          navMan.selected = 'true';
-          w3_close()
-          return false;
+          startLoad()
         });
         /*$('#loadAccountSettings').click(function(){
           
@@ -79,10 +77,11 @@
 
         $('#loadCardManagementBtn').click(function(){
             
-        });
+        });       */
         $('#loadDashboardBtn').click(function(){
+            renda.component('dashboard','myDashboard','dashboardDisplayDiv');
         });
-       */
+      
         $('#logoutBtn').click(function(){
             logout();
         });

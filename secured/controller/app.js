@@ -28,7 +28,7 @@
 
     /* Basic Functions */
     function login(data){
-        if (data) {
+        if (data) { 
             let result = JSON.parse(data);
             //let result = USERDATA;
             console.dir(result);
@@ -45,11 +45,11 @@
                 sessionStorage.loggedin = true;
 
                 // confirm user state
-                    if (result['data']['ProgressStatus'] == 'KYC Submitted'){
+                    if (String(result['data']['ProgressStatus']) == 'KYC Submitted'){
                         renda.page('dashboard')
                         return false;
                     }
-                    if (result['data']['Status'] != 'active') {
+                    if (String(result['data']['Status']) !== 'active') {
                         renda.page('register_otp')
                         return false;
                     } 
@@ -245,7 +245,6 @@
 
     function startLoad(){
         $(".loadingbar").show();
-        $("#loadingbar").show();
         $("#loader").show();
         $(".showAjaxLoad").addClass('w3-animate-fading');
     }
@@ -255,3 +254,4 @@
       console.log('found new version!');
       window.applicationCache.swapCache()
     }
+

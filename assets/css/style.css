@@ -64,7 +64,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 900;
-    background: #281332;
+    background: #2B333E;
 }
 
 img {
@@ -341,22 +341,36 @@ nav ul li:last-child{
 }
 
 footer {
-    background-color: #281332;
+    background-color: #2B333E;
     height: 150px;
 }
 
 /*--- Login Page ---*/
-.login-main-container, .register-main-container, .setup-main-container {
-    font-family: 'Montserrat', sans-serif;
+.login-main-container, .register-main-container {
+   
     font-weight: 400;
     width: 100%;
     min-height: 100%;
     padding-bottom: 30px;
     position: absolute;
     top: 0;
-    /*background: url('../images/login_page_background.jpg') no-repeat center;*/
+    
     background-size: cover;
-    background: #281332;
+    background: #2B333E;
+    color: #ffffff;
+}
+
+.setup-main-container {
+   
+    font-weight: 400;
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 30px;
+    position: absolute;
+    top: 0;
+    
+    background-size: cover;
+    background: #2B333E;
     color: #ffffff;
 }
 
