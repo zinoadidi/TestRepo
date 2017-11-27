@@ -1,0 +1,40 @@
+<div id='myDashboard'>
+	<div id='viewGoals' class="w3-container" class="">	
+		
+		<div id="goalsDiv" style="margin-left:6%">
+		  <div v-for="item in commonData.Dashboard.goals" class="single-goal " :id="item.GoalId" style="" >
+		  	<div style="background: #2B333E; height:150px; max-height: 150px; overflow: hidden;" class="w3-text-white w3-card-4 w3-round w3-padding w3-margin w3-hover-opacity w3-hover-shadow" >
+			  	<div class="display-block input-text-medium " style="">
+			  		&#8358;{{ item.GoalAmount }}
+			  	</div>
+			  	<div class="" style="margin-top: 10px">
+			  		<div class="input-text-goal">{{ item.ItemName }}</div><center>
+			  		<div class="input-text-fixed" style="margin-bottom: 3px">{{ item.ItemDescription }}</div></center>
+			  	</div>
+			</div>
+		  </div>
+		  <div class="single-goal" style="" id="createGoalDiv"   onclick="renda.component('goals','create','dashboardDisplayDiv');">
+		  	<div style="background: #7D388B; height:150px; max-height: 150px; overflow: hidden;" class=" w3-card-4 w3-round w3-padding w3-margin w3-text-white" >
+			  	<center>
+			  		<div class="display-block " style=""></div>
+			  		<div class=" " style="margin-top: 20px;">
+			  			<span class='display-block input-text-medium'>New Goal</span>
+			  			<span class="fa fa-plus icon-mod" style="margin-top: 15px;">
+			  			</span>
+			  		</div>
+			  		
+			  	</center>
+			  		
+			</div>
+		  </div>
+		</div>
+
+
+	</div>
+	<button onclick="renda.component('goals','create','dashboardDisplayDiv');" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
+		<small><span class="fa fa-plus" style="    font-size: 5em !important; padding-top: 4px"></span></small>
+	</button>
+</div>
+
+
+<script src="secured/controller/myDashboard.js"></script>
