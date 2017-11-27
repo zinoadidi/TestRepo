@@ -207,7 +207,7 @@
 	  <script type="text/javascript" src="assets/js/pwstrength.js"></script>
 	  <script type="text/javascript" src="assets/js/index.js"></script>
 	  </head>
-    <section>
+    <section >
         <div class="main-container login-main-container col-lg-12">
         	<header>
                 <div id="help-icon-holder">
@@ -217,44 +217,285 @@
                 <a href="javascript:void(0)"> <img class="img-responsive center" src="assets/images/logo_white.png"></a>
             </div>
            
-            <div class="center register-divs" id="selectDiv">
+            <div class="center register-divs" id="welcomeDiv">
             	<p class="welcome-text center w3-padding w3-margin w3-text-white" style="font-size: 3vw;">
-                   <span class="w3-block">New to payday investor? Register Now!</span>
-            		<span>Choose form our registration option.</span>         
+                   <span class="w3-block">Welcome to Payday Investor</span>
+            		<span>Please select one of the options below.</span>         
                 </p>
             
-                <form method="post">
+                <div>
                     <div class="row">
                         <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
-                            <button class="w3-button input-text-large" style="background: #5bc0de">NEW TO ARM?</button>
+                            <button class="w3-button  input-text-medium" style="background: #1794b9; width: 100%" onclick="showRegDiv('new')"><small>NEW TO ARM</small></button>
                         </div>
                         <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
-                            <button class="w3-button input-text-large" style="background: #337ab7">Existing ARM Client??</button>
+                            <button class="w3-button input-text-medium" style="background: #337ab7;width: 100%" onclick="showRegDiv('existing')">Existing ARM Client</button>
                        
                         </div>
                         <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
                     </div>
-
-                </form>
-
-                <a class="register-here-link col-lg-12 col-md-12 col-sm-12 col-xs-12" href="http://127.0.0.1:8000/login"><p>Have an account? Login Here!</p></a>
-
+                    <div class="row" ">
+                        <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
+                            <button class="w3-button  input-text-medium" style="background: #438cb9;width: 100%" onclick="renda.page('login')"><small>LOGIN</small></button>
+                        </div>
+                        <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                </div>
 
             </div>
-		</div>
+            <div class="center register-divs" id="new">
+            	<form onsubmit="event.preventDefault();" method="post" class="register" enctype="multipart/form-data" novalidate="novalidate">
+                	<div class="form-holder col-lg-6" class="margin-top:0px">
+
+                        <div class="reg-step register-step-1">
+                        	<div class="col-lg-6 w3-margin w3-padding">
+
+	                    	<Label textWrap="true" class='input-text-medium w3-text-white'>Please provide your details to continue</Label>
+                        	<img src="assets/images/pagination-1.png" class="img-responsive center paginated-tab" width="80%">
+	                    	</div>
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="username-icon-holder">
+                                    <i class="fa icon-mod fa-user" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="username-field">
+                                    <input type="text" style="padding-left: 10px;" placeholder="Surname" value= "" class="w3-input input-text-goal padding-left-2" v-model="regVm.Surname" required="" onfocusout="checkValue(this)" aria-required="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="username-icon-holder">
+                                    <i class="fa icon-mod fa-user" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="username-field">
+                                    <input type="text" style="padding-left: 10px;" placeholder="First Name" v-model="regVm.Firstname" value= "" class="w3-input input-text-goal padding-left-2" required="" onfocusout="checkValue(this)" aria-required="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="username-icon-holder">
+                                    <i class="fa icon-mod fa-user" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="username-field">
+                                    <input type="text" style="font-size:2.5em" placeholder="Other Names" v-model="regVm.Middlename" value= "" class="w3-input input-text-goal padding-left-2" required="" onfocusout="checkValue(this)" aria-required="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="username-icon-holder">
+                                    <i class="fa icon-mod fa-phone-square" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="username-field">
+                                    <input type="number" style="" placeholder="Phone Number" v-model="regVm.Phonenumber" id="Phonenumber" value= "" class="w3-input input-text-goal padding-left-2">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-field-holder ">
+                            	<div class="col-xs-12 center" id="username-field" style="margin-top:5px">
+                            	
+		                        <div class="upload-button-holder">
+		                        	
+                            		<p class="input-text-goal center">Select a profile picture</p>
+		                            <input type="file" id="ProfileUpload" value= "" class="w3-input input-text-goal padding-left-2" class="upload-button" data-toggle="tooltip" title="Select your profile image" accept="image/*" required="" aria-required="true">
+                            		
+		                        </div>
+		                        </div>
+                            </div>
+                            
+                            <div class="form-group submit-button-holder nxt_btn ">
+                                <div class="col-xs-offset-6 col-xs-6">
+                                    <button type="button" class="forward w3-margin" onclick="showRegStep('register-step-2')">NEXT</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                        <div class="reg-step register-step-2" style="display: none;">
+                        	<div class="col-lg-6 w3-margin w3-padding">
+	                    	<img src="assets/images/pagination-2.png" class="img-responsive center paginated-tab" width="80%">
+
+	                    	</div>
+
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="username-icon-holder">
+                                    <i class="fa icon-mod fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="username-field">
+                                    <input type="email" value= "" onfocusout="checkValue(this)" style="padding-left: 10px;" class="w3-input input-text-goal padding-left-2" placeholder="Email" id="Email" v-model="regVm.Email">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="password-icon-holder">
+                                    <i class="fa icon-mod fa-unlock-alt" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="password-field">
+                                    <input type="password" id="password" placeholder="Password" v-model="regVm.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input input-text-goal padding-left-2">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="password-icon-holder">
+                                    <i class="fa icon-mod fa-unlock" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="password-field">
+                                    <input type="password" placeholder="Confirm Password" id="confirmPassword" v-model="regVm.confirmPassword" required="" onfocusout="checkValue(this)"  class="w3-input input-text-goal padding-left-2" aria-required="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group form-field-holder">
+                                <div class="form-icon-holder col-xs-2" id="username-icon-holder">
+                                    <i class="fa icon-mod fa-question-circle" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="username-field" style="padding-top:10px; padding-bottom: 15px;">
+                                    <select v-model="regVm.SecurityQuestion" required="" aria-required="true" class="form-control w3-input w3-text-white input-text-goal "  style="background: #2b333e">
+                                        <option value= "">Select a security question</option>
+                                        <option value="What is your favorite movie">What is your favorite movie?</option>
+                                        <option value="What is your mother's maiden name">What is your mother's maiden name?</option>
+                                        <option value="What street did you grow up on">What street did you grow up on?</option>
+                                        <option value="What was the make of your first car">What was the make of your first car?</option>
+                                        <option value="What is your father's middle name">What is your father's middle name?</option>
+                                        <option value="In what city were you born">In what city were you born?</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12"  style="padding-top: 15px;padding-bottom: 15px;padding-left: 0px">
+                                <div class="form-icon-holder col-xs-2" id="username-icon-holder">
+                                    <i class="fa icon-mod fa-question-circle" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-xs-10 text-field" id="username-field">
+                           
+                                    <input type="text" style="" placeholder="Answer to security question" v-model="regVm.SecurityAnswer" value= "" class="w3-input input-text-goal padding-left-2" required="" onfocusout="checkValue(this)" aria-required="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group submit-button-holder ">
+                            <div class="w3-container center">
+                            	
+                            <p class="center">
+                            <input type="checkbox" v-model="regVm.terms" required="" onfocusout="checkValue(this)" aria-required="true" class=" w3-checkbox w3-check" style="/*position: absolute; *//* opacity: 0; *//* pointer-events: none; */">
+                            By Registering, you hereby agree with our <a class="terms-link register-here-link" href="javascript:void(0)">Terms and Conditions</a></p></div>
+                            </div>
+                            <div class="form-group submit-button-holder nxt_btn ">
+                                <div class="col-xs-6">
+                                    <button type="button" class="back w3-button"  onclick="showRegStep('register-step-1')">BACK</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="register w3-button" onclick="register(null)">REGISTER</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        
+                        <p class="center" onclick="renda.page('login')">Already have an account? Click Here to Login</p>
+                </form>
+            </div>
+
+            <div class="center register-divs" id="existing">
+            	<div class="main-container login-main-container col-lg-12">
+	            <header>
+	                <div id="help-icon-holder">
+	                </div>
+	            </header>
+	            <div class="login-form-container center" style="" id="login_form_container">
+	            <div class="center logo-holder">
+                	<a href="javascript:void(0)"> <img class="img-responsive center" src="assets/images/logo_white.png"></a>
+            	</div>
+            	<p class="welcome-text w3-card w3-border-bottom w3-border-black">Welcome to Payday. Please Provide Your ARM User ID and Password</p>
+
+	            <div class="form-holder center">
+
+	            <div >
+	                <div class="row" style="">
+	                    <div class="col-lg-4"></div>
+	                    <div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12">
+	                        <div class="form-icon-holder  col-lg-2 col-md-2 col-sm-2 col-xs-2" id="username-icon-holder">
+	                            <i class="fa fa-envelope" aria-hidden="true"></i>
+	                        </div>
+	                        <div class="col-xs-10 col-lg-10 col-sm-10 col-md-10  text-field" id="username-field">
+	                            <input type="email" placeholder="User ID" value="" id="Username" required="" class="input-text-medium">
+	                        </div>
+	                    </div>
+	                    <div class="col-lg-4"></div>
+	                </div>
+	                <div class="row" style="margin-bottom: 0px !important;">
+	                    <div class="col-lg-4"></div>
+	                    <div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12">
+	                        <div class="form-icon-holder col-lg-2 col-md-2 col-sm-2 col-xs-2" id="password-icon-holder">
+	                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+	                        </div>
+	                        <div class="col-xs-10 col-lg-10 col-sm-10 col-md-10 text-field" id="password-field">
+	                            <input type="password" placeholder="Password" id="Password" class="input-text-medium">
+	                        </div>
+	                    </div>
+	                    <div class="col-lg-4"></div>
+	                </div>
+	                
+	                <div class="form-group submit-button-holder" onclick="VerifyExistingClient(null)">
+	                    <button type="submit" id="loginBtn" >Verify Details</button>
+	                </div>
+	                 <div class="form-group submit-button-holder">
+	                    <button type="submit" class="w3-button" onclick="showRegDiv('welcomeDiv')">Back</button>
+	                </div>
+	            </div>
+		        </div>
+				    </div>
+				</div>
+            </div>
+
+            <div class="center register-divs" id="confirm_existing">
+            	<div class="main-container login-main-container col-lg-12">
+	            <header>
+	                <div id="help-icon-holder">
+	                </div>
+	            </header>
+	            <div class="login-form-container center" style="" id="login_form_container">
+	            <div class="center logo-holder">
+                	<a href="javascript:void(0)"> <img class="img-responsive center" src="assets/images/logo_white.png"></a>
+            	</div>
+            	<p class="welcome-text w3-card w3-border-bottom w3-border-black">Please Confirm Your Details to Continue</p>
+
+	            <div class="form-holder center">
+
+	            <div>
+	            	<div>
+		                <div class="row" style="" v-for="(value, key) in existingVm">
+		                    <div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+		                        <label class="w3-padding input-text-goal" style="display: block;">{{ key }}: {{ value }}</label>
+		                    </div>
+		                
+		                </div>
+		            </div>
+	                
+	                <div class="form-group submit-button-holder" onclick="regExistingClient(null)">
+	                    <button type="submit" id="loginBtn" >Register</button>
+	                </div>
+	                 <div class="form-group submit-button-holder">
+	                    <button type="submit" class="w3-button" onclick="showRegDiv('welcomeDiv')">Back</button>
+	                </div>
+	            </div>
+		        </div>
+				</div>
+				</div>
+            </div>
+        </div>
 	</section>
 
  
 
 <script>
     $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-    $("#success-alert").slideUp(500);
-});
+	    $("#success-alert").slideUp(500);
+	});
 $("#error-alert").fadeTo(2000, 500).slideUp(500, function(){
     $("#error-alert").slideUp(500);
 });
@@ -270,3 +511,5 @@ renda.loader('stop')
     <link href="assets/css/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="assets/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="secured/controller/users.js"></script>
+
+    <script>initRegApp();initExistingClientApp();</script>

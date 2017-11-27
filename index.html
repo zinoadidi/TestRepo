@@ -16,29 +16,34 @@
 			#loadingDiv {
 			  background-color: #2B333E;
 			}
-			#preloader {
+			#preindexLoader {
 			    position: fixed;
 			    top: 0;
 			    left: 0;
+			    text-align: center;
 			    width: 100%;
 				height: 100%;
 				background-color: #2B333E;
 			}
 			#loadingImg{
-			    position: fixed;
+				display: block;
+			    margin-left: auto;
+			    margin-right: auto;
+			    position: absolute;
+			    left: 40%;
 			}
 			.small-screen{
 				margin-left:0%;
-				left: 45%;
-				right:45%;
+				/*left: 45%;
+				right:45%;*/
 			    top: 40%;
 			}
 			.large-screen{
-				left: 45%;
-				right:45%
+				/*left: 45%;
+				right:45%*/
 			    top: 40%;
 			}
-			#loader {
+			#indexLoader {
 			    display: block;
 			    position: relative;
 				left: 44%;
@@ -53,7 +58,7 @@
 			    animation: spin 2s linear infinite;
 			    z-index: 1001;
 			}
-			#loader:before {
+			#indexLoader:before {
 			    content: "";
 			    position: absolute;
 			    top: 5px;
@@ -66,7 +71,7 @@
 			    -webkit-animation: spin 3s linear infinite;
 			    animation: spin 3s linear infinite;
 			}
-			#loader:after {
+			#indexLoader:after {
 			    content: "";
 			    position: absolute;
 			    top: 15px;
@@ -113,10 +118,13 @@
 	</head>
 	<body>
 		<div id="loadingbar" style="z-index: 1000; position: fixed;" class="w3-top">
-			<div id="preloader" >
+			<div id="preindexLoader" >
+				
+					
 			  <img src='img/logo.png' height="120" id="loadingImg" class="w3-hide-large small-screen">
 			  <img src='img/logo.png' height="170" id="loadingImg" class="w3-hide-small w3-hide-medium large-screen">
-			  <div id="loader"></div>
+			
+			  <div id="indexLoader"></div>
 			</div>	
 		</div>
 		<div id="display" style=''></div>
@@ -137,12 +145,12 @@
         <script type="text/javascript" src="js/index.js"></script>
 		<script src="secured/assets/ajax/libs/vue.js"></script>
 		<script src="secured/assets/js/renda/renda.js"></script>		
+		<script src="secured/assets/js/toastr.js"></script>
 		<script src="secured/model/constants.js"></script>
 		<script src="secured/model/models.js"></script>
 		<script src="secured/route/routes.js"></script>
 		<script src="secured/model/config.js"></script>
 		<script src="secured/controller/app.js"></script>	
-		<script src="secured/assets/js/toastr.js"></script>
 		<script src="secured/assets/js/jwt-decode.min.js"></script>
 		<script src="secured/assets/ajax/libs/Chart.min.js" />
 

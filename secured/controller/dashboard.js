@@ -4,14 +4,23 @@ var navMan = {
     selected:'false'
 }
 $(document).ready(function(){ 
+     dashboardTitle = new Vue({
+      el: '#appTitleDisplayDiv',
+      data: {
+        vm:{
+            title:''
+        }
+      }
+    });
+    dashboardTitle.vm.title = renda.Config.currentPage;
     $( "*", document.body ).click(function( event ) {  
         event.stopPropagation();  
         var domElement = $( this ).get( 0 );  
         monitorClicks(domElement)  
     });  
+
     authenticateUser(); 
     loadDefaults();
-    
 });
 function loadDefaults(){
     renda.component('dashboard','header','dashboadHeaderDiv');
@@ -46,6 +55,7 @@ function w3_close() {
 }
 
 function monitorClicks(el){
+  dashboardTitle.vm.title = renda.Config.currentPage;
   var cp = renda.Config.currentPage;
   if(cp =='login' || cp == 'register' || cp == 'setup_profile'
     ){
@@ -77,3 +87,27 @@ function switchTabs(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " dash-tab-current";
 }
+
+
+(function(){
+
+    window.onload = canceltimer;
+    document.onmousemove = canceltimer;
+    document.onkeypress = canceltimer;
+
+    var tim = 0;
+
+    function inactivity_lunch () {
+        tim = setTimeout(function(){
+            
+            logout();
+
+        },300000);   // 10 minutes
+    }
+    
+    function canceltimer() {
+        window.clearTimeout(tim);  // cancel the timer on each mousemove/click/load
+        inactivity_lunch();  
+    }
+
+})();

@@ -72,6 +72,23 @@ function User(obj){
     this.Surname = obj == null ? '' : obj.Surname;
 }
 
+function existingUser(obj){
+    this.MembershipNumber = obj == null ? '' : obj.MembershipNumber;
+    this.Title = obj == null ? '' : obj.Title;
+    this.FirstName = obj == null ? '' : obj.FirstName;
+    this.LastName = obj == null ? '' : obj.LastName;
+    this.FullName = obj == null ? '' : obj.FullName;
+    this.DateOfBirth = obj == null ? '' : obj.DateOfBirth;
+    this.Gender = obj == null ? '' : obj.Gender;
+    this.PhoneNumber = obj == null ? '' : obj.PhoneNumber;
+    this.MobileNumber = obj == null ? '' : obj.MobileNumber;
+    this.EmailAddress = obj == null ? '' : obj.EmailAddress;
+    this.Address = obj == null ? '' : obj.Address;
+    this.State = obj == null ? '' : obj.State;
+    this.Country = obj == null ? '' : obj.Country;
+    this.State = obj == null ? '' : obj.State;
+}
+
 var payday = {
     user:{}
 };
@@ -86,19 +103,6 @@ var commonData = {
     Dashboard: new Dashboard(null)
 }
 function updateDataFromApi(data){
-    if (data) { 
-        stats(data,1)
-        let result = JSON.parse(data);
-        if (result.status == 200){
-                sessionStorage.UserInfo = JSON.stringify(result)
-                updateUserData() 
-
-        }else{
-        }        
-        return false;
-    }else{
-        renda.get('/dashboardData/'+sessionStorage.UserId,'updateDataFromApi');
-    }
-    
+    renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
     return false;  
 }

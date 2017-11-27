@@ -1,6 +1,4 @@
- var dashboardApp = ''
- var navApp = ''
- updateDataFromApi(null)
+
  $(document).ready(function(){ 
 	dashboardApp = new Vue({
 	  el: '#myDashboard',
@@ -14,12 +12,14 @@
 	      	commonData:commonData
 	  }
 	});
+	
 	var testDash = String(sessionStorage.dashboardData)
 	if ( testDash != 'undefined' && testDash != 'null' && testDash != ''){
 		stats(sessionStorage.dashboardData,'existing');
+		 updateDataFromApi(null)
 	}else{
 		startLoad()
-		renda.get('/dashboardData/'+sessionStorage.UserId,'stats',1);
+        renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
 	}
 
 });
@@ -27,20 +27,21 @@
 
 function stats(data,option){
 	if (data) {
+		stopLoad()
 		if (option == 1) {
 			data = JSON.parse(data);
 			sessionStorage.dashboardData = JSON.stringify(data);
 			commonData.Dashboard = data['data']
 			commonData.User = payday.user
 			navApp.data = commonData;
-			dashboardApp.data = commonData;	
-			stopLoad()
+			dashboardApp.commonData = commonData;	
+			
 		}else{
 			data = JSON.parse(data);
 			commonData.Dashboard = data['data']
 			commonData.User = payday.user
 			navApp.data = commonData;
-			dashboardApp.data = commonData;	
+			dashboardApp.commonData = commonData;	
 		}
 		if(String(commonData.User.ProfilePic)!='null'){
             

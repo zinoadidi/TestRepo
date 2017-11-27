@@ -6,7 +6,7 @@
     font-style: normal;
 }
 
-@font-face {
+@font-face { 
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -437,7 +437,7 @@ footer {
     transform: initial;
 }
 #username-icon-holder .fa, #password-icon-holder .fa, #gender-icon-holder .fa, #age-icon-holder .fa{
-    font-size: 18px; margin-top: 10px;
+    font-size: 18px; margin-top: 5px;
 }
 
 #password-icon-holder {

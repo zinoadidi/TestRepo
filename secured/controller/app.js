@@ -22,8 +22,7 @@
         }); 
         
         // check app cache
-
-     
+       
     });
 
     /* Basic Functions */
@@ -79,7 +78,7 @@
             "Password":pass
         };
         if (validateObj(data)){
-            startLoad()
+            renda.loader('start')
             renda.post('/authenticate/login',JSON.stringify(data),'login');
         }else{
             return false;
@@ -255,3 +254,10 @@
       window.applicationCache.swapCache()
     }
 
+    //toastr options
+    toastr.options.closeButton = true;
+    toastr.options.timeOut = 12000;
+    toastr.options.closeEasing = 'swing';
+    toastr.options.preventDuplicates = true;
+    toastr.options.positionClass='toast-top-full-width';
+    toastr.options.fontSize = '200em';
