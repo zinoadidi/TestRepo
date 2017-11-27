@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.payday.arm" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Payday</name>
+    <description>
+        The Payday Investor is an application for anyone who wishes to make better financial decisions, whether it is to save more, or acquire an asset, or simply invest in their future.
+    </description>
+    <author email=" support@armvendors.com" href="https://paydayinvestor.arm.com.ng">
+        Payday Investor Team
+    </author>
+    <icon src="icon.png" />
+    <splash src="splash.png" />
+    <content src="index.html" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="12000" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-navigation href="*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <preference name="android-targetSdkVersion" value="23" />
+    </platform>
+    <preference name="android-targetSdkVersion" value="23" />
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <preference name="orientation" value="portrait" />
+    <preference name="loadUrlTimeoutValue" value="120000" />
+    <engine name="browser" spec="^5.0.1" />
+    <engine name="android" spec="^5.1.1" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+    <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
+</widget>

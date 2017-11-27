@@ -1,0 +1,21 @@
+@media(min-width: 1200px){
+	.tile-container.tile-direction__row{
+		display: flex;
+		flex-direction: row;
+		
+	}
+	.tile-container.tile-direction__row .tile-container{
+		flex-grow: 1;
+	}
+	.tile-container.tile-direction__row .tile-container .tile{
+		height: 100% !important;
+	}	
+}
+@media (max-width: 1200px){
+	#about-app-content{
+		flex-direction: column;	
+	}
+	.section-2 #about-app-txt{
+		padding-top: 50px;
+	}
+}
