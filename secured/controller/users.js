@@ -1,117 +1,216 @@
+$('.register-divs').hide();
+renda.loader('stop')    
+$('#welcomeDiv').fadeIn();       
 
-/*declare temporary vue object*/
-
-function validateCategoryForm(){
-    var errorFound = 0;
-    var obj = {
-        'name':temporaryApp.vm.name,
-        'description':temporaryApp.vm.description,
-        'picture':temporaryApp.vm.fileId
-    };
-    console.log(obj);
-
-    $.each( obj, function( key, value ) {
-        if (value) {
-            if (value == null || value == '' || value.lenght == 0) {
-                toastr.error('Please fill in detail for: '+key);
-                errorFound ++;
-            }   
-        }else{
-            
-                toastr.error('Please fill in detail for: '+key);
-                errorFound ++;
-            
-        }
-
+ function initRegApp(){
+    temporaryApp = new Vue({
+      el: '#new',
+      data: {
+        regVm: new User(null)
+      }
     });
-    console.log(temporaryApp.vm);
-    if (errorFound>0) {
-        return false;
-    }else{
-        createCategory();
-    }
+ }
+var existingApp = '';
+function initExistingClientApp(){
+    existingApp = new Vue({
+      el: '#confirm_existing',
+      data: {
+        existingVm: new existingUser(null)
+      }
+    });
+ }
 
-}
-
-function createCategory(data){
-    if (data) {
-        var result = data;
-        if (result.success == true){
-            toastr.success(result.message); 
-            loadComponent('dashboard','categories/create','dashboardDisplayDiv');
+function register(data){
+    if (data) { 
+        stopLoad()
+        let result = JSON.parse(data);
+        //let result = USERDATA;
+        console.dir(result);
+        if (result.status == 200){
+            toastr.success('Registration Successful')
+            //decode token
+            sessionStorage.UserId = result.data['UserId'];
+            sessionStorage._id = result.data['UserId'];
+            sessionStorage.UserInfo = JSON.stringify(result)
+            updateUserData()
+            // confirm user state
+            renda.page('register_otp')             
         }else{
-            toastr.error(result.message); 
-        }            
+            alert(result['message']);    
+        }
         return false;
     }else{
-        temporaryApp.vm.userId = sessionStorage.userid;
-        var data = {
-            "userId": temporaryApp.vm.userId,
-            "name": temporaryApp.vm.name,
-            "description": temporaryApp.vm.description,
-            "fileId": temporaryApp.vm.fileId
+      
+        url = "/register/stepOne";
+        var files = '';
+        files = document.getElementById('ProfileUpload').files[0]
+        if(temporaryApp.regVm.Password != temporaryApp.regVm.confirmPassword){
+            toastr.error('Password does not match confirm password field');
+            return false;
         }
-        console.log(data);
-        sendAPIData('category/create',data,'createCategory');
-    }
-}
-
-function listUsers(data,type){
-    if (data) {
-        var result = data;
-        if (result.success == true){
-            var item = '';
-            var count=0;
-            var users = [];
-            var Users = null;
-            if(result.data.users){
-                Users = result.data.users;
-            }
-            if(result.data.clients){
-                Users = result.data.clients;
-            }
-            $.each(Users, function (key, data) {
-                count +=1;
-                if (data) {
-                    if(data.firstName==null || data.firstName ==''){data.firstName = 'Not Provided';}
-                    if(data.lastName==null || data.lastName ==''){data.lastName = 'Not Provided';}
-                    if(data.phoneNo==null || data.phoneNo ==''){data.phoneNo = 'Not Provided';}
-                    if(data.username==null || data.username ==''){data.username = 'Not Provided';}
-                    users.push({
-                        'sn':count,
-                        'firstName':data.firstName,
-                        'lastName':data.lastName,
-                        'phoneNo':data.phoneNo,
-                        'username':data.username
-                    }); 
-
-                }else{
-                }     
+        if(temporaryApp.regVm.Phonenumber.length != 11){
+            toastr.error('Phone number must be 11 digits');
+            showRegStep('register-step-1')
+            return false;
+        }
+        if(temporaryApp.regVm.Password.length < 8){
+            toastr.error('Please Use a stronger password not less than 8 digit. Password must contain numbers and characters.');
+            return false;
+        }
+        if(files){
+            var ProfileUpload = renda.fileToBase64(files);
+            ProfileUpload.then(function(result) {
+                ProfileUpload = result;
+                sendRegReq()
             });
-            console.log(users);
-            var columns =  [
-                { data: 'sn'},
-                { data: 'firstName' },
-                { data: 'lastName' },
-                { data: 'phoneNo' },
-                { data: 'username' }
-            ];
-            populateDataTable(users,columns,'usersListTable');
-        
         }else{
-            toastr.error(result.message); 
-        }            
-        return false;
-    }else{
-        if (type == 'allUsers') {
-            requestAPIData('user/all','listUsers');
+            toastr.error('Please Upload Profile Picture');
+            showRegStep('register-step-1')
+            return false;
+
         }
-        if (type == 'allClients') {
-            requestAPIData('client/all','listUsers');
+        function sendRegReq(){
+            data = {
+                "Surname":temporaryApp.regVm.Surname,
+                "Firstname":temporaryApp.regVm.Firstname,
+                "Middlename":temporaryApp.regVm.Middlename,
+                "Email":temporaryApp.regVm.Email,
+                "Phonenumber":temporaryApp.regVm.Phonenumber,
+                "Password":temporaryApp.regVm.Password,
+                "SecurityQuestion":temporaryApp.regVm.SecurityQuestion,
+                "SecurityAnswer":temporaryApp.regVm.SecurityAnswer,
+                "ProfilePic":ProfileUpload,
+                "Token":' ',
+                "PRToken":' ',
+                "terms":true
+            } 
+            if (validateObj(data)){
+                console.dir(data)
+                renda.loader('start')
+                renda.post(url,JSON.stringify(data),'register');     
+            }else{
+                return false;
+            }      
         }
-        if (type == 'allCreators') {
-            requestAPIData('user/role/59cd177e85beea380e856a88/count/all','listUsers');
+    }                   
+}
+
+function activateOtp(data){
+    if (data) {
+        stopLoad()            
+        let result = JSON.parse(data);
+        //let result = USERDATA;
+        console.dir(result);
+        if (result.status == 200){
+            alert(result.message); 
+            renda.page('login')
+        } else{
+            alert(result.message)
         }
         return false;
     }
+    let Token = document.getElementById('Otp').value;
+    let UserId = sessionStorage.UserId; 
+    
+    data = {
+        "Token":Token,
+        "UserId":UserId
+    };
+    if (validateObj(data)){
+        renda.loader('start')
+        renda.post('/activate',JSON.stringify(data),'activateOtp');
+    }else{
+        return false;
+    }
+    return false;  
+}
+
+function VerifyExistingClient(data){
+    if (data) {
+        stopLoad()            
+        let result = JSON.parse(data);
+        //let result = USERDATA;
+        console.dir(result);
+        if (result.status == 200){
+            toastr.success(result.message); 
+
+            existingApp.existingVm.MembershipNumber = result.data.MembershipNumber;
+            existingApp.existingVm.Title = result.data.Title;
+            existingApp.existingVm.FirstName = result.data.FirstName;
+            existingApp.existingVm.LastName = result.data.LastName;
+            existingApp.existingVm.FullName = result.data.FullName;
+            existingApp.existingVm.DateOfBirth = result.data.DateOfBirth;
+            existingApp.existingVm.Gender = result.data.Gender;
+            existingApp.existingVm.PhoneNumber = result.data.PhoneNumber;
+            existingApp.existingVm.MobileNumber = result.data.MobileNumber;
+            existingApp.existingVm.EmailAddress = result.data.EmailAddress;
+            existingApp.existingVm.Address = result.data.Address;
+            existingApp.existingVm.State = result.data.State;
+            existingApp.existingVm.Country = result.data.Country;
+            showRegDiv('confirm_existing')
+        } else{
+            alert(result.message)
+        }
+        return false;
+    }
+    let email = document.getElementById('Username').value;
+    let pass = document.getElementById('Password').value; 
+        
+    data = {
+        "Username":email,
+        "Password":pass
+    };
+    if (validateObj(data)){
+        renda.loader('start')
+        renda.post('/authenticate/existingClient',JSON.stringify(data),'VerifyExistingClient');
+    }else{
+        return false;
+    }
+    return false;  
+}
+
+function regExistingClient(data){
+    if (data) {
+        stopLoad()            
+        let result = JSON.parse(data);
+        //let result = USERDATA;
+        console.dir(result);
+        if (result.status == 200){
+            alert(result.message); 
+            renda.page('login')
+        }else{
+            alert(result.message)
+        }
+        return false;
+    }
+    let MembershipNumber = existingApp.existingVm.MembershipNumber;
+        
+    data = {
+        "MembershipNumber":MembershipNumber
+    };
+    if (validateObj(data)){
+        renda.loader('start')
+        renda.post('/register/existingClient',JSON.stringify(data),'regExistingClient');
+    }else{
+        return false;
+    }
+    return false;  
+}
+
+function showRegDiv(el){
+    $('.register-divs').hide();
+     $('#'+el).fadeIn();       
+}
+
+function checkValue(el){
+    if(el.value == ''){
+        toastr.warning('Please Provide Infromation For The Field Above')
+    }
+}
+
+function showRegStep(id){
+    console.log(id)
+    $('.reg-step').hide();
+    $('.'+id).show();
+
 }

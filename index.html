@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="">
 <html lang="en"> 
 	<head>
 	<!-- 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
@@ -10,27 +10,44 @@
 		<title>Payday</title>
 		<!-- Styles -->
 		<style type="text/css">
+			/*body,.display{
+		    	background: #2B333E !important;
+			}*/
 			#loadingDiv {
-			  background-color: #281332;
+			  background-color: #2B333E;
 			}
 			#preloader {
 			    position: fixed;
 			    top: 0;
 			    left: 0;
+			    text-align: center;
 			    width: 100%;
 				height: 100%;
-				background-color: #281332;
+				background-color: #2B333E;
 			}
 			#loadingImg{
-			    position: fixed;
-				left: 42%;
+				display: block;
+			    margin-left: auto;
+			    margin-right: auto;
+			    position: absolute;
+			    left: 40%;
+			}
+			.small-screen{
+				margin-left:0%;
+				/*left: 45%;
+				right:45%;*/
+			    top: 40%;
+			}
+			.large-screen{
+				/*left: 45%;
+				right:45%*/
 			    top: 40%;
 			}
 			#loader {
 			    display: block;
 			    position: relative;
 				left: 44%;
-			    top: 55%;
+			    top: 65%;
 			    width: 45px;
 			    height: 45px;
 			    
@@ -99,20 +116,22 @@
 		<link href="secured/assets/css/toastr.css" rel="stylesheet"/>
 		<link rel="stylesheet" href="secured/assets/css/style.css"/>
 	</head>
-
-	<body id="display" style='background:#554c61'>
-	
-	</body>
-
-	<footer>
-		<div id="loadingbar" style="z-index: 1000; position: fixed;" class="w3-top loadingbar">
+	<body>
+		<div id="loadingbar" style="z-index: 1000; position: fixed;" class="w3-top">
 			<div id="preloader" >
-			  <img src='img/logo.png' height="70" id="loadingImg" class="w3-hide-large w3-hide-medium">
-			  <img src='img/logo.png' height="120" id="loadingImg" class="w3-hide-small w3-hide-large">
-			  <img src='img/logo.png' height="200" id="loadingImg" class="w3-hide-small w3-hide-medium">
+				
+					
+			  <img src='img/logo.png' height="120" id="loadingImg" class="w3-hide-large small-screen">
+			  <img src='img/logo.png' height="170" id="loadingImg" class="w3-hide-small w3-hide-medium large-screen">
+			
 			  <div id="loader"></div>
 			</div>	
 		</div>
+		<div id="display" style=''></div>
+	</body>
+
+	<footer>
+		
 		
 		<!-- scripts -->
 		<script src="secured/assets/js/jquery-3.2.1.min.js"></script>
@@ -122,10 +141,10 @@
 				$.mobile.allowCrossDomainPages = true;
 			});
 		</script>
-		<script src="secured/assets/js/renda/renda.js"></script>		
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-
+		<script src="secured/assets/ajax/libs/vue.js"></script>
+		<script src="secured/assets/js/renda/renda.js"></script>		
 		<script src="secured/model/constants.js"></script>
 		<script src="secured/model/models.js"></script>
 		<script src="secured/route/routes.js"></script>
@@ -133,12 +152,12 @@
 		<script src="secured/controller/app.js"></script>	
 		<script src="secured/assets/js/toastr.js"></script>
 		<script src="secured/assets/js/jwt-decode.min.js"></script>
-		<script src="secured/assets/ajax/libs/vue.js"></script>
 		<script src="secured/assets/ajax/libs/Chart.min.js" />
 
 		<script src="secured/assets/js/moment.js"></script>
 		<script type="text/javascript" src="secured/assets/DataTables/datatables.min.js"></script>
 
 	</footer>
+ 
 </html> 
  

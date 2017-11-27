@@ -1,5 +1,4 @@
     $(document).ready(function(){ 
-       
         //load extra files
         checklogin();   
 
@@ -22,39 +21,65 @@
             logout();
         }); 
         
+        // check app cache
+       
     });
 
     /* Basic Functions */
     function login(data){
-        alert();
-
-        if (data) {
-            var result = data;
-            if (result.success == true){
+        if (data) { 
+            let result = JSON.parse(data);
+            //let result = USERDATA;
+            console.dir(result);
+            if (result.status == 200){
+                if(result.message == ''){
+                    result.message = 'Login successful.';
+                }
                 toastr.success(result.message); 
-                sessionStorage.usertoken= result.token;
                 //decode token
-                var decoded = jwt_decode(sessionStorage.usertoken);
-                sessionStorage.userid = decoded._doc._id;
-                sessionStorage._id = decoded._doc._id;
-                sessionStorage.setItem('userinfo', JSON.stringify(decoded._doc));
+                sessionStorage.UserId = result.data['UserId'];
+                sessionStorage._id = result.data['UserId'];
+                sessionStorage.UserInfo = JSON.stringify(result)
+                updateUserData()
                 sessionStorage.loggedin = true;
-                loadPage('dashboard');
-            }else{
-                toastr.error(result.message); 
-            }            
+
+                // confirm user state
+                    if (String(result['data']['ProgressStatus']) == 'KYC Submitted'){
+                        renda.page('dashboard')
+                        return false;
+                    }
+                    if (String(result['data']['Status']) !== 'active') {
+                        renda.page('register_otp')
+                        return false;
+                    } 
+                    if (
+                        result['data']['ProgressStatus'] == null || result['data']['ProgressStatus'] == 'null' ||
+                        result['data']['ProgressStatus'] == 'Stage 1 Completed' || result['data']['ProgressStatus'] == 'Stage 2 Completed' ||
+                        result['data']['BVN'] == null || result['data']['Gender'] == null
+                    ){
+                        renda.page('setup_profile')
+                        return false;                                
+                    }                   
+                }else{
+                    toastr.error(result['message']);    
+                    if(result['status'] == 204){
+                        renda.page('register_otp')
+                        return false;
+                    }
+                }
+            stopLoad()            
             return false;
         }
-        var email = document.getElementById('Username').value;
-        var pass = document.getElementById('Password').value; 
+        let email = document.getElementById('Username').value;
+        let pass = document.getElementById('Password').value; 
         
-        var data = {
+        data = {
             "Username":email,
             "Password":pass
         };
         if (validateObj(data)){
-            renda.postData('/authenticate/login',data,'login');
-            
+            renda.loader('start')
+            renda.post('/authenticate/login',JSON.stringify(data),'login');
         }else{
             return false;
         }
@@ -62,8 +87,24 @@
     }
 
     function checklogin(){
+
       if (typeof(Storage) !== "undefined") {
             if(sessionStorage.loggedin){ 
+                let result = JSON.parse(sessionStorage.UserInfo)
+                updateUserData()
+                if (result['data']['Status'] != 'active') {
+                    renda.page('register_otp')
+                    return false;
+                } 
+                if (
+                    result['data']['ProgressStatus'] == null || result['data']['ProgressStatus'] == 'null' ||
+                    result['data']['ProgressStatus'] == 'Stage 1 Completed' || result['data']['ProgressStatus'] == 'Stage 2 Completed' ||
+                    result['data']['BVN'] == null || result['data']['Gender'] == null
+                ){
+                    renda.page('setup_profile')
+                    return false;                                
+                }                   
+            
                 if (renda.Config.currentPage == 'dashboard') {
                     return false;
                 }else{
@@ -73,7 +114,6 @@
             }else{
                 if (renda.Config.currentPage == 'dashboard' || renda.Config.currentPage == '') {
                     renda.page('login');
-                    
                     return false;
                 }else{
                     
@@ -164,16 +204,20 @@
 
     }
 
-    function validateObj(obj){
+    function validateObj(obj,silentMode){
         var errorFound = 0;
         $.each( obj, function( key, value ) {
             if (value) {
                 if (value == null || value == '' || value.lenght == 0) {
-                    toastr.error('Please fill in detail for: '+key);
+                    if(silentMode){}else{
+                        toastr.error('Please fill in detail for: '+key);
+                    }
                     errorFound ++;
                 }   
             }else{
-                toastr.error('Please fill in detail for: '+key);
+                if(silentMode){}else{
+                    toastr.error('Please fill in detail for: '+key);
+                }
                 errorFound ++; 
             }
 
@@ -188,16 +232,26 @@
     }
     function logout(){ 
         sessionStorage.clear();
-        loadPage('login');
+        renda.page('login');
     }
 
     function stopLoad(){
         $(".loadingbar").hide();
+        $("#loadingbar").hide();
+        $("#loader").hide();
         $(".showAjaxLoad").removeClass('w3-animate-fading');
     }
 
     function startLoad(){
         $(".loadingbar").show();
+        $("#loader").show();
         $(".showAjaxLoad").addClass('w3-animate-fading');
     }
+
+    // update app cache
+    function onUpdateReady() {
+      console.log('found new version!');
+      window.applicationCache.swapCache()
+    }
+
 

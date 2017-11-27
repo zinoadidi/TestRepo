@@ -1,31 +1,36 @@
-startLoad();
+//startLoad();
 var navMan = {
-    status:'closed'
+    status:'closed',
+    selected:'false'
 }
 $(document).ready(function(){ 
-    $( document ).ajaxStart(function() {
-        startLoad();
-    });
-    $( document ).ajaxComplete(function() {
-        stopLoad();
+     dashboardTitle = new Vue({
+      el: '#appTitleDisplayDiv',
+      data: {
+            vm:{
+                title:''
+            }
+      }
     });
     $( "*", document.body ).click(function( event ) {  
         event.stopPropagation();  
         var domElement = $( this ).get( 0 );  
         monitorClicks(domElement)  
     });  
+
     authenticateUser(); 
     loadDefaults();
-
 });
 function loadDefaults(){
-    loadComponent('dashboard','header','dashboadHeaderDiv');
-    loadComponent('dashboard','navigation','dashboardNavDiv');
-    loadComponent('dashboard','stats','dashboardDisplayDiv');
+    renda.component('dashboard','header','dashboadHeaderDiv');
+    renda.component('dashboard','navigation','dashboardNavDiv');
+    renda.component('dashboard','myDashboard','dashboardDisplayDiv');
+    
+    stopLoad()
 }
 
 function w3_open() {
-    setTimeout(function () { navMan.status = 'open' }, 300);
+  setTimeout(function () { navMan.status = 'open' }, 100);
   document.getElementById("dashboadHeaderDiv").style.position = "relative";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "9";
   document.getElementById("mySidebar").style.zIndex = "10";
@@ -37,7 +42,7 @@ function w3_open() {
 }
 function w3_close() { 
   navMan.status = 'close';
-  $('#mySidebar').hide("slide", { direction: "left" }, 200);
+  $('#mySidebar').hide("slide", { direction: "left" }, 100);
   document.getElementById("mySidebar").style.zIndex = "11";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "10";
   document.getElementById("main").style.marginLeft = "0%";
@@ -49,15 +54,35 @@ function w3_close() {
 }
 
 function monitorClicks(el){
-    //console.log(el.id)
-    if (el.id == 'dashboardNavDiv' || el.id == 'dashboadHeaderDiv'){
-        if (el.id == 'dashboadHeaderDiv' && navMan.status == 'open'){
-            w3_close()
-          }
-    }else{
-        w3_close()
+  dashboardTitle.vm.title = renda.Config.currentPage;
+  var cp = renda.Config.currentPage;
+  if(cp =='login' || cp == 'register' || cp == 'setup_profile'
+    ){
+    return false;
+  }
+  if (el.id == 'dashboardNavDiv') {
+    return false;
+  }
+  if (el.id == 'display' || el.id == 'dashboardDisplayDiv') {
+    if(navMan.status == 'open' || document.getElementById("mySidebar").style.display == "block"){
+      w3_close()
     }
+  }
   
 
 
+}
+
+function switchTabs(evt, tabName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("dashboardTabs");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" dash-tab-current", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " dash-tab-current";
 }
