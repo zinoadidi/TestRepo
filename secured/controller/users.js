@@ -40,8 +40,7 @@ function register(data){
         }
         return false;
     }else{
-      
-        url = "/register/stepOne";
+
         var files = '';
         files = document.getElementById('ProfileUpload').files[0]
         if(temporaryApp.regVm.Password != temporaryApp.regVm.confirmPassword){
@@ -53,7 +52,7 @@ function register(data){
             showRegStep('register-step-1')
             return false;
         }
-        if(temporaryApp.regVm.Password.length < 8){
+        if(temporaryApp.regVm.Password.length = '' || temporaryApp.regVm.Password.length < 8){
             toastr.error('Please Use a stronger password not less than 8 digit. Password must contain numbers and characters.');
             return false;
         }
@@ -87,7 +86,7 @@ function register(data){
             if (validateObj(data)){
                 console.dir(data)
                 renda.loader('start')
-                renda.post(url,JSON.stringify(data),'register');     
+                renda.post("/register/stepOne",JSON.stringify(data),'register');     
             }else{
                 return false;
             }      

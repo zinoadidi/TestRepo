@@ -12,6 +12,7 @@ $(document).ready(function(){
             }
       }
     });
+    dashboardTitle.vm.title = renda.Config.currentPage;
     $( "*", document.body ).click(function( event ) {  
         event.stopPropagation();  
         var domElement = $( this ).get( 0 );  
