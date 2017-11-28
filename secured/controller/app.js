@@ -233,6 +233,7 @@
     function logout(){ 
         sessionStorage.clear();
         renda.page('login');
+        window.clearTimeout(tim);
     }
 
     function stopLoad(){
@@ -302,3 +303,19 @@
     toastr.options.preventDuplicates = true;
     toastr.options.positionClass='toast-top-full-width';
     toastr.options.fontSize = '200em';
+
+window.onload = canceltimer;
+document.onmousemove = canceltimer;
+document.onkeypress = canceltimer;
+
+var tim = 0;
+function inactivity_lunch () {
+  tim = setTimeout(function(){
+  logout();
+  },300000);   // 10 minutes
+}
+
+function canceltimer() {
+  window.clearTimeout(tim);  // cancel the timer on each mousemove/click/load
+  inactivity_lunch();  
+}

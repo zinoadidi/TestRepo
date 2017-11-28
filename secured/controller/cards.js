@@ -30,7 +30,6 @@ function createCard(data){
         data = JSON.parse(data);
         if (data.status == 200){            
             if(cardRegStep != 2){
-                cardRegStep =2;
                 toastr.success('Card submission successful. Click ok to verify your card')
                 cardVerificationVar = window.open(encodeURI(data['data'].redirectUrl), '_blank', 'location=yes');
                 return false;
@@ -61,11 +60,11 @@ function createCard(data){
                 "CVV": cvc,
                 "UserId": sessionStorage.UserId
             }
-            if(cardNumber < 10){
+            if(String(cardNumber).lenght < 12){
                 toastr.error('Please Confirm The Lenght of Your Card Number')
                 return false
             }
-            if(cvc < 3){
+            if(String(cvc).lenght < 3){
                 toastr.error('Please Confirm That Your CVC is 3 Digits')
                 return false
             }
@@ -73,19 +72,11 @@ function createCard(data){
                 startLoad()
                 renda.post(url,JSON.stringify(data),'createCard');
             }else{
+                return false;
             }
             return false;
         }else{
-            url = "/card/tokinze/getFeedback/"+sessionStorage.UserId+"/"+cardNumber;
-            data = {
-                "CardNo": cardNumber,
-                "UserId": sessionStorage.UserId
-            }
-            if (validateObj(data)){
-                startLoad()
-                renda.post(url,JSON.stringify(data),'createCard');
-            }else{
-            }
+            
             return false;
              
         }
