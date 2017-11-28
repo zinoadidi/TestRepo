@@ -30,8 +30,12 @@ function createCard(data){
         data = JSON.parse(data);
         if (data.status == 200){            
             if(cardRegStep != 2){
-                toastr.success('Card submission successful. Click ok to verify your card')
-                cardVerificationVar = window.open(encodeURI(data['data'].redirectUrl), '_blank', 'location=yes');
+                toastr.success('Card submission successful. kindly verify your card on the page that will be displayed to you soon')
+                /*$('.hideCardPageDivs').hide();
+                console.log(data['data']['data']['authurl'])
+                $('#verifyCardIframe').attr('src',data['data']['data']['authurl']);
+                $('#verifyCardDiv').show()*/
+                cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_system', 'location=yes');
                 return false;
             }else{
                 toastr.success('Card Successfully Added!')

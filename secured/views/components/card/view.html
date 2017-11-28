@@ -48,9 +48,24 @@
       font-size: 3.3vw !important;
       font-weight: 400;
     }
+
+    #verifyCardDiv{
+      
+
+
+    }
+    #verifyCardIframe{
+      
+      border: none;
+      
+      overflow: hidden;
+      
+      width: 100%;
+      height: 500px;
+    }
   </style>
-<div id='myDashboard'>
-	<div id='addCard' class="w3-container w3-margin-top w3-margin-bottom" >		
+<div id='cardDiv'>
+	<div id='addCard' class="w3-container w3-margin-top w3-margin-bottom hideCardPageDivs" >		
 		<div id="addCardDiv" style="color: #2B333E">
 		  <div  class="single-card" style="" >
 		  	<div class="center w3-card w3-white input-text-medium w3-bottombar w3-padding w3-hover-gray" style="" onclick="showAddCardForm('addNewCardForm')">Add A New Card</div>
@@ -65,7 +80,7 @@
 		  </div>
 		</div>
 	</div>
-	<div id='viewCards' class="w3-container" class="">		
+	<div id='viewCards' class="w3-container" class="hideCardPageDivs">		
 		<div id="cardsDiv" style="">
 		  <div v-for="item in cards" class="single-card " :id="item.Id" style="" >
 		  	<div style="background: #1d232c; height:auto;  overflow: hidden;" class="w3-text-white w3-card-4 w3-round w3-container w3-padding " >
@@ -78,12 +93,14 @@
 			  	</div>
 			</div>
 		  </div>
-		 
 		</div>
-	</div>
-  <button onclick="showAddCardForm('addNewCardForm')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
-    <small><span class="fa fa-plus" style="font-size: 5em !important; padding-top: 4px"></span></small>
-  </button>
+    <button onclick="showAddCardForm('addNewCardForm')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
+      <small><span class="fa fa-plus" style="font-size: 5em !important; padding-top: 4px"></span></small>
+    </button>
+  </div>
+  <div id="verifyCardDiv" style="display: none" class='verifyCardDiv hideCardPageDivs'>
+    <embed src="" id="verifyCardIframe" class="verifyCardIframe w3-container" height="auto" width="100%"></embed>
+  </div>
 </div>
 
 <script src="secured/assets/js/card-js.min.js"></script>
