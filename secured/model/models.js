@@ -89,6 +89,15 @@ function existingUser(obj){
     this.State = obj == null ? '' : obj.State;
 }
 
+function Cards(obj){
+    this.Id = obj == null ? '' : obj.Id;
+    this.AppUserId = obj == null ? '' : obj.AppUserId;
+    this.CardNo = obj == null ? '' : obj.CardNo;
+    this.FWCode = obj == null ? '' : obj.FWCode;
+    this.Status = obj == null ? '' : obj.Status;
+    this.DeductionDay = obj == null ? '' : obj.DeductionDay;
+}
+
 var payday = {
     user:{}
 };
@@ -102,7 +111,5 @@ var commonData = {
     User:new User(null),
     Dashboard: new Dashboard(null)
 }
-function updateDataFromApi(data){
-    renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
-    return false;  
-}
+var cardsApp ={};
+var investment101 = {};

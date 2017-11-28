@@ -238,12 +238,14 @@
     function stopLoad(){
         $(".loadingbar").hide();
         $("#loadingbar").hide();
+        $("#loadingbarr").hide();
         $("#loader").hide();
         $(".showAjaxLoad").removeClass('w3-animate-fading');
     }
 
     function startLoad(){
         $(".loadingbar").show();
+        $("#loadingbarr").show();
         $("#loader").show();
         $(".showAjaxLoad").addClass('w3-animate-fading');
     }
@@ -252,6 +254,45 @@
     function onUpdateReady() {
       console.log('found new version!');
       window.applicationCache.swapCache()
+    }
+
+    function updateDataFromApi(data){
+        renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
+        renda.get('/cards/'+sessionStorage.UserId,'stats','cards');
+        return false;  
+    }
+
+    function stats(data,option){
+        if (data) {
+            stopLoad()
+            if (option == 1 || option == 'new') {
+                data = JSON.parse(data);
+                sessionStorage.dashboardData = JSON.stringify(data);
+                commonData.Dashboard = data['data']
+                commonData.User = payday.user
+                navApp.data = commonData;
+                dashboardApp.commonData = commonData;   
+                
+            }else if (option == 'cards') {
+                data = JSON.parse(data);
+                sessionStorage.userCards = JSON.stringify(data);
+                cardsApp.cards = data['data'];   
+                
+            }else{
+                data = JSON.parse(data);
+                commonData.Dashboard = data['data']
+                commonData.User = payday.user
+                navApp.data = commonData;
+                dashboardApp.commonData = commonData;   
+            }
+            if(String(commonData.User.ProfilePic)!='null'){
+                
+            }else{
+                navApp.commonData.User.ProfilePic = 'secured/assets/img/profile.jpg'
+                dashboardApp.commonData.User.ProfilePic = 'secured/assets/img/profile.jpg'
+            }
+            //drawChart()
+        }
     }
 
     //toastr options

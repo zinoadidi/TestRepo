@@ -57,7 +57,7 @@
 		  	<div class="panel w3-hide" id="addNewCardForm">
 			    <form onsubmit="event.preventDefault();">
 			      <div class="card-js stripe" data-stripe="true" id="add-card-form">
-              <input class="name input-text-medium" placeholder="Name of card holder" required="" >   
+              <input class="name" placeholder="Name of card holder" required="">   
             </div>
 			      <button type="submit" class="btnn w3-padding" id="read-btn-1">Add Card</button>
 			    </form>
@@ -66,25 +66,22 @@
 		</div>
 	</div>
 	<div id='viewCards' class="w3-container" class="">		
-		<div id="cardsDiv" style="">
+		<div id="goalsDiv" style="">
 		  <div v-for="item in cards" class="single-card " :id="item.Id" style="" >
-		  	<div style="background: #1d232c; height:auto;  overflow: hidden;" class="w3-text-white w3-card-4 w3-round w3-container w3-padding " >
-			  	<div class="display-block input-text-medium w3-padding" style="margin-top: 3px;">
-			  		Card ID: {{ item.Id }}
+		  	<div style="background: #2B333E; height:150px; max-height: 150px; overflow: hidden;" class="w3-text-white w3-card-4 w3-round  w3-hover-opacity w3-hover-shadow" >
+			  	<div class="display-block input-text-medium " style="">
+			  		&#8358;Card ID: {{ item.Id }}
 			  	</div>
-			  	<div class="w3-padding" style="margin-top: 10px;margin-bottom: 5px">
-			  		<div class="input-text-large center w3-center">XXXX XXXX XXXX {{ item.CardNo }}</div>
-			  		<div class="input-text-fixed" style="margin-bottom: 3px; margin-top: 20px"><span class="w3-text-green input-text-medium">{{ item.Status }}</span><button class='w3-button w3-red w3-right w3-ripple w3-hover-opacity w3-hover-shadow w3-hover-gray w3-padding input-text-medium' :id="item.Id" onclick="deleteCard(this.id)">Delete Card</button></div>
+			  	<div class="" style="margin-top: 10px">
+			  		<div class="input-text-goal">XXXX XXXX XXXX {{ item.CardNo }}</div><center>
+			  		<div class="input-text-fixed" style="margin-bottom: 3px">{{ item.ItemDescription }}</div></center>
 			  	</div>
 			</div>
 		  </div>
 		 
 		</div>
 	</div>
-  <button onclick="showAddCardForm('addNewCardForm')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
-    <small><span class="fa fa-plus" style="font-size: 5em !important; padding-top: 4px"></span></small>
-  </button>
+
 </div>
 
-<script src="secured/assets/js/card-js.min.js"></script>
-<script src="secured/controller/cards.js"></script>
+<script src="secured/controller/user_extras.js"></script>

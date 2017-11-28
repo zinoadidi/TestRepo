@@ -55,6 +55,7 @@ function w3_close() {
 }
 
 function monitorClicks(el){
+  canceltimer()
   dashboardTitle.vm.title = renda.Config.currentPage;
   var cp = renda.Config.currentPage;
   if(cp =='login' || cp == 'register' || cp == 'setup_profile'
@@ -69,12 +70,11 @@ function monitorClicks(el){
       w3_close()
     }
   }
-  
-
-
 }
 
 function switchTabs(evt, tabName) {
+    window.clearTimeout(tim);  // cancel the timer on each mousemove/click/load
+    inactivity_lunch();
     var i, x, tablinks;
     x = document.getElementsByClassName("dashboardTabs");
     for (i = 0; i < x.length; i++) {
@@ -88,26 +88,18 @@ function switchTabs(evt, tabName) {
     evt.currentTarget.className += " dash-tab-current";
 }
 
+window.onload = canceltimer;
+document.onmousemove = canceltimer;
+document.onkeypress = canceltimer;
 
-(function(){
+var tim = 0;
+function inactivity_lunch () {
+  tim = setTimeout(function(){
+  logout();
+  },300000);   // 10 minutes
+}
 
-    window.onload = canceltimer;
-    document.onmousemove = canceltimer;
-    document.onkeypress = canceltimer;
-
-    var tim = 0;
-
-    function inactivity_lunch () {
-        tim = setTimeout(function(){
-            
-            logout();
-
-        },300000);   // 10 minutes
-    }
-    
-    function canceltimer() {
-        window.clearTimeout(tim);  // cancel the timer on each mousemove/click/load
-        inactivity_lunch();  
-    }
-
-})();
+function canceltimer() {
+  window.clearTimeout(tim);  // cancel the timer on each mousemove/click/load
+  inactivity_lunch();  
+}

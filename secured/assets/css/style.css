@@ -123,17 +123,7 @@ input{
     right: 10%;
 }
 
-.cvc{
-    width: 80% !important;
-}
-.expiry{
-    width: 80% !important;
-}
 
-.cvc,.card-number,.expiry{
-    font-size: 3.3vw !important;
-    font-weight: 400;
-}
 
 .toastr{
     font-size: 3.5vw !important;

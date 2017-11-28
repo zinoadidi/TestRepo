@@ -85,7 +85,7 @@ function updateStage(data){
                 BankAccountNo:temporaryApp.vm.BankAccountNo
             }
             if (validateObj(data)){
-	            startLoad()
+	            renda.loader('start')
 	            renda.post(url,JSON.stringify(data),'updateStage');
 	        }else{
 	        }
@@ -134,6 +134,7 @@ function updateStage(data){
                 	"UtilityUpload":UtilityUpload
 	            } 
 	            if (validateObj(data,true)){
+	            	renda.loader('start')
 		            renda.post(url,JSON.stringify(data),'updateStage');     
 		        }else{
 		            return false;

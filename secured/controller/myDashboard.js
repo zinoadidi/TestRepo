@@ -25,35 +25,6 @@
 });
 /*request stat data*/
 
-function stats(data,option){
-	if (data) {
-		stopLoad()
-		if (option == 1) {
-			data = JSON.parse(data);
-			sessionStorage.dashboardData = JSON.stringify(data);
-			commonData.Dashboard = data['data']
-			commonData.User = payday.user
-			navApp.data = commonData;
-			dashboardApp.commonData = commonData;	
-			
-		}else{
-			data = JSON.parse(data);
-			commonData.Dashboard = data['data']
-			commonData.User = payday.user
-			navApp.data = commonData;
-			dashboardApp.commonData = commonData;	
-		}
-		if(String(commonData.User.ProfilePic)!='null'){
-            
-		}else{
-			navApp.commonData.User.ProfilePic = 'secured/assets/img/profile.jpg'
-			dashboardApp.commonData.User.ProfilePic = 'secured/assets/img/profile.jpg'
-
-		}
-		//drawChart()
-	}
-}
-
 function drawChart(){
 	if(temporaryApp.vm.pendingContents == '' || 
 		temporaryApp.vm.rejectedContents == '' ||
