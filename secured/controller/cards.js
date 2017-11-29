@@ -59,7 +59,6 @@ function createCard(data){
         var myCard = $('#add-card-form');
         var cardNumber = myCard.CardJs('cardNumber');
         var cardType = myCard.CardJs('cardType');
-        var name = myCard.CardJs('name');
         var expiryMonth = myCard.CardJs('expiryMonth');
         var expiryYear = myCard.CardJs('expiryYear');
         var cvc = myCard.CardJs('cvc');

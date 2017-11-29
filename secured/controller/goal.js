@@ -70,7 +70,7 @@ function createGoal(data){
     	var GoalUpload = renda.fileToBase64(files);
     	console.log('---------------------before send')
 		GoalUpload.then(function(result) {
-			GoalUpload = result;
+			GoalUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 			console.log(result)
 			sendGoalReq();
 		});
