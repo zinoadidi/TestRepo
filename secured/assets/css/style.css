@@ -63,7 +63,6 @@ html, body {height: 100%;}
 }
 input{
     padding-left: 10px;
-    
 }
 
 .input-text-small{
@@ -76,12 +75,10 @@ input{
 }
 .padding-left: {
     padding-left: 10px !important;
-    
 }
 
 .padding-left-2: {
     padding-left: 16px !important;
-    
 }
 .icon-mod{
     background-size: cover;
@@ -117,14 +114,15 @@ input{
     width: 100% !important;
     display: block;
 }
+.single-article{
+    width: 100% !important;
+    display: block;
+}
 .floating-btn{
     position: fixed;
     bottom: 10%;
     right: 10%;
 }
-
-
-
 .toastr{
     font-size: 3.5vw !important;
     font-weight: 700 !important;

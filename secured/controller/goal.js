@@ -44,6 +44,14 @@ function onChangeInput(arg) {
 function createGoal(data){
     if(data){
     	renda.loader('stop');
+    	try{
+            JSON.parse(data);
+        }catch(err){
+        	stopLoad()
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }
     	stopLoad();
 	    data = JSON.parse(data);
     	if (data.status == 200){              

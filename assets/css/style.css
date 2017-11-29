@@ -105,8 +105,8 @@ a:focus {
 }
 .btn {
     display: block;
-    border: 1px solid;
-    padding: 10px;
+    padding: 12px;
+    border:0px solid black;
     font-size: 10px;
     overflow: hidden;
     border-radius: 0;
@@ -503,11 +503,10 @@ footer {
 
 .login-main-container .login-form-container .submit-button-holder button, .register-main-container .register-form-container .submit-button-holder button, .setup-main-container .setup-form-container .submit-button-holder button,
 .submit-button-holder button {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: #363d48;
     font-size: 3.5vw;
-    border: 1px solid;
     
-    padding: 7px;
+    padding: 12px;
     width: 100%;
     
 
@@ -517,6 +516,7 @@ footer {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
+    border: 0px solid black !important;
 }
 
 .login-main-container .login-form-container .register-here-link, .register-form-holder .register-here-link {

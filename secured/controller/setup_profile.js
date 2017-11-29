@@ -48,6 +48,14 @@ function step2(){
 function updateStage(data){
 	var url ='';    
     if(data){
+    	try{
+            JSON.parse(data);
+        }catch(err){
+        	stopLoad();
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }
     	renda.loader('stop');
 	    data = JSON.parse(data);
     	if (data.status == 200){
@@ -62,7 +70,7 @@ function updateStage(data){
 	            console.log('Error With Step Selection')
 	        }
 		}else{
-            toastr.error(data['message']);    
+            alert(data['message']);    
 		}           
 		return false;
     }else{

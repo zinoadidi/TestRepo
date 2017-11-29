@@ -96,7 +96,14 @@ function register(data){
 
 function activateOtp(data){
     if (data) {
-        stopLoad()            
+        stopLoad()   
+        try{
+            JSON.parse(data);
+        }catch(err){
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }        
         let result = JSON.parse(data);
         //let result = USERDATA;
         console.dir(result);
@@ -126,7 +133,14 @@ function activateOtp(data){
 
 function VerifyExistingClient(data){
     if (data) {
-        stopLoad()            
+        stopLoad()
+        try{
+            JSON.parse(data);
+        }catch(err){
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }            
         let result = JSON.parse(data);
         //let result = USERDATA;
         console.dir(result);
@@ -170,7 +184,14 @@ function VerifyExistingClient(data){
 
 function regExistingClient(data){
     if (data) {
-        stopLoad()            
+        stopLoad()
+        try{
+            JSON.parse(data);
+        }catch(err){
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }            
         let result = JSON.parse(data);
         //let result = USERDATA;
         console.dir(result);

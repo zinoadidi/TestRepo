@@ -27,3 +27,8 @@
 }
 {"status":200,"message":"","data":{"UserId":"PIV1000369133","Surname":"TestSurname","Firstname":"TestFirstName","Middlename":"TestMiddleName","BVN":null,"BankName":null,"BankAccountNo":null,"Address":null,"Email":"new@test.com","Phonenumber":"11023006789","RegistrationDate":"2017-11-22T15:50:42.857","Status":"active","ProfilePic":null,"MaritalStatus":null,"Gender":null,"DOB":null,"ProgressStatus":"Stage 1 Completed","Token":"87789","PRToken":null,"SecurityQuestion":"TestQuestion","SecurityAnswer":"TestAnswer"}}
 {"Username":"new@test.com","Password":"TestPassword@123"}
+
+
+
+test@tested.test
+test@123

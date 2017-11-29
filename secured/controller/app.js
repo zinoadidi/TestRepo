@@ -27,7 +27,16 @@
 
     /* Basic Functions */
     function login(data){
-        if (data) { 
+        if (data) {
+
+            try{
+                    JSON.parse(data);
+                }catch(err){
+                    stopLoad()
+                    toastr.error('An error occured while verfying user information.')
+                    console.dir(err);
+                    return false;
+                } 
             let result = JSON.parse(data);
             //let result = USERDATA;
             console.dir(result);
@@ -233,7 +242,7 @@
     function logout(){ 
         sessionStorage.clear();
         renda.page('login');
-        window.clearTimeout(tim);
+        window.clearTimeout(timer_);
     }
 
     function stopLoad(){
@@ -252,10 +261,7 @@
     }
 
     // update app cache
-    function onUpdateReady() {
-      console.log('found new version!');
-      window.applicationCache.swapCache()
-    }
+
 
     function updateDataFromApi(data){
         renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
@@ -266,7 +272,21 @@
     function stats(data,option){
         if (data) {
             stopLoad()
+            try{
+                    JSON.parse(data);
+                }catch(err){
+                    toastr.error('An error occured while verfying user information.')
+                    console.dir(err);
+                    return false;
+                }
             if (option == 1 || option == 'new') {
+                try{
+                    JSON.parse(data);
+                }catch(err){
+                    toastr.error('An error occured while verfying user information.')
+                    console.dir(err);
+                    return false;
+                }
                 data = JSON.parse(data);
                 sessionStorage.dashboardData = JSON.stringify(data);
                 commonData.Dashboard = data['data']
@@ -308,14 +328,14 @@ window.onload = canceltimer;
 document.onmousemove = canceltimer;
 document.onkeypress = canceltimer;
 
-var tim = 0;
+var timer_ = 0;
 function inactivity_lunch () {
-  tim = setTimeout(function(){
+  timer_ = setTimeout(function(){
   logout();
-  },300000);   // 10 minutes
+  },900000);   // 10 minutes
 }
 
 function canceltimer() {
-  window.clearTimeout(tim);  // cancel the timer on each mousemove/click/load
+  window.clearTimeout(timer_);  // cancel the timer on each mousemove/click/load
   inactivity_lunch();  
 }
