@@ -1,16 +1,17 @@
+$(document).ready(function(){
+	createGoalApp = new Vue({
+	  el: '#createGoalDiv',
+	  data: {
+	      cgvm: new Goal(null)
+	  }
+	});
+	createGoalApp.cgvm.UserId = sessionStorage.UserId
+})
 
-
-        createGoalApp = new Vue({
-		  el: '#createGoalDiv',
-		  data: {
-		      cgvm: new Goal(null)
-		  }
-		});
-        createGoalApp.cgvm.UserId = sessionStorage.UserId
-        renda.loader('stop')
-		$('.frequency-depend').hide();
-	    $('.frequencies').hide();
-
+renda.loader('stop')
+$('.frequency-depend').hide();
+$('.frequencies').hide();
+goalTab('viewSingleGoal')
 
 function clear(){
 	renda.component('goals','view','dashboardDisplayDiv')
@@ -40,7 +41,7 @@ function onChangeInput(arg) {
 	       $('#monthDays').show();
 	       createGoalApp.cgvm.Duration = $('#custom-duration').val() +' Months';
 	    }
-	}
+}
 function createGoal(data){
     if(data){
     	renda.loader('stop');
@@ -57,7 +58,7 @@ function createGoal(data){
     	if (data.status == 200){              
             toastr.success(data['message'])
             updateDataFromApi(null)
-            clear();
+            goalTab('createGoal');
 		}else{
             toastr.error(data['message']);    
 		}           
@@ -106,4 +107,20 @@ function createGoal(data){
 	        }
 		}        
 	}
+}
+
+function viewSingleGoal(data){
+
+	createGoalApp = new Vue({
+	  el: '#createGoalDiv',
+	  data: {
+	      cgvm: new Goal(null)
+	  }
+	});
+	createGoalApp.cgvm.UserId = sessionStorage.UserId
+}
+
+function goalTab(tab){
+	$('.goalTabs').hide()
+	$('#'+tab).show()
 }

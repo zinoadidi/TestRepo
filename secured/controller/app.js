@@ -53,7 +53,7 @@
                 sessionStorage.loggedin = true;
 
                 // confirm user state
-                    if (String(result['data']['ProgressStatus']) == 'KYC Submitted'){
+                    if (String(result['data']['ProgressStatus']) == 'KYC Submitted' || String(result['data']['ProgressStatus']) == "Existing Customer"){
                         renda.page('dashboard')
                         return false;
                     }
@@ -101,6 +101,14 @@
             if(sessionStorage.loggedin){ 
                 let result = JSON.parse(sessionStorage.UserInfo)
                 updateUserData()
+                if(String(result['data']['ProgressStatus']) == 'KYC Submitted' || String(result['data']['ProgressStatus']) == "Existing Customer"){
+                    if (renda.Config.currentPage == 'dashboard') {
+                        return false;
+                    }else{
+                        renda.page('dashboard');
+                    }
+                    return false;
+                }
                 if (result['data']['Status'] != 'active') {
                     renda.page('register_otp')
                     return false;

@@ -4,15 +4,15 @@ function initInvestment101Page(){
 	investment101 = new Vue({
 	  el: '#investment101Page',
 	  data: {
-	      	data:{
-	      		"title": "Investment 101 – Realising Ambitions",
-		        "link": "http://realisingambitions.com",
-		        "description": "The ARM Blog",
-		        "lastBuildDate": "Tue, 28 Nov 2017 15:23:50 +0000",
-		        "language": "en-US",
-		        "generator": "https://wordpress.org/?v=4.7.7",
-			    "item": []
-	      	}
+      	data:{
+      		"title": "Investment 101 – Realising Ambitions",
+	        "link": "http://realisingambitions.com",
+	        "description": "The ARM Blog",
+	        "lastBuildDate": "Tue, 28 Nov 2017 15:23:50 +0000",
+	        "language": "en-US",
+	        "generator": "https://wordpress.org/?v=4.7.7",
+		    "item": []
+      	}
 	  }
 	});
 	if(sessionStorage.investment101){
