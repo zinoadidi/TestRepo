@@ -281,20 +281,14 @@
         if (data) {
             stopLoad()
             try{
-                    JSON.parse(data);
-                }catch(err){
-                    toastr.error('An error occured while verfying user information.')
-                    console.dir(err);
-                    return false;
-                }
+                JSON.parse(data);
+            }catch(err){
+                toastr.error('An error occured while verfying user information.')
+                console.dir(err);
+                return false;
+            }
             if (option == 1 || option == 'new') {
-                try{
-                    JSON.parse(data);
-                }catch(err){
-                    toastr.error('An error occured while verfying user information.')
-                    console.dir(err);
-                    return false;
-                }
+                
                 data = JSON.parse(data);
                 sessionStorage.dashboardData = JSON.stringify(data);
                 commonData.Dashboard = data['data']

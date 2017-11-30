@@ -6,7 +6,7 @@
         defaultPage:'login',
         errorPage:'login',
         loadDefaultPage:false,
-        trackUrlChanges:true,
+        trackUrlChanges:false,
         registerPageHistory:true,
         viewPath:'secured/views/',
         serverUrl:'http://paydayinvestor.arm.com.ng/api/v1',

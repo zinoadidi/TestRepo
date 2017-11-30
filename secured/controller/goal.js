@@ -1,13 +1,17 @@
-$(document).ready(function(){
-	createGoalApp = new Vue({
-	  el: '#createGoalDiv',
+viewGoalApp = new Vue({
+	  el: '#viewGoals',
 	  data: {
-	      cgvm: new Goal(null)
+	      	commonData:commonData
 	  }
 	});
-	createGoalApp.cgvm.UserId = sessionStorage.UserId
-})
-
+/*createGoalApp = new Vue({
+  el: '#createGoalDiv',
+  data: {
+      cgvm: new Goal(null)
+  }
+});*/
+/*createGoalApp.cgvm.UserId = sessionStorage.UserId*/
+//renda.get('/dashboardData/'+sessionStorage.UserId,'updateGoalList');
 renda.loader('stop')
 $('.frequency-depend').hide();
 $('.frequencies').hide();
@@ -109,12 +113,11 @@ function createGoal(data){
 	}
 }
 
-function viewSingleGoal(data){
-
-	createGoalApp = new Vue({
-	  el: '#createGoalDiv',
+function viewSingleGoal(id){
+	var singleGoalApp = new Vue({
+	  el: '#viewSingleGoal',
 	  data: {
-	      cgvm: new Goal(null)
+	      data: new Goal(null)
 	  }
 	});
 	createGoalApp.cgvm.UserId = sessionStorage.UserId
@@ -124,3 +127,5 @@ function goalTab(tab){
 	$('.goalTabs').hide()
 	$('#'+tab).show()
 }
+
+goalTab('viewGoals')
