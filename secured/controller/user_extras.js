@@ -1,8 +1,12 @@
 renda.get('/investmentOne','updateUserExtras','investment101');
+<<<<<<< HEAD
 $("a").click(function(event){
     var link = this.href;
     return false;
 });
+=======
+
+>>>>>>> eb95b086eb835a7d8866f07beb8ec85cdb29a53e
 function initInvestment101Page(){
     
 	investment101 = new Vue({
@@ -21,6 +25,7 @@ function initInvestment101Page(){
 	});
 	if(sessionStorage.investment101){
 		investment101.data = JSON.parse(sessionStorage.investment101);
+<<<<<<< HEAD
         $('a').each(function() {
           var href = $(this).attr('href') || '';
             $(this).attr('href', 'javascript:void(0)');
@@ -31,11 +36,15 @@ function initInvestment101Page(){
         alert(link);
         return false;
     });
+=======
+	}
+>>>>>>> eb95b086eb835a7d8866f07beb8ec85cdb29a53e
 
 }
 
 
 function updateUserExtras(data,option){
+<<<<<<< HEAD
 
 	if (data) {
         stopLoad()
@@ -44,6 +53,10 @@ function updateUserExtras(data,option){
             alert(link);
             return false;
         });
+=======
+	if (data) {
+        stopLoad()
+>>>>>>> eb95b086eb835a7d8866f07beb8ec85cdb29a53e
         try{
             JSON.parse(data);
         }catch(err){
@@ -55,10 +68,13 @@ function updateUserExtras(data,option){
             data = JSON.parse(data);
             sessionStorage.investment101 = JSON.stringify(data);
             investment101.data = data['data']
+<<<<<<< HEAD
             $('a').each(function() {
                 var href = $(this).attr('href') || '';
                 $(this).attr('href', 'javascript:void(0)');
             });
+=======
+>>>>>>> eb95b086eb835a7d8866f07beb8ec85cdb29a53e
             return false;
         }else if (option == 'cards') {
             data = JSON.parse(data);

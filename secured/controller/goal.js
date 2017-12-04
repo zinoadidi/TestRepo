@@ -4,12 +4,21 @@ viewGoalApp = new Vue({
 	      	commonData:commonData
 	  }
 	});
+<<<<<<< HEAD
 	createGoalApp = new Vue({
 	  el: '#createGoalDiv',
 	  data: {
 	      cgvm: new Goal(null)
 	  	}
 	});
+=======
+/*createGoalApp = new Vue({
+  el: '#createGoalDiv',
+  data: {
+      cgvm: new Goal(null)
+  }
+});*/
+>>>>>>> eb95b086eb835a7d8866f07beb8ec85cdb29a53e
 /*createGoalApp.cgvm.UserId = sessionStorage.UserId*/
 //renda.get('/dashboardData/'+sessionStorage.UserId,'updateGoalList');
 renda.loader('stop')
