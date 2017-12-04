@@ -57,7 +57,11 @@ function w3_close() {
 
 function monitorClicks(el){
 
-  dashboardTitle.vm.title = renda.Config.currentPage;
+  if(renda.Config.currentPage == 'userExtras'){
+    dashboardTitle.vm.title = renda.Config.currentComponent;
+  }else{
+    renda.Config.currentPage = renda.Config.currentPage;
+  }
   var cp = renda.Config.currentPage;
   if(cp =='login' || cp == 'register' || cp == 'setup_profile'
     ){
@@ -74,7 +78,7 @@ function monitorClicks(el){
 }
 
 function switchTabs(evt, tabName) {
-    window.clearTimeout(tim);  // cancel the timer on each mousemove/click/load
+    canceltimer()  // cancel the timer on each mousemove/click/load
     inactivity_lunch();
     var i, x, tablinks;
     x = document.getElementsByClassName("dashboardTabs");

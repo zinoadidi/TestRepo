@@ -27,6 +27,11 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
+        window.open = cordova.InAppBrowser.open;
+         if (!window.device) {
+            window.device = { platform: 'Browser' };
+        }
+        handleExternalURLs();
         this.receivedEvent('deviceready');
         screen.orientation.lock('portrait');
     },
@@ -43,5 +48,34 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
+function handleExternalURLs() {
+    // Handle click events for all external URLs
+    if (device.platform.toUpperCase() === 'ANDROID') {
+        $(document).on('click', 'a[href^="http"]', function (e) {
+            var url = $(this).attr('href');
+            navigator.app.loadUrl(url, { openExternal: true });
+            e.preventDefault();
+        });
+        $(document).on('click', 'a[href^="https"]', function (e) {
+            var url = $(this).attr('href');
+            navigator.app.loadUrl(url, { openExternal: true });
+            e.preventDefault();
+        });
+    }
+    else if (device.platform.toUpperCase() === 'IOS') {
+        $(document).on('click', 'a[href^="http"]', function (e) {
+            var url = $(this).attr('href');
+            window.open(url, '_system');
+            e.preventDefault();
+        });
+        $(document).on('click', 'a[href^="https"]', function (e) {
+            var url = $(this).attr('href');
+            window.open(url, '_system');
+            e.preventDefault();
+        });
+    }
+    else {
+        // Leave standard behaviour
+    }
+}
 app.initialize();

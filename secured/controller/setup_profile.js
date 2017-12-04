@@ -48,6 +48,14 @@ function step2(){
 function updateStage(data){
 	var url ='';    
     if(data){
+    	try{
+            JSON.parse(data);
+        }catch(err){
+        	stopLoad();
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }
     	renda.loader('stop');
 	    data = JSON.parse(data);
     	if (data.status == 200){
@@ -62,7 +70,7 @@ function updateStage(data){
 	            console.log('Error With Step Selection')
 	        }
 		}else{
-            toastr.error(data['message']);    
+            alert(data['message']);    
 		}           
 		return false;
     }else{
@@ -97,30 +105,30 @@ function updateStage(data){
 	    	files = document.getElementById('PassportUpload').files[0]
 	    	var PassportUpload = renda.fileToBase64(files);
 			PassportUpload.then(function(result) {
-				PassportUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");;
+				PassportUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 			});
 	    	files = document.getElementById('SignatureUpload').files[0]
 	    	var SignatureUpload = renda.fileToBase64(files);
 			SignatureUpload.then(function(result) {
-				SignatureUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");;
+				SignatureUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				sendReq();
 			});
 			files = document.getElementById('ThumbUpload').files[0]
 	    	var ThumbUpload = renda.fileToBase64(files);
 			ThumbUpload.then(function(result) {
-				ThumbUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");;
+				ThumbUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				sendReq()
 			});
 			files = document.getElementById('IdentificationUpload').files[0]
 	    	var IdentificationUpload = renda.fileToBase64(files);
 			IdentificationUpload.then(function(result) {
-				IdentificationUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");;
+				IdentificationUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				sendReq()
 			});
 			files = document.getElementById('UtilityUpload').files[0]
 	    	var UtilityUpload = renda.fileToBase64(files);
 			UtilityUpload.then(function(result) {
-				UtilityUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");;
+				UtilityUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				sendReq()
 			});
 			function sendReq(){

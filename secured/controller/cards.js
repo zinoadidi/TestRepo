@@ -25,6 +25,14 @@ $(document).ready(function(){
 function createCard(data){
     var url ='';    
     if(data){
+        try{
+            JSON.parse(data);
+        }catch(err){
+            stopLoad();
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }
         stopLoad();
         console.dir(data)
         data = JSON.parse(data);
@@ -35,11 +43,12 @@ function createCard(data){
                 console.log(data['data']['data']['authurl'])
                 $('#verifyCardIframe').attr('src',data['data']['data']['authurl']);
                 $('#verifyCardDiv').show()*/
-                cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_system', 'location=yes');
+                cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_blank', 'location=yes');
+                //navigator.app.loadUrl(encodeURI(data['data']['data']['authurl']),{openExternal:true});
                 return false;
             }else{
                 toastr.success('Card Successfully Added!')
-                showAddCardForm('addNewCardForm')  
+                //showAddCardForm('addNewCardForm')  
             }
         }else{
             toastr.error(data['message']);
@@ -50,7 +59,6 @@ function createCard(data){
         var myCard = $('#add-card-form');
         var cardNumber = myCard.CardJs('cardNumber');
         var cardType = myCard.CardJs('cardType');
-        var name = myCard.CardJs('name');
         var expiryMonth = myCard.CardJs('expiryMonth');
         var expiryYear = myCard.CardJs('expiryYear');
         var cvc = myCard.CardJs('cvc');

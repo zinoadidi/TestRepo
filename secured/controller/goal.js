@@ -1,16 +1,21 @@
-
-
-        createGoalApp = new Vue({
-		  el: '#createGoalDiv',
-		  data: {
-		      cgvm: new Goal(null)
-		  }
-		});
-        createGoalApp.cgvm.UserId = sessionStorage.UserId
-        renda.loader('stop')
-		$('.frequency-depend').hide();
-	    $('.frequencies').hide();
-
+viewGoalApp = new Vue({
+	  el: '#viewGoals',
+	  data: {
+	      	commonData:commonData
+	  }
+	});
+	createGoalApp = new Vue({
+	  el: '#createGoalDiv',
+	  data: {
+	      cgvm: new Goal(null)
+	  	}
+	});
+/*createGoalApp.cgvm.UserId = sessionStorage.UserId*/
+//renda.get('/dashboardData/'+sessionStorage.UserId,'updateGoalList');
+renda.loader('stop')
+$('.frequency-depend').hide();
+$('.frequencies').hide();
+goalTab('viewSingleGoal')
 
 function clear(){
 	renda.component('goals','view','dashboardDisplayDiv')
@@ -40,16 +45,24 @@ function onChangeInput(arg) {
 	       $('#monthDays').show();
 	       createGoalApp.cgvm.Duration = $('#custom-duration').val() +' Months';
 	    }
-	}
+}
 function createGoal(data){
     if(data){
     	renda.loader('stop');
+    	try{
+            JSON.parse(data);
+        }catch(err){
+        	stopLoad()
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }
     	stopLoad();
 	    data = JSON.parse(data);
     	if (data.status == 200){              
             toastr.success(data['message'])
             updateDataFromApi(null)
-            clear();
+            goalTab('createGoal');
 		}else{
             toastr.error(data['message']);    
 		}           
@@ -62,7 +75,7 @@ function createGoal(data){
     	var GoalUpload = renda.fileToBase64(files);
     	console.log('---------------------before send')
 		GoalUpload.then(function(result) {
-			GoalUpload = result;
+			GoalUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 			console.log(result)
 			sendGoalReq();
 		});
@@ -99,3 +112,20 @@ function createGoal(data){
 		}        
 	}
 }
+
+function viewSingleGoal(id){
+	var singleGoalApp = new Vue({
+	  el: '#viewSingleGoal',
+	  data: {
+	      data: new Goal(null)
+	  }
+	});
+	createGoalApp.cgvm.UserId = sessionStorage.UserId
+}
+
+function goalTab(tab){
+	$('.goalTabs').hide()
+	$('#'+tab).show()
+}
+
+goalTab('viewGoals')

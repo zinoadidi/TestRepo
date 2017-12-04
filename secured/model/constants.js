@@ -15,4 +15,6 @@ var temporaryApp = null;
  	
  };
 
+ var globalLinkVar = '';
+
 	
