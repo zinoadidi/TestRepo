@@ -2,33 +2,204 @@
 <div id="myDashboard">
   <div id="statsDiv" class="w3-margin w3-padding">
     
-    <div id="walletDiv" class="w3-white w3-card w3-padding">
-      <div class="input-text-medium " style="margin-bottom:3px"><small>Total Net Worth</small></div>
+    <div id="walletDiv" class="">
+      <div class="input-text-medium w3-white w3-card w3-padding" style="margin-bottom:3px">Total Net Worth</div>
       <div class="input-text-large">
-        <div class="display-inline">
-          <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.net_investment.TotalInvestment}}</span>
-          <span class="display-block input-text-medium"><small><small>Net Investment</small></small></span>
+        <div class="w3-container w3-white w3-card">
+          <div class="display-inline center">
+            <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.client_balance.BookBalance}}</span>
+            <span class="display-block input-text-medium"><small><small>Ledger Balance</small></small></span>
+          </div>
+          <div class="display-inline w3-right center">
+            <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.client_balance.AvailableBalance}}</span>
+            <span class="display-block input-text-medium"><small><small>Avaliable Balance</small></small></span>
+          </div>
         </div>
-        <div class="display-inline w3-right">
-          <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.fetchWallet.Amount}}</span>
-          <span class="display-block input-text-medium"><small><small>Wallet Balance</small></small></span>
+        <div class="w3-container w3-white w3-card" style="margin-top:3px" >
+          <div class="display-inline w3-left center">
+            <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.client_balance.AccruedIntrest}}</span>
+            <span class="display-block input-text-medium"><small><small>Accrued Intrest</small></small></span>
+          </div>
+          <div class="display-inline w3-right center">
+            <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.fetchWallet.Amount}}</span>
+            <span class="display-block input-text-medium"><small><small>Wallet Balance</small></small></span>
+          </div>
+        </div>
+        <div class="">
+          <div class="input-text-medium w3-padding w3-right w3-white w3-card" style="margin-top:3px">
+            <small class=" w3-padding w3-round"><b>Today's Yield</b></small>
+            <span class="w3-text-green">{{commonData.Dashboard.yield_rate}}%</span>
+          </div>
         </div>
       </div>
     </div>
-   <!--  <div id="walletDiv" class="w3-container">
-      <div class="input-text-medium"><small>Today's Yield</small></div>
-      <div class="input-text-large w3-large w3-border w3-circle">
-        <span class="display-block">&#8358; 1200000</span>
-        <span class="display-block input-text-medium"><small><small>Net Investment</small></small></span>
-        <br/>
-        <span class="display-block">&#8358; 380000</span>
-        <span class="display-block input-text-medium"><small><small>Wallet Balance</small></small></span>
-
+    <br/>
+    <div id="goalStatDiv" class="">
+      <div class="input-text-medium w3-bottombar w3-white center w3-padding" style="margin-bottom:7px; margin-top:50px;"><span class="w3-padding">Goal Summary</span></div>
+      <div class="input-text-large">
+        <div class="center ">
+          <div class="center w3-circle w3-card-4 w3-white w3-padding display-inline" style="color: #656C75; width:40vw; height:40vw;  border: 5px solid #656C75;">
+            <div style="position: relative; top:25%"> 
+              <div class="input-text-medium center-element w3-white" style=""><b>
+                You Have<br/>
+                  <big><big>{{commonData.Dashboard.goals_total}}</big></big>
+                  <br/>
+                  Goal(s)</b>
+              </div>
+            </div>
+          </div>
+          <div class="center display-inline" style="color: #656C75; width:40vw;">
+            <div class="w3-white w3-card w3-padding">
+              <span class="display-block input-text-goal">Completed Goals</span>
+              <span class="display-block" >{{commonData.Dashboard.goals_done}}</span>
+            </div>
+            <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
+              <span class="display-block input-text-goal">Pending Goals</span>
+              <span class="display-block" >{{commonData.Dashboard.goals_pending}}</span>
+            </div>
+            <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
+              <span class="display-block input-text-goal">Suspended Goals</span>
+              <span class="display-block" >{{commonData.Dashboard.goals_suspended}}</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div> -->
+    </div>
+    <br/>
+    <div id="investmentCalculatorDiv" class="">
+      <center>
+      <div class="col-md-6 col-xl-4">
+        <div class="box">
+          <div class="box-header input-text-medium w3-bottombar w3-white center w3-padding">
+            <center>Investment Calculator</center>
+          </div>
+          <div class="box-body b-t w3-white w3-card w3-padding">
+            <form  id="savings">
+              <div class="row" style="margin-top: 5px">
+               <div class="col-xs-6 col-lg-6">
+                  <div class="col-xs-12 col-lg-12">
+                      <div class="text-muted">Initial Investment</div>
+                  </div>
 
-    
-    
+                  <div class="col-xs-12 col-lg-12">
+                    <input name="initialdeposit" type="number"  class="w3-input w3-text-black form-control" placeholder="">
+                  </div>
+               </div>
+                <div class="col-xs-6 col-lg-6">
+                  <div class="col-xs-12 col-lg-12">
+                      <div class="text-muted">Duration</div>
+                  </div>
+
+                  <div class="col-xs-12 col-lg-12">
+                       <select name="numyears" class="form-control w3-select w3-input">
+                          <option value="">Select years</option>
+                          <option value="1">1 year</option>
+                          <option value="2">2 years</option>
+                          <option value="3">3 years</option>
+                          <option value="4">4 years</option>
+                          <option value="5">5 years</option>
+                          <option value="6">6 years</option>
+                          <option value="7">7 years</option>
+                          <option value="8">8 years</option>
+                          <option value="9">9 years</option>
+                          <option value="10">10 years</option>
+                          <option value="15">15 years</option>
+                          <option value="20">20 years</option>
+                          <option value="25">25 years</option>
+                          <option value="30">30 years</option>
+                          <option value="35">35 years</option>
+                          <option value="40">40 years</option>
+                          <option value="45">45 years</option>
+                          <option value="50">50 years</option>
+                          <option value="55">55 years</option>
+                          <option value="60">60 years</option>
+                          <option value="65">65 years</option>
+                          <option value="70">70 years</option>
+                          <option value="75">75 years</option>
+                          <option value="80">80 years</option>
+                          <option value="85">85 years</option>
+                          <option value="90">90 years</option>
+                          <option value="95">95 years</option>
+                          <option value="100">100 years</option>
+                          <option value="200">200 years</option>
+                          <option value="300">300 years</option>
+                          <option value="400">400 years</option>
+                          <option value="500">500 years</option>
+                          <option value="600">600 years</option>
+                          <option value="700">700 years</option>
+                          <option value="800">800 years</option>
+                          <option value="900">900 years</option>
+                          <option value="1000">1000 years</option>
+                      </select>
+                  </div>
+               </div>
+              </div>
+              <div class="row" style="margin-top: 5px">
+                   <div class="col-xs-6 col-lg-6">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Monthly Investment</div>
+                      </div>
+
+                      <div class="col-xs-12 col-lg-12">
+                        <input name="monthlydeposit"  type="number"  class="w3-input w3-text-black form-control" placeholder="0">
+                      </div>
+                   </div>
+                    <div class="col-xs-6 col-lg-6">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Intrest Rate (%)</div>
+                      </div>
+
+                      <div class="col-xs-12 col-lg-12">
+                          <input type="text" name="interestrate" disabled="disabled"  class="w3-input w3-text-black form-control" placeholder="17.87" :value="commonData.Dashboard.yield_rate">
+                      </div>
+                   </div>
+              </div>
+
+               <div class="row">
+                  <div class="col-xs-12 col-lg-12">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Total investment (Naira)</div>
+                      </div>
+
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="input-group m-b">
+                              <span class="input-group-addon">₦</span>
+                              <input id="annualamount" disabled="disabled" style="height:40px" type="text" class="w3-input w3-text-black form-control">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row" style="">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="text-muted">Total amount due (Naira)</div>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon">₦</span>
+                            <input id="result" disabled="disabled" style="height:40px" type="text" class="form-control w3-input w3-text-black ">
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+            <div class="box-footer">
+               <div class="row" style="margin-top: 5px">
+                 <div class="col-xs-12 col-lg-12">
+
+                    <div class="col-xs-12 col-lg-12">
+                        <button onclick="Calculate(document.forms['savings'])" class="w3-button w3-bar input-text-medium w3-text-white" style="background:#656C75">Calculate</button>
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+         </div>
+      </center>
+    </div>
   </div>
 </div>
 

@@ -11,29 +11,29 @@
             <br/><small>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
         </span>
       </li>
-      <button id="loadDashboardBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');" ><i class="fa fa-home w3-margin-right "></i><span class="navFontSize">Dashboard</span></button>
+      <button id="loadDashboardBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 " onclick="loadPage('dashboard')"><i class="fa fa-home w3-margin-right "></i><span class="navFontSize">Dashboard</span></button>
 
       <!-- client options -->
-        <button id="loadGoalManagementBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.page('goals','dashboardDisplayDiv');"><i class=" fa fa-home w3-margin-right "></i><span class="navFontSize">Goal Management</span></button>
+        <button id="loadGoalManagementBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('goals','goal','dashboardDisplayDiv');"><i class=" fa fa-home w3-margin-right "></i><span class="navFontSize">Goal Management</span></button>
 
       <!-- content providers options -->
-        <button id="loadInvestment101Btn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.component('userExtras','investment101','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">Investment 101</span></button>
+        <button id="loadInvestment101Btn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('content-type','create','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">Investment 101</span></button>
 
       <!-- content options -->
-        <button id="loadCardManagementBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.component('card','view','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right"></i><span class="navFontSize">Card Management</span></button>
+        <button id="loadCardManagementBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('card','view','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right"></i><span class="navFontSize">Card Management</span></button>
 
       <!-- Category options -->
-        <button id="loadTransactionBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.component('categories','view','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">My Transactions</span></button>
+        <button id="loadTransactionBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('categories','view','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">My Transactions</span></button>
 
-        <button id="loadActivitiesBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('categories','create','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right menuItemBtn"></i><span class="navFontSize">My Activities</span></button>
+        <button id="loadActivitiesBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('categories','create','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">My Activities</span></button>
 
-        <button id="loadAccountSettings" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.component('dashboard','stats','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">Account Settings</span></button>
+        <button id="loadAccountSettings" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('dashboard','stats','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">Account Settings</span></button>
 
-        <button id="categoryOptionsBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">Contact Us</span></button>
+        <button id="categoryOptionsBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">Contact Us</span></button>
 
-        <button id="categoryOptionsBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">FAQs</span></button>
+        <button id="categoryOptionsBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class="fa fa-users w3-margin-right "></i><span class="navFontSize">FAQs</span></button>
 
-       <button id="logoutBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 menuItemBtn"><i class="fa fa-home w3-margin-right "></i><span class="navFontSize" onclick="logout();">Logout</span></button>
+       <button id="logoutBtn" class="w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2"><i class="fa fa-home w3-margin-right "></i><span class="navFontSize" onclick="logout();">Logout</span></button>
     </ul>
     </div>
            
@@ -56,7 +56,31 @@
           $(this).addClass('w3-light-grey');
           startLoad()
         });
-        
+        /*$('#loadAccountSettings').click(function(){
+          
+        });
+        $('#loadActivitiesBtn').click(function(){
+            
+
+        });
+        $('#loadTransactionBtn').click(function(){
+            
+        });
+
+        $('#loadInvestment101Btn').click(function(){
+            
+
+        });
+        $('#loadGoalManagementBtn').click(function(){
+            
+        });
+
+        $('#loadCardManagementBtn').click(function(){
+            
+        });       */
+        $('#loadDashboardBtn').click(function(){
+            renda.component('dashboard','myDashboard','dashboardDisplayDiv');
+        });
       
         $('#logoutBtn').click(function(){
             logout();

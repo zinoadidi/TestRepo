@@ -71,8 +71,7 @@
 		  	<div class="center w3-card w3-white input-text-medium w3-bottombar w3-padding w3-hover-gray" style="" onclick="showAddCardForm('addNewCardForm')">Add A New Card</div>
 		  	<div class="panel w3-hide" id="addNewCardForm">
 			    <form onsubmit="event.preventDefault();">
-			      <div class="card-js stripe" data-stripe="true" id="add-card-form">
-              <input class="name input-text-medium" placeholder="Name of card holder" required="" >   
+			      <div class="card-js stripe" data-stripe="true" id="add-card-form">   
             </div>
 			      <button type="submit" class="btnn w3-padding" id="read-btn-1">Add Card</button>
 			    </form>
@@ -82,7 +81,7 @@
 	</div>
 	<div id='viewCards' class="w3-container" class="hideCardPageDivs">		
 		<div id="cardsDiv" style="">
-		  <div v-for="item in cards" class="single-card " :id="item.Id" style="" >
+		  <div v-for="item in cards" class="single-card " :id="item.Id" style="margin-bottom: 3px" >
 		  	<div style="background: #1d232c; height:auto;  overflow: hidden;" class="w3-text-white w3-card-4 w3-round w3-container w3-padding " >
 			  	<div class="display-block input-text-medium w3-padding" style="margin-top: 3px;">
 			  		Card ID: {{ item.Id }}
