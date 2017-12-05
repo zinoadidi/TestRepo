@@ -4,7 +4,11 @@ viewGoalApp = new Vue({
       	commonData:commonData
   }
 });
+<<<<<<< HEAD
 createGoalApp = new Vue({ 
+=======
+createGoalApp = new Vue({
+>>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
   el: '#createGoalDiv',
   data: {
       cgvm: new Goal(null)
@@ -120,7 +124,11 @@ function viewSingleGoal(id){
 	    data: new Goal(null)
 	  }
 	});
+<<<<<<< HEAD
 	console.log(id.getAttribute('data-goalData'));
+=======
+	console.dir(singleGoalApp.data);
+>>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
 }
 
 function goalTab(tab){
