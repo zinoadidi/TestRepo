@@ -9,7 +9,7 @@
         trackUrlChanges:false,
         registerPageHistory:true,
         viewPath:'secured/views/',
-        serverUrl:'http://paydayinvestor.arm.com.ng/api/v1',
+        serverUrl:'https://paydayinvestor.arm.com.ng/api/v1',
         appMode:'debug',
         httpReqHeaders:{
             "Content-Type": "application/json",
@@ -93,7 +93,42 @@ var TESTDATA = {
     }
 }
 
-var TESTDASH = { "status": 200, "message": "", "data": { "yield_rate": 17.8173, "goals_done": null, "goals_total": 1, "goals_pending": 1, "goals_suspended": 0, "total_withdrawals": 0, "net_investment": { "AppUserId": "PIV1000213131", "TotalInvestment": 0, "AccruedIntrest": 0 }, "fetchWallet": { "UserId": "PIV1000213131", "Amount": 0 }, "top_goal": false, "goals": [{ "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false }], "chat_data ": { "Credit": "", "Debit": "" } } }
+var TESTDASH = { 
+
+    "status": 200, 
+    "message": "", 
+    "data": { 
+        "yield_rate": 17.8173, 
+        "goals_done": 2, 
+        "goals_total": 3, 
+        "goals_pending": 1, 
+        "goals_suspended": 0, 
+        "total_withdrawals": 0, 
+        "net_investment": { 
+            "AppUserId": "PIV1000213131", 
+            "TotalInvestment": 0, 
+            "AccruedIntrest": 0 
+        }, "fetchWallet": { 
+            "UserId": "PIV1000213131", 
+            "Amount": 0 
+        }, "top_goal": false, 
+        "goals": [
+            { "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false },
+            { "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false },
+            { "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false },
+            { "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false },
+            { "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false },
+            { "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false },
+            { "ExcessFund": 0, "GoalId": "Goal1131161", "AppUserId": "PIV1000213131", "ItemName": "my new goal", "ItemDescription": "GGJJBGJ JGJBGJJ ", "GoalAmount": 10000, "Duration": "10 days", "MonthlyDeduction": 1000, "ProductId": null, "AmountAttained": 0, "Status": "Active", "DateCreated": "2017-11-24T04:26:16.357", "GoalType": "2", "Day": "Daily", "Frequency": "Daily", "CardId": 0, "GoalImage": null, "NoOfDeductionRemaining": 10, "IsTopGoal": false }
+        ], 
+        "chat_data ": { "Credit": "", "Debit": "" },
+        "client_balance":{
+            "AccruedIntrest":2000,
+            "BookBalance":3000,
+            "AvailableBalance":4000
+        }
+    } 
+}
 
 var TESTcard = 
 {

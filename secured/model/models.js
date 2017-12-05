@@ -20,6 +20,11 @@ function Dashboard(obj){
         "Credit":"",
         "Debit":""
     } : obj.chat_data;
+    this.client_balance = obj == null ? {
+        "AccruedIntrest":0,
+        "BookBalance":0,
+        "AvailableBalance":0
+    } : obj.client_balance;
 
 }
 

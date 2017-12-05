@@ -1,15 +1,15 @@
 viewGoalApp = new Vue({
-	  el: '#viewGoals',
-	  data: {
-	      	commonData:commonData
-	  }
-	});
-/*createGoalApp = new Vue({
+  el: '#viewGoals',
+  data: {
+      	commonData:commonData
+  }
+});
+createGoalApp = new Vue({ 
   el: '#createGoalDiv',
   data: {
       cgvm: new Goal(null)
-  }
-});*/
+  	}
+});
 /*createGoalApp.cgvm.UserId = sessionStorage.UserId*/
 //renda.get('/dashboardData/'+sessionStorage.UserId,'updateGoalList');
 renda.loader('stop')
@@ -117,10 +117,10 @@ function viewSingleGoal(id){
 	var singleGoalApp = new Vue({
 	  el: '#viewSingleGoal',
 	  data: {
-	      data: new Goal(null)
+	    data: new Goal(null)
 	  }
 	});
-	createGoalApp.cgvm.UserId = sessionStorage.UserId
+	console.log(id.getAttribute('data-goalData'));
 }
 
 function goalTab(tab){

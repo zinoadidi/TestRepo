@@ -1,6 +1,10 @@
 renda.get('/investmentOne','updateUserExtras','investment101');
-
+$("a").click(function(event){
+    var link = this.href;
+    return false;
+});
 function initInvestment101Page(){
+    
 	investment101 = new Vue({
 	  el: '#investment101Page',
 	  data: {
@@ -17,14 +21,29 @@ function initInvestment101Page(){
 	});
 	if(sessionStorage.investment101){
 		investment101.data = JSON.parse(sessionStorage.investment101);
+        $('a').each(function() {
+          var href = $(this).attr('href') || '';
+            $(this).attr('href', 'javascript:void(0)');
+        });
 	}
+    $("a").click(function(event){
+        var link = this.href;
+        alert(link);
+        return false;
+    });
 
 }
 
 
 function updateUserExtras(data,option){
+
 	if (data) {
         stopLoad()
+        $("a").click(function(event){
+            var link = this.href;
+            alert(link);
+            return false;
+        });
         try{
             JSON.parse(data);
         }catch(err){
@@ -36,6 +55,10 @@ function updateUserExtras(data,option){
             data = JSON.parse(data);
             sessionStorage.investment101 = JSON.stringify(data);
             investment101.data = data['data']
+            $('a').each(function() {
+                var href = $(this).attr('href') || '';
+                $(this).attr('href', 'javascript:void(0)');
+            });
             return false;
         }else if (option == 'cards') {
             data = JSON.parse(data);

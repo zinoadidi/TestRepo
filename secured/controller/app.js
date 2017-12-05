@@ -341,3 +341,7 @@ function canceltimer() {
   window.clearTimeout(timer_);  // cancel the timer on each mousemove/click/load
   inactivity_lunch();  
 }
+
+function openLinkInBrowser(link){
+    globalLinkVar = window.open(link, '_blank', 'location=yes');
+}
