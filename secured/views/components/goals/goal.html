@@ -6,23 +6,15 @@
 	<div class="" id="myDashboard">
 		<div id='viewGoals' class="goalTabs" style="display: none">	
 			<div id="goalsDiv" style="margin-left:6%" class="w3-animate-left">
-<<<<<<< HEAD
-<<<<<<< HEAD
-			  <div v-for="item in commonData.Dashboard.goals" class="single-goal " :id="key" style="" onclick="viewSingleGoal(this.id)">
-=======
 			  <div v-for="item in commonData.Dashboard.goals" class="single-goal " :data-goalData="item" :id="item.GoalId" style="" onclick="viewSingleGoal(this.id)">
->>>>>>> 93a03e437a5a7cd5e23f296878ae986b659e519e
-=======
-			  <div v-for="(key,item) in commonData.Dashboard.goals" class="single-goal " :id="key" style="" onclick="viewSingleGoal(this.id)">
->>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
 			  	<div style="background: #2B333E; height:150px; max-height: 150px; overflow: hidden;    margin: 4px!important;" class="w3-text-white w3-card-4 w3-round w3-padding w3-hover-opacity w3-hover-shadow" >
 				  	<div class="display-block input-text-medium " style="">
-				  		&#8358;{{ item.GoalAmount }}
+						<center><div class="input-text-fixed" style="margin-bottom: 3px">{{ item.ItemName }}</div></center>  
 				  	</div>
-				  	<div class="" style="margin-top: 10px">
-				  		<div class="input-text-goal">{{ item.ItemName }}</div><center>
-				  		<div class="input-text-fixed" style="margin-bottom: 3px">{{ item.ItemDescription }}</div></center>
-				  	</div>
+				  	<div class="" style="margin-top: 10px">	
+						<center>&#8358;{{ item.GoalAmount }}						
+						<div class="input-text-goal">{{ item.Status }}</div></center>						  
+					</div>
 				</div>
 			  </div>
 			  <div class="single-goal" style="" id="createGoalDiv" onclick="goalTab('createGoal')">
@@ -40,7 +32,6 @@
 				</div>
 			  </div>
 			</div>
-<<<<<<< HEAD
 		</div>  
 	</div>
 	<div id='viewSingleGoal' class="goalTabs" >	
@@ -53,20 +44,6 @@
 			  	<div class="" style="margin-top: 10px">
 			  		<div class="input-text-goal">{{ data.ItemName }}</div><center>
 			  		<div class="input-text-fixed" style="margin-bottom: 3px">{{ data.ItemDescription }}</div></center>
-=======
-		</div>
-	</div>
-	<div id='viewSingleGoal' class="goalTabs" >	
-		<div id="goalsDiv" style="margin-left:6%" class="">
-		  <div v-for="item in commonData.Dashboard.goals" class="single-goal w3-animate-right" :id="item.GoalId" style="" onclick="viewSingleGoal(this.id)">
-		  	<div style="background: #2B333E; height:150px; max-height: 150px; overflow: hidden;    margin: 4px!important;" class="w3-text-white w3-card-4 w3-round w3-padding w3-hover-opacity w3-hover-shadow" >
-			  	<div class="display-block input-text-medium " style="">
-			  		&#8358;{{ item.GoalAmount }}
-			  	</div>
-			  	<div class="" style="margin-top: 10px">
-			  		<div class="input-text-goal">{{ item.ItemName }}</div><center>
-			  		<div class="input-text-fixed" style="margin-bottom: 3px">{{ item.ItemDescription }}</div></center>
->>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
 			  	</div>
 			</div>
 		  </div>
@@ -87,10 +64,10 @@
 		</div>
 	</div>
 	<div id='createGoal' class="goalTabs" >
-	    <section id="createGoalDiv" class="w3-white" style="font-weight: 0px;">
+	    <section id="createGoalDivApp" class="w3-white" style="font-weight: 0px;">
 	    <div class=" col-lg-12 w3-margin-left w3-padding">
 	        <div class="">
-	            <form action="#"onsubmit="event.preventDefault();createGoal(null)" id="step1" method="post" class="w3-animate-right stages">
+	            <form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
 	            <div class=" m12 l12 m12">
 	              <div class="display-block center">
 	                  <h5>Create  Goal</h5>
@@ -121,14 +98,11 @@
 	              <label class="input-text-goal w3-left">Number of Deductions:</label>
 	              <input type="text" class="form-control w3-input custom-duration" style="height: 3.2rem; padding-left:10px " tabindex="-1" readonly="readonly" required="" v-model="cgvm.Duration" id="custom-duration" value="">
 	            </div>
-
-
-
 	            <div class="form-group inline col-lg-5 left margin">
 	              <label class="input-text-goal w3-left">Frequency:</label>
 	              <select v-model="cgvm.Frequency" required="" data-placement="bottom" id="frequency" class="form-control w3-input frequency">
 	                  <option value="">Debit Frequency</option>
-	                  <option value="Daily">Daily</option>
+	                  
 	                  <option value="Weekly">Weekly</option>
 	                  <option value="Monthly">Monthly</option>
 	              </select>
@@ -184,31 +158,37 @@
 	                      <option value="Friday">Friday</option>
 	                      <option value="Saturday">Saturday</option>
 	                  </select>
-	              </div>
-	            </div>
-	               <div class="clearfix"></div>
-	                  <hr>
-	                   <!--  <label class="input-text-goal w3-left">Choose Card:</label>
-	                    <div class="card-holder">
-	                        <div class="col-md-6 col-lg-5 col-sm-12 col-xs-12 no_padding">
-	                            <div class="card-select">
-	                                <h6> :: No card. <a href="javascript:void(0)">Add a card</a></h6>
-	                            </div>
-	                        </div>
-	                    </div> -->
-	                    <label class="input-text-goal w3-left">Select Goal Image:</label>
-	                  <div class="form-group form-field-holder">
-	                    <div class="form-icon-holder col-xs-2" id="username-icon-holder">
-	                        <i class="fa fa-circle" aria-hidden="true"></i>
-	                    </div>
-	                    <div class="col-xs-10 text-field" id="username-field">
-	                        <input type="file" class='w3-input' placeholder="Goal Image" value="" id="GoalUpload" required="" data-toggle="tooltip" data-placement="bottom" accept="image/*">
-	                    </div>
-	                </div>
-	                    <div class="col-lg-11 form-group">
-	                        <br><br>
-	                        <button type="submit" class="w3-bar w3-button w3-border-0 w3-text-white w3-large w3-right header-color" >Submit</button>
-	                    </div>
+				  </div>
+				  
+				  
+				</div>
+	             
+
+						<div class="clearfix"></div>
+						<hr>
+						
+						<label class="input-text-goal w3-left">Select A Card:</label>
+						<div class="card-holder">
+							<select class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+								<option></option>
+								<option v-for="n in cgvm.userCards" :fwCode='n.FWCode' :id="n.Id">{{ n.CardNo }}</option>
+							</select>
+							<br></br>
+						</div>
+					</div>
+					<label class="input-text-goal w3-left">Select Goal Image:</label>
+					<div class="form-group form-field-holder">
+						<div class="form-icon-holder col-xs-2" id="username-icon-holder">
+							<i class="fa fa-circle" aria-hidden="true"></i>
+						</div>
+						<div class="col-xs-10 text-field" id="username-field">
+							<input type="file" class='w3-input' placeholder="Goal Image" value="" id="GoalUpload" required="" data-toggle="tooltip" data-placement="bottom" accept="image/*">
+						</div>
+					</div>
+					<div class="col-lg-11 form-group">
+						<br><br>
+						<button type="submit" class="w3-bar w3-button w3-border-0 w3-text-white w3-large w3-right header-color" onclick="createGoal(null)">Create Goal</button>
+					</div>
 	            </form>
 
 	        </div>

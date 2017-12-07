@@ -57,21 +57,13 @@
   </div>
 	<div id='investment101Div' class="w3-container w3-margin-top w3-margin-bottom w3-white" >		
       <div v-for="item in data.item" class="single-article" :id="item.guid" style="">
-<<<<<<< HEAD
         <div style="color: #2B333E; height:200px; max-height: 200px; overflow: hidden;" class="w3-white w3-card  w3-hover-opacity w3-hover-shadow w3-margin ">
-=======
-        <div style="color: #2B333E; height:250px; max-height: 250px; overflow: hidden;" class="w3-white w3-card  w3-hover-opacity w3-hover-shadow w3-margin ">
->>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
           <div class="display-block input-text-medium w3-text-white center" style="background: #2B333E;" > {{item.title}} <span class="input-text-goal">- {{ item.pubDate }}</span>
           </div>
           <div class="w3-padding" style="margin-top: 3px; padding-top: 0px">
             <button class="input-text-goal w3-button w3-right" onclick='openLinkInBrowser(this.id)' :id="item.link">View Full Story</button>
             <div class="input-text-goal" v-html='item.description'></div>
             <div class="w3-right">{{item.category}}</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
           </div>
       </div>
       </div>

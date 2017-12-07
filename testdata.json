@@ -1,5 +1,5 @@
 {
-    "status": 200,
+    "status": 200, 
     "message": "We've sent an activation link to your email. Please click the link to activate your account",
     "data": {
         "UserId": "PIV1000148123",

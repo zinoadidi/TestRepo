@@ -68,7 +68,9 @@
                     ){
                         renda.page('setup_profile')
                         return false;                                
-                    }                   
+                    }
+                    renda.page('dashboard')
+                    return false;                   
                 }else{
                     toastr.error(result['message']);    
                     if(result['status'] == 204){
@@ -231,6 +233,8 @@
                     }
                     errorFound ++;
                 }   
+            }else if (value == undefined) {
+                
             }else{
                 if(silentMode){}else{
                     toastr.error('Please fill in detail for: '+key);
@@ -301,7 +305,7 @@
                 sessionStorage.userCards = JSON.stringify(data);
                 cardsApp.cards = data['data'];   
                 
-            }else{
+            }else{ // chences
                 data = JSON.parse(data);
                 commonData.Dashboard = data['data']
                 commonData.User = payday.user

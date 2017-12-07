@@ -42,12 +42,21 @@ function Goal(obj){
     this.Status = obj == null ? '' : obj.Status;
     this.DateCreated = obj == null ? '' : obj.DateCreated;
     this.GoalType = obj == null ? '' : obj.GoalType;
+    this.monthDays = obj == null ? '' : obj.monthDays;
     this.Day = obj == null ? '' : obj.Day;
     this.Frequency = obj == null ? '' : obj.Frequency;
     this.CardId = obj == null ? '' : obj.CardId;
     this.GoalImage = obj == null ? '' : obj.GoalImage;
     this.NoOfDeductionRemaining = obj == null ? '' : obj.NoOfDeductionRemaining;
     this.IsTopGoal = obj == null ? '' : obj.IsTopGoal;
+    this.userCards = obj == null ? [{
+        "AppUserId":0,
+        "CardNo":0,
+        "DeductionDay":0,
+        "FWCode":0,
+        "Id":0,
+        "Status":null
+    }] : obj.userCards;
 
 }
 

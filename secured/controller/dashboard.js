@@ -1,27 +1,17 @@
-//startLoad();
+//startLoad(); 
 var navMan = {
     status:'closed',
     selected:'false'
 }
 $(document).ready(function(){ 
-     dashboardTitle = new Vue({
-      el: '#appTitleDisplayDiv',
-      data: {
-        vm:{
-            title:''
-        }
-      }
-    });
-    dashboardTitle.vm.title = renda.Config.currentPage;
     $( "*", document.body ).click(function( event ) {  
         event.stopPropagation();  
         var domElement = $( this ).get( 0 );  
-        canceltimer();
-        monitorClicks(domElement);  
+        monitorClicks(domElement)  
     });  
-
     authenticateUser(); 
     loadDefaults();
+    
 });
 function loadDefaults(){
     renda.component('dashboard','header','dashboadHeaderDiv');
@@ -56,18 +46,9 @@ function w3_close() {
 }
 
 function monitorClicks(el){
-
-  if(renda.Config.currentPage == 'userExtras'){
-    dashboardTitle.vm.title = renda.Config.currentComponent;
-  }else{
-    renda.Config.currentPage = renda.Config.currentPage;
-  }
   var cp = renda.Config.currentPage;
   if(cp =='login' || cp == 'register' || cp == 'setup_profile'
     ){
-    return false;
-  }
-  if (el.id == 'dashboardNavDiv') {
     return false;
   }
   if (el.id == 'display' || el.id == 'dashboardDisplayDiv') {
@@ -75,11 +56,12 @@ function monitorClicks(el){
       w3_close()
     }
   }
+  
+
+
 }
 
 function switchTabs(evt, tabName) {
-    canceltimer()  // cancel the timer on each mousemove/click/load
-    inactivity_lunch();
     var i, x, tablinks;
     x = document.getElementsByClassName("dashboardTabs");
     for (i = 0; i < x.length; i++) {
@@ -92,4 +74,3 @@ function switchTabs(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " dash-tab-current";
 }
-

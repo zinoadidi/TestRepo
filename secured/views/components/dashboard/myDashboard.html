@@ -3,11 +3,11 @@
   <div id="statsDiv" class="w3-margin w3-padding">
     
     <div id="walletDiv" class="">
-      <div class="input-text-medium w3-white w3-card w3-padding" style="margin-bottom:3px">Total Net Worth</div>
-      <div class="input-text-large">
-        <div class="w3-container w3-white w3-card">
+      <div class="input-text-medium w3-white w3-padding w3-card" style="margin-bottom:3px">Total Net Worth</div>
+      <div class="input-text-large w3-card">
+        <div class="w3-container w3-white">
           <div class="display-inline center">
-            <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.client_balance.BookBalance}}</span>
+            <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.client_balance.BookBalnce}}</span>
             <span class="display-block input-text-medium"><small><small>Ledger Balance</small></small></span>
           </div>
           <div class="display-inline w3-right center">
@@ -15,11 +15,7 @@
             <span class="display-block input-text-medium"><small><small>Avaliable Balance</small></small></span>
           </div>
         </div>
-<<<<<<< HEAD
         <div class="w3-container w3-white w3-card" style="margin-top:0px" >
-=======
-        <div class="w3-container w3-white w3-card" style="margin-top:3px" >
->>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
           <div class="display-inline w3-left center">
             <span class="display-block w3-text-green">&#8358; {{commonData.Dashboard.client_balance.AccruedIntrest}}</span>
             <span class="display-block input-text-medium"><small><small>Accrued Intrest</small></small></span>
@@ -39,7 +35,7 @@
     </div>
     <br/>
     <div id="goalStatDiv" class="">
-      <div class="input-text-medium w3-bottombar w3-white center w3-padding" style="margin-bottom:7px; margin-top:50px;"><span class="w3-padding">Goal Summary</span></div>
+      <div class="input-text-medium w3-bottombar w3-white center w3-padding w3-card" style="margin-bottom:7px; margin-top:50px;"><span class="w3-padding ">Goal Summary</span></div>
       <div class="input-text-large">
         <div class="center ">
           <div class="center w3-circle w3-card-4 w3-white w3-padding display-inline" style="color: #656C75; width:40vw; height:40vw;  border: 5px solid #656C75;">
@@ -53,10 +49,7 @@
             </div>
           </div>
           <div class="center display-inline" style="color: #656C75; width:40vw;">
-            <div class="w3-white w3-card w3-padding">
-              <span class="display-block input-text-goal">Completed Goals</span>
-              <span class="display-block" >{{commonData.Dashboard.goals_done}}</span>
-            </div>
+            
             <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
               <span class="display-block input-text-goal">Pending Goals</span>
               <span class="display-block" >{{commonData.Dashboard.goals_pending}}</span>
@@ -64,6 +57,10 @@
             <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
               <span class="display-block input-text-goal">Suspended Goals</span>
               <span class="display-block" >{{commonData.Dashboard.goals_suspended}}</span>
+            </div>
+            <div class="w3-white w3-card w3-padding">
+              <span class="display-block input-text-goal">Completed Goals</span>
+              <span class="display-block" >{{commonData.Dashboard.goals_done}}</span>
             </div>
           </div>
         </div>
@@ -74,7 +71,7 @@
       <center>
       <div class="col-md-6 col-xl-4">
         <div class="box">
-          <div class="box-header input-text-medium w3-bottombar w3-white center w3-padding">
+          <div class="box-header input-text-medium w3-bottombar w3-white center w3-padding w3-card">
             <center>Investment Calculator</center>
           </div>
           <div class="box-body b-t w3-white w3-card w3-padding">
@@ -154,11 +151,7 @@
                       </div>
 
                       <div class="col-xs-12 col-lg-12">
-<<<<<<< HEAD
                           <input type="text" name="interestrate" disabled="disabled"  class="w3-input w3-text-black form-control center" :placeholder="commonData.Dashboard.yield_rate" :value="commonData.Dashboard.yield_rate">
-=======
-                          <input type="text" name="interestrate" disabled="disabled"  class="w3-input w3-text-black form-control" placeholder="17.87" :value="commonData.Dashboard.yield_rate">
->>>>>>> 623d1577e4160eac8c989bc9350a73a5c5dfeafb
                       </div>
                    </div>
               </div>

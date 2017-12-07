@@ -2,7 +2,7 @@
 <widget id="com.payday.arm" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Payday</name>
     <description>
-        The Payday Investor is an application for anyone who wishes to make better financial decisions, whether it is to save more, or acquire an asset, or simply invest in their future.
+        The Payday Investor is an application for anyone who wishes to make better financial decisions, whether it is to save more, acquire an asset, or simply invest in their future.
     </description>
     <author email=" support@armvendors.com" href="https://paydayinvestor.arm.com.ng">
         Payday Investor Team
@@ -23,9 +23,7 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <preference name="android-targetSdkVersion" value="23" />
     </platform>
-    <preference name="android-targetSdkVersion" value="23" />
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
@@ -38,4 +36,5 @@
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
 </widget>

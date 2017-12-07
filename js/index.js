@@ -31,7 +31,7 @@ var app = {
          if (!window.device) {
             window.device = { platform: 'Browser' };
         }
-        handleExternalURLs();
+        this.requestPermission();
         this.receivedEvent('deviceready');
         screen.orientation.lock('portrait');
     },
@@ -46,36 +46,34 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;'); */
 
         console.log('Received Event: ' + id);
+    },
+
+    // request permission
+    requestPermission: function(){
+        var list = [
+          permissions.CAMERA,
+          permissions.GET_ACCOUNTS
+        ];
+
+        permissions.hasPermission(list, callback, null);
+
+        function error() {
+          console.warn('permission is not turned on');
+        }
+
+        function success( status ) {
+          if( !status.hasPermission ) {
+          
+            permissions.requestPermissions(
+              list,
+              function(status) {
+                if( !status.hasPermission ) error();
+              },
+              error);
+          }
+        }
     }
+
 };
-function handleExternalURLs() {
-    // Handle click events for all external URLs
-    if (device.platform.toUpperCase() === 'ANDROID') {
-        $(document).on('click', 'a[href^="http"]', function (e) {
-            var url = $(this).attr('href');
-            navigator.app.loadUrl(url, { openExternal: true });
-            e.preventDefault();
-        });
-        $(document).on('click', 'a[href^="https"]', function (e) {
-            var url = $(this).attr('href');
-            navigator.app.loadUrl(url, { openExternal: true });
-            e.preventDefault();
-        });
-    }
-    else if (device.platform.toUpperCase() === 'IOS') {
-        $(document).on('click', 'a[href^="http"]', function (e) {
-            var url = $(this).attr('href');
-            window.open(url, '_system');
-            e.preventDefault();
-        });
-        $(document).on('click', 'a[href^="https"]', function (e) {
-            var url = $(this).attr('href');
-            window.open(url, '_system');
-            e.preventDefault();
-        });
-    }
-    else {
-        // Leave standard behaviour
-    }
-}
+
 app.initialize();
