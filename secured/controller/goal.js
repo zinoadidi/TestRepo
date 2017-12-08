@@ -36,7 +36,7 @@ $('.frequencies').hide();
 goalTab('viewSingleGoal')
 
 function clear(){
-	renda.component('goals','view','dashboardDisplayDiv')
+	renda.component('goals','goal','dashboardDisplayDiv')
 }
 function onChangeInput(arg) {
 	console.log(arg)
@@ -80,7 +80,7 @@ function createGoal(data){
     	if (data.status == 200){
 			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
 			toastr.success(data['message'])
-			renda.component('goals','goal','dashboardDisplayDiv');
+			clear();
 			updateDataFromApi(null)
 		}else{
             toastr.error(data['message']);    
@@ -223,7 +223,8 @@ function goalOptions(id,reqType){
 				singleGoalApp.sgdata = data['data']
 				return false
 			}else{
-				toastr.warn(data['message'])
+				toastr.warning(data['message'])
+				clear()
 			}
 		}else{
 			toastr.error(data['message'])			
@@ -263,5 +264,5 @@ function goalOptions(id,reqType){
 }
 
 function editGoal(data){
-	
+
 }

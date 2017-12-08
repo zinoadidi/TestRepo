@@ -14,8 +14,8 @@ $(document).ready(function(){
     
 });
 function loadDefaults(){
+    renda.component('dashboard','navigation','dashboardNavDiv');    
     renda.component('dashboard','header','dashboadHeaderDiv');
-    renda.component('dashboard','navigation','dashboardNavDiv');
     renda.component('dashboard','myDashboard','dashboardDisplayDiv');
     
     stopLoad()

@@ -60,7 +60,8 @@
             </div>
             <div class="w3-white w3-card w3-padding">
               <span class="display-block input-text-goal">Completed Goals</span>
-              <span class="display-block" v-if="commonData.Dashboard">{{commonData.Dashboard.goals_done}}</span>
+              <span class="display-block" v-if="commonData.Dashboard.goals_done">{{commonData.Dashboard.goals_done}}</span>
+              <span class="display-block" v-if="!commonData.Dashboard.goals_done">0</span>
             </div>
           </div>
         </div>
