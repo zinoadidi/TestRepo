@@ -23,7 +23,7 @@ if ( testDash != 'undefined' && testDash != 'null' && testDash != ''){
 }
 
 $( document ).ready(function() {
-  console.log( "ready!" );
+
   w3_close()
   $('#loadInvestment101Btn').click(function(){
       w3_close()
@@ -34,7 +34,7 @@ $( document ).ready(function() {
       w3_close()
       startLoad()
       renda.component('dashboard','myDashboard','dashboardDisplayDiv')
-  });
+    });
   $('#loadGoalManagementBtn').click(function(){
       w3_close()
       startLoad()

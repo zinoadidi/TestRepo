@@ -249,16 +249,19 @@ function goalOptions(id,reqType){
 			}
 			if(id == "Top_Up"){
 				
-				
 			}
 			if(id == "Edit_Goal"){
-				//goalTab('editGoal')
-				
+				$('#extendedGoalUI').show()
+				editGoal()
 			}
 			stopLoad()
 		}else{
 			return false;
 		}	
 	}
+	
+}
+
+function editGoal(data){
 	
 }

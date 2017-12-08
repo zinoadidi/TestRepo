@@ -3,10 +3,9 @@
  
     <ul class='w3-ul w3-striped' style="overflow:scroll">
       <li class=' w3-text-white w3-xlarge w3-center' id='profileArea' style="">
-        
         <p v-show="!commonData.User.ProfilePic"></p>
-        <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:70%"></img>
-        <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:120px"></img>
+        <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:75%"></img>
+        <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:120px; height:130px"></img>
         <span class="navFontSize">
             <br/><small>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
         </span>

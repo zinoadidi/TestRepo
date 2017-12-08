@@ -201,10 +201,11 @@
 						
 						<label class="input-text-goal w3-left">Select A Card:</label>
 						<div class="card-holder">
-							<select class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+							<select v-if="cgvm.userCards[0].CardNo" class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
 								<option></option>
 								<option v-for="n in cgvm.userCards" :fwCode='n.FWCode' :id="n.Id">{{ n.CardNo }}</option>
 							</select>
+							<button v-if="!cgvm.userCards[0].CardNo" class="w3-button w3-green w3=margin w3-padding" onclick="renda.component('card','view','dashboardDisplayDiv');">Add Card</button>
 							<br></br>
 						</div>
 					</div>
@@ -226,6 +227,26 @@
 	        </div>
 	    </div>
 	    </section>
+	</div>
+	<div id="extendedGoalUI" class="w3-modal">
+			<div class="w3-modal-content">
+		
+				<header class="w3-container w3-teal"> 
+					<span onclick="document.getElementById('id01').style.display='none'" 
+					class="w3-button w3-display-topright">&times;</span>
+					<h2>Modal Header</h2>
+				</header>
+		
+				<div class="w3-container">
+					<p>Some text..</p>
+					<p>Some text..</p>
+				</div>
+		
+				<footer class="w3-container w3-teal">
+					<p>Modal Footer</p>
+				</footer>
+		
+			</div>
 	</div>
 	<button onclick="goalTab('createGoal')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
 		<small><span class="fa fa-plus" style="    font-size: 5em !important; padding-top: 4px"></span></small>
