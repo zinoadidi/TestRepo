@@ -1,16 +1,21 @@
 viewGoalApp = new Vue({
   el: '#viewGoals',
   data: {
-      	commonData:commonData
+	commonData:commonData	 
   }
 });
 createGoalApp = new Vue({ 
 	el: '#createGoalDivApp',
   data: {
-      cgvm: new Goal(null)
+      cgvm: new Goal(null) 
   	}
 }); 
-
+var singleGoalApp = new Vue({
+	el: '#viewSingleGoal',
+	data: {
+	  sgdata: new Goal(null)
+	}
+  });
 var isCard = '';
 /*createGoalApp.cgvm.UserId = sessionStorage.UserId*/
 //renda.get('/dashboardData/'+sessionStorage.UserId,'updateGoalList');
@@ -73,16 +78,16 @@ function createGoal(data){
     	stopLoad();
 	    data = JSON.parse(data);
     	if (data.status == 200){
+			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
 			toastr.success(data['message'])
-            updateDataFromApi(null)
-            goalTab('createGoal');
+			renda.component('goals','goal','dashboardDisplayDiv');
+			updateDataFromApi(null)
 		}else{
             toastr.error(data['message']);    
 		}           
 		return false;
     }else{
 		startLoad()
-		
 		var files = '';
 		var url = '/new/goal';   
     	files = document.getElementById('GoalUpload').files[0]
@@ -102,7 +107,6 @@ function createGoal(data){
 		
 		function sendGoalReq(){
 			console.log('ready to lunch')
-			
 			if (createGoalApp.cgvm.Day) {}else{
 				createGoalApp.cgvm.Day = createGoalApp.cgvm.weekDays
 				if (createGoalApp.cgvm.Day) {}else{
@@ -136,8 +140,7 @@ function createGoal(data){
 				"ItemDescription" : createGoalApp.cgvm.ItemDescription,
 				"CardId" : createGoalApp.cgvm.userCards.CardNo,
 				"ProductId":"1",
-				"CardToken" : createGoalApp.cgvm.userCards.CardToken,
-
+				"CardToken" : createGoalApp.cgvm.userCards.CardToken
 			}  
 	        if (validateObj(data)){
 	            renda.post(url,JSON.stringify(data),'createGoal');     
@@ -152,20 +155,24 @@ function createGoal(data){
 }
 
 function viewSingleGoal(id){
-	var singleGoalApp = new Vue({
-	  el: '#viewSingleGoal',
-	  data: {
-	    data: new Goal(null)
-	  }
+	var goarArray = viewGoalApp.commonData.Dashboard.goals;
+	goarArray.forEach( function (arrayItem)
+	{
+		if(arrayItem.GoalId == id){
+			singleGoalApp.sgdata = arrayItem;
+			if(singleGoalApp.sgdata.GoalImage){
+
+			}else{
+				singleGoalApp.sgdata.GoalImage = 'secured/assets/img/goalBackground.png'
+			}
+		}else{}
 	});
-	//alert($('#'+id).attr('data-goalData'));
+	goalTab('viewSingleGoal')	
 }
 
 function goalTab(tab){
 	$('.goalTabs').hide()
 	$('#'+tab).show()
-	renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
-	
 }
 function updateCardList(data){
 	data = JSON.parse(data);
@@ -204,4 +211,54 @@ function onChangeCard(){
 	}else{
 		
 	}
+}
+
+function goalOptions(id,reqType){
+	if(reqType){
+		stopLoad()
+		data = JSON.parse(id);
+		if(data['status'] ==200){
+			if(data['data']){
+				toastr.success(data['message'])
+				singleGoalApp.sgdata = data['data']
+				return false
+			}else{
+				toastr.warn(data['message'])
+			}
+		}else{
+			toastr.error(data['message'])			
+			return false;
+		}
+	}else{
+		var goal = singleGoalApp.sgdata; 
+		var data = '';
+		var confirmAction = confirm('You are about to '+id+'. Continue?')
+		if(confirmAction){
+			startLoad()
+			if(id == "Suspend_Goal"){
+				renda.get('/goal/suspend/' + goal.GoalId, 'goalOptions', 'success');			
+				return false
+			}
+			if(id == "Resume_Goal"){
+				renda.get('/goal/resume/' + goal.GoalId, 'goalOptions', 'success');							
+				return false
+			}
+			if(id == "Delete_Goal"){
+				renda.get('/goal/delete/' + goal.GoalId, 'goalOptions', 'success');											
+				return false
+			}
+			if(id == "Top_Up"){
+				
+				
+			}
+			if(id == "Edit_Goal"){
+				//goalTab('editGoal')
+				
+			}
+			stopLoad()
+		}else{
+			return false;
+		}	
+	}
+	
 }

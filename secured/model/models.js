@@ -127,3 +127,5 @@ var commonData = {
 }
 var cardsApp ={};
 var investment101 = {};
+var activities = {};
+var transactions = {};

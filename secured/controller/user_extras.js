@@ -1,4 +1,5 @@
 renda.get('/investmentOne','updateUserExtras','investment101');
+renda.get('/userNotification/'+sessionStorage.UserId+'?page=1','updateUserExtras','activities');
 $("a").click(function(event){
     var link = this.href;
     return false;
@@ -6,7 +7,7 @@ $("a").click(function(event){
 function initInvestment101Page(){
     
 	investment101 = new Vue({
-	  el: '#investment101Page',
+	  el: '#investment101Page', 
 	  data: {
       	data:{
       		"title": "Investment 101 – Realising Ambitions",
@@ -34,6 +35,54 @@ function initInvestment101Page(){
 
 }
 
+function initActivitiesPage(){
+    
+	activities = new Vue({
+	  el: '#activitiesPage',
+	  data: {
+      	data:{
+            "total": 0,         
+            "per_page": 0,         
+            "current_page": 0,         
+            "last_page": 0,         
+            "next_page_url": "",         
+            "prev_page_url": "",         
+            "from": 0,         
+            "to": 0,         
+            "data": {}
+      	}
+	  }
+	});
+	if(sessionStorage.activities){
+		activities.data = JSON.parse(sessionStorage.activities);
+    }
+    
+}
+
+function initTransactionsPage(){
+	transactions = new Vue({
+	  el: '#transactionPage',
+	  data: {
+      	data:{
+            "AppUserId ": 0,         
+            "TransactionType ": 0,         
+            "Status ": 0,         
+            "Amount ": 0,         
+            "TransactionKind ": "",         
+            "Details ": "",         
+            "TransactionDate ": "",         
+            "GoalId ": 0       
+      	}
+	  }
+	});
+	if(sessionStorage.activities){
+		activities.data = JSON.parse(sessionStorage.activities);
+    }
+    
+}
+
+
+
 
 function updateUserExtras(data,option){
 
@@ -60,7 +109,21 @@ function updateUserExtras(data,option){
                 $(this).attr('href', 'javascript:void(0)');
             });
             return false;
-        }else if (option == 'cards') {
+        
+        }
+        else if ( option == 'activities') {
+            data = JSON.parse(data);
+            sessionStorage.activities = JSON.stringify(data);
+            activities.data = data['data']
+            return false;
+        }
+        else if ( option == 'transactions') {
+            data = JSON.parse(data);
+            sessionStorage.transactions = JSON.stringify(data);
+            transactions.data = data['data']
+            return false;
+        }
+        else if (option == 'cards') {
             data = JSON.parse(data);
             sessionStorage.userCards = JSON.stringify(data);
             cardsApp.cards = data['data'];   
@@ -81,4 +144,85 @@ function updateUserExtras(data,option){
         //drawChart()
     }
 
+}
+
+
+function nextActivityPage(){
+    startLoad()
+    var page = parseInt(activities.data.current_page);
+    page ++;
+    if(page <= 0 || page > (parseInt(activities.data.per_page) / parseInt(activities.data.total))){
+        page = 1;
+    }else{
+        page = page +1;
+    }
+    renda.get('/userNotification/'+sessionStorage.UserId+'?page='+page,'updateUserExtras','activities');
+
+}
+
+function prevActivityPage(){
+    startLoad()
+    var page = parseInt(activities.data.current_page);
+    page++;
+    if(page <= 0 || page > (parseInt(activities.data.per_page) / parseInt(activities.data.total))){
+        page = 1;
+    }else{
+        page = page -1;
+    }
+    renda.get('/userNotification/'+sessionStorage.UserId+'?page='+page,'updateUserExtras','activities');
+
+}
+
+function filterTransactions(data){
+    if (data) {
+        try{
+            JSON.parse(data);
+        }catch(err){
+            stopLoad()
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        } 
+        let result = JSON.parse(data);
+        //let result = USERDATA;
+        console.dir(result);
+        if (result.status == 200){
+            if(result.data){
+             updateUserExtras(data,'transactions')            
+            }else{
+                toastr.error(result.message);
+                stopLoad()
+                return false
+            }
+        }else{
+            toastr.error(result['message']);    
+        }
+        stopLoad()            
+        return false;
+    }else{
+        let FromDate = $('#FromDate').val();
+        let ToDate = $('#ToDate').val(); 
+        let TransactionType = $('#TransactionType').val(); 
+        data = {
+            "UserId": sessionStorage.UserId,
+            "FromDate": FromDate,             
+            "ToDate": ToDate,             
+            "TransactionType": TransactionType 
+        };
+        console.log(data)
+        if(FromDate == undefined || FromDate == null 
+            || ToDate == undefined || ToDate == null
+            || TransactionType == undefined || TransactionType == null ){
+            alert("Please provide information for filter")
+            return false;
+        }
+        if (validateObj(data)){
+            startLoad()
+            renda.post('/transaction/history',JSON.stringify(data),'filterTransactions');
+        }else{
+            return false;
+        }
+    }
+    
+    return false;  
 }

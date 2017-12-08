@@ -49,25 +49,24 @@
       font-weight: 400;
     }
   </style>
-<div id='investment101Page' class="w3-white" >
-  <div class="input-text-goal w3-padding"><b>
-    <div style="display: block">{{data.title}}</div>
-    <div style="display: block">description: {{data.description}}</div>
-    <div style="display: block">Last Update: {{data.lastBuildDate}}</div></b>
+<div id='activitiesPage' class="" >
+  <div class="input-text-goal w3-padding w3-white center">
+    <b>
+    <div style= "width:50%!important" class="w3-third">Total Activities: {{data.total}}</div>
+    <div style= "width:50%!important" class="w3-third"><span>Current Page: {{data.current_page}}</span> <br/></div>
+    <div style=" w3-white ">
+      <button class="w3-button w3-green w3-padding w3-margin" style= "width:30%!important" onclick="prevActivityPage()">Previous Page</button>         
+      
+      <button class="w3-button w3-green w3-padding w3-margin" style= "width:30%!important" onclick="nextActivityPage()">Next Page</button> 
+    </div>  </b>
   </div>
-	<div id='investment101Div' class="w3-container w3-margin-top w3-margin-bottom w3-white" >		
-      <div v-for="item in data.item" class="single-article" :id="item.guid" style="">
-        <div style="color: #2B333E; height:250px; max-height: 250px; overflow: hidden;" class="w3-white w3-card  w3-hover-opacity w3-hover-shadow w3-margin ">
-          <div class="display-block input-text-medium w3-text-white center" style="background: #2B333E;" > {{item.title}} <span class="input-text-goal">- {{ item.pubDate }}</span>
-          </div>
-          <div class="w3-padding" style="margin-top: 3px; padding-top: 0px">
-            <button class="input-text-goal w3-button w3-right" onclick='openLinkInBrowser(this.id)' :id="item.link">View Full Story</button>
-            <div class="input-text-goal" v-html='item.description'></div>
-            <div class="w3-right">{{item.category}}</div>
-          </div>
-      </div>
-      </div>
-     
+   
+	<div id='activitiesPageDiv' class="w3-container w3-margin-top w3-margin-bottom" >		
+    <ul class="w3-ul w3-stripped">
+    <li v-for="item in data.data" class=" w3-white" :data-item="item" style="color: #1f6e22;">
+        <div v-if="item"><span class="input-text-goal"  style="color: #1f6e22;">{{item['Date']}}</span> <span class="input-text-goal" style="color: #1f6e22;">- {{ item['Description'] }}</span> </div>
+    </li>
+  </ul>
 
 	</div>
 

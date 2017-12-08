@@ -49,30 +49,49 @@
       font-weight: 400;
     }
   </style>
-<div id='investment101Page' class="w3-white" >
-  <div class="input-text-goal w3-padding"><b>
-    <div style="display: block">{{data.title}}</div>
-    <div style="display: block">description: {{data.description}}</div>
-    <div style="display: block">Last Update: {{data.lastBuildDate}}</div></b>
+<div id='transactionPage' class="w3-white" >
+  
+  <div class="input-text-goal w3-padding w3-center center"><b>
+    <b>     
+      <div class="input-text-goal m12 l12 s12  w3-center">Filter Transaction</div>
+      <div class="m3 s3 l3" style="display:inline;" >Start Date:</div>
+      <input style= "width:25%!important" type="date" class="input-text-goal" placeholder="Start Date" id="FromDate" style="margin-left:2px; margin-right:2px">
+      <div class="m3 s3 l3"style="display:inherit">:End Date:</div>
+      <input style= "width:25%!important" type="date" class="input-text-goal" placeholder="End Date" id="ToDate">
+      <br/>
+      <center class="center">
+      <select style= "width:40%!important;" class="input-text-goal w3-input w3-third w3-select" placeholder="End Date" id="TransactionType">
+          <option>Credit</option>
+          <option>Debit</option>
+      </select>
+      <button class="w3-button w3-green w3-third w3-margin-left w3-right" style= "width:20%!important" onclick="filterTransactions()">Filter</button>         
+    </center>
+    </b>
   </div>
-	<div id='investment101Div' class="w3-container w3-margin-top w3-margin-bottom w3-white" >		
-      <div v-for="item in data.item" class="single-article" :id="item.guid" style="">
-        <div style="color: #2B333E; height:250px; max-height: 250px; overflow: hidden;" class="w3-white w3-card  w3-hover-opacity w3-hover-shadow w3-margin ">
-          <div class="display-block input-text-medium w3-text-white center" style="background: #2B333E;" > {{item.title}} <span class="input-text-goal">- {{ item.pubDate }}</span>
+	<div id='transactionPageDiv' class="w3-container w3-margin-top w3-margin-bottom  w3-center" >		
+      <ul class="w3-ul w3-stripped m12 s12 l12 w3-tiny"  v-if="data.data">
+        <li v-for="item in data['data']" class=" w3-white s12 m12" style="color: #1f6e22;">
+          <div class="">
+            <div class="w3-twothird w3-left" style="width:60%">
+              <div class="input-text-medium " style="display:block; text-align:left">{{item['GoalName']}}</div><br/>
+              <div class="">
+                <span class="input-text-goal " style='display:block;text-align:left'>{{item['TransactionDate']}}</span>
+              </div>
+            </div>
+            <div class="w3-rest w3-right">
+              <span class="w3-right input-text-medium" style="margin-top: 20px; right:5px!important">
+                <span v-if="item['TransactionType']=='Credit'" class="w3-text-green">&#8358;{{ item['Amount'] }}</span>
+                <span v-if="item['TransactionType']=='Debit'" class="w3-text-red">&#8358;{{ item['Amount'] }}</span>
+              </span>
+            </div>
           </div>
-          <div class="w3-padding" style="margin-top: 3px; padding-top: 0px">
-            <button class="input-text-goal w3-button w3-right" onclick='openLinkInBrowser(this.id)' :id="item.link">View Full Story</button>
-            <div class="input-text-goal" v-html='item.description'></div>
-            <div class="w3-right">{{item.category}}</div>
-          </div>
-      </div>
-      </div>
-     
+        </tr>    
+      </ul>
 
-	</div>
+  </div>
 
 
 </div>
 
 <script src="secured/controller/user_extras.js"></script>
-<script type="text/javascript">initTransactionPage()</script>
+<script type="text/javascript">initTransactionsPage()</script>
