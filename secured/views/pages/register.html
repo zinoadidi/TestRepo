@@ -243,7 +243,7 @@
                         </div>
                         <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
                     </div>
-                    <div class="row" ">
+                    <div class="row" >
                         <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
                             <button class="w3-button  input-text-medium" style="background: #438cb9;width: 100%;padding: 15px;" onclick="renda.page('login')"><small>LOGIN</small></button>
@@ -360,7 +360,7 @@
                                     <i class="fa icon-mod fa-question-circle" aria-hidden="true"></i>
                                 </div>
                                 <div class="col-xs-10 text-field" id="username-field" style="padding-top:10px; padding-bottom: 15px;">
-                                    <select v-model="regVm.SecurityQuestion" required="" aria-required="true" class="form-control w3-input w3-text-white input-text-goal "  style="background: #2b333e">
+                                    <select v-model="regVm.SecurityQuestion" required="" aria-required="true" class="form-control w3-input w3-text-white input-text-goal "  style="background: #29313C">
                                         <option value= "">Select a security question</option>
                                         <option value="What is your favorite movie">What is your favorite movie?</option>
                                         <option value="What is your mother's maiden name">What is your mother's maiden name?</option>
@@ -477,11 +477,54 @@
 
 	            <div>
 	            	<div>
+						<div class="row" style="" v-if="!armOneDetail.IsARMOne">
+							<div class="form-group form-field-holder">
+								<div class="form-icon-holder col-xs-2" id="password-icon-holder">
+									<i class="fa icon-mod fa-unlock-alt" aria-hidden="true"></i>
+								</div>
+								<div class="col-xs-10 text-field" id="password-field">
+									<input type="password" id="password" placeholder="Password" v-model="armOneDetail.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input input-text-goal padding-left-2">
+								</div>
+							</div>
+							<div class="form-group form-field-holder">
+								<div class="form-icon-holder col-xs-2" id="password-icon-holder">
+									<i class="fa icon-mod fa-unlock" aria-hidden="true"></i>
+								</div>
+								<div class="col-xs-10 text-field" id="password-field">
+									<input type="password" placeholder="Confirm Password" id="confirmPassword" v-model="armOneDetail.confirmPassword" required="" onfocusout="checkValue(this)"  class="w3-input input-text-goal padding-left-2" aria-required="true">
+								</div>
+							</div>
+							<div class="form-group form-field-holder">
+								<div class="form-icon-holder col-xs-2" id="username-icon-holder">
+									<i class="fa icon-mod fa-question-circle" aria-hidden="true"></i>
+								</div>
+								<div class="col-xs-10 text-field" id="username-field" style="padding-top:10px; padding-bottom: 15px;">
+									<select v-model="armOneDetail.SecurityQuestion" required="" aria-required="true" class="form-control w3-input w3-text-white input-text-goal "  style="background: #29313C">
+										<option value= "">Select a security question</option>
+										<option value="What is your favorite movie">What is your favorite movie?</option>
+										<option value="What is your mother's maiden name">What is your mother's maiden name?</option>
+										<option value="What street did you grow up on">What street did you grow up on?</option>
+										<option value="What was the make of your first car">What was the make of your first car?</option>
+										<option value="What is your father's middle name">What is your father's middle name?</option>
+										<option value="In what city were you born">In what city were you born?</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-12"  style="padding-top: 15px;padding-bottom: 15px;padding-left: 0px">
+								<div class="form-icon-holder col-xs-2" id="username-icon-holder">
+									<i class="fa icon-mod fa-question-circle" aria-hidden="true"></i>
+								</div>
+								<div class="col-xs-10 text-field" id="username-field">
+							
+									<input type="text" style="" placeholder="Answer to security question" v-model="armOneDetail.SecurityAnswer" value= "" class="w3-input input-text-goal padding-left-2" required="" onfocusout="checkValue(this)" aria-required="true">
+								</div>
+							</div>
+						</div>
 		                <div class="row" style="" v-for="(value, key) in existingVm">
 		                    <div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
 		                        <label class="w3-padding input-text-goal" style="display: block;">{{ key }}: {{ value }}</label>
 		                    </div>
-		                
+
 		                </div>
 		            </div>
 	                

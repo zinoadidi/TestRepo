@@ -104,7 +104,7 @@ input{
 }
 
 .header-color{
-    background:#2B333E;
+    background:#29313C;
 }
 
 .display-block{
@@ -135,6 +135,7 @@ input{
 .toastr{
     font-size: 3.5vw !important;
     font-weight: 700 !important;
+    text-align: center !important;
 }
 
 .center-element{
@@ -144,4 +145,28 @@ input{
     height: 30%;
     width: 50%;
     margin: -15% 0 0 -25%;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }

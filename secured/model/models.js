@@ -88,19 +88,20 @@ function User(obj){
 
 function existingUser(obj){
     this.MembershipNumber = obj == null ? '' : obj.MembershipNumber;
-    this.Title = obj == null ? '' : obj.Title;
+    /* this.Title = obj == null ? '' : obj.Title;
     this.FirstName = obj == null ? '' : obj.FirstName;
-    this.LastName = obj == null ? '' : obj.LastName;
+    this.LastName = obj == null ? '' : obj.LastName; */
     this.FullName = obj == null ? '' : obj.FullName;
     this.DateOfBirth = obj == null ? '' : obj.DateOfBirth;
     this.Gender = obj == null ? '' : obj.Gender;
-    this.PhoneNumber = obj == null ? '' : obj.PhoneNumber;
+    /* this.PhoneNumber = obj == null ? '' : obj.PhoneNumber; */
     this.MobileNumber = obj == null ? '' : obj.MobileNumber;
     this.EmailAddress = obj == null ? '' : obj.EmailAddress;
     this.Address = obj == null ? '' : obj.Address;
     this.State = obj == null ? '' : obj.State;
     this.Country = obj == null ? '' : obj.Country;
     this.State = obj == null ? '' : obj.State;
+    
 }
 
 function Cards(obj){
@@ -129,3 +130,4 @@ var cardsApp ={};
 var investment101 = {};
 var activities = {};
 var transactions = {};
+var userProfile = {};

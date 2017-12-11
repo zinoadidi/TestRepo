@@ -15,7 +15,13 @@ function initExistingClientApp(){
     existingApp = new Vue({
       el: '#confirm_existing',
       data: {
-        existingVm: new existingUser(null)
+        existingVm: new existingUser(null),
+        armOneDetail:{
+            IsARMOne:"",
+            SecurityQuestion :"",
+            SecurityAnswer:"",
+            Password :""
+        }
       }
     });
  }
@@ -148,19 +154,20 @@ function VerifyExistingClient(data){
             toastr.success(result.message); 
 
             existingApp.existingVm.MembershipNumber = result.data.MembershipNumber;
-            existingApp.existingVm.Title = result.data.Title;
-            existingApp.existingVm.FirstName = result.data.FirstName;
-            existingApp.existingVm.LastName = result.data.LastName;
             existingApp.existingVm.FullName = result.data.FullName;
             existingApp.existingVm.DateOfBirth = result.data.DateOfBirth;
             existingApp.existingVm.Gender = result.data.Gender;
-            existingApp.existingVm.PhoneNumber = result.data.PhoneNumber;
             existingApp.existingVm.MobileNumber = result.data.MobileNumber;
             existingApp.existingVm.EmailAddress = result.data.EmailAddress;
             existingApp.existingVm.Address = result.data.Address;
             existingApp.existingVm.State = result.data.State;
             existingApp.existingVm.Country = result.data.Country;
+            existingApp.armOneDetail.IsARMOne = result.data.IsARMOne;
             showRegDiv('confirm_existing')
+            if(result.data.IsARMOne){
+            }else{
+                alert('Please Enter A Password and select a security question to continue')
+            }
         } else{
             alert(result.message)
         }
@@ -204,12 +211,33 @@ function regExistingClient(data){
         return false;
     }
     let MembershipNumber = existingApp.existingVm.MembershipNumber;
+    if(existingApp.armOneDetail.IsARMOne){
+        data = {
+            "MembershipNumber":MembershipNumber,
+            "IsARMOne" : existingApp.armOneDetail.IsARMOne
+        };
+    }else{
+        data = {
+            "MembershipNumber":MembershipNumber,
+            "Password": existingApp.armOneDetail.Password,
+            "SecurityQuestion" :  existingApp.armOneDetail.SecurityQuestion,
+            "SecurityAnswer" :  existingApp.armOneDetail.SecurityAnswer,
+            "IsARMOne" : existingApp.armOneDetail.IsARMOne
+        };
         
-    data = {
-        "MembershipNumber":MembershipNumber
-    };
+    }
+    if(existingApp.armOneDetail.Password != existingApp.armOneDetail.confirmPassword){
+        toastr.error('Please confirm that your password matches "confirm password" field')
+        return false
+    }
+    if(existingApp.armOneDetail.Password.length = '' || existingApp.armOneDetail.Password.length < 8){
+        toastr.error('Please Use a stronger password not less than 8 digit. Password must contain numbers and characters.');
+        return false;
+    }
+    data.IsARMOne = 'true'    
     if (validateObj(data)){
         renda.loader('start')
+        data.IsARMOne = false;
         renda.post('/register/existingClient',JSON.stringify(data),'regExistingClient');
     }else{
         return false;

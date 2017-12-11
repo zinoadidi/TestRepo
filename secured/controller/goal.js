@@ -160,6 +160,7 @@ function viewSingleGoal(id){
 	{
 		if(arrayItem.GoalId == id){
 			singleGoalApp.sgdata = arrayItem;
+			
 			if(singleGoalApp.sgdata.GoalImage){
 
 			}else{
@@ -233,6 +234,13 @@ function goalOptions(id,reqType){
 	}else{
 		var goal = singleGoalApp.sgdata; 
 		var data = '';
+		if(id == "Edit_Goal"){
+			singleGoalApp.sgdata.userCards = createGoalApp.cgvm.userCards
+			$('#extendedGoalUI').show()
+			$('#editGoal').show()
+			//bhvgh
+			return false;
+		}
 		var confirmAction = confirm('You are about to '+id+'. Continue?')
 		if(confirmAction){
 			startLoad()
@@ -251,10 +259,7 @@ function goalOptions(id,reqType){
 			if(id == "Top_Up"){
 				
 			}
-			if(id == "Edit_Goal"){
-				$('#extendedGoalUI').show()
-				editGoal()
-			}
+			
 			stopLoad()
 		}else{
 			return false;
@@ -264,5 +269,102 @@ function goalOptions(id,reqType){
 }
 
 function editGoal(data){
+	if(data){
+		renda.loader('stop');
+		try{
+			JSON.parse(data);
+		}catch(err){
+			stopLoad()
+			toastr.error('An error occured while verfying user information.')
+			console.dir(err);
+			return false;
+		}
+		stopLoad();
+		data = JSON.parse(data);
+		if (data.status == 200){
+			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
+			toastr.success(data['message'])
+			clear();
+			updateDataFromApi(null)
+		}else{
+			toastr.error(data['message']);    
+		}           
+		return false;
+	}else{
+		startLoad()
+		createGoalApp.cgvm = singleGoalApp.sgdata;
+		var files = '';
+		var url = '/goal/update';   
+		files = document.getElementById('GoalUpload').files[0]
+		console.log('---------------------before send')
+		var GoalUpload = '';
+		if(files){
+			GoalUpload = renda.fileToBase64(files);			
+			GoalUpload.then(function(result) {
+				GoalUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
+				console.log(result)
+				sendGoalReq();
+			});
+		}else{
+			GoalUpload = singleGoalApp.sgdata.GoalImage;
+			sendGoalReq()
+		}
+		
+		function sendGoalReq(){
+			console.log('ready to lunch')
+			if (createGoalApp.cgvm.Day) {}else{
+				createGoalApp.cgvm.Day = createGoalApp.cgvm.weekDays
+				if (createGoalApp.cgvm.Day) {}else{
+					createGoalApp.cgvm.Day = createGoalApp.cgvm.monthDays
+					createGoalApp.cgvm.weekDays = '0'
+				}
+			}
+			if (createGoalApp.cgvm.userCards.CardNo) {}else{
+				alert('Please select a card. If you have not added a card yet, please add one before creating a goal');
+				stopLoad()
+				return false;
+			}
+			if (createGoalApp.cgvm.monthDays) {}else{
+				createGoalApp.cgvm.monthDays = '0'
+			}
+			
+			var data = {
+				"AppUserId":sessionStorage.UserId,
+				"GoalId":singleGoalApp.sgdata.GoalId,
+				"ItemName":createGoalApp.cgvm.ItemName,
+				"GoalAmount":createGoalApp.cgvm.GoalAmount,
+				"Duration":parseInt(createGoalApp.cgvm.GoalAmount) / parseInt(createGoalApp.cgvm.MonthlyDeduction),
+				"MonthlyDeduction":createGoalApp.cgvm.MonthlyDeduction,
+				"ProductId":'CustomProduct',
+				"AmountAttained":singleGoalApp.sgdata.AmountAttained,
+				"Status":singleGoalApp.sgdata.Status,
+				"DateCreate":singleGoalApp.sgdata.DateCreated,
+				"GoalType":'custom',				
+				"Day":createGoalApp.cgvm.Day,
+				"Frequency":createGoalApp.cgvm.Frequency,
+				"GoalImage":GoalUpload
+				
+				/* "monthDays" : createGoalApp.cgvm.monthDays,
+				"weekDays" : createGoalApp.cgvm.weekDays,
+				"ItemDescription" : createGoalApp.cgvm.ItemDescription,
+				"CardId" : createGoalApp.cgvm.userCards.CardNo,
+				"ProductId":"1",
+				"CardToken" : createGoalApp.cgvm.userCards.CardToken */
+			}  
+			if (validateObj(data)){
+				renda.post(url,JSON.stringify(data),'editGoal');     
+			}else{
+				console.log('error occured');
+				console.dir(data)
+				stopLoad()
+				return false;
+			}
+		}        
+	}
+
+}
+
+function freqChange(){
+	var currentVal = $('#frequency').val()
 
 }

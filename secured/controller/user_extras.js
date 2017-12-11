@@ -81,9 +81,6 @@ function initTransactionsPage(){
     
 }
 
-
-
-
 function updateUserExtras(data,option){
 
 	if (data) {
@@ -225,4 +222,52 @@ function filterTransactions(data){
     }
     
     return false;  
+}
+
+
+function profileTab(tab){
+    $('.profileTab').hide()
+	$('#'+tab).show()
+}
+
+
+function initUserProfilePage(){
+    
+	userProfile = new Vue({
+	  el: '#profilePage',
+	  data: {
+      	userDetails:{
+           "Gender":"",
+           "Address":"",
+           "Surname":"",
+           "Firstname":"",
+           "Middlename":"",
+           "SecurityQuestion":"",
+           "SecurityAnswer":'',
+           "BankName":"",
+           "BankAccountNo":"",
+           "Phonenumber":"",
+           "Email":"",
+           "AccountStatus":""
+        }
+	  }
+	});
+	if(sessionStorage.UserInfo){
+        var data =  JSON.parse(sessionStorage.UserInfo);
+		userProfile.userDetails.Gender = data['data'].Gender;
+		userProfile.userDetails.Address = data['data'].Address;
+		userProfile.userDetails.Surname = data['data'].Surname;
+		userProfile.userDetails.Firstname = data['data'].Firstname;
+		userProfile.userDetails.Middlename = data['data'].Middlename;
+		userProfile.userDetails.SecurityQuestion = data['data'].SecurityQuestion;
+		userProfile.userDetails.SecurityAnswer = '***********';
+		userProfile.userDetails.BankName = data['data'].BankName;
+		userProfile.userDetails.BankAccountNo = data['data'].BankAccountNo;
+		userProfile.userDetails.Phonenumber = data['data'].Phonenumber;
+		userProfile.userDetails.Email = data['data'].Email;
+		userProfile.userDetails.AccountStatus = data['data'].Status;
+		
+    }
+    profileTab('viewProfile')
+    
 }

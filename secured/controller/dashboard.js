@@ -28,8 +28,12 @@ function w3_open() {
   document.getElementById("mySidebar").style.zIndex = "10";
   document.getElementById("mySidebar").style.width = "50vw";
   document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("mySidebar").style.left = '0px';
+  document.getElementById("mySidebar").style.clip = 'rect(0px 207px 736px 0.0px)';
   document.getElementById("openNav").style.display = 'none';
   document.getElementById("closeNav").style.display = 'inline-block';
+  
+  
   
 }
 function w3_close() { 

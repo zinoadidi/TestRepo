@@ -6,15 +6,22 @@
 	<div class="" id="myDashboard">
 		<div id='viewGoals' class="goalTabs" style="display: none">	
 			<div id="goalsDiv" style="margin-left:6%" class="w3-animate-left">
-			  <div v-for="item in commonData.Dashboard.goals" class="single-goal " :id="item.GoalId" style="" onclick="viewSingleGoal(this.id)">
-				<div style="background: #2B333E; height:150px; max-height: 150px; overflow: hidden;margin: 4px!important;" class="w3-text-white w3-card-4 w3-round w3-padding w3-hover-opacity w3-hover-shadow" >
-				  	<div class="display-block input-text-medium " style="">
-						<center><div class="input-text-fixed" style="margin-bottom: 3px">{{ item.ItemName }}</div></center>  
-				  	</div>
-				  	<div class="" style="margin-top: 10px">	
-						<center>&#8358;{{ item.GoalAmount }}						
-						<div class="input-text-goal">{{ item.Status }}</div></center>						  
-					</div>
+			  <div v-for="item in commonData.Dashboard.goals" class="single-goal " :id="item.GoalId"onclick="viewSingleGoal(this.id)">
+				<div style="background: #29313C; height:150px; max-height: 150px; overflow: hidden;margin: 4px!important;background-size: 100%;background-position: center;background-repeat: no-repeat;"  v-bind:style="{ backgroundImage: 'url(' + item.GoalImage + ')' }" class="w3-text-white w3-card-4 w3-round w3-padding w3-hover-opacity w3-hover-shadow" >
+					
+					<div style="padding-top:60px" class="w3-left">
+						<div style="" class="w3-black w3-padding w3-opacity">
+							
+							<div class="display-block input-text-medium " style="">
+								<div class="input-text-fixed" style="margin-bottom: 3px"><b><strong>{{ item.ItemName }}</strong></b></div>
+							</div>
+							<div class="" style="margin-top: 2px">	
+								&#8358;{{ item.GoalAmount }}											  
+							</div>
+						</div>
+						
+					</div>  
+					
 				</div>
 			  </div>
 			  <div class="single-goal" style="" id="createGoalDiv" onclick="goalTab('createGoal')">
@@ -39,14 +46,14 @@
 		  <div class="w3-animate-right "  style="">
 		  	<div v-bind:style="{ backgroundImage: 'url(' + sgdata.GoalImage + ')' }" class="singleGoalWithImageDiv w3-text-white w3-card-4 w3-round w3-hover-opacity w3-hover-shadow" > 
 			  	<div class="" style="padding-top:50%;">
-					<div class="w3-opacity-min" style="background:#2B333E;">
+					<div class="w3-opacity-min" style="background:#29313C;">
 						<div class="input-text-medium w3-margin-left" style="padding-top:5px">{{ sgdata.ItemName }}</div>								
 						<div class="display-block input-text-large w3-margin-left" style="">
 							&#8358;{{ sgdata.GoalAmount }}
 						</div>
 					</div>
 				  </div>
-				  <div style="background:#2B333E;" class="input-text-large w3-round">
+				  <div style="background:#29313C;" class="input-text-large w3-round">
 						<div class="w3-center w3-container w3-padding" style="font-size: 2.65vw;"> 
 								<div class="m3 l3 s3" style="display: inline-block;
 								width: 27%; margin-right:7px">
@@ -83,17 +90,160 @@
 			</div>
 			<div style="" class="input-text-large">
 					<div class="w3-center w3-container w3-padding" style="font-size: 2.65vw;"> 
-						<button class="w3-button w3-padding w3-text-white" style="background:#2B333E;" onclick="goalOptions(this.id)" id="Edit_Goal">Edit Goal</button>
-						<button v-if="sgdata.Status =='Active'" class="w3-button w3-padding w3-text-white" onclick="goalOptions(this.id)" style="background:#2B333E;" id="Suspend_Goal">Suspend Goal</button>
-						<button v-if="sgdata.Status =='Suspended'" class="w3-button w3-padding w3-text-white" onclick="goalOptions(this.id)" style="background:#2B333E;" id="Resume_Goal">Resume Goal</button>
-						<button class="w3-button w3-padding w3-text-white" style="background:#2B333E; " onclick="goalOptions(this.id)" id="Delete_Goal">Delete Goal</button>
-						<button class="w3-button w3-padding w3-text-white" style="background:#2B333E; " onclick="goalOptions(this.id)"id="Top_Up">Top Up</button>
+						<button class="w3-button w3-padding w3-text-white" style="background:#29313C;" onclick="goalOptions(this.id)" id="Edit_Goal">Edit Goal</button>
+						<button v-if="sgdata.Status =='Active'" class="w3-button w3-padding w3-text-white" onclick="goalOptions(this.id)" style="background:#29313C;" id="Suspend_Goal">Suspend Goal</button>
+						<button v-if="sgdata.Status =='Suspended'" class="w3-button w3-padding w3-text-white" onclick="goalOptions(this.id)" style="background:#29313C;" id="Resume_Goal">Resume Goal</button>
+						<button class="w3-button w3-padding w3-text-white" style="background:#29313C; " onclick="goalOptions(this.id)" id="Delete_Goal">Delete Goal</button>
+						<button class="w3-button w3-padding w3-text-white" style="background:#29313C; " onclick="goalOptions(this.id)"id="Top_Up">Top Up</button>
 					</div>
 					
 				</div>
 		  </div>
 		  
 		</div>
+		<div id="extendedGoalUI" class="w3-modal">
+			<div class="w3-modal-content" style="margin-top:50px">
+				<div id="editGoal">
+					
+					<header class="w3-container w3-padding w3-text-white input-text-medium" style="background:#29313C"> 
+						<span onclick="document.getElementById('extendedGoalUI').style.display='none'" style="background:transparent" class="w3-button w3-display-topright input-text-large">&times;</span>
+						Edit Goal
+					</header>
+
+					<div id='' class="" >
+						<section id="editGoalDivApp" class="w3-white" style="font-weight: 0px;">
+							<div class=" col-lg-12 w3-margin-left w3-padding">
+								<div class="">
+									<form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+									<div class=" m12 l12 m12">
+										<div class="">
+										<label class="input-text-goal w3-left">Goal Title</label>
+										<input type="text" class="form-control w3-input" style="height: 3.2rem; padding-left:10px " placeholder="Enter Goal Name" v-model="sgdata.ItemName" required="" value="">
+										</div>
+									</div>
+										<div class="col-sm-11 ">
+											<label class="input-text-goal w3-left display-block"><br/>Goal Description:</label>
+											<textarea style="padding-left:10px " class="form-control w3-input w3-textarea col-lg-12" v-model="sgdata.ItemDescription" rows="6"></textarea>
+										</div>
+										<div class="form-group inline col-lg-1 left margin">
+										</div>
+										<br/>
+										<div class="form-group inline col-lg-5 left margin">
+										<label class="input-text-goal w3-left">Total Amount of Goal:</label>
+										<input type="text" class="form-control w3-input custom-amount number" style="height: 3.2rem; padding-left:10px;width:100%" placeholder="Enter Goal Amount" v-model="sgdata.GoalAmount" required="" id="custom-amount" value="">
+									</div>
+										<div class="form-group inline col-lg-5 left margin">
+										<label class="input-text-goal w3-left">You will invest the sum of:</label>
+										<input type="text" style="height: 3.2rem; padding-left:10px " required="" v-model="sgdata.MonthlyDeduction" class="form-control w3-input custom-deduction number" id="custom-deduction" value="">
+									</div>
+											<div class="form-group inline col-lg-1 left margin">
+										</div>
+										<div class="form-group inline col-lg-5 left margin">
+										<label class="input-text-goal w3-left">Number of Deductions:</label>
+										<input type="text" class="form-control w3-input custom-duration" style="height: 3.2rem; padding-left:10px " tabindex="-1" readonly="readonly" required="" v-model="sgdata.Duration" id="custom-duration" value="">
+									</div>
+									<div class="form-group inline col-lg-5 left margin">
+										<label class="input-text-goal w3-left">Frequency:</label>
+										<select v-model="sgdata.Frequency" required="" data-placement="bottom" id="frequency" class="form-control w3-input frequency">
+											<option value="">Debit Frequency</option>
+											
+											<option value="Weekly">Weekly</option>
+											<option value="Monthly">Monthly</option>
+										</select>
+									</div>
+									<div class="form-group inline col-lg-1 left margin">
+									</div>
+									<div class="form-group inline col-lg-5 left margin frequency-depend display-block" style="display: none;">
+										&nbsp;
+										<label class="input-text-goal w3-left">Day To Be Debited:</label>
+										<div class="col-xs-12 text-field" id="monthDays">
+										<select v-model="sgdata.monthDays" class="form-control w3-input" data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+													<option value="31">31</option>
+												</select>
+											</div>
+					
+										<div class="col-xs-12 text-field" id="weekDays">
+											<select class="form-control w3-input" v-model="sgdata.weekDays" data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+												<option value="Sunday">Sunday</option>
+												<option value="Monday">Monday</option>
+												<option value="Tuesday">Tuesday</option>
+												<option value="Wednesday">Wednesday</option>
+												<option value="Thursday">Thursday</option>
+												<option value="Friday">Friday</option>
+												<option value="Saturday">Saturday</option>
+											</select>
+										</div>
+										
+										
+									</div>
+									<div class="clearfix"></div>
+									<hr>
+									
+									<label class="input-text-goal w3-left">Select A Card:</label>
+									<div class="card-holder">
+										<span v-if="sgdata.userCards">
+										<select v-if="sgdata.userCards[0].CardNo" class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+											<option></option>
+											<option v-for="n in sgdata.userCards" :fwCode='n.FWCode' :id="n.Id">{{ n.CardNo }}</option>
+										</select>
+										</span>	
+										<span v-if="!sgdata.userCards">
+										<button v-if="!sgdata.userCards" class="w3-button w3-green w3=margin w3-padding" onclick="renda.component('card','view','dashboardDisplayDiv');">Add Card</button>
+										</span><br>
+									</div>
+								</div>
+								<label class="input-text-goal w3-left">Select Goal Image:</label>
+								<div class="form-group form-field-holder">
+									
+									<div class="col-xs-10 text-field" id="username-field">
+										<input type="file" class='w3-input' placeholder="" value="" id="GoalUpload" required="" data-toggle="tooltip" data-placement="bottom" accept="image/*">
+									</div>
+								</div>
+								<div class="col-lg-11 form-group">
+									<br>
+									<button type="" class="w3-bar w3-button w3-border-0 w3-text-white w3-large w3-third w3-left header-color" style="width:40%!important" onclick="document.getElementById('extendedGoalUI').style.display='none';goalTab('viewGoals')">Cancel</button>									
+									<button type="submit" class="w3-bar w3-button w3-border-0 w3-text-white w3-large e3-third w3-right header-color" style="width:40%!important" onclick="editGoal(null)">Modify Goal</button>
+								</div>
+								</form>
+					
+								</div>
+							</div>
+						</section>
+					</div>
+				
+				</div>
+			</div>
+			</div>
 	</div>
 	<div id='createGoal' class="goalTabs" >
 	    <section id="createGoalDivApp" class="w3-white" style="font-weight: 0px;">
@@ -132,7 +282,7 @@
 	            </div>
 	            <div class="form-group inline col-lg-5 left margin">
 	              <label class="input-text-goal w3-left">Frequency:</label>
-	              <select v-model="cgvm.Frequency" required="" data-placement="bottom" id="frequency" class="form-control w3-input frequency">
+	              <select v-model="cgvm.Frequency" required="" data-placement="bottom" id="frequency" class="form-control w3-input frequency" onchange="freqChange()">
 	                  <option value="">Debit Frequency</option>
 	                  
 	                  <option value="Weekly">Weekly</option>
@@ -141,47 +291,47 @@
 	            </div>
 	            <div class="form-group inline col-lg-1 left margin">
 	                </div>
-	             <div class="form-group inline col-lg-5 left margin frequency-depend display-block" style="display: none;">
+	             <div class="form-group inline col-lg-5 left margin " style="">
 	              &nbsp;
 	              <label class="input-text-goal w3-left">Day To Be Debited:</label>
-	              <div class="col-xs-12 text-field" id="monthDays">
+	              <div class="col-xs-12 text-field" id="monthDays" v-if="cgvm.Frequency == 'Monthly'">
 	              <select v-model="cgvm.monthDays" class="form-control w3-input" data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
-	                            <option value="1">1</option>
-	                            <option value="2">2</option>
-	                            <option value="3">3</option>
-	                            <option value="4">4</option>
-	                            <option value="5">5</option>
-	                            <option value="6">6</option>
-	                            <option value="7">7</option>
-	                            <option value="8">8</option>
-	                            <option value="9">9</option>
-	                            <option value="10">10</option>
-	                            <option value="11">11</option>
-	                            <option value="12">12</option>
-	                            <option value="13">13</option>
-	                            <option value="14">14</option>
-	                            <option value="15">15</option>
-	                            <option value="16">16</option>
-	                            <option value="17">17</option>
-	                            <option value="18">18</option>
-	                            <option value="19">19</option>
-	                            <option value="20">20</option>
-	                            <option value="21">21</option>
-	                            <option value="22">22</option>
-	                            <option value="23">23</option>
-	                            <option value="24">24</option>
-	                            <option value="25">25</option>
-	                            <option value="26">26</option>
-	                            <option value="27">27</option>
-	                            <option value="28">28</option>
-	                            <option value="29">29</option>
-	                            <option value="30">30</option>
-	                            <option value="31">31</option>
-	                        </select>
-	                    </div>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+					</select>
+				</div>
 
-	              <div class="col-xs-12 text-field" id="weekDays">
-	                  <select class="form-control w3-input" v-model="cgvm.weekDays" data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+	              <div class="col-xs-12 text-field" id="weekDays" v-if="cgvm.Frequency == 'Weekly'">
+	                  <select class="form-control w3-input" v-model="cgvm.weekDays" data-toggle="tooltip" data-placement="bottom" data-original-title="" title=""  v-if="cgvm.Frequency == 'Weekly'">
 	                      <option value="Sunday">Sunday</option>
 	                      <option value="Monday">Monday</option>
 	                      <option value="Tuesday">Tuesday</option>
@@ -215,7 +365,7 @@
 							<i class="fa fa-circle" aria-hidden="true"></i>
 						</div>
 						<div class="col-xs-10 text-field" id="username-field">
-							<input type="file" class='w3-input' placeholder="Goal Image" value="" id="GoalUpload" required="" data-toggle="tooltip" data-placement="bottom" accept="image/*">
+							<input type="file" class='w3-input' placeholder="Goal Image" value="" id="GoalUploadCreate" required="" data-toggle="tooltip" data-placement="bottom" accept="image/*">
 						</div>
 					</div>
 					<div class="col-lg-11 form-group">
@@ -228,26 +378,7 @@
 	    </div>
 	    </section>
 	</div>
-	<div id="extendedGoalUI" class="w3-modal">
-			<div class="w3-modal-content">
-		
-				<header class="w3-container w3-teal"> 
-					<span onclick="document.getElementById('id01').style.display='none'" 
-					class="w3-button w3-display-topright">&times;</span>
-					<h2>Modal Header</h2>
-				</header>
-		
-				<div class="w3-container">
-					<p>Some text..</p>
-					<p>Some text..</p>
-				</div>
-		
-				<footer class="w3-container w3-teal">
-					<p>Modal Footer</p>
-				</footer>
-		
-			</div>
-	</div>
+	
 	<button onclick="goalTab('createGoal')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
 		<small><span class="fa fa-plus" style="    font-size: 5em !important; padding-top: 4px"></span></small>
 	</button>

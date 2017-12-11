@@ -235,6 +235,8 @@
                 }   
             }else if (value == undefined) {
                 
+            }else if (value == 0) {
+                
             }else{
                 if(silentMode){}else{
                     toastr.error('Please fill in detail for: '+key);
