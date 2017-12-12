@@ -700,7 +700,7 @@ footer {
     width: 50%;
 }
 #faqs h3{ 
-    cursor:pointer; position: relative; background: black; border-radius: 2px;
+    cursor:pointer; position: relative; background: #29313C; border-radius: 2px;
     padding: 10px; font-weight: normal; margin: 0px 0 2px; font-size: 16px;
 }
 #faqs h3:after { 
@@ -720,7 +720,7 @@ footer {
     font-weight: 400; font-family: 'Roboto', sans-serif;
 }
 .faqs h1{
-    font-size: 22px; text-align: center; margin-bottom: 10px; margin-top: 30px;
+    font-size: 22px; text-align: center; margin-bottom: 10px; margin-top: 30px; color:#29313C
 }
 .account_links{
   margin-top: 10px; float: right;
@@ -1019,7 +1019,7 @@ a.rp_link{
     color:#000; text-decoration: underline;
 }
 .mhelp{
-    margin-top: 30px; text-align: center;
+    margin-top: 30px; text-align: center;color:#29313C
 }
 .mhelp a{
     text-decoration: underline;

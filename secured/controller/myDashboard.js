@@ -14,7 +14,7 @@ var navApp = new Vue({
  
 /*request stat data*/
 var testDash = String(sessionStorage.dashboardData)
-if ( testDash != 'undefined' && testDash != 'null' && testDash != ''){
+if (testDash != 'undefined' && testDash != 'null' && testDash != ''){
 	stats(sessionStorage.dashboardData,'existing');
 }else{
 	startLoad()
@@ -61,5 +61,15 @@ $( document ).ready(function() {
       w3_close()
       startLoad()
       renda.component('userExtras','activities','dashboardDisplayDiv');
+  });
+  $('#loadContactUsBtn').click(function(){
+    w3_close()
+    startLoad()
+    renda.component('userExtras','contact','dashboardDisplayDiv');
+  });
+  $('#loadFAQBtn').click(function(){
+    w3_close()
+    startLoad()
+    renda.component('userExtras','faq','dashboardDisplayDiv');
   });
 });

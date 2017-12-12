@@ -12,7 +12,7 @@
     <ul class='w3-ul w3-striped' style="overflow:scroll">
       <li class=' w3-text-white w3-xlarge w3-center' id='profileArea' style="">
         <p v-show="!commonData.User.ProfilePic"></p>
-        <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:75%"></img>
+        <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:75%;height:120px"></img>
         <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:120px; height:130px"></img>
         <span class="navFontSize">
             <br/><small>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
@@ -37,9 +37,9 @@
 
         <button id="loadAccountSettings" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_account_settings_icon.png" class="navIcon"></i><span class="navFontSize">Account Settings</span></button>
 
-        <button id="categoryOptionsBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_contact_us_icon.png" class="navIcon"></i><span class="navFontSize">Contact Us</span></button>
+        <button id="loadContactUsBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_contact_us_icon.png" class="navIcon"></i><span class="navFontSize">Contact Us</span></button>
 
-        <button id="categoryOptionsBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_faqs.png" class="navIcon"></i><span class="navFontSize">FAQs</span></button>
+        <button id="loadFAQBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_faqs.png" class="navIcon"></i><span class="navFontSize">FAQs</span></button>
 
        <button id="logoutBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2"><i class=" w3-margin-right"><img src="img/LineIcons/Secondary(Icons)/pdi_logout_icon.png" class="navIcon"></i><span class="navFontSize" onclick="logout();">Logout</span></button>
     </ul>

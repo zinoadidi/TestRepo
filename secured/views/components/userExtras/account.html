@@ -15,10 +15,10 @@
     <div id="viewProfile" class="profileTab w3-container" style="display:none">
         <div id="viewProfileDiv" style="margin-left:6%" class="w3-animate-left w3-white">
             <center><div class="input-text-medium w3-padding">My Profile</div>
-            <div class="input-text-goal w3-padding"><b>Account Status: </b>{{userDetails.Accountstatus}}</div></center>
-            <ul v-for="(item,key) in userDetails" class="w3-padding w3-white " onclick="">
+            <div class="input-text-goal w3-padding"><b>Account Status: </b>{{userExtras.ProgressStatus}}</div></center>
+            <ul  class="w3-padding w3-white " onclick="">
              
-                <li style="" class="w3-padding">
+                <li style="" class="w3-padding input-text-goal" v-for="(item,key) in userDetails">
                     <span><b>{{key}}: </b></span>
                     <span>{{item}}</span> 
                 </li>  
@@ -31,15 +31,24 @@
         <div id="editProfileDiv" class="">
             <div class="w3-animate-right "  style="">
                 <center><div class="input-text-medium w3-padding">Edit Profile</div>
-                
+                <div>
+                    <img v-bind:src="userExtras.ProfilePic"  class="w3-circle" style="width:150px; height:140px"/>
+                    <div>
+                        <p class="input-text-goal center">Select a new profile image</p>
+                        <input type="file" id="ProfileUpload" value= "" class="w3-input input-text-goal padding-left-2 upload-button" data-toggle="tooltip" accept="image/*" required="" aria-required="true" style="width: 50%;" onchange ="prepareProfileUpload()">
+                    </div>  
+                </div>
             
             </div>
         </div>
     </div>
     <div id='changePassword' class="profileTab w3-animate-left" style="display:none">
         <section id="changePasswordDiv" class="w3-white" style="font-weight: 0px;">
-        <div class=" col-lg-12 w3-margin-left w3-padding">
+        <div class=" col-lg-12 w3-margin-left w3-padding input-text-medium">
             Change Password
+        </div>
+        <div class="input-text-goal">
+
         </div>
         </section>
     </div>

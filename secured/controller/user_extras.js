@@ -249,6 +249,11 @@ function initUserProfilePage(){
            "Phonenumber":"",
            "Email":"",
            "AccountStatus":""
+        },
+        userExtras:{
+            "ProgressStatus":"",
+            "ProfilePic":"",
+
         }
 	  }
 	});
@@ -266,8 +271,129 @@ function initUserProfilePage(){
 		userProfile.userDetails.Phonenumber = data['data'].Phonenumber;
 		userProfile.userDetails.Email = data['data'].Email;
 		userProfile.userDetails.AccountStatus = data['data'].Status;
+		userProfile.userExtras.ProgressStatus = data['data'].ProgressStatus;
+        if(data['data'].ProfilePic){
+            userProfile.userExtras.ProfilePic = data['data'].ProfilePic;
+        }else{
+            userProfile.userExtras.ProfilePic = 'assets/images/profile-img.jpg'
+        }
 		
     }
     profileTab('viewProfile')
     
+}
+
+function prepareProfileUpload(data){
+    if (data) {
+        stopLoad()
+        try{
+            JSON.parse(data);
+        }catch(err){
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }
+        
+        data = JSON.parse(data);
+        if(data['status'] == 200){
+            toastr.success(data['message'])
+            if(confirm('would you like to logout to refresh your account?')){
+                logout();
+            }else{
+                return false;
+            }
+        }else{
+            toastr.error('An error occured while updating profile.')            
+        }
+        
+        
+        return false;
+        
+    }
+    var files = '';
+    files = document.getElementById('ProfileUpload').files[0]
+    if(files){
+        var ProfileUpload = renda.fileToBase64(files);
+        ProfileUpload.then(function(result) {
+            userProfile.userExtras.ProfilePic = result
+            ProfileUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
+            sendRegReq()
+        });
+    }else{
+        toastr.error('Please Select An Image');
+        return false;
+    }
+    function sendRegReq(){
+        var confirmUpload = window.confirm('Your profile picture is about to be updated. Continue?')
+        if(confirmUpload){
+            data = {
+                "ProfilePic":ProfileUpload,
+                "UserId":sessionStorage.UserId
+            } 
+            if (validateObj(data)){
+                console.dir(data)
+                startLoad()
+                renda.post("/user/update",JSON.stringify(data),'prepareProfileUpload');     
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }    
+}
+
+function prepareContactForm(){
+
+}
+function submitContactForm(data){
+    if (data) {
+        stopLoad()
+        try{
+            JSON.parse(data);
+        }catch(err){
+            toastr.error('An error occured while performing requeest.')
+            console.dir(err);
+            return false;
+        }
+        
+        data = JSON.parse(data);
+        if(data['status'] == 200){
+            toastr.success('Thank you for contacting us. We will get back to you shortly')
+        }else{
+            toastr.error('An error occured, Please try again later.')            
+        }
+        return false;
+        
+    }
+    if($('#FullName').val()&&$('#PhoneNumber').val()&&$('#Email').val()&&$('#Message').val()){
+
+    }else{
+        toastr.error('Please Provide All Fields');
+        return false;
+    }
+    var confirmUpload = window.confirm('Submit Contact Form?')
+    if(confirmUpload){
+        var confirmData = {
+            "FullName":$('#FullName').val(),
+            "PhoneNumber":$('#PhoneNumber').val(),
+            "Email":$('#Email').val(),
+            "ContactOption":$('#ContactOption').val(),
+            "Message":$('#Message').val(),
+        } 
+        
+        data = {
+            "RecipientEmail": "enquiries@arminvestmentcenter.com",
+            "Subject":"Payday Investor Mobile: "+ confirmData.ContactOption+" From "+ confirmData.FullName,
+            "Body":confirmData.Message+". (Phone Number: "+confirmData.PhoneNumber+"; Email:"+confirmData.Email+")",
+            "IsBodyHtml":false,
+        }
+        console.dir(confirmData)            
+        startLoad()
+        renda.post("/sendEmail",JSON.stringify(data),'prepareProfileUpload');     
+       
+    }else{
+        return false;
+    }
+      
 }

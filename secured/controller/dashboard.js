@@ -22,14 +22,14 @@ function loadDefaults(){
 }
 
 function w3_open() {
-  setTimeout(function () { navMan.status = 'open' }, 100);
+  setTimeout(function () { navMan.status = 'open' }, 2);
   document.getElementById("dashboadHeaderDiv").style.position = "relative";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "9";
   document.getElementById("mySidebar").style.zIndex = "10";
   document.getElementById("mySidebar").style.width = "50vw";
   document.getElementById("mySidebar").style.display = "block";
   document.getElementById("mySidebar").style.left = '0px';
-  document.getElementById("mySidebar").style.clip = 'rect(0px 207px 736px 0.0px)';
+  document.getElementById("mySidebar").style.clip = 'rect(0px 100% 736px 0.0px)';
   document.getElementById("openNav").style.display = 'none';
   document.getElementById("closeNav").style.display = 'inline-block';
   
@@ -38,7 +38,7 @@ function w3_open() {
 }
 function w3_close() { 
   navMan.status = 'close';
-  $('#mySidebar').hide("slide", { direction: "left" }, 70);
+  $('#mySidebar').hide("slide", { direction: "left" }, 1);
   document.getElementById("mySidebar").style.zIndex = "11";
   document.getElementById("dashboadHeaderDiv").style.zIndex = "10";
   document.getElementById("main").style.marginLeft = "0%";
@@ -46,6 +46,7 @@ function w3_close() {
   //document.getElementById("mySidebar").style.display = "none";
   document.getElementById("closeNav").style.display = 'none';
   document.getElementById("openNav").style.display = "inline-block";
+  document.getElementById("mySidebar").style.clip = 'rect(0px 100% 736px 0.0px)';
 
 }
 
