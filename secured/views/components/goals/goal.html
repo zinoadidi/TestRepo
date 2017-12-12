@@ -7,7 +7,7 @@
 		<div id='viewGoals' class="goalTabs" style="display: none">	
 			<div id="goalsDiv" style="margin-left:6%" class="w3-animate-left">
 			  <div v-for="item in commonData.Dashboard.goals" class="single-goal " :id="item.GoalId"onclick="viewSingleGoal(this.id)">
-				<div style="background: #29313C; height:150px; max-height: 150px; overflow: hidden;margin: 4px!important;background-size: 100%;background-position: center;background-repeat: no-repeat;"  v-bind:style="{ backgroundImage: 'url(' + item.GoalImage + ')' }" class="w3-text-white w3-card-4 w3-round w3-padding w3-hover-opacity w3-hover-shadow" >
+				<div style="background: #29313C; overflow: auto;margin: 4px!important;background-size: 100%;background-position: center;background-repeat: no-repeat;"  v-bind:style="{ backgroundImage: 'url(' + item.GoalImage + ')' }" class="w3-text-white w3-card-4 w3-round w3-padding w3-hover-opacity w3-hover-shadow" >
 					
 					<div style="padding-top:60px" class="w3-left">
 						<div style="" class="w3-black w3-padding w3-opacity">

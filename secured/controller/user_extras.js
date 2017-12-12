@@ -383,14 +383,15 @@ function submitContactForm(data){
         } 
         
         data = {
-            "RecipientEmail": "enquiries@arminvestmentcenter.com",
-            "Subject":"Payday Investor Mobile: "+ confirmData.ContactOption+" From "+ confirmData.FullName,
-            "Body":confirmData.Message+". (Phone Number: "+confirmData.PhoneNumber+"; Email:"+confirmData.Email+")",
-            "IsBodyHtml":false,
+            "name": confirmData.FullName,
+            "phone": confirmData.PhoneNumber,
+            "email": confirmData.Email,
+            "subject":""+ confirmData.ContactOption+" From "+ confirmData.FullName,
+            "message":confirmData.Message
         }
-        console.dir(confirmData)            
+        console.dir(data)            
         startLoad()
-        renda.post("/sendEmail",JSON.stringify(data),'prepareProfileUpload');     
+        renda.post("/sendContactMessage",JSON.stringify(data),'prepareProfileUpload');     
        
     }else{
         return false;
