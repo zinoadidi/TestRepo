@@ -27,11 +27,9 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
+
         window.open = cordova.InAppBrowser.open;
-         if (!window.device) {
-            window.device = { platform: 'Browser' };
-        }
-        this.requestPermission();
+         
         this.receivedEvent('deviceready');
         screen.orientation.lock('portrait');
     },
@@ -44,35 +42,12 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;'); */
-
+        
         console.log('Received Event: ' + id);
-    },
+    }
 
     // request permission
-    requestPermission: function(){
-        var list = [
-          permissions.CAMERA,
-          permissions.GET_ACCOUNTS
-        ];
 
-        permissions.hasPermission(list, callback, null);
-
-        function error() {
-          console.warn('permission is not turned on');
-        }
-
-        function success( status ) {
-          if( !status.hasPermission ) {
-          
-            permissions.requestPermissions(
-              list,
-              function(status) {
-                if( !status.hasPermission ) error();
-              },
-              error);
-          }
-        }
-    }
 
 };
 
