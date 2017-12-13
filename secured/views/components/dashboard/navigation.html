@@ -14,7 +14,7 @@
         <p v-show="!commonData.User.ProfilePic"></p>
         <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:75%;height:120px"></img>
         <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:120px; height:130px"></img>
-        <span class="navFontSize">
+        <span class="navFontSize" v-if="commonData.User.Firstname">
             <br/><small>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
         </span>
       </li>

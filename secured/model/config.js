@@ -139,3 +139,33 @@ var TESTcard =
             "status":"success"
         }
     };
+var cardList ={
+    "status": 200,
+    "message": "",
+    "data": [
+        {
+        "Id": 2328,
+        "AppUserId": "PIV100012",
+        "CardNo": "6398",
+        "FWCode": "UKiIIx2IlQ0aFod=VBV",
+        "Status": "active",
+        "DeductionDay": 27
+        },
+        {
+        "Id": 2328,
+        "AppUserId": "PIV100012",
+        "CardNo": "6398",
+        "FWCode": "UKiIIx2IlQ0aFod=VBV",
+        "Status": "active",
+        "DeductionDay": 27
+        },
+        {
+        "Id": 2328,
+        "AppUserId": "PIV100012",
+        "CardNo": "6398",
+        "FWCode": "UKiIIx2IlQ0aFod=VBV",
+        "Status": "active",
+        "DeductionDay": 27
+        }
+    ]
+}
