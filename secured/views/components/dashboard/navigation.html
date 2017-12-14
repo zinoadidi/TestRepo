@@ -3,7 +3,6 @@
             .navIcon{
               size: 3vw!important;
               width: 8.0vw;
-      
               filter: brightness(4);
             }
         </style>
@@ -12,8 +11,8 @@
     <ul class='w3-ul w3-striped' style="overflow:scroll">
       <li class=' w3-text-white w3-xlarge w3-center' id='profileArea' style="">
         <p v-show="!commonData.User.ProfilePic"></p>
-        <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:75%;height:120px"></img>
-        <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:120px; height:130px"></img>
+        <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:70%;height:120px"></img>
+        <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:200px; height:210px"></img>
         <span class="navFontSize" v-if="commonData.User.Firstname">
             <br/><small>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
         </span>
@@ -22,20 +21,20 @@
       <button id="loadDashboardBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2 " onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_dashboard_icon.png" class="navIcon"></i><span class="navFontSize">Dashboard</span></button>
 
       <!-- client options -->
-        <button id="loadGoalManagementBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_goal_management_icon.png" class="navIcon"></i><span class="navFontSize">Goal Management</span></button>
+        <button id="loadGoalManagementBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_goal_management_icon.png" class="navIcon"></i><span class="navFontSize">Goal</span></button>
 
       <!-- content providers options -->
-        <button id="loadInvestment101Btn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_investment_101_icon.png" class="navIcon"></i><span class="navFontSize">Investment 101</span></button>
+        <button id="loadInvestment101Btn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_investment_101_icon.png" class="navIcon"></i><span class="navFontSize">Blog</span></button>
 
       <!-- content options -->
-        <button id="loadCardManagementBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_card_management_icon.png" class="navIcon"></i><span class="navFontSize">Card Management</span></button>
+        <button id="loadCardManagementBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_card_management_icon.png" class="navIcon"></i><span class="navFontSize">Card</span></button>
 
       <!-- Category options -->
-        <button id="loadTransactionBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_my_transactions_icon.png" class="navIcon"></i><span class="navFontSize">My Transactions</span></button>
+        <button id="loadTransactionBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_my_transactions_icon.png" class="navIcon"></i><span class="navFontSize">Transactions</span></button>
 
-        <button id="loadActivitiesBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_my_activities_icon.png" class="navIcon"></i><span class="navFontSize">My Activities</span></button>
+        <button id="loadActivitiesBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_my_activities_icon.png" class="navIcon"></i><span class="navFontSize">Activities</span></button>
 
-        <button id="loadAccountSettings" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_account_settings_icon.png" class="navIcon"></i><span class="navFontSize">Account Settings</span></button>
+        <button id="loadAccountSettings" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_account_settings_icon.png" class="navIcon"></i><span class="navFontSize">Settings</span></button>
 
         <button id="loadContactUsBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick="renda.component('dashboard','myDashboard','dashboardDisplayDiv');"><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_contact_us_icon.png" class="navIcon"></i><span class="navFontSize">Contact Us</span></button>
 

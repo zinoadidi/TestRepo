@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">            
         <link href="assets/css/materialize.min.css" rel="stylesheet"/>
         <link href="assets/css/w3.css" rel="stylesheet"/>  
-        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">         
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">          
         <style>
-            .w3-display-topleft,.w3-display-topright{
-                top: 0px;
-                margin-top: 5px!important;
-                padding: 0px!important;
-            }
             @media (max-width:641px)  { 
                 /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
                 .backgroundImg{
@@ -22,13 +16,22 @@
                     background-image: url("assets/login_assets/PayDay-Investor-(Login-Page)_bg.jpg")
                     ;
                 }
+                .w3-container{
+                    padding: 0.00em 0px!important;
+                    margin: 0px!important; 
+                    text-align: center!important
+                }
+                .w3-half{
+                    width:100%!important;
+                }
                 .mobileBlock{
                     display: block;
                     padding: 0px!important;
                     margin:0px!important
                 }
+                
                 .w3-display-middle{
-                    left: 45%!important;
+                    
                 }
                 .height-cover{
                     height: -webkit-fill-available;
@@ -39,7 +42,7 @@
                 .customized-input{
                     padding-left: 15px!important;
                     height: auto!important;
-                    text-align: right!important;
+                    width:100%!important
                 }
                 .font-medium{
                     font-size: 15px;
@@ -83,16 +86,25 @@
                     position: absolute;
                     margin-bottom: 40px;
                 }
-                .fa{
-                    display: inline!important;
-                    position: absolute!important;
-                    color: white!important;
-                    font-size: 22px!important;
-                    margin-top: 8px;
+                .pdy-mod-input{
+                    /* border-right: 2px solid white !important; */
+                    padding-left:3px;
+                    width: 100%!important;
+                }
+                .pd-reg-button{
+                    width: 97% !important;
                     
+                    padding-top: 10px!important;
+                    padding-bottom: 10px!important;
+                }
+                .pdy-input{
+                    width: 100%!important;
+                    padding-left:0px
+                }
+                .zero-margin{
+                    padding-right: 15px;
                 }
             }
-           
             @media (min-width:642px)  { 
                 /* tablet, landscape iPad, lo-res laptops ands desktops */ 
                 .backgroundImg{
@@ -112,7 +124,6 @@
                 .customized-input{
                     padding-left: 15px!important;
                     height: auto!important;
-                    text-align: center!important;
                 }
                 .font-medium{
                     font-size:1.5vw!important;
@@ -156,15 +167,25 @@
                     position: absolute;
                     margin-bottom: 40px;
                 }
-                .fa{
-                    display: inline!important;
-                    position: absolute!important;
-                    color: white!important;
-                    font-size: 30px!important;
-                    margin-top: 3px;
+               
+                .pdy-mod-input{
+                    border-right: 2px solid white !important;
+                    padding-left:3px
+                }
+                .pd-reg-button{
+                    width: 88% !important;
+                    margin-left: 30px!important;
+                    padding-top: 10px!important;
+                    padding-bottom: 10px!important;
+                }
+                .pdy-input{
+                    padding-left:10px 
                 }
             }
-          
+            
+         
+            
+            
         </style>
     </head>
     <body>
@@ -173,36 +194,38 @@
                 <a href="#" class="w3-text-white pdy-padding font-small w3-margin ">< Back to home</a>
             </div>
             <div class="w3-display-topright pdy-padding w3-margin  ">
-                <a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px  w3-hide-small">New to ARM?</a>
-                <button class="w3-button w3-margin font-small w3-transparent pdy-border w3-text-white pdy-padding-left-ex pdy-padding-right-ex">Register</button>                    
+                <a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px">Existing ARM client?</a>
+                <button class="w3-button w3-margin font-small w3-transparent pdy-border w3-text-white pdy-padding-left-ex pdy-padding-right-ex">Login</button>                    
             </div>
             <div class="w3-display-middle  ">
                 <div class="w3-container w3-center">
                     <img src="assets/img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding w3-margin"/>
                 </div>
                 <div class="w3-text-white w3-center font-medium w3-padding w3-margin-left">
-                    PLEASE LOGIN TO CONTINUE
+                    NEW TO ARM? CREATE AN ACCOUNT
                 </div>
                 <form class="w3-container">
-                    <div class="w3-margin">
-                        <span class="fa fa-envelope-o w3-xxlarge"></span>
-                        <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="email" placeholder="Enter Your Email"  id="Username" required="">
-                    </div>     
-                    <div class="w3-margin">
-                        <span class="fa fa-lock w3-xxlarge"></span>                            
-                        <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="password" placeholder="Enter Your Password"  id="Password" required="">      
-                                            
+                    <div class="w3-margin w3-container">
+                        <div>
+                            <div  class="w3-half ">
+                                <input class=" w3-text-white font-medium pdy-input pdy-mod-input" type="email" placeholder="Surname"  id="Surname" required="" style="">                        
+                            </div>
+                            <div class="w3-half">
+                                <input class=" w3-text-white font-medium pdy-input" type="password" placeholder="First Name"  id="Password" required="">                                               
+                            </div>
+                        </div>
+                        <div class="">
+                            <input class="w3-input w3-text-white pdy-input font-medium" type="email" placeholder="Email"  id="Username" required="">
+                        </div> 
                     </div>
-                    <div>
-                        
-                        <button class="w3-button pdy-green w3-bar w3-margin font-small">Login</button>      
-                        <center><span class=" w3-text-white font-small pdy-padding-left-ex forgot-password">Forgot Password?</span></center>                
+                    <div class="zero-margin">
+                        <button class="w3-button pdy-green w3-margin font-small pd-reg-button" >Get Started</button>                    
                     </div>
                 </form>
             </div>
-            <div class="w3-display-bottommiddle w3-margin  w3-hide-small">
-                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-right mobileBlock">Need Help?</a>
-                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-left mobileBlock">Private Policy</a>                    
+            <div class="w3-display-bottommiddle w3-margin  ">
+                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-right ">Need Help?</a>
+                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-left ">Private Policy</a>                    
             </div>
         </div>
     </body>
