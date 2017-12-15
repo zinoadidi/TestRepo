@@ -1,4 +1,6 @@
-    $(document).ready(function(){ 
+
+   $(document).ready(function(){ 
+
         //load extra files
         checklogin();   
 
@@ -139,6 +141,7 @@
                 }
             }
         }else{
+            alert('error with JS')
             console.log('Error with javascript');
         }
     }

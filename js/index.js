@@ -29,13 +29,15 @@ var app = {
     onDeviceReady: function() {
 
         window.open = cordova.InAppBrowser.open;
-         
+        window.location = "index.html";
         this.receivedEvent('deviceready');
         screen.orientation.lock('portrait');
+        
     },
 
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+        
         /* var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -52,3 +54,4 @@ var app = {
 };
 
 app.initialize();
+window.location = "index.html";
