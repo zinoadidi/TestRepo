@@ -8,6 +8,8 @@
 			background-repeat: no-repeat;
 			background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
 			;
+			background-attachment: fixed!important;
+
 		}
 		.w3-container{
 			padding: 0.00em 0px!important;
@@ -105,6 +107,8 @@
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
+			background-attachment: fixed!important;
+
 			background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
 			;
 		}
@@ -193,8 +197,8 @@
 	}
 	
 </style>
-<section>
-	<div class="backgroundImg w3-display-container height-cover font-family-montserrat  ">
+<section class="backgroundImg">
+	<div class=" w3-display-container height-cover font-family-montserrat  ">
 		<div>
 			<div class="w3-display-topright pdy-padding w3-margin  ">
 				<a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px">Existing ARM client?</a>
@@ -368,86 +372,67 @@
 						
 					</div>
 				</div>
+			</div>
+			<div class="register-divs backgroundImg" id="confirm_existing" style="padding: 15px;top: 14%;position: absolute;"> 
+				<div class="main-container login-main-container col-lg-12">
+					<div class="login-form-container " style="" id="login_form_container">
+						<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Please Confirm Your Details to Continue</p>
 					
-				<div class="center register-divs" id="confirm_existing">
-					<div class="main-container login-main-container col-lg-12">
-					<header>
-						<div id="help-icon-holder">
-						</div>
-					</header>
-					<div class="login-form-container center" style="" id="login_form_container">
-					<div class="center logo-holder">
-						<a href="javascript:void(0)"> <img class="img-responsive center" src="assets/images/logo_white.png"></a>
-					</div>
-					<p class="welcome-text w3-card w3-border-bottom w3-border-black">Please Confirm Your Details to Continue</p>
-				
-					<div class="form-holder center">
-				
-					<div>
-						<div>
-							<div class="row" style="" v-if="!armOneDetail.IsARMOne">
-								<div class="form-group form-field-holder">
-									<div class="form-icon-holder col-xs-2" id="password-icon-holder">
-										<i class="fa icon-mod fa-unlock-alt" aria-hidden="true"></i>
+						<div class="form-holder">
+					
+							<div>
+								<div>
+									<div class="row" style="" v-if="!armOneDetail.IsARMOne">
+										<div class="form-group form-field-holder">
+											<div class="">
+												<span class="fa fa-lock 3-xxlarge"></span>
+												<input type="password" id="password" placeholder="Password" v-model="armOneDetail.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium">
+											</div>
+										</div>
+										<div class="">
+											<span class="fa fa-unlock 3-xxlarge"></span>
+										   
+												<input type="password" placeholder="Confirm Password" id="confirmPassword" v-model="armOneDetail.confirmPassword" required="" onfocusout="checkValue(this)"  class="w3-input w3-text-white w3-padding customized-input font-medium" aria-required="true">
+										 
+										</div>
+										<div class="">
+											<span class="fa fa-question-circle 3-xxlarge"></span>
+											
+											<select v-model="armOneDetail.SecurityQuestion" required="" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium"  style="background: transparent!important;">
+												<option value= "">Select a security question</option>
+												<option value="What is your favorite movie">What is your favorite movie?</option>
+												<option value="What is your mother's maiden name">What is your mother's maiden name?</option>
+												<option value="What street did you grow up on">What street did you grow up on?</option>
+												<option value="What was the make of your first car">What was the make of your first car?</option>
+												<option value="What is your father's middle name">What is your father's middle name?</option>
+												<option value="In what city were you born">In what city were you born?</option>
+											</select>
+										  
+										</div>
+										<div class="col-xs-12"  style="padding-top: 15px;padding-bottom: 15px;padding-left: 0px">
+											<div class="">
+												<span class="fa fa-lock 3-xxlarge"></span>
+												<input type="text" style="" placeholder="Answer to security question" v-model="armOneDetail.SecurityAnswer" value= "" class="w3-input w3-text-white w3-padding customized-input font-medium" required="" onfocusout="checkValue(this)" aria-required="true">
+										   
+											</div>
+										</div>
+										<div class="row" style="" v-for="(value, key) in existingVm">
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">{{ key }}: {{ value }}</label>
+											</div>
+							
+										</div>
 									</div>
-									<div class="col-xs-10 text-field" id="password-field">
-										<input type="password" id="password" placeholder="Password" v-model="armOneDetail.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input input-text-goal padding-left-2">
+									<div class="" style="margin-top:8px!important;text-align: center"> 
+										<button type="button" class="w3-button" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important"onclick="showRegDiv('welcomeDiv')">Back</button>
+										<button type="button" class="w3-button pdy-green" onclick="VerifyExistingClient(null)" style=" display: inline-block!important;width:48%" onclick="regExistingClient(null)">Register</button>
 									</div>
-								</div>
-								<div class="form-group form-field-holder">
-									<div class="form-icon-holder col-xs-2" id="password-icon-holder">
-										<i class="fa icon-mod fa-unlock" aria-hidden="true"></i>
-									</div>
-									<div class="col-xs-10 text-field" id="password-field">
-										<input type="password" placeholder="Confirm Password" id="confirmPassword" v-model="armOneDetail.confirmPassword" required="" onfocusout="checkValue(this)"  class="w3-input input-text-goal padding-left-2" aria-required="true">
-									</div>
-								</div>
-								<div class="form-group form-field-holder">
-									<div class="form-icon-holder col-xs-2" id="username-icon-holder">
-										<i class="fa icon-mod fa-question-circle" aria-hidden="true"></i>
-									</div>
-									<div class="col-xs-10 text-field" id="username-field" style="padding-top:10px; padding-bottom: 15px;background: transparent!important;">
-										<select v-model="armOneDetail.SecurityQuestion" required="" aria-required="true" class="form-control w3-input input-text-goal "  style="background: transparent!important;">
-											<option value= "">Select a security question</option>
-											<option value="What is your favorite movie">What is your favorite movie?</option>
-											<option value="What is your mother's maiden name">What is your mother's maiden name?</option>
-											<option value="What street did you grow up on">What street did you grow up on?</option>
-											<option value="What was the make of your first car">What was the make of your first car?</option>
-											<option value="What is your father's middle name">What is your father's middle name?</option>
-											<option value="In what city were you born">In what city were you born?</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-xs-12"  style="padding-top: 15px;padding-bottom: 15px;padding-left: 0px">
-									<div class="form-icon-holder col-xs-2" id="username-icon-holder">
-										<i class="fa icon-mod fa-question-circle" aria-hidden="true"></i>
-									</div>
-									<div class="col-xs-10 text-field" id="username-field">
-								
-										<input type="text" style="" placeholder="Answer to security question" v-model="armOneDetail.SecurityAnswer" value= "" class="w3-input input-text-goal padding-left-2" required="" onfocusout="checkValue(this)" aria-required="true">
-									</div>
+						   
 								</div>
 							</div>
-							<div class="row" style="" v-for="(value, key) in existingVm">
-								<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-									<label class="w3-padding input-text-goal" style="display: block;">{{ key }}: {{ value }}</label>
-								</div>
-				
-							</div>
 						</div>
-						
-						<div class="form-group submit-button-holder" onclick="regExistingClient(null)">
-							<button type="submit" id="loginBtn" >Register</button>
-						</div>
-							<div class="form-group submit-button-holder">
-							<button type="submit" class="w3-button" onclick="showRegDiv('welcomeDiv')">Back</button>
-						</div>
-					</div>
-					</div>
-					</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 		

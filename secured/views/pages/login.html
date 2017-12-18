@@ -11,6 +11,8 @@
 				background-size: cover;
 				background-position: center;
 				background-repeat: no-repeat;
+				background-attachment: fixed!important;
+
 				background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
 				;
 			}
@@ -20,7 +22,7 @@
 				margin:0px!important
 			}
 			.w3-display-middle{
-				left: 45%!important;
+				/* left: 45%!important; */
 			}
 			.height-cover{
 				height: -webkit-fill-available;
@@ -92,6 +94,8 @@
 				background-size: cover;
 				background-position: center;
 				background-repeat: no-repeat;
+				background-attachment: fixed!important;
+
 				background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
 				;
 			}
@@ -176,7 +180,7 @@
                 <div class="w3-text-white w3-center font-medium w3-padding w3-margin-left">
                     PLEASE LOGIN TO CONTINUE
                 </div> 
-                <form class="w3-container" onsubmit="javascript:void(0);login()">
+                <form class="w3-container" onsubmit="event.preventDefault();login()">
                     <div class="w3-margin">
                         <span class="fa fa-envelope-o w3-xxlarge"></span>
                         <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="email" placeholder="Enter Your Email"  id="Username" required="">
@@ -189,7 +193,7 @@
                     <div>
                         
                         <button class="w3-button pdy-green w3-bar w3-margin font-small">Login</button>      
-                        <center><span class=" w3-text-white font-small pdy-padding-left-ex forgot-password">Forgot Password?</span></center>                
+                        <center><span class=" w3-text-white font-small pdy-padding-left-ex forgot-password" onclick="renda.page('forgot_password')">Forgot Password?</span></center>                
                     </div>
                 </form>
             </div>

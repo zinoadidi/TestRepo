@@ -45,6 +45,8 @@
             if (result.status == 200){
                 if(result.message == ''){
                     result.message = 'Login successful.';
+                }else{
+                    result.message = 'Welcome Back '+result.data.Firstname;
                 }
                 toastr.success(result.message); 
                 //decode token
@@ -98,6 +100,45 @@
         }
         return false;  
     }
+    function forgot_password(data){
+        if (data) {
+
+            try{
+                JSON.parse(data);
+            }catch(err){
+                stopLoad()
+                toastr.error('An error occured while verfying user information.')
+                console.dir(err);
+                return false;
+            } 
+            let result = JSON.parse(data);
+            //let result = USERDATA;
+            console.dir(result);
+            if (result.status == 200){
+                if(result.message == ''){
+                    result.message = ' An Email Has Been Sent To You. Please Follow The Link in Your Mail to Reset Your Password';
+                }
+                toastr.success(result.message); 
+                renda.page('login')        
+            }else{
+                toastr.error(result['message']);    
+            }
+            stopLoad()                                    
+            return false;
+        }
+        let email = document.getElementById('Username').value;
+        data = {
+            "Email":email
+        };
+        if (validateObj(data)){
+            renda.loader('start')
+            renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login');
+        }else{
+            return false;
+        }
+        return false;  
+    }
+
 
     function checklogin(){
 
