@@ -82,6 +82,16 @@
       </div>
     </div>
     <br/>
+
+    <div id="topGoalDiv" class="" style="display:none">
+      <div class="input-text-medium w3-bottombar w3-white center w3-padding w3-card" style="margin-bottom:7px; margin-top:30px;"><span class="w3-padding ">Top Goal</span></div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12" style="background: white;">
+          <div></div>
+        </div>
+      </div>
+    </div>
+  
     <div id="investmentCalculatorDiv" class="">
       <center>
       <div class="col-md-6 col-xl-4">
@@ -92,7 +102,7 @@
           <div class="box-body b-t w3-white w3-card w3-padding">
             <form  id="savings">
               <div class="row" style="margin-top: 5px">
-               <div class="col-xs-6 col-lg-6">
+                <div class="w3-third" style="width:50%!important; margin-right:10%!important">
                   <div class="col-xs-12 col-lg-12">
                       <div class="text-muted">Initial Investment</div>
                   </div>
@@ -101,7 +111,7 @@
                     <input name="initialdeposit" type="number"  class="w3-input w3-text-black form-control" placeholder="">
                   </div>
                </div>
-                <div class="col-xs-6 col-lg-6">
+               <div class="w3-third" style="width:30%!important;">
                   <div class="col-xs-12 col-lg-12">
                       <div class="text-muted">Duration</div>
                   </div>
@@ -151,7 +161,7 @@
                </div>
               </div>
               <div class="row" style="margin-top: 5px">
-                   <div class="col-xs-6 col-lg-6">
+                   <div class="w3-third" style="width:50%!important; margin-right:10%!important">
                       <div class="col-xs-12 col-lg-12">
                           <div class="text-muted">Monthly Investment</div>
                       </div>
@@ -160,21 +170,21 @@
                         <input name="monthlydeposit"  type="number"  class="w3-input w3-text-black form-control" placeholder="0">
                       </div>
                    </div>
-                    <div class="col-xs-6 col-lg-6">
+                   <div class="w3-third" style="width:30%!important">
                       <div class="col-xs-12 col-lg-12">
-                          <div class="text-muted">Intrest Rate (%)</div>
+                          <div class="text-muted">Intrest Rate</div>
                       </div>
 
                       <div class="col-xs-12 col-lg-12">
-                          <input type="text" name="interestrate" disabled="disabled"  class="w3-input w3-text-black form-control center" :placeholder="commonData.Dashboard.yield_rate" :value="commonData.Dashboard.yield_rate">
+                          <input type="text" name="interestrate" disabled="disabled"  class="w3-input w3-text-black form-control center" :placeholder="commonData.Dashboard.yield_rate" :value="commonData.Dashboard.yield_rate+'(%)'">
                       </div>
                    </div>
               </div>
 
                <div class="row">
-                  <div class="col-xs-12 col-lg-12">
+                  <div class="w3-third" style="width:40%!important; margin-right:10%!important">
                       <div class="col-xs-12 col-lg-12">
-                          <div class="text-muted">Total investment (Naira)</div>
+                          <div class="text-muted">Total investment</div>
                       </div>
 
                       <div class="col-xs-12 col-lg-12">
@@ -184,20 +194,19 @@
                           </div>
                       </div>
                   </div>
-              </div>
-              <div class="row" style="">
-                <div class="col-xs-12 col-lg-12">
-                    <div class="col-xs-12 col-lg-12">
-                        <div class="text-muted">Total amount due (Naira)</div>
-                    </div>
 
-                    <div class="col-xs-12 col-lg-12">
-                        <div class="input-group m-b">
-                            <span class="input-group-addon">₦</span>
-                            <input id="result" disabled="disabled" style="height:40px" type="text" class="form-control w3-input w3-text-black ">
-                        </div>
-                    </div>
-                </div>
+                  <div class="w3-third" style="width:40%!important">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Total Return</div>
+                      </div>
+  
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="input-group m-b">
+                              <span class="input-group-addon">₦</span>
+                              <input id="result" disabled="disabled" style="height:40px" type="text" class="form-control w3-input w3-text-black ">
+                          </div>
+                      </div>
+                  </div>
               </div>
 
             </form>

@@ -36,7 +36,7 @@ if (testDash != 'undefined' && testDash != 'null' && testDash != ''){
 }
 
 $( document ).ready(function() {
-
+    $(window).scrollTop(0);
   w3_close()
   $('#loadInvestment101Btn').click(function(){
       w3_close()
