@@ -152,20 +152,159 @@ var cardList ={
         "DeductionDay": 27
         },
         {
-        "Id": 2328,
+        "Id": 2312,
         "AppUserId": "PIV100012",
-        "CardNo": "6398",
-        "FWCode": "UKiIIx2IlQ0aFod=VBV",
+        "CardNo": "6326",
+        "FWCode": "UKiIIx2IlQ0aFod=VUT",
         "Status": "active",
         "DeductionDay": 27
         },
         {
-        "Id": 2328,
+        "Id": 2333,
         "AppUserId": "PIV100012",
-        "CardNo": "6398",
-        "FWCode": "UKiIIx2IlQ0aFod=VBV",
+        "CardNo": "6355",
+        "FWCode": "UKiIIx2IlQ0aFod=VAS",
         "Status": "active",
         "DeductionDay": 27
         }
     ]
+}
+
+var funmiData={
+    "status": 200,
+    "message": "",
+    "data": {
+        "yield_rate": 17.7486,
+        "goals_done": null,
+        "goals_total": 4,
+        "goals_pending": 3,
+        "goals_suspended": 1,
+        "total_withdrawals": 0,
+        "net_investment": {
+            "AppUserId": "PIV100036614",
+            "TotalInvestment": 0,
+            "AccruedIntrest": 0
+        },
+        "fetchWallet": {
+            "UserId": "PIV100036614",
+            "Amount": 0.36
+        },
+        "top_goal": {
+            "ExcessFund": 0,
+            "GoalId": "Goal10149",
+            "AppUserId": "PIV100036614",
+            "ItemName": "Christmas Holiday",
+            "ItemDescription": "My next holiday will be in dubai",
+            "GoalAmount": 450000,
+            "Duration": "1497 weeks",
+            "MonthlyDeduction": 300,
+            "ProductId": null,
+            "AmountAttained": 995.45,
+            "Status": "Active",
+            "DateCreated": "2017-12-05T14:46:05.56",
+            "GoalType": "2",
+            "Day": "Monday",
+            "Frequency": "Weekly",
+            "CardId": 10,
+            "GoalImage": "http://res.cloudinary.com/arm/image/upload/v1512481565/ecotrb2uqpe1gplkj5lx.jpg",
+            "NoOfDeductionRemaining": 1497,
+            "IsTopGoal": true
+        },
+        "goals": [
+            {
+                "ExcessFund": 0,
+                "GoalId": "Goal10149",
+                "AppUserId": "PIV100036614",
+                "ItemName": "Christmas Holiday",
+                "ItemDescription": "My next holiday will be in dubai",
+                "GoalAmount": 450000,
+                "Duration": "1497 weeks",
+                "MonthlyDeduction": 300,
+                "ProductId": null,
+                "AmountAttained": 995.45,
+                "Status": "Active",
+                "DateCreated": "2017-12-05T14:46:05.56",
+                "GoalType": "2",
+                "Day": "Monday",
+                "Frequency": "Weekly",
+                "CardId": 10,
+                "GoalImage": "http://res.cloudinary.com/arm/image/upload/v1512481565/ecotrb2uqpe1gplkj5lx.jpg",
+                "NoOfDeductionRemaining": 1497,
+                "IsTopGoal": false
+            },
+            {
+                "ExcessFund": 0,
+                "GoalId": "Goal101423",
+                "AppUserId": "PIV100036614",
+                "ItemName": "fgfgfj",
+                "ItemDescription": "jfdjfdj",
+                "GoalAmount": 100,
+                "Duration": "0 weeks",
+                "MonthlyDeduction": 10,
+                "ProductId": null,
+                "AmountAttained": 98,
+                "Status": "Active",
+                "DateCreated": "2017-12-07T10:02:34.403",
+                "GoalType": "2",
+                "Day": "Wednesday",
+                "Frequency": "Weekly",
+                "CardId": 1,
+                "GoalImage": null,
+                "NoOfDeductionRemaining": 0,
+                "IsTopGoal": false
+            },
+            {
+                "ExcessFund": 0,
+                "GoalId": "Goal101427",
+                "AppUserId": "PIV100036614",
+                "ItemName": "my travel goal",
+                "ItemDescription": "travel goal",
+                "GoalAmount": 1000,
+                "Duration": "8 months",
+                "MonthlyDeduction": 100,
+                "ProductId": null,
+                "AmountAttained": 200,
+                "Status": "Suspended",
+                "DateCreated": "2017-12-08T09:00:51.657",
+                "GoalType": "2",
+                "Day": "8",
+                "Frequency": "Monthly",
+                "CardId": 1,
+                "GoalImage": "http://res.cloudinary.com/arm/image/upload/v1512720051/l8hz35wnkp9vu3ief9ba.jpg",
+                "NoOfDeductionRemaining": 8,
+                "IsTopGoal": false
+            },
+            {
+                "ExcessFund": 0,
+                "GoalId": "Goal101439",
+                "AppUserId": "PIV100036614",
+                "ItemName": "Hi new goal",
+                "ItemDescription": "A new new new New goal",
+                "GoalAmount": 50000,
+                "Duration": "497 months",
+                "MonthlyDeduction": 100,
+                "ProductId": null,
+                "AmountAttained": 300,
+                "Status": "Active",
+                "DateCreated": "2017-12-14T12:58:21.557",
+                "GoalType": "2",
+                "Day": "7",
+                "Frequency": "Monthly",
+                "CardId": 9,
+                "GoalImage": null,
+                "NoOfDeductionRemaining": 497,
+                "IsTopGoal": false
+            }
+        ],
+        "chat_data ": {
+            "Credit": "[Date.UTC(2017,11,30),2,304],",
+            "Debit": ""
+        },
+        "client_balance": {
+            "AppUserId": "PIV100036614",
+            "AvailableBalance": 1593.81,
+            "BookBalnce": 2303.81,
+            "AccruedIntrest": 0
+        }
+    }
 }

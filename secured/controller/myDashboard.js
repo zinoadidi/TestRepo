@@ -11,7 +11,8 @@ var navApp = new Vue({
       	commonData:commonData
   }
 });
- 
+
+
 /*request stat data*/
 var testDash = String(sessionStorage.dashboardData)
 if (testDash != 'undefined' && testDash != 'null' && testDash != ''){
@@ -72,4 +73,17 @@ $( document ).ready(function() {
     startLoad()
     renda.component('userExtras','faq','dashboardDisplayDiv');
   });
+  stats();
 });
+
+
+function stats(){
+    var date = new Date();
+    var today = date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear();
+    if(parseInt(date.getMonth())<=1){
+        var startDate = date.getDate()+'-'+(parseInt(date.getMonth())-1)+'-'+date.getFullYear();
+    }else{
+
+    }
+    
+}

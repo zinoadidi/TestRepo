@@ -128,6 +128,12 @@ function activateOtp(data){
         "Token":Token,
         "UserId":UserId
     };
+    if(Token){
+
+    }else{
+        toastr.error('Please Enter The Token Sent to Your Email to Continue')
+        return false;
+    }
     if (validateObj(data)){
         renda.loader('start')
         renda.post('/activate',JSON.stringify(data),'activateOtp');

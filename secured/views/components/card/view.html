@@ -88,7 +88,7 @@
 			  	</div>
 			  	<div class="w3-padding" style="margin-top: 10px;margin-bottom: 5px">
 			  		<div class="input-text-large center w3-center">XXXX XXXX XXXX {{ item.CardNo }}</div>
-			  		<div class="input-text-fixed" style="margin-bottom: 3px; margin-top: 20px"><span class="w3-text-green input-text-medium">{{ item.Status }}</span><button class='w3-button w3-text-red w3-right w3-ripple w3-hover-opacity w3-hover-shadow w3-hover-gray w3-padding input-text-medium' :id="item.Id" onclick="deleteCard(this.id)">Delete Card</button></div>
+			  		<div class="input-text-fixed" style="margin-bottom: 3px; margin-top: 20px"><span class="w3-text-green input-text-medium">{{ item.Status }}</span><button class='w3-button w3-text-red w3-right w3-ripple w3-hover-opacity w3-hover-shadow w3-hover-gray w3-padding input-text-medium' :id="item.Id" onclick="deleteCard(null,this.id)">Delete Card</button></div>
 			  	</div>
         </div>
       <!--   <div class="demo-container">
@@ -105,9 +105,10 @@
         </div> -->
 		  </div>
 		</div>
-    <button onclick="showAddCardForm('addNewCardForm')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
-      <small><span class="fa fa-plus" style="font-size: 5em !important; padding-top: 4px"></span></small>
-    </button>
+    <a onclick="showAddCardForm('addNewCardForm')" href="javascript:void(0)" style="background:transparent">
+      <span class="fa" style="font-size: 3.5em !important; padding-top: 4px;"><img src="img/LineIcons/Secondary(Icons)/add_credit_card.png" class="w3-button w3-circle w3-text-white floating-btn" style="width:30vw!important"/></span>
+      
+    </a>
   </div>
   <div id="verifyCardDiv" style="display: none" class='verifyCardDiv hideCardPageDivs'>
     <embed src="" id="verifyCardIframe" class="verifyCardIframe w3-container" height="auto" width="100%"></embed>

@@ -11,8 +11,9 @@
                     <div id="dashLoader" class="w3-spin"></div>
                 </div>
             </div>
-            <div class="w3-card w3-white w3-text-green input-text-medium w3-padding" style="margin-top: 15%" id="appTitleDisplayDiv">
-                <!-- {{vm.title}} -->Dashboard
+            <div class="w3-card w3-white w3-text-green input-text-medium w3-padding" style="margin-top: 15%;text-transform:capitalize" id="appTitleDisplayDiv">
+                <span v-if='title'>{{title}}</span> 
+                <span v-if='!title'>PAYDAY INVESTOR</span> 
             </div>
             <div id="dashboardDisplayDiv" style="margin-top: 5px"></div>
             </div>

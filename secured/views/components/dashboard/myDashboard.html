@@ -5,7 +5,7 @@
     <div id="walletDiv" class="">
       <div class="input-text-medium w3-white w3-padding w3-card" style="margin-bottom:3px">Total Net Worth</div>
       <div class="input-text-large w3-card">
-        <div class="w3-container w3-white">
+        <div class="w3-padding w3-white">
           <div class="display-inline center">
             <span class="display-block w3-text-green"  v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.client_balance.BookBalnce}}</span>
             <span class="display-block input-text-medium"><small><small>Ledger Balance</small></small></span>
@@ -16,11 +16,11 @@
           </div>
         </div>
         <div class="w3-container w3-white w3-card" style="margin-top:0px" >
-          <div class="display-inline w3-left center">
+          <div class="display-inline w3-left center w3-padding">
             <span class="display-block w3-text-green" v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.client_balance.AccruedIntrest}}</span>
             <span class="display-block input-text-medium"><small><small>Accrued Intrest</small></small></span>
           </div>
-          <div class="display-inline w3-right center">
+          <div class="display-inline w3-right center w3-padding">
             <span class="display-block w3-text-green" v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.fetchWallet.Amount}}</span>
             <span class="display-block input-text-medium"><small><small>Wallet Balance</small></small></span>
           </div>
@@ -53,6 +53,7 @@
             <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
               <span class="display-block input-text-goal">Pending Goals</span>
               <span class="display-block" v-if="commonData.Dashboard">{{commonData.Dashboard.goals_pending}}</span>
+              <span class="display-block" v-if="!commonData.Dashboard.goals_pending">0</span>                            
             </div>
             <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
               <span class="display-block input-text-goal">Suspended Goals</span>
@@ -64,6 +65,15 @@
               <span class="display-block" v-if="!commonData.Dashboard.goals_done">0</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="transactiontDiv" class="">
+      <div class="input-text-medium w3-bottombar w3-white center w3-padding w3-card" style="margin-bottom:7px; margin-top:30px;"><span class="w3-padding ">Transaction History</span></div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          
         </div>
       </div>
     </div>
@@ -206,3 +216,5 @@
 </div>
 
 <script src="secured/controller/myDashboard.js"></script>
+
+

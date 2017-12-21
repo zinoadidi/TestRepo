@@ -237,10 +237,48 @@ function goalOptions(id,reqType){
 		if(id == "Edit_Goal"){
 			singleGoalApp.sgdata.userCards = createGoalApp.cgvm.userCards
 			$('#extendedGoalUI').show()
+			$('.extendGoalDivs').hide()
 			$('#editGoal').show()
 			//bhvgh
 			return false;
 		}
+		if(id == "Top_Up"){
+			singleGoalApp.sgdata.userCards = createGoalApp.cgvm.userCards
+			$('#extendedGoalUI').show()
+			$('.extendGoalDivs').hide()			
+			$('#topUpGoal').show()
+			//bhvgh
+			return false;
+		}
+		if(id == "More_Options"){
+			$('#moreOptionsDiv').toggle();
+			return false;
+		}
+		if(id == "Redeem_Goal"){
+			$('#extendedGoalUI').show()
+			$('.extendGoalDivs').hide()
+			$('#redeemGoal').show()
+			return false;
+		}
+		if(id == "Part_Withdrawal"){
+			$('#extendedGoalUI').show()
+			$('.extendGoalDivs').hide()
+			$('#partWithdrawalGoal').show()
+			return false;
+		}
+		if(id == "Move_Excess"){
+			$('#extendedGoalUI').show()
+			$('.extendGoalDivs').hide()
+			$('#moveExcess').show()
+			return false;
+		}
+		if(id == "Transfer_To_Wallet"){
+			$('#extendedGoalUI').show()
+			$('.extendGoalDivs').hide()
+			$('#transferToWallet').show()
+			return false;
+		}
+		
 		var confirmAction = confirm('You are about to '+id+'. Continue?')
 		if(confirmAction){
 			startLoad()
@@ -367,4 +405,257 @@ function editGoal(data){
 function freqChange(){
 	var currentVal = $('#frequency').val()
 
+}
+
+function Top_Up_Goal(data,option){
+	if(data){
+		renda.loader('stop');
+		try{
+			JSON.parse(data);
+		}catch(err){
+			stopLoad()
+			toastr.error('An error occured while performing request.')
+			console.dir(err);
+			return false;
+		}
+		stopLoad();
+		data = JSON.parse(data);
+		if (data.status == 200){
+			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
+			toastr.success(data['message'])
+			clear();
+			updateDataFromApi(null)
+		}else{
+			toastr.error(data['message']);    
+		}           
+		return false;
+	}else{
+		if(option == 'card'){
+			url = '/goal/topup';
+			var element = $('#topUpCards').find('option:selected'); 
+			var cardToken = element.attr('fwCode');
+			
+			var data = {
+				"UserId":sessionStorage.UserId,
+				"GoalId":singleGoalApp.sgdata.GoalId,
+				"GoalAmount":$('#GoalAmount').val(),
+				"CardToken" : cardToken
+			}  
+			if(data.GoalAmount){
+			}else{
+				toastr.warning('Please Enter Amount')
+				return false;
+			}
+			if(data.CardToken){
+				
+			}else{
+				toastr.warning('Select a card to top up with. If you do not have a card on your account yet, please add one to continue')			
+				return false;
+			}
+			if (validateObj(data)){
+				startLoad()
+				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
+			}else{
+				console.log('error occured');
+				console.dir(data)
+				stopLoad()
+				return false;
+			} 
+			return false;       
+		}
+		if(option == 'wallet'){
+			url = '/wallet/transferToWallet';
+			var element = $('#topUpCards').find('option:selected'); 
+			var cardToken = element.attr('fwCode');
+			
+			var data = {
+				"UserId":sessionStorage.UserId,
+				"GoalId":singleGoalApp.sgdata.GoalId,
+				"Amount":$('#walletAmount').val()
+			}  
+			if(data.Amount){
+			}else{
+				toastr.warning('Please Enter Amount')
+				return false;
+			}
+			
+			if (validateObj(data)){
+				startLoad()
+				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
+			}else{
+				console.log('error occured');
+				console.dir(data)
+				stopLoad()
+				return false;
+			} 
+			return false;       
+		}
+	}
+}
+
+function redeemGoal(data){
+	if(data){
+		renda.loader('stop');
+		try{
+			JSON.parse(data);
+		}catch(err){
+			stopLoad()
+			toastr.error('An error occured while performing request.')
+			console.dir(err);
+			return false;
+		}
+		stopLoad();
+		data = JSON.parse(data);
+		if (data.status == 200){
+			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
+			toastr.success(data['message'])
+			clear();
+			updateDataFromApi(null)
+		}else{
+			toastr.error(data['message']);    
+		}           
+		return false;
+	}else{
+		url = '/goal/redeem';
+		var data = {
+			"UserId":sessionStorage.UserId,
+			"GoalId":singleGoalApp.sgdata.GoalId,
+			"Amount":$('#RedeemAmount').val(),
+			"Reason":$('#RedeemReason').val(),
+			"OTP":payday.user.Token,
+			"RedemptionType":'Redemption',
+			"GoalType":singleGoalApp.sgdata.GoalType
+		}  
+		if(data.Amount){
+		}else{
+			toastr.warning('Please Enter Amount')
+			return false;
+		}
+		if(data.Reason){
+			
+		}else{
+			toastr.warning('Please Provide Reason For Redemption')			
+			return false;
+		}
+		if (validateObj(data)){
+			startLoad()
+			renda.post(url,JSON.stringify(data),'redeemGoal');     
+		}else{
+			console.log('error occured');
+			console.dir(data)
+			stopLoad()
+			return false;
+		} 
+		return false;       
+		
+	}
+}
+
+function partWithdrawal(data){
+	if(data){
+		renda.loader('stop');
+		try{
+			JSON.parse(data);
+		}catch(err){
+			stopLoad()
+			toastr.error('An error occured while performing request.')
+			console.dir(err);
+			return false;
+		}
+		stopLoad();
+		data = JSON.parse(data);
+		if (data.status == 200){
+			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
+			toastr.success(data['message'])
+			clear();
+			updateDataFromApi(null)
+		}else{
+			toastr.error(data['message']);    
+		}           
+		return false;
+	}else{
+		url = '/goal/redeem';
+		var data = {
+			
+			"GoalId":singleGoalApp.sgdata.GoalId,
+			"Amount":$('#partAmount').val()
+			
+		}  
+		if(data.Amount){
+		}else{
+			toastr.warning('Please Enter Amount')
+			return false;
+		}
+		
+		if (validateObj(data)){
+			startLoad()
+			renda.post(url,JSON.stringify(data),'partWithdrawal');     
+		}else{
+			console.log('error occured');
+			console.dir(data)
+			stopLoad()
+			return false;
+		} 
+		return false;       
+		
+	}
+}
+
+function moveExcess(data){
+	if(data){
+		renda.loader('stop');
+		try{
+			JSON.parse(data);
+		}catch(err){
+			stopLoad()
+			toastr.error('An error occured while performing request.')
+			console.dir(err);
+			return false;
+		}
+		stopLoad();
+		data = JSON.parse(data);
+		if (data.status == 200){
+			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
+			toastr.success(data['message'])
+			clear();
+			updateDataFromApi(null)
+		}else{
+			toastr.error(data['message']);    
+		}           
+		return false;
+	}else{
+		url = '/goal/moveExess';
+		var data = {
+			
+			"GoalId":singleGoalApp.sgdata.GoalId,
+			"Excess":$('#excessAmount').val()
+			
+		}  
+		if(data.Amount){
+		}else{
+			toastr.warning('Please Enter Amount')
+			return false;
+		}
+		
+		if (validateObj(data)){
+			startLoad()
+			renda.post(url,JSON.stringify(data),'moveExcess');     
+		}else{
+			console.log('error occured');
+			console.dir(data)
+			stopLoad()
+			return false;
+		} 
+		return false;       
+		
+	}
+}
+
+function topUpOptionsTab(tab){
+	$('.topUpOptions').hide()
+	$('#'+tab).show()
+}
+
+function transferToWallet(){
+	
 }

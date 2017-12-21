@@ -1,7 +1,8 @@
+
 <div >
-	<div class="w3-container center w3-margin w3-padding">
-		<button class="w3-button w3-bottombar" style="display: inline-block; color:#354357" onclick="goalTab('viewGoals')">View Goals</button>
-		<button class="w3-button w3-bottombar" style="display: inline-block; color:#354357"  onclick="goalTab('createGoal')">Create Goal</button>
+	<div class="w3-container center w3-margin w3-padding"> 
+		<button class="w3-button w3-bottombar" style="display: inline-block; color:#354357" onclick="goalTab('viewGoals')">My Goals</button>
+		<button class="w3-button w3-bottombar" style="display: inline-block; color:#354357"  onclick="goalTab('createGoal')">New Goal</button>
 	</div> 
 	<div class="" id="myDashboard">
 		<div id='viewGoals' class="goalTabs" style="display: none">	
@@ -25,7 +26,7 @@
 				</div>
 			  </div>
 			  <div class="single-goal" style="" id="createGoalDiv" onclick="goalTab('createGoal')">
-			  	<div style=" height:150px; max-height: 150px; overflow: hidden;" class=" w3-card-4 w3-white w3-round w3-padding w3-text-white" >
+			  	<div style=" overflow: auto;" class=" w3-card-4 w3-white w3-round w3-padding w3-text-white" >
 				  	<center>
 				  		<div class="display-block " style=""></div>
 				  		<div class=" " style="margin-top: 10px;">
@@ -89,21 +90,78 @@
 					
 			</div>
 			<div style="" class="input-text-large">
-					<div class="w3-center w3-container w3-padding" style="font-size: 2.65vw;"> 
-						<button class="w3-button w3-padding w3-text-white" style="background:#29313C;" onclick="goalOptions(this.id)" id="Edit_Goal">Edit Goal</button>
-						<button v-if="sgdata.Status =='Active'" class="w3-button w3-padding w3-text-white" onclick="goalOptions(this.id)" style="background:#29313C;" id="Suspend_Goal">Suspend Goal</button>
-						<button v-if="sgdata.Status =='Suspended'" class="w3-button w3-padding w3-text-white" onclick="goalOptions(this.id)" style="background:#29313C;" id="Resume_Goal">Resume Goal</button>
-						<button class="w3-button w3-padding w3-text-white" style="background:#29313C; " onclick="goalOptions(this.id)" id="Delete_Goal">Delete Goal</button>
-						<button class="w3-button w3-padding w3-text-white" style="background:#29313C; " onclick="goalOptions(this.id)"id="Top_Up">Top Up</button>
-					</div>
-					
+				<div class=" w3-container" style="font-size: 2.65vw;"> 
+					<button class="w3-button w3-padding w3-text-black" style="background:transparent!important" onclick="goalOptions(this.id)" id="Edit_Goal">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/edit_goal.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;"/>
+							<span>Edit Goal</span>
+						</span>
+					</button>
+					<button v-if="sgdata.Status =='Active'" class="w3-button w3-padding w3-text-black" onclick="goalOptions(this.id)" style="background:transparent;" id="Suspend_Goal">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/suspend_goal.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;filter: brightness(0);"/>
+							<span>Suspend</span>
+						</span>
+					</button>
+					<button v-if="sgdata.Status =='Suspended'" class="w3-button w3-padding w3-text-black" onclick="goalOptions(this.id)" style="background:transparent;" id="Resume_Goal">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/resume_goal.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;"/>
+							<span>Resume</span>
+						</span>
+					</button>
+					<button class="w3-button w3-padding w3-text-black" style="background:transparent; " onclick="goalOptions(this.id)" id="Delete_Goal">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/delete_goal.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;"/>
+							<span>Delete</span>
+						</span>
+					</button>
+					<button class="w3-button w3-padding w3-text-black" style="background:transparent!important" onclick="goalOptions(this.id)"id="Top_Up">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/top_up.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;filter: brightness(0);"/>
+							<span>Top Up</span>
+						</span>
+					</button>
+					<button class="w3-button w3-padding w3-text-black" style="background:transparent!important" onclick="goalOptions(this.id)"id="More_Options">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/goal_option_icon.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;filter: brightness(0);"/>
+							<span>More</span>
+						</span>
+					</button>
 				</div>
+				<div class=" w3-container" style="font-size: 2.65vw; display:none" id="moreOptionsDiv"> 
+					<button class="w3-button w3-padding w3-text-black" onclick="goalOptions(this.id)" style="background:transparent;" id="Move_Excess">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/move_excess.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;filter:brightness(0)"/>
+							<span>Move<br/>Excess</span>
+						</span>
+					</button>
+					<button class="w3-button w3-padding w3-text-black" onclick="goalOptions(this.id)" style="background:transparent;" id="Part_Withdrawal">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/part_withdrawal.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;filter:brightness(0)"/>
+							<span>Part<br/>Withdrawal</span>
+						</span>
+					</button>
+					<button class="w3-button w3-padding w3-text-black" onclick="goalOptions(this.id)" style="background:transparent;" id="Transfer_To_Wallet">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/transfer_to_wallet.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;filter:brightness(0)"/>
+							<span>Transfer<br/>to wallet</span>
+							
+						</span>
+					</button>
+					<button class="w3-button w3-padding w3-text-black" onclick="goalOptions(this.id)" style="background:transparent;" id="Redeem_Goal">
+						<span style="text-align: -webkit-center;">
+							<img src="img/LineIcons/Secondary(Icons)/redeem_goal.png" class="navIcon" style="display:block!important;margin-bottom: 0.5px;filter:brightness(0)"/>
+							<span>Redeem<br/>Goal</span>
+						</span>
+					</button>
+				</div>	
+			</div>
 		  </div>
 		  
 		</div>
 		<div id="extendedGoalUI" class="w3-modal">
 			<div class="w3-modal-content" style="margin-top:50px">
-				<div id="editGoal">
+				<div id="editGoal" style="display:none" class="extendGoalDivs">
 					
 					<header class="w3-container w3-padding w3-text-white input-text-medium" style="background:#29313C"> 
 						<span onclick="document.getElementById('extendedGoalUI').style.display='none'" style="background:transparent" class="w3-button w3-display-topright input-text-large">&times;</span>
@@ -242,9 +300,193 @@
 					</div>
 				
 				</div>
+				<div id="topUpGoal" style="display:none" class="extendGoalDivs">
+					<div class="w3-container center w3-margin w3-padding" style="background:#29313C"> 
+						<button class="w3-button" style="display: inline-block; color:white" onclick="topUpOptionsTab('topUpFromCard')">From Card</button>
+						<button class="w3-button" style="display: inline-block; color:white"  onclick="topUpOptionsTab('topUpFromWallet')">From Wallet</button>
+					</div> 
+					<div id="topUpOptionsDiv">
+						<div id="topUpFromCard" class="topUpOptions">
+							<header class="w3-container w3-padding w3-text-white input-text-medium" style="background:white;color:black!important;padding-top: 20px!important;"> 
+								<span onclick="document.getElementById('extendedGoalUI').style.display='none'" style="background:transparent" class="w3-button w3-display-topright input-text-large">&times; </span>
+								<span class="w3-margin w3-padding">Top Up {{sgdata.ItemName}} With Card</span>
+							</header>
+		
+							<div id='' class="" >
+								<section id="topUpGoalDivApp" class="w3-white" style="font-weight: 0px;">
+									<div class=" col-lg-12 w3-margin-left w3-padding">
+										<div class="">
+										<form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+											<div class="w3-margin">
+												<span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+												<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Amount to Top Up Goal"  id="GoalAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+											</div>
+											<div class="w3-margin">
+												<hr>
+												<label class="input-text-goal w3-left">Select A Card:</label>
+												<div class="card-holder">
+													<span v-if="sgdata.userCards">
+													<select v-if="sgdata.userCards[0].CardNo" class="form-control w3-input" onchange=""  id="topUpCards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+														<option></option>
+														<option v-for="n in sgdata.userCards" :fwCode='n.FWCode' :id="n.Id">{{ n.CardNo }}</option>
+													</select>
+													</span>	
+													<span v-if="!sgdata.userCards" class="">
+														<button v-if="!sgdata.userCards" class="w3-button w3=margin w3-padding" onclick="renda.component('card','view','dashboardDisplayDiv');" style="background-color: #464646!important;margin-left:10px;color:white">Add Card</button>
+													</span><br>
+												</div>
+											</div>
+											<div class="" style="margin-top:8px!important;text-align: center"> 
+												<button type="button" class="w3-button"  onclick="document.getElementById('extendedGoalUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+												<button type="button" class="w3-button pdy-green" onclick="Top_Up_Goal(null,'card')" style=" display: inline-block!important;width:48%">Top Up</button>
+											</div>
+										</form>
+							
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+						<div id="topUpFromWallet" class="topUpOptions" style="display:none">
+							<header class="w3-container w3-padding w3-text-white input-text-medium" style="background:white;color:black!important;padding-top: 20px!important;"> 
+								<span onclick="document.getElementById('extendedGoalUI').style.display='none'" style="background:transparent" class="w3-button w3-display-topright input-text-large">&times; </span>
+								<span class="w3-margin w3-padding">Top Up {{sgdata.ItemName}} From Wallet</span>
+							</header>
+		
+							<div id='' class="" >
+								<section id="topUpGoalDivApp" class="w3-white" style="font-weight: 0px;">
+									<div class=" col-lg-12 w3-margin-left w3-padding">
+										<div class="">
+										<form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+											<div class="w3-margin">
+												<span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+												<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Amount to Top Up Goal"  id="walletAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+											</div>
+											
+											<div class="" style="margin-top:8px!important;text-align: center"> 
+												<button type="button" class="w3-button"  onclick="document.getElementById('extendedGoalUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+												<button type="button" class="w3-button pdy-green" onclick="Top_Up_Goal(null,'wallet')" style=" display: inline-block!important;width:48%">Top Up</button>
+											</div>
+										</form>
+							
+										</div>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+					
+				
+				</div>
+				<div id="redeemGoal" style="display:none" class="extendGoalDivs">
+					<div class=" center w3-padding" style="background:#29313C"> 
+						<span class="w3-margin w3-padding w3-text-white" style="padding-top:20px!important">Redeem Goal</span>
+					</div> 
+					<div id="redeemGoalDiv">
+						<section id="topUpGoalDivApp" class="w3-white" style="font-weight: 0px;">
+							<div class=" col-lg-12 w3-margin-left w3-padding">
+								<div class="">
+									<form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+										<div class="w3-margin">
+											<span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+											<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Amount to Redeem"  id="RedeemAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+										</div>
+										<div class="w3-margin">
+											<span class="fa fa-question-circle w3-xxlarge" style="position:absolute;margin-left: 3px;"></span>                            
+											<textarea class="w3-input w3-text-white w3-padding customized-input font-medium" placeholder="Reason For Redemption"  id="RedeemReason" required="" style="padding-left:50px!important; width:86%;color:black!important"></textarea>      
+										</div>
+										<div class="" style="margin-top:8px!important;text-align: center"> 
+											<button type="button" class="w3-button"  onclick="document.getElementById('extendedGoalUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+											<button type="button" class="w3-button pdy-green" onclick="redeemGoal(null)" style=" display: inline-block!important;width:48%">Redeem Goal</button>
+										</div>
+									</form>
+						
+								</div>
+							</div>
+						</section>
+					</div>
+					
+				
+				</div>
+				<div id="partWithdrawalGoal" style="display:none" class="extendGoalDivs">
+					<div class=" center w3-padding" style="background:#29313C"> 
+						<span class="w3-margin w3-padding w3-text-white" style="padding-top:20px!important">Part Withdrawal</span>
+					</div> 
+					<div id="partWithdrawalDiv">
+						<section id="partWithdrawalDivApp" class="w3-white" style="font-weight: 0px;">
+							<div class=" col-lg-12 w3-margin-left w3-padding">
+								<div class="">
+									<form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+										<div class="w3-margin">
+											<span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+											<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Amount to Withdraw"  id="partAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+										</div>
+										
+										<div class="" style="margin-top:8px!important;text-align: center"> 
+											<button type="button" class="w3-button"  onclick="document.getElementById('extendedGoalUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+											<button type="button" class="w3-button pdy-green" onclick="partWithdrawal(null)" style=" display: inline-block!important;width:48%">Withdraw</button>
+										</div>
+									</form>
+						
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+				<div id="moveExcess" style="display:none" class="extendGoalDivs">
+					<div class=" center w3-padding" style="background:#29313C"> 
+						<span class="w3-margin w3-padding w3-text-white" style="padding-top:20px!important">Move Excess Fund to Wallet</span>
+					</div> 
+					<div id="moveExcessDiv">
+						<section id="moveExcessDivApp" class="w3-white" style="font-weight: 0px;">
+							<div class=" col-lg-12 w3-margin-left w3-padding">
+								<div class="">
+									<form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+										<div class="w3-margin">
+											<span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+											<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Excess Amount to Move"  id="excessAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+										</div>
+										
+										<div class="" style="margin-top:8px!important;text-align: center"> 
+											<button type="button" class="w3-button"  onclick="document.getElementById('extendedGoalUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+											<button type="button" class="w3-button pdy-green" onclick="moveExcess(null)" style=" display: inline-block!important;width:48%">Move Excess</button>
+										</div>
+									</form>
+						
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+				<div id="transferToWallet" style="display:none" class="extendGoalDivs">
+					<div class=" center w3-padding" style="background:#29313C"> 
+						<span class="w3-margin w3-padding w3-text-white" style="padding-top:20px!important">Transfer to Wallet</span>
+					</div> 
+					<div id="transferToWalletDiv">
+						<section id="topUpGoalDivApp" class="w3-white" style="font-weight: 0px;">
+							<div class=" col-lg-12 w3-margin-left w3-padding">
+								<div class="">
+								<form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+									<div class="w3-margin">
+										<span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+										<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Amount to Transfer"  id="walletTransferAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+									</div>
+									
+									<div class="" style="margin-top:8px!important;text-align: center"> 
+										<button type="button" class="w3-button"  onclick="document.getElementById('extendedGoalUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+										<button type="button" class="w3-button pdy-green" onclick="transferToWallet(null)" style=" display: inline-block!important;width:48%">Transfer</button>
+									</div>
+								</form>
+					
+								</div>
+							</div>
+						</section>
+					</div>
+
+				
+				</div>
 			</div>
-			</div>
-	</div>
+		</div>
 	<div id='createGoal' class="goalTabs" >
 	    <section id="createGoalDivApp" class="w3-white" style="font-weight: 0px;">
 	    <div class=" col-lg-12 w3-margin-left w3-padding">
@@ -356,7 +598,7 @@
 								<option v-for="n in cgvm.userCards" :fwCode='n.FWCode' :id="n.Id">{{ n.CardNo }}</option>
 							</select>
 							<button v-if="!cgvm.userCards[0].CardNo" class="w3-button w3-green w3=margin w3-padding" onclick="renda.component('card','view','dashboardDisplayDiv');">Add Card</button>
-							<br></br>
+							<br>
 						</div>
 					</div>
 					<label class="input-text-goal w3-left">Select Goal Image:</label>
@@ -379,8 +621,8 @@
 	    </section>
 	</div>
 	
-	<button onclick="goalTab('createGoal')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#354357">
-		<small><span class="fa fa-plus" style="    font-size: 5em !important; padding-top: 4px"></span></small>
+	<button onclick="goalTab('createGoal')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#d8e2f1;padding-left: 10px;padding-right: 10px;padding-bottom: 5px!important; padding-top: 5px!important;">
+		<small><span class="" style="    font-size: 3em!important; padding-top: 4px"><img src="img/LineIcons/Secondary(Icons)/create_goal.png" class="navIcon"/></span></small>
 	</button>
 </div>
 

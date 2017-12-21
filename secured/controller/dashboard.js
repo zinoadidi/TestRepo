@@ -11,7 +11,12 @@ $(document).ready(function(){
     });  
     authenticateUser(); 
     loadDefaults();
-    
+    dashboardTitle = new Vue({
+        el: '#appTitleDisplayDiv',
+        data:{
+            title:''
+        }
+    })
 });
 function loadDefaults(){
     renda.component('dashboard','navigation','dashboardNavDiv');    
@@ -37,6 +42,7 @@ function w3_open() {
   
 }
 function w3_close() { 
+    
   navMan.status = 'close';
   $('#mySidebar').hide("slide", { direction: "left" }, 1);
   document.getElementById("mySidebar").style.zIndex = "11";
@@ -47,11 +53,21 @@ function w3_close() {
   document.getElementById("closeNav").style.display = 'none';
   document.getElementById("openNav").style.display = "inline-block";
   document.getElementById("mySidebar").style.clip = 'rect(0px 100% 736px 0.0px)';
-
+  var cp = renda.Config.currentPage;
+  if(cp == 'userExtras'){
+    dashboardTitle.title = renda.Config.currentComponent;
+  }else{
+    dashboardTitle.title = renda.Config.currentPage;    
+  }
 }
 
 function monitorClicks(el){
   var cp = renda.Config.currentPage;
+  if(cp == 'userExtras'){
+    dashboardTitle.title = renda.Config.currentComponent;
+  }else{
+    dashboardTitle.title = renda.Config.currentPage;    
+  }
   if(cp =='login' || cp == 'register' || cp == 'setup_profile'
     ){
     return false;

@@ -19,7 +19,7 @@ $(document).ready(function(){
         startLoad()
         renda.get('/cards/'+sessionStorage.UserId,'stats','cards');
     }
-
+    showAddCardForm('addNewCardForm')
 });
 
 function createCard(data){
@@ -44,6 +44,7 @@ function createCard(data){
                 $('#verifyCardIframe').attr('src',data['data']['data']['authurl']);
                 $('#verifyCardDiv').show()*/
                 cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_blank', 'location=yes');
+               /*  cardVerificationVar.addEventListener('loadstop', function() { alert(event.url); }); */
                 //navigator.app.loadUrl(encodeURI(data['data']['data']['authurl']),{openExternal:true});
                 return false;
             }else{
@@ -97,6 +98,40 @@ function createCard(data){
 
 }
 
+function deleteCard(data,id){
+    var url ='';    
+    if(data){
+        try{
+            JSON.parse(data);
+        }catch(err){
+            stopLoad();
+            toastr.error('An error occured while verfying user information.')
+            console.dir(err);
+            return false;
+        }
+        stopLoad();
+        console.dir(data)
+        data = JSON.parse(data);
+        if (data.status == 200){         
+            toastr.success(data['message']);
+        }else{
+            toastr.error(data['message']);
+            alert('An error occured while removing card. Please try again later.')    
+        }           
+        return false;
+    }else{
+        if(id){
+            startLoad()
+            url = '/card/delete/'+id;   
+            renda.get(url,'deleteCard');
+            
+        }else{
+            toastr.error('an error occured while identifying card')
+        }
+        return false;
+    }
+
+}
 
 function showAddCardForm(id) {
     var x = document.getElementById(id);
