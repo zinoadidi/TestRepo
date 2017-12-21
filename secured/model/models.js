@@ -1,9 +1,9 @@
 function Dashboard(obj){
     this.yield_rate = obj == null ? '' : obj.yield_rate;
-    this.goals_done = obj == null ? '' : obj.goals_done;
-    this.goals_total = obj == null ? '' : obj.goals_total;
-    this.goals_pending = obj == null ? '' : obj.goals_pending;
-    this.goals_suspended = obj == null ? '' : obj.goals_suspended;
+    this.goals_done = obj == null ? 0 : obj.goals_done;
+    this.goals_total = obj == null ? 0 : obj.goals_total;
+    this.goals_pending = obj == null ? 0 : obj.goals_pending;
+    this.goals_suspended = obj == null ? 0 : obj.goals_suspended;
     this.total_withdrawals = obj == null ? '' : obj.total_withdrawals;
     this.net_investment = obj == null ? {
         "AppUserId": "PIV100012",
