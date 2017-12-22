@@ -91,6 +91,28 @@ $( document ).ready(function() {
   }else{
     dashboardStats();
   }
+  var ctx =  document.getElementById("myPieChart").getContext("2d");
+  var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Red',
+            'Yellow',
+            'Blue'
+        ],
+        datasets: [{
+            data: [10, 20, 30],
+            label: 'Dataset 1',            
+            backgroundColor: [
+                '#223344',
+                '#aabbcc',
+                '#332244'
+            ]
+        }]
+    },
+    
+    options: []
+  });
 });
 
 
