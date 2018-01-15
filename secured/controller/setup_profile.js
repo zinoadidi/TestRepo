@@ -52,13 +52,14 @@ function updateStage(data){
             JSON.parse(data);
         }catch(err){
         	stopLoad();
-            toastr.error('An error occured while verfying user information.')
+            toastr.error('An error occured while performing request.')
             console.dir(err);
             return false;
         }
     	renda.loader('stop');
-	    data = JSON.parse(data);
-    	if (data.status == 200){
+		data = JSON.parse(data);     
+    	if (data.UserId){
+			data = modResult(data);
     		sessionStorage.UserInfo = JSON.stringify(data)                 
 	        if(step == 1){
 	            toastr.success('Profile Update Was Successful')
@@ -70,7 +71,7 @@ function updateStage(data){
 	            console.log('Error With Step Selection')
 	        }
 		}else{
-            alert(data['message']);    
+            alert(data);    
 		}           
 		return false;
     }else{
@@ -79,7 +80,7 @@ function updateStage(data){
 	            toastr.error('BVN and Bank Account Number Must be 11 and 10 Digits Respectively.');
 	            return false;
 	        }
-	        url = '/register/stepTwo';   
+	        url = 'Account/RegisterSTG2';   
 	        data = {
                 UserId: sessionStorage.UserId,
                 Gender: temporaryApp.vm.Gender,
@@ -93,14 +94,15 @@ function updateStage(data){
                 BankAccountNo:temporaryApp.vm.BankAccountNo
             }
             if (validateObj(data)){
-	            renda.loader('start')
+				renda.loader('start')
+				data = JSON.stringify(data)
 	            renda.post(url,JSON.stringify(data),'updateStage');
 	        }else{
 	        }
 	        return false;
 	    }else if(step == 2){
 	    	startLoad()
-	    	url = "/register/stepThree";
+	    	url = "Account/RegisterSTG3";
 	    	var files = '';
 	    	files = document.getElementById('PassportUpload').files[0]
 	    	var PassportUpload = renda.fileToBase64(files);
@@ -142,7 +144,8 @@ function updateStage(data){
                 	"UtilityUpload":UtilityUpload
 	            } 
 	            if (validateObj(data,true)){
-	            	renda.loader('start')
+					renda.loader('start')
+					data = JSON.stringify(data)
 		            renda.post(url,JSON.stringify(data),'updateStage');     
 		        }else{
 		            return false;

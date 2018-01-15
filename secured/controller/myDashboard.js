@@ -23,16 +23,17 @@ var statsData = new Vue({
 
     }
 })
-
+ 
 
 /*request stat data*/
 var testDash = String(sessionStorage.dashboardData)
 if (testDash != 'undefined' && testDash != 'null' && testDash != ''){
-	stats(sessionStorage.dashboardData,'existing');
+    loadDashboardData(null,'dashData')
+    
+	//stats(sessionStorage.dashboardData,'existing');
 }else{
-	startLoad()
-	renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
-	renda.get('/cards/' + sessionStorage.UserId, 'stats', 'cards');
+    loadDashboardData(null,'cards');
+    loadDashboardData(null,'dashData')
 }
 
 $( document ).ready(function() {
@@ -120,16 +121,18 @@ function dashboardStats(data){
     if(data){
 		renda.loader('stop');
 		try{
-			JSON.parse(data);
+            JSON.parse(data);
+            data = JSON.parse(data);
 		}catch(err){
 			stopLoad()
 			console.dir(err);
-			return false;
+			data = []
 		}
 		stopLoad();
-		data = JSON.parse(data);
-		if (data.status == 200){
+		
+		if (data){
             console.log(data)
+            data.data = modResult(data);
             if(data.data){
                 sessionStorage.monthlyTrans = JSON.stringify(data);
                 var counter = 0;
@@ -145,7 +148,8 @@ function dashboardStats(data){
                 });
                 
             }else{
-
+                statsData.data = [0];
+                statsData.labels=[0];
             }
             var ctx = document.getElementById("myChart").getContext("2d");
             var myChart = 
@@ -173,7 +177,7 @@ function dashboardStats(data){
                 }
             });
         }else{
-			console.log(data['message']);    
+			console.log(data);    
 		}           
 		return false;
 	}else{
@@ -185,13 +189,15 @@ function dashboardStats(data){
             var startDate = date.getFullYear()+'-'+(parseInt(date.getMonth()))+'-'+date.getDate();        
         }
         data= {  
+            "AppUserId": sessionStorage.UserId,
             "UserId": sessionStorage.UserId,
             "FromDate":startDate,             
             "ToDate": today,             
             "TransactionType": "Credit"  
         } 
         startLoad()
-        renda.post('/transaction/history',JSON.stringify(data),'dashboardStats');
+        data = JSON.stringify(data);
+        renda.post('UserTransactions/TransactionHistory',JSON.stringify(data),'dashboardStats');
     }
     return false;
 }

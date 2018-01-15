@@ -29,10 +29,21 @@ function initExistingClientApp(){
 function register(data){
     if (data) { 
         stopLoad()
+        console.dir(data);        
+        try{
+            JSON.parse(data);
+        }catch(err){
+            stopLoad()
+            toastr.error('An error occured while performing request.')
+            alert(data)
+            console.dir(err);
+            return false;
+        } 
         let result = JSON.parse(data);
+        
         //let result = USERDATA;
-        console.dir(result);
-        if (result.status == 200){
+        if (result.UserId){
+            result = modResult(result);
             toastr.success('Registration Successful')
             //decode token
             sessionStorage.UserId = result.data['UserId'];
@@ -42,7 +53,7 @@ function register(data){
             // confirm user state
             renda.page('register_otp')             
         }else{
-            alert(result['message']);    
+            alert(result);    
         }
         return false;
     }else{
@@ -75,6 +86,7 @@ function register(data){
 
         }
         function sendRegReq(){
+            var token = generateToken(5);
             data = {
                 "Surname":temporaryApp.regVm.Surname,
                 "Firstname":temporaryApp.regVm.Firstname,
@@ -84,15 +96,17 @@ function register(data){
                 "Password":temporaryApp.regVm.Password,
                 "SecurityQuestion":temporaryApp.regVm.SecurityQuestion,
                 "SecurityAnswer":temporaryApp.regVm.SecurityAnswer,
-                "ProfilePic":ProfileUpload,
-                "Token":' ',
-                "PRToken":' ',
+                "ProfilePic":'null',
+                "Token":token,
+                "PRToken":token,
                 "terms":true
             } 
             if (validateObj(data)){
                 console.dir(data)
+                data.ProfilePic = null;
+                data = JSON.stringify(data)
                 renda.loader('start')
-                renda.post("/register/stepOne",JSON.stringify(data),'register');     
+                renda.post("Account/RegisterSTG1",JSON.stringify(data),'register');     
             }else{
                 return false;
             }      
@@ -106,41 +120,43 @@ function activateOtp(data){
         try{
             JSON.parse(data);
         }catch(err){
-            toastr.error('An error occured while verfying user information.')
+            toastr.error('An error occured while performing request.')
             console.dir(err);
             return false;
         }        
         let result = JSON.parse(data);
         //let result = USERDATA;
         console.dir(result);
-        if (result.status == 200){
+        if (result.UserId){
+            result = modResult(result);
+            result.message = 'Account Activated successfully, Please log in to continue';
             alert(result.message); 
             renda.page('login')
         } else{
-            alert(result.message)
+            alert(result)
         }
         return false;
-    }
-    let Token = document.getElementById('Otp').value;
-    let UserId = sessionStorage.UserId; 
+    }else{
+        let Token = document.getElementById('Otp').value;
+        let UserId = sessionStorage.UserId; 
+        let UserInfo = JSON.parse(sessionStorage.UserInfo);
     
-    data = {
-        "Token":Token,
-        "UserId":UserId
-    };
-    if(Token){
-
-    }else{
-        toastr.error('Please Enter The Token Sent to Your Email to Continue')
-        return false;
-    }
-    if (validateObj(data)){
+        if(Token){
+            if(Token == UserInfo.data.Token){
+                UserInfo.data.Status = 'active';
+            }else{
+                toastr.error('Account Verification Failed!. Please confirm the code entered matches the one in your mail')
+                return false;
+            }
+        }else{
+            toastr.warning('Please Enter The Token Sent to Your Email to Continue')
+            return false;
+        }
+        data = JSON.stringify(UserInfo.data);
         renda.loader('start')
-        renda.post('/activate',JSON.stringify(data),'activateOtp');
-    }else{
-        return false;
+        renda.post('Account/Update',JSON.stringify(data),'activateOtp');
+        return false;  
     }
-    return false;  
 }
 
 function VerifyExistingClient(data){
@@ -151,12 +167,16 @@ function VerifyExistingClient(data){
         }catch(err){
             toastr.error('An error occured while verfying user information.')
             console.dir(err);
+            alert(data)                                               
             return false;
         }            
         let result = JSON.parse(data);
+        
         //let result = USERDATA;
         console.dir(result);
-        if (result.status == 200){
+        if (result.MembershipNumber){
+            result = modResult(result);
+            result.message = 'Welcome to Payday '+result.data.FullName+'!. Please confirm your details to continue';
             toastr.success(result.message); 
 
             existingApp.existingVm.MembershipNumber = result.data.MembershipNumber;
@@ -175,7 +195,7 @@ function VerifyExistingClient(data){
                 alert('Please Enter A Password and select a security question to continue')
             }
         } else{
-            alert(result.message)
+            alert(result)
         }
         return false;
     }
@@ -188,7 +208,8 @@ function VerifyExistingClient(data){
     };
     if (validateObj(data)){
         renda.loader('start')
-        renda.post('/authenticate/existingClient',JSON.stringify(data),'VerifyExistingClient');
+        data = JSON.stringify(data);
+        renda.post('Account/AuthenticateExisting',JSON.stringify(data),'VerifyExistingClient');
     }else{
         return false;
     }
@@ -201,6 +222,7 @@ function regExistingClient(data){
         try{
             JSON.parse(data);
         }catch(err){
+            alert(data)            
             toastr.error('An error occured while verfying user information.')
             console.dir(err);
             return false;
@@ -208,11 +230,13 @@ function regExistingClient(data){
         let result = JSON.parse(data);
         //let result = USERDATA;
         console.dir(result);
-        if (result.status == 200){
+        if (result.UserId){
+            result = modResult(result);
+            result.message = 'Your account has been created. Please log in to continue';
             alert(result.message); 
             renda.page('login')
         }else{
-            alert(result.message)
+            alert(result)
         }
         return false;
     }
@@ -243,8 +267,8 @@ function regExistingClient(data){
     data.IsARMOne = 'true'    
     if (validateObj(data)){
         renda.loader('start')
-        data.IsARMOne = false;
-        renda.post('/register/existingClient',JSON.stringify(data),'regExistingClient');
+       data = JSON.stringify(data)
+        renda.post('Account/RegisterExisting',JSON.stringify(data),'regExistingClient');
     }else{
         return false;
     }

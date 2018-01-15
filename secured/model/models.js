@@ -6,7 +6,7 @@ function Dashboard(obj){
     this.goals_suspended = obj == null ? 0 : obj.goals_suspended;
     this.total_withdrawals = obj == null ? '' : obj.total_withdrawals;
     this.net_investment = obj == null ? {
-        "AppUserId": "PIV100012",
+        "AppUserId": "",
         "TotalInvestment": 0,
         "AccruedIntrest": 0
     } : obj.net_investment;
@@ -131,3 +131,5 @@ var investment101 = {};
 var activities = {};
 var transactions = {};
 var userProfile = {};
+
+var temporaryDashData = new Dashboard(null);

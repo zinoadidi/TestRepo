@@ -1,9 +1,7 @@
-
+    
    $(document).ready(function(){ 
-
         //load extra files
         checklogin();   
-
         $("#loadDashboardBtn").click(function(){
             loadDashboardStatsDiv();
         }); 
@@ -22,82 +20,104 @@
         $("#logoutBtn").click(function(){
             logout();
         }); 
-        
+        loginClass = new Login();
+        loginClass.generateArmOneToken()
         // check app cache
        
     });
-
     /* Basic Functions */
-    function login(data){
+    function login(data,option){
         if (data) {
-
             try{
-                    JSON.parse(data);
-                }catch(err){
-                    stopLoad()
-                    toastr.error('An error occured while verfying user information.')
-                    console.dir(err);
-                    return false;
-                } 
+                JSON.parse(data);
+            }catch(err){
+                stopLoad()
+                toastr.error('An error occured while performing request.')
+                console.dir(err);
+                return false;
+            } 
             let result = JSON.parse(data);
             //let result = USERDATA;
             console.dir(result);
-            if (result.status == 200){
-                if(result.message == ''){
-                    result.message = 'Login successful.';
-                }else{
-                    result.message = 'Welcome Back '+result.data.Firstname;
-                }
-                toastr.success(result.message); 
-                //decode token
-                sessionStorage.UserId = result.data['UserId'];
-                sessionStorage._id = result.data['UserId'];
-                sessionStorage.UserInfo = JSON.stringify(result)
-                updateUserData()
-                sessionStorage.loggedin = true;
 
-                // confirm user state
-                    if (String(result['data']['ProgressStatus']) == 'KYC Submitted' || String(result['data']['ProgressStatus']) == "Existing Customer"){
+            if(option == 'armOne'){
+                if(result.ResponseCode && result.ResponseCode== "00"){ 
+                    loginClass.serverSettings.numOfTimesGenerated = 0;
+                    if(result.StatusMessage == ''){
+                        result.StatusMessage = 'Login successful.';
+                    }else{
+                        result.StatusMessage = 'Login successful. Please wait while we prepare your account';
+                    }
+                    toastr.success(result.StatusMessage);
+                    data = {
+                        "Email":result.EmailAddress
+                    };
+                    data = JSON.stringify(data); 
+                    renda.post('Account/FetchUserByEmail',JSON.stringify(data),'login')
+                }else{
+                    stopLoad()
+                    toastr.error(result['StatusMessage']);    
+                } 
+                return false
+            }else{
+                console.log(result)
+                if (result.UserId){
+                    result = modResult(result);
+                    result.message = 'Welcome Back '+result.data.Firstname;
+                    toastr.success(result.message); 
+                    //decode token
+                    sessionStorage.UserId = result.data['UserId'];
+                    sessionStorage._id = result.data['UserId'];
+                    sessionStorage.UserInfo = JSON.stringify(result)
+                    updateUserData()
+                    sessionStorage.loggedin = true;
+    
+                    // confirm user state
+                        if (String(result['data']['ProgressStatus']) == 'KYC Submitted' || String(result['data']['ProgressStatus']) == "Existing Customer"){
+                            renda.page('dashboard')
+                            return false;
+                        }
+                        if (String(result['data']['Status']) !== 'active') {
+                            renda.page('register_otp')
+                            return false;
+                        } 
+                        if (
+                            result['data']['ProgressStatus'] == null || result['data']['ProgressStatus'] == 'null' ||
+                            result['data']['ProgressStatus'] == 'Stage 1 Completed' || result['data']['ProgressStatus'] == 'Stage 2 Completed' ||
+                            result['data']['BVN'] == null || result['data']['Gender'] == null
+                        ){
+                            renda.page('setup_profile')
+                            return false;                                
+                        }
                         renda.page('dashboard')
-                        return false;
-                    }
-                    if (String(result['data']['Status']) !== 'active') {
-                        renda.page('register_otp')
-                        return false;
-                    } 
-                    if (
-                        result['data']['ProgressStatus'] == null || result['data']['ProgressStatus'] == 'null' ||
-                        result['data']['ProgressStatus'] == 'Stage 1 Completed' || result['data']['ProgressStatus'] == 'Stage 2 Completed' ||
-                        result['data']['BVN'] == null || result['data']['Gender'] == null
-                    ){
-                        renda.page('setup_profile')
-                        return false;                                
-                    }
-                    renda.page('dashboard')
-                    return false;                   
+                        return false;                   
                 }else{
                     toastr.error(result['message']);    
-                    if(result['status'] == 204){
+                    if(result['Status'] == 204 || result['Status']==null || result['Status']==''){
                         renda.page('register_otp')
                         return false;
                     }
                 }
-            stopLoad()            
-            return false;
-        }
-        let email = document.getElementById('Username').value;
-        let pass = document.getElementById('Password').value; 
-        
-        data = {
-            "Username":email,
-            "Password":pass
-        };
-        if (validateObj(data)){
-            renda.loader('start')
-            renda.post('/authenticate/login',JSON.stringify(data),'login');
+                stopLoad()            
+                return false;
+            }
         }else{
-            return false;
-        }
+            let email = document.getElementById('Username').value;
+            let pass = document.getElementById('Password').value; 
+            
+            data = {
+                "Membershipkey": email,
+                "Password": pass,
+                "RedirectURL": "#!/dashboard",
+                "Channel": "ARM_PAYDAY_MOBILE"
+            };
+            if (validateObj(data)){
+                renda.loader('start')
+                loginClass.authenticateUser(JSON.stringify(data));
+            }else{
+                return false;
+            }
+        }   
         return false;  
     }
     function forgot_password(data){
@@ -328,6 +348,7 @@
     }
 
     function stats(data,option){
+        console.log(data)
         if (data) {
             stopLoad()
             try{
@@ -338,14 +359,12 @@
                 return false;
             }
             if (option == 1 || option == 'new') {
-                
                 data = JSON.parse(data);
                 sessionStorage.dashboardData = JSON.stringify(data);
                 commonData.Dashboard = data['data']
                 commonData.User = payday.user
                 navApp.data = commonData;
                 dashboardApp.commonData = commonData;   
-                
             }else if (option == 'cards') {
                 data = JSON.parse(data);
                 sessionStorage.userCards = JSON.stringify(data);
@@ -394,4 +413,23 @@ function canceltimer() {
 
 function openLinkInBrowser(link){
     globalLinkVar = window.open(link, '_blank', 'location=yes');
+}
+
+function generateToken(length) {
+    var chars = '0123456789',result=0;
+    for (var i = length; i > 0; --i)
+        result += chars[Math.round(Math.random() * (chars.length - 1))]
+    return parseInt(result)
+}
+
+function modResult(data){
+    var result = data;
+    var modResult = result;
+    result = {
+        data:'',
+        message:'',
+        status:200
+    };
+    result.data = modResult;
+    return result;
 }

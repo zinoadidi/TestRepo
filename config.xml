@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.payday.arm" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.payday.arm" version="0.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Payday</name>
     <description>
         The Payday Investor is an application for anyone who wishes to make better financial decisions, whether it is to save more, acquire an asset, or simply invest in their future.
@@ -9,7 +9,7 @@
     </author>
     <icon src="icon.png" />
     <content src="index.html" />
-    <preference name="AutoHideSplashScreen" value="true" />
+    <splash src="splash.png" />
     <access origin="https://127.0.0.1*" />
     <access origin="https://localhost*" />
     <allow-intent href="https://*/*" />
@@ -27,10 +27,10 @@
     </platform>
     <preference name="orientation" value="portrait" />
     <preference name="loadUrlTimeoutValue" value="120000" />
-    <engine name="browser" spec="^5.0.1" />
-    <engine name="android" spec="^7.0.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
+    <engine name="browser" spec="^5.0.1" />
+    <engine name="android" spec="^7.0.0" />
 </widget>

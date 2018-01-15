@@ -16,5 +16,5 @@ var temporaryApp = null;
  };
 
  var globalLinkVar = '';
-
+ var loginClass = '';
 	

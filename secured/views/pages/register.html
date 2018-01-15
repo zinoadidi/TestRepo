@@ -251,14 +251,14 @@
 								<div class="w3-margin w3-container">
 									<div>
 										<div  class="w3-half ">
-											<input class=" w3-text-white font-medium pdy-input pdy-mod-input" type="email" type='text' placeholder="Surname" class="w3-input input-text-goal padding-left-2" v-model="regVm.Surname" required="" onfocusout="checkValue(this)" aria-required="true">                        
+											<input class=" w3-text-white font-medium pdy-input pdy-mod-input"  type='text' placeholder="Surname" class="w3-input input-text-goal padding-left-2" v-model="regVm.Surname" required="" onfocusout="checkValue(this)" aria-required="true">                        
 										</div>
 										<div class="w3-half">
 											<input class=" w3-text-white font-medium pdy-input" type='text' placeholder="First Name" v-model="regVm.Firstname" required="" onfocusout="checkValue(this)" aria-required="true">                                               
 										</div>
 									</div>
 									<div class="">
-										<input class="w3-input w3-text-white pdy-input font-medium" type="email" placeholder="Email"  id="" required="">
+										<input class="w3-input w3-text-white pdy-input font-medium" type="email" placeholder="Email"  id="" required="" v-model="regVm.Email" >
 									</div> 
 								</div>
 								

@@ -95,3 +95,124 @@ function switchTabs(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " dash-tab-current";
 }
+
+function loadDashboardData(data,option){
+  if(data){
+    switch (option) {
+      case 'Rate':
+        try{
+          data = JSON.parse(data);
+          temporaryDashData.yield_rate = data.EffectiveYield;
+        }catch(err){
+          console.dir(err);
+          temporaryDashData.yield_rate = 0.00;
+        }
+        break;
+
+      case 'Goals':
+        let goals_done = 0;
+        let goals_total = 0;
+        let goals_pending = 0;
+        let goals_suspended = 0;
+        let goals_active = 0;
+        try{
+          
+          data = JSON.parse(data);
+          if(data.length){
+            goals_total = data.length;
+          }
+          for(var goals in data){
+            if(goals.Status =='Completed'){
+              goals_done++;
+            }else if(goals.Status =='Active'){
+              goals_active++;
+            }else if(goals.Status =='Suspended'){
+              goals_suspended++;
+            }else{
+              goals_pending++;
+            }
+
+          }
+          console.log(data);   
+
+        }catch(err){
+          console.dir(err);
+        }
+        temporaryDashData.goals_done = goals_done;
+        temporaryDashData.goals_total = goals_total;
+        temporaryDashData.goals_pending = goals_pending;
+        temporaryDashData.goals_suspended = goals_suspended;
+        temporaryDashData.goals = data;
+        break;
+
+      case 'TotalInvestment':
+        try{
+          data = JSON.parse(data);
+          temporaryDashData.net_investment = data;
+        }catch(err){
+          console.dir(err);
+          temporaryDashData.net_investment.AppUserId = data.AppUserId;
+        }
+        break;
+      case 'FetchWallet':
+        try{
+          data = JSON.parse(data);
+          temporaryDashData.fetchWallet = data;
+        }catch(err){
+          console.dir(err);
+          temporaryDashData.fetchWallet.UserId = data.UserId;
+        }
+        break;
+      case 'TopGoal':
+        try{
+          data = JSON.parse(data);
+          temporaryDashData.top_goal = data;
+        }catch(err){
+          console.dir(err);
+        }
+        break;
+      case 'CurrentBalance':
+        try{
+          data = JSON.parse(data);
+          temporaryDashData.client_balance = data;
+        }catch(err){
+          console.dir(err);
+        }
+        break;
+      case 'cards':
+        break;
+      
+      case 6:
+        day = "Saturday";
+      }
+      console.dir(temporaryDashData)
+      
+      if(option == 'cards'){
+      }else{
+        option = 'new';
+      }
+      data = modResult(temporaryDashData);
+    stats(JSON.stringify(data),option)
+    return false;
+  }else{
+    startLoad()
+    let UserId = {'UserId':sessionStorage.UserId}
+    UserId = JSON.stringify(UserId)
+    switch (option) {
+      case 'dashData':
+        renda.post('Goal/Rate',null,'loadDashboardData',null,null,'Rate');
+        renda.post('Goal/FetchAllGoals',JSON.stringify(UserId),'loadDashboardData',null,null,'Goals');
+        renda.post('Goal/TotalInvestment',JSON.stringify(UserId),'loadDashboardData',null,null,'TotalInvestment');
+        renda.post('Goal/FetchWallet',JSON.stringify(UserId),'loadDashboardData',null,null,'FetchWallet');
+        renda.post('Goal/FetchTopGoal',JSON.stringify(UserId),'loadDashboardData',null,null,'TopGoal');
+        renda.post('UserTransactions/CurrentBalance',JSON.stringify(UserId),'loadDashboardData',null,null,'CurrentBalance');
+        break;
+      case 'cards':
+        renda.post('PaymentDetails/FetchPaymentDetails',JSON.stringify(UserId),'loadDashboardData',null,null,'cards');
+        break;
+      case 6:
+          day = "Saturday";
+    }
+  }
+  
+}

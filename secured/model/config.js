@@ -1,5 +1,5 @@
      /*App settings*/
-    var authToken = btoa("paydayInvestor:13fc17edc2ea436f7dab66cad29eb9b2")
+    var authToken = btoa("arm:@rm1k0y1l@g0s")
     var appSettings = {
         appTitle:'Payday',
         displayContainer:'display',
@@ -7,15 +7,15 @@
         errorPage:'login',
         loadDefaultPage:false,
         trackUrlChanges:false,
-        registerPageHistory:true,
+        registerPageHistory:true, 
         viewPath:'secured/views/',
-        serverUrl:'https://paydayinvestor.arm.com.ng/api/v1',
+        serverUrl:'http://192.168.250.29:8000/pdiv/',
         appMode:'debug',
         httpReqHeaders:{
             "Content-Type": "application/json",
             "Accept": "application/json",
             "Access-Control-Allow-Credentials":"true"
-        },
+         }, 
         httpRequestAuth:{
             "status": true,
             "authName":"Basic",
@@ -308,3 +308,33 @@ var funmiData={
         }
     }
 }
+
+var armUserData = {"ResponseCode":"00","ResponseDescription":"User authenticated Successfully","SessionKey":"6hxaY9w98dzpcxeAzuIKi3HglUcvPcLfZC8MW+6qmv52UVzT6CqrqyY/S/F1/QwWzSb4V05w544JYqiyUxqiOi1bLS1JVi1bLX87l6RNUA7bL5GgeA30byl+aelLaJw92c53FLlrHkgr","RedirectURL":"https://stag-api.arm.com.ng/cookiemanager/Authenticate.aspx?Token=6hxaY9w98dzpcxeAzuIKi3HglUcvPcLfZC8MW%2b6qmv52UVzT6CqrqyY%2fS%2fF1%2fQwWzSb4V05w544JYqiyUxqiOi1bLS1JVi1bLX87l6RNUA7bL5GgeA30byl%2baelLaJw92c53FLlrHkgr&ReturnUrl=#!/dashboard&Action=Login","MembershipKey":0,"EmailAddress":"Testedd@gmail.com","FirstName":"TestFirstName","LastName":"TestSurname","SecurityQuestion":"TestQuestion","SecurityQuestion2":"","IsAccountActivated":true,"Subscription":[]}
+
+var leyeTestData = {
+        "UserId": "PIV1000615247",
+        "Surname": "Adidi",
+        "Firstname": "Elozino",
+        "Middlename": "Adewale",
+        "BVN": "22180758315",
+        "BankName": "Guaranty Trust Bank",
+        "BankAccountNo": "0139501660",
+        "Address": "5 obiwunmi street off folagoro somolu lagos",
+        "Email": "zinoadidi@gmail.com",
+        "Phonenumber": "07055069014",
+        "RegistrationDate": "2017-11-29T13:54:30.6",
+        "Status": "active",
+        "ProfilePic": "http://res.cloudinary.com/arm/image/upload/v1511960070/gffj15jlbb6agz659gkn.jpg",
+        "MaritalStatus": "Single",
+        "Gender": "Male",
+        "DOB": "1997-03-19T00:00:00",
+        "ProgressStatus": "KYC Submitted",
+        "Token": "14158",
+        "PRToken": " ",
+        "SecurityQuestion": "In what city were you born",
+        "SecurityAnswer": "Essau",
+        "KYCFeedback": null,
+        "MembershipNumber": null
+    }
+
+/* \"Password\":\"TestPassword123\",\"Email\":\"Testedd@gmail.com\" */
