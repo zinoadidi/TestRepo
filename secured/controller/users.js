@@ -31,11 +31,15 @@ function register(data){
         stopLoad()
         console.dir(data);        
         try{
-            JSON.parse(data);
+            var r = JSON.parse(data);
         }catch(err){
             stopLoad()
             toastr.error('An error occured while performing request.')
-            alert(data)
+            if(r.message){
+                alert(r.message);    
+            }else{
+                alert(data)
+            }
             console.dir(err);
             return false;
         } 
@@ -84,10 +88,11 @@ function register(data){
                 sendRegReq()
             });
         }else{
-            toastr.error('Please Upload Profile Picture');
+            /* toastr.error('Please Upload Profile Picture');
             showRegStep('register-step-1')
-            return false;
-
+            return false; */
+            sendRegReq()
+            
         }
         function sendRegReq(){
             var token = generateToken(5);
@@ -248,7 +253,7 @@ function regExistingClient(data){
     if(existingApp.armOneDetail.IsARMOne){
         data = {
             "MembershipNumber":MembershipNumber,
-            "IsARMOne" : existingApp.armOneDetail.IsARMOne
+            "IsARMOne" : 'true'
         };
     }else{
         data = {
@@ -256,7 +261,7 @@ function regExistingClient(data){
             "Password": existingApp.armOneDetail.Password,
             "SecurityQuestion" :  existingApp.armOneDetail.SecurityQuestion,
             "SecurityAnswer" :  existingApp.armOneDetail.SecurityAnswer,
-            "IsARMOne" : existingApp.armOneDetail.IsARMOne
+            "IsARMOne" : 'false'
         };
         
     }
@@ -267,11 +272,10 @@ function regExistingClient(data){
     if(existingApp.armOneDetail.Password.length = '' || existingApp.armOneDetail.Password.length < 8){
         toastr.error('Please Use a stronger password not less than 8 digit. Password must contain numbers and characters.');
         return false;
-    }
-    data.IsARMOne = 'true'    
+    }  
     if (validateObj(data)){
         renda.loader('start')
-       data = JSON.stringify(data)
+        data = JSON.stringify(data)
         renda.post('Account/RegisterExisting',JSON.stringify(data),'regExistingClient');
     }else{
         return false;

@@ -23,11 +23,7 @@
         loginClass = new Login();
         loginClass.generateArmOneToken()
         // check app cache
-        $(document).click(function(evt) {
-            if ($(evt.target).is("a"))
-                console('link clicked')
-                 return false;
-        });
+      
     });
     /* Basic Functions */
     function login(data,option){
@@ -120,7 +116,7 @@
         }   
         return false;  
     }
-    function forgot_password(data){
+    function forgot_password(data,option){
         if (data) {
 
             try{
@@ -132,14 +128,17 @@
                 return false;
             } 
             let result = JSON.parse(data);
-            //let result = USERDATA;
+            result = modResult(result)
             console.dir(result);
             if (result.status == 200){
-                if(result.message == ''){
-                    result.message = ' An Email Has Been Sent To You. Please Follow The Link in Your Mail to Reset Your Password';
-                }
+               if(option){
+                 
+               }else{
+                result.message = 'Please provide your security detail to continue';
                 toastr.success(result.message); 
-                renda.page('login')        
+                $('#verify_user_account').show();
+                $('#verify_email').hide();
+               }      
             }else{
                 toastr.error(result['message']);    
             }
@@ -152,7 +151,10 @@
         };
         if (validateObj(data)){
             renda.loader('start')
-            renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login');
+            // old password restt
+            /* renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login'); */
+            data = JSON.stringify(data)
+            renda.post('Account/FetchUserByEmail',JSON.stringify(data),'forgot_password')            
         }else{
             return false;
         }
@@ -453,9 +455,3 @@ window.onbeforeunload = function (e) {
     // For Safari
     return 'Are You Sure?'; */
   };
-
-  $(document).click(function(evt) {
-    if ($(evt.target).is("a"))
-        console('link clicked')
-         return false;
-});
