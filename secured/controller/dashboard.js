@@ -180,19 +180,17 @@ function loadDashboardData(data,option){
         }
         break;
       case 'cards':
-        break;
-      
-      case 6:
-        day = "Saturday";
+        console.log(data)
       }
-      console.dir(temporaryDashData)
       
       if(option == 'cards'){
+        stats(data,option)
       }else{
         option = 'new';
+        data = modResult(temporaryDashData);
+        stats(JSON.stringify(data),option)
       }
-      data = modResult(temporaryDashData);
-    stats(JSON.stringify(data),option)
+      
     return false;
   }else{
     startLoad()
@@ -216,3 +214,24 @@ function loadDashboardData(data,option){
   }
   
 }
+
+var httpReq = obj => {
+  return new Promise((resolve, reject) => {
+      let xhr = new XMLHttpRequest();
+      xhr.open(obj.method || "GET", obj.url);
+      if (obj.headers) {
+          Object.keys(obj.headers).forEach(key => {
+              xhr.setRequestHeader(key, obj.headers[key]);
+          });
+      }
+      xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+              resolve(xhr.response);
+          } else {
+              reject(xhr.statusText);
+          }
+      };
+      xhr.onerror = () => reject(xhr.statusText);
+      xhr.send(obj.body);
+  });
+};

@@ -144,9 +144,13 @@ function updateStage(data){
                 	"UtilityUpload":UtilityUpload
 	            } 
 	            if (validateObj(data,true)){
-					renda.loader('start')
-					data = JSON.stringify(data)
-		            renda.post(url,JSON.stringify(data),'updateStage');     
+					if(typeof(data.UtilityUpload) !== 'string'){
+						return false;
+					}else{
+						renda.loader('start')
+						data = JSON.stringify(data)
+						renda.post(url,JSON.stringify(data),'updateStage');   
+					}
 		        }else{
 		            return false;
 		        }

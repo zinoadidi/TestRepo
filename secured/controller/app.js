@@ -23,7 +23,11 @@
         loginClass = new Login();
         loginClass.generateArmOneToken()
         // check app cache
-       
+        $(document).click(function(evt) {
+            if ($(evt.target).is("a"))
+                console('link clicked')
+                 return false;
+        });
     });
     /* Basic Functions */
     function login(data,option){
@@ -71,7 +75,7 @@
                     sessionStorage.UserInfo = JSON.stringify(result)
                     updateUserData()
                     sessionStorage.loggedin = true;
-    
+     
                     // confirm user state
                         if (String(result['data']['ProgressStatus']) == 'KYC Submitted' || String(result['data']['ProgressStatus']) == "Existing Customer"){
                             renda.page('dashboard')
@@ -93,10 +97,6 @@
                         return false;                   
                 }else{
                     toastr.error(result['message']);    
-                    if(result['Status'] == 204 || result['Status']==null || result['Status']==''){
-                        renda.page('register_otp')
-                        return false;
-                    }
                 }
                 stopLoad()            
                 return false;
@@ -342,8 +342,8 @@
 
 
     function updateDataFromApi(data){
-        renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');
-        renda.get('/cards/'+sessionStorage.UserId,'stats','cards');
+        loadDashboardData(null,'dashData')
+        loadDashboardData(null,'cards')
         return false;  
     }
 
@@ -354,7 +354,7 @@
             try{
                 JSON.parse(data);
             }catch(err){
-                toastr.error('An error occured while verfying user information.')
+                toastr.error('An error occured while performing request.')
                 console.dir(err);
                 return false;
             }
@@ -367,7 +367,8 @@
                 dashboardApp.commonData = commonData;   
             }else if (option == 'cards') {
                 data = JSON.parse(data);
-                sessionStorage.userCards = JSON.stringify(data);
+                sessionStorage.userCards = JSON.stringify(data); 
+                data = modResult(data)       
                 cardsApp.cards = data['data'];   
                 
             }else{ // chences
@@ -389,17 +390,17 @@
 
     //toastr options
     toastr.options.closeButton = true;
-    toastr.options.timeOut = 12000;
+    toastr.options.timeOut = 4000;
     toastr.options.closeEasing = 'swing';
     toastr.options.preventDuplicates = true;
-    toastr.options.positionClass='toast-top-full-width';
+    toastr.options.positionClass='toast-top-right';
     toastr.options.fontSize = '200em';
 
-window.onload = canceltimer;
-document.onmousemove = canceltimer;
-document.onkeypress = canceltimer;
+    window.onload = canceltimer;
+    document.onmousemove = canceltimer;
+    document.onkeypress = canceltimer;
+    var timer_ = 0;
 
-var timer_ = 0;
 function inactivity_lunch () {
   timer_ = setTimeout(function(){
   logout();
@@ -433,3 +434,28 @@ function modResult(data){
     result.data = modResult;
     return result;
 }
+
+function promiseXmlHTTP(options){
+    startLoad()
+    return new Promise(function(resolve, reject) {
+        $.ajax(options).done(resolve).fail(reject);
+    });
+}
+
+window.onbeforeunload = function (e) {
+    /* //var e = e || window.event;
+    var e = e ;
+    // For IE and Firefox
+    if (e) {
+      e.returnValue = 'Are You Sure?';
+    }
+  
+    // For Safari
+    return 'Are You Sure?'; */
+  };
+
+  $(document).click(function(evt) {
+    if ($(evt.target).is("a"))
+        console('link clicked')
+         return false;
+});

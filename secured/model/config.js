@@ -338,3 +338,12 @@ var leyeTestData = {
     }
 
 /* \"Password\":\"TestPassword123\",\"Email\":\"Testedd@gmail.com\" */
+
+
+/* {
+"Membershipkey": "okorie85@gmail.com",
+"OldPassword": "",
+"NewPassword": "Costain2007",
+"IsReset": true,
+"Channel": "ARM_PAYDAY"
+} */

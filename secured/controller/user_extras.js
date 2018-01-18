@@ -1,11 +1,12 @@
-renda.get('/investmentOne','updateUserExtras','investment101');
-renda.get('/userNotification/'+sessionStorage.UserId+'?page=1','updateUserExtras','activities');
+
+//renda.get('/investmentOne','updateUserExtras','investment101');
+renda.post('Utility/FetchAllActivities',JSON.stringify(JSON.stringify({'UserId':sessionStorage.UserId})),'updateUserExtras',null,null,'activities');
 $("a").click(function(event){
     var link = this.href;
-    return false;
-});
+    return false; 
+}); 
 function initInvestment101Page(){
-    
+
 	investment101 = new Vue({
 	  el: '#investment101Page', 
 	  data: {
@@ -19,20 +20,26 @@ function initInvestment101Page(){
 		    "item": []
       	}
 	  }
-	});
+    });
+    startLoad()
+    promiseXmlHTTP({url:'https://paydayinvestor.arm.com.ng/api/v1/investment-one',method:'GET'}).then(function(result){
+    updateUserExtras(result,'investment101')
+    });
 	if(sessionStorage.investment101){
 		investment101.data = JSON.parse(sessionStorage.investment101);
         $('a').each(function() {
           var href = $(this).attr('href') || '';
             $(this).attr('href', 'javascript:void(0)');
         });
-	}
+        stopLoad()
+    }
+    
     $("a").click(function(event){
         var link = this.href;
         alert(link);
         return false;
     });
-
+    
 }
 
 function initActivitiesPage(){
@@ -75,49 +82,44 @@ function initTransactionsPage(){
       	}
 	  }
 	});
-	if(sessionStorage.activities){
-		activities.data = JSON.parse(sessionStorage.activities);
+	if(sessionStorage.transactions){
+		transactions.data = JSON.parse(sessionStorage.transactions);
     }
     
 }
 
 function updateUserExtras(data,option){
-
 	if (data) {
         stopLoad()
-        $("a").click(function(event){
-            var link = this.href;
-            alert(link);
+        if ( option == 'investment101') {
+            sessionStorage.investment101 = JSON.stringify(data);
+            investment101.data = data['data']
+            $('a').click(function(e) {
+                e.preventDefault();
+            });
+            $('#investment101LoaderDiv').hide()
             return false;
-        });
+        }
         try{
             JSON.parse(data);
         }catch(err){
-            toastr.error('An error occured while verfying user information.')
+            toastr.error('An error occured while perfoming request.')
             console.dir(err);
             return false;
         }
-        if ( option == 'investment101') {
-            data = JSON.parse(data);
-            sessionStorage.investment101 = JSON.stringify(data);
-            investment101.data = data['data']
-            $('a').each(function() {
-                var href = $(this).attr('href') || '';
-                $(this).attr('href', 'javascript:void(0)');
-            });
-            return false;
         
-        }
-        else if ( option == 'activities') {
+        if ( option == 'activities') {
             data = JSON.parse(data);
+            data = modResult(data)          
             sessionStorage.activities = JSON.stringify(data);
-            activities.data = data['data']
+            activities.data = JSON.parse(sessionStorage.activities);
             return false;
         }
         else if ( option == 'transactions') {
             data = JSON.parse(data);
+            data = modResult(data) 
             sessionStorage.transactions = JSON.stringify(data);
-            transactions.data = data['data']
+            transactions.data = JSON.parse(sessionStorage.transactions);
             return false;
         }
         else if (option == 'cards') {
@@ -176,23 +178,19 @@ function filterTransactions(data){
             JSON.parse(data);
         }catch(err){
             stopLoad()
-            toastr.error('An error occured while verfying user information.')
+            toastr.error(data)
             console.dir(err);
             return false;
         } 
         let result = JSON.parse(data);
         //let result = USERDATA;
         console.dir(result);
-        if (result.status == 200){
-            if(result.data){
-             updateUserExtras(data,'transactions')            
-            }else{
-                toastr.error(result.message);
-                stopLoad()
-                return false
-            }
+        if (result){
+            updateUserExtras(data,'transactions')            
+            stopLoad()
+            return false
         }else{
-            toastr.error(result['message']);    
+            toastr.error(result);    
         }
         stopLoad()            
         return false;
@@ -202,6 +200,7 @@ function filterTransactions(data){
         let TransactionType = $('#TransactionType').val(); 
         data = {
             "UserId": sessionStorage.UserId,
+            "AppUserId": sessionStorage.UserId,
             "FromDate": FromDate,             
             "ToDate": ToDate,             
             "TransactionType": TransactionType 
@@ -215,7 +214,8 @@ function filterTransactions(data){
         }
         if (validateObj(data)){
             startLoad()
-            renda.post('/transaction/history',JSON.stringify(data),'filterTransactions');
+            data =JSON.stringify(data)
+            renda.post('UserTransactions/TransactionHistory',JSON.stringify(data),'filterTransactions');
         }else{
             return false;
         }

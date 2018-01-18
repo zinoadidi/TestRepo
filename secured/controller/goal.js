@@ -28,7 +28,7 @@ var isCard = '';
 	dashboardApp.data = commonData;
 	stopLoad()
 } */
-renda.get('/cards/'+sessionStorage.UserId,'updateCardList','cards');
+renda.post('PaymentDetails/FetchPaymentDetails',JSON.stringify(JSON.stringify({'UserId':sessionStorage.UserId})),'updateCardList');
 
 renda.loader('stop')
 $('.frequency-depend').hide();
@@ -68,28 +68,27 @@ function createGoal(data){
     if(data){
     	renda.loader('stop');
     	try{
-            JSON.parse(data);
+            data = JSON.parse(data);
         }catch(err){
         	stopLoad()
-            toastr.error('An error occured while verfying user information.')
+            toastr.error('An error occured while creating goal. Please try again later.')
             console.dir(err);
             return false;
         }
     	stopLoad();
-	    data = JSON.parse(data);
-    	if (data.status == 200){
-			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
-			toastr.success(data['message'])
+		data = modResult(data)
+    	if (data.data.AppUserId){
+			loadDashboardData(null,'dashData')				
+			toastr.success('Weldone!. Goal was created successfully')
 			clear();
-			updateDataFromApi(null)
 		}else{
-            toastr.error(data['message']);    
+            toastr.error('Request failed. Please try again');    
 		}           
 		return false;
     }else{
 		startLoad()
 		var files = '';
-		var url = '/new/goal';   
+		var url = 'Goal/Create';   
     	files = document.getElementById('GoalUpload').files[0]
 		console.log('---------------------before send')
 		var GoalUpload = '';
@@ -122,15 +121,17 @@ function createGoal(data){
 			if (createGoalApp.cgvm.monthDays) {}else{
 				createGoalApp.cgvm.monthDays = '0'
 			}
+			var _duration =parseInt(createGoalApp.cgvm.GoalAmount.replace(",","")) / parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))
 			
 			var data = {
 				"UserId":sessionStorage.UserId,
+				"AppUserId":sessionStorage.UserId,
 				"ItemName":createGoalApp.cgvm.ItemName,
-				"GoalAmount":createGoalApp.cgvm.GoalAmount,
-				"Duration":parseInt(createGoalApp.cgvm.GoalAmount) / parseInt(createGoalApp.cgvm.MonthlyDeduction),
-				"MonthlyDeduction":createGoalApp.cgvm.MonthlyDeduction,
-				"ProductId":'1',
-				"GoalType":'custom',
+				"GoalAmount":createGoalApp.cgvm.GoalAmount.replace(",",""),
+				"MonthlyDeduction":createGoalApp.cgvm.MonthlyDeduction.replace(",",""),
+				"Duration":_duration.toString(),				
+				"ProductId":"custom",
+				"GoalType":"custom",
 				"monthDays" : createGoalApp.cgvm.monthDays,
 				"weekDays" : createGoalApp.cgvm.weekDays,
 				"Day":createGoalApp.cgvm.Day,
@@ -139,10 +140,10 @@ function createGoal(data){
 				"Status":"active",
 				"ItemDescription" : createGoalApp.cgvm.ItemDescription,
 				"CardId" : createGoalApp.cgvm.userCards.CardNo,
-				"ProductId":"1",
 				"CardToken" : createGoalApp.cgvm.userCards.CardToken
 			}  
 	        if (validateObj(data)){
+				data = JSON.stringify(data)
 	            renda.post(url,JSON.stringify(data),'createGoal');     
 	        }else{
 	        	console.log('error occured');
@@ -155,33 +156,56 @@ function createGoal(data){
 }
 
 function viewSingleGoal(id){
-	var goarArray = viewGoalApp.commonData.Dashboard.goals;
-	goarArray.forEach( function (arrayItem)
-	{
-		if(arrayItem.GoalId == id){
-			singleGoalApp.sgdata = arrayItem;
-			
-			if(singleGoalApp.sgdata.GoalImage){
+	console.log('id:',id)
+	if(typeof(id) !== null && typeof id === 'object'){
+		singleGoalApp.sgdata = id;
+		if(singleGoalApp.sgdata.GoalImage){
+		}else{
+			singleGoalApp.sgdata.GoalImage = 'secured/assets/img/goalBackground.png'
+		}	
+	}else{
+		var goarArray = viewGoalApp.commonData.Dashboard.goals;
+		goarArray.forEach( function (arrayItem){
+			if(arrayItem.GoalId == id){
+				singleGoalApp.sgdata = arrayItem;
+				if(singleGoalApp.sgdata.GoalImage){
 
-			}else{
-				singleGoalApp.sgdata.GoalImage = 'secured/assets/img/goalBackground.png'
-			}
-		}else{}
-	});
+				}else{
+					singleGoalApp.sgdata.GoalImage = 'secured/assets/img/goalBackground.png'
+				}
+			}else{}
+		});
+	}
+	
 	goalTab('viewSingleGoal')	
-}
+} 
 
 function goalTab(tab){
 	$('.goalTabs').hide()
 	$('#'+tab).show()
 }
 function updateCardList(data){
-	data = JSON.parse(data);
-	sessionStorage.userCards = JSON.stringify(data);
-	if(data['data']){
-		isCard = true;
-		createGoalApp.cgvm.userCards = data['data'];		
-	}else{
+	try{
+		data = JSON.parse(data);
+		data = modResult(data);
+		sessionStorage.userCards = JSON.stringify(data);
+		if(data['data']){
+			isCard = true;
+			createGoalApp.cgvm.userCards = data['data'];	
+			singleGoalApp.sgdata.userCards = createGoalApp.cgvm.userCards
+				
+		}else{
+			var confirmCreateCard = confirm('Hi. You have not added a payment method, Please click ok to add a card');
+			if(confirmCreateCard){
+				renda.component('card','view','dashboardDisplayDiv');
+			}else{
+				isCard = false;
+				goalTab('viewGoals')
+			}
+
+		}
+	  }catch(err){
+		console.dir(err);
 		var confirmCreateCard = confirm('Hi. You have not added a payment method, Please click ok to add a card');
 		if(confirmCreateCard){
 			renda.component('card','view','dashboardDisplayDiv');
@@ -189,10 +213,8 @@ function updateCardList(data){
 			isCard = false;
 			goalTab('viewGoals')
 		}
-		return false;
-	}
-	
-	console.log(data)
+	  }
+	  return false;
 }
 goalTab('viewGoals')
 
@@ -214,23 +236,42 @@ function onChangeCard(){
 	}
 }
 
+function calculateGoalDuration(){
+	var _duration =parseInt(createGoalApp.cgvm.GoalAmount.replace(",","")) / parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))
+	createGoalApp.cgvm.Duration = _duration;
+}
+
 function goalOptions(id,reqType){
+	
 	if(reqType){
 		stopLoad()
-		data = JSON.parse(id);
-		if(data['status'] ==200){
-			if(data['data']){
-				toastr.success(data['message'])
-				singleGoalApp.sgdata = data['data']
-				return false
-			}else{
-				toastr.warning(data['message'])
+		console.log(reqType)
+		if(reqType == 'delete'){
+			if(id == true || id == 'true'){
 				clear()
+			}else{
+				toastr.error(id)
 			}
-		}else{
-			toastr.error(data['message'])			
-			return false;
 		}
+		try{
+            JSON.parse(id);
+        }catch(err){
+            toastr.error(id)
+            console.dir(err);
+			
+			return false;			
+        }
+		data = JSON.parse(id);
+		data = modResult(data)
+
+		if(data['data']){
+			toastr.success('Goal Updated Successful')
+			singleGoalApp.sgdata = data['data']
+			
+		}else{
+			toastr.warning(data)
+		}
+		return false
 	}else{
 		var goal = singleGoalApp.sgdata; 
 		var data = '';
@@ -282,16 +323,25 @@ function goalOptions(id,reqType){
 		var confirmAction = confirm('You are about to '+id+'. Continue?')
 		if(confirmAction){
 			startLoad()
+			data = singleGoalApp.sgdata;
 			if(id == "Suspend_Goal"){
-				renda.get('/goal/suspend/' + goal.GoalId, 'goalOptions', 'success');			
+				data.Status = 'Suspended';
+				data = JSON.stringify(data);							
+				renda.post('Goal/Update', JSON.stringify(data), 'goalOptions',null,null, 'success');			
 				return false
 			}
 			if(id == "Resume_Goal"){
-				renda.get('/goal/resume/' + goal.GoalId, 'goalOptions', 'success');							
+				data.Status = 'Active';		
+				data = JSON.stringify(data);									
+				renda.post('Goal/Update', JSON.stringify(data), 'goalOptions',null,null, 'success');							
 				return false
 			}
 			if(id == "Delete_Goal"){
-				renda.get('/goal/delete/' + goal.GoalId, 'goalOptions', 'success');											
+				data = {
+					"GoalId":singleGoalApp.sgdata.GoalId
+				};
+				data = JSON.stringify(data);			
+				renda.post('Goal/Delete', JSON.stringify(data), 'goalOptions',null,null, 'delete');											
 				return false
 			}
 			if(id == "Top_Up"){
@@ -323,7 +373,6 @@ function editGoal(data){
 			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
 			toastr.success(data['message'])
 			clear();
-			updateDataFromApi(null)
 		}else{
 			toastr.error(data['message']);    
 		}           
@@ -332,7 +381,7 @@ function editGoal(data){
 		startLoad()
 		createGoalApp.cgvm = singleGoalApp.sgdata;
 		var files = '';
-		var url = '/goal/update';   
+		var url = 'Goal/Update';   
 		files = document.getElementById('GoalUpload').files[0]
 		console.log('---------------------before send')
 		var GoalUpload = '';

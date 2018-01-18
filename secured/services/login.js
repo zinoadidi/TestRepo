@@ -13,11 +13,13 @@ class Login{
         }
         this.generateArmOneToken = function(){
             if(this.serverSettings.numOfTimesGenerated >= 5){
+                console.log('token request exceed maximum')
                 stopLoad();
-                toastr.error('An error occured while performing request. Please confirm you that your device has network coverage. If the problem persist, please contact an administrator.')
-                this.serverSettings.numOfTimesGenerated = 0;
+                if(this.serverSettings.numOfTimesGenerated >= 1000) {
+                    renda.page('login');
+                    toastr.warning('An error occured. Please try again')
+                }
                 return false;
-                
             }
             this.serverSettings.numOfTimesGenerated ++;
             var data = JSON.stringify({
@@ -35,8 +37,11 @@ class Login{
                         loginClass.serverSettings.CustomerReference = checkResponse.CustomerReference;
                         var lastGenerated = new Date();
                         loginClass.serverSettings.lastGenerated = lastGenerated.getHours()+lastGenerated.getMinutes();
+                        loginClass.serverSettings.numOfTimesGenerated = 0;                                            
                     }else{
                         console.log('ARM token request failed')
+                        toastr.error('An error occured while performing request. Please confirm you that your device has network coverage. If the problem persist, please contact an administrator.')
+                        loginClass.serverSettings.numOfTimesGenerated = 0;                                                
                     }
                 }
             });
@@ -77,5 +82,3 @@ class Login{
 
 }
 
-
-/* https://stag-api.arm.com.ng/armauth/OAuth/Token */

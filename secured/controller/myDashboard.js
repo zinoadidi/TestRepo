@@ -1,4 +1,5 @@
 
+var statsData = '';
 dashboardApp = new Vue({
   el: '#myDashboard',
   data: {
@@ -12,24 +13,25 @@ var navApp = new Vue({
   }
 });
 
-var statsData = new Vue({
-    el: '#myChat',
-    data:{
-        labels:[0,1,3,4],
-        data:[0,0,0,0],
-        backgroundColor:'#02ff1030',
-        color:'#4daf51',
-        pointBackgroundColor:'#fff'
+if(renda.Config.currentPage =='dashboard'){
+    statsData = new Vue({
+        el: '#transactiontDiv',
+        data:{
+            labels:[0,1,3,4],
+            data:[0,0,0,0],
+            backgroundColor:'#02ff1030',
+            color:'#4daf51',
+            pointBackgroundColor:'#fff'
 
-    }
-})
+        }
+    })
+}
  
 
 /*request stat data*/
 var testDash = String(sessionStorage.dashboardData)
 if (testDash != 'undefined' && testDash != 'null' && testDash != ''){
     loadDashboardData(null,'dashData')
-    
 	//stats(sessionStorage.dashboardData,'existing');
 }else{
     loadDashboardData(null,'cards');
@@ -86,13 +88,9 @@ $( document ).ready(function() {
     startLoad()
     renda.component('userExtras','faq','dashboardDisplayDiv');
   });
-  if(sessionStorage.monthlyTrans){
-    dashboardStats(sessionStorage.monthlyTrans);
-    dashboardStats();
-  }else{
-    dashboardStats();
-  }
-  var ctx =  document.getElementById("myPieChart").getContext("2d");
+  
+  dashboardStats();
+/*   var ctx =  document.getElementById("myPieChart").getContext("2d");
   var myDoughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -113,15 +111,31 @@ $( document ).ready(function() {
     },
     
     options: []
-  });
+  }); */
 });
 
 
 function dashboardStats(data){
+    if(renda.Config.currentPage !='dashboard'){
+
+        return false
+    };
+    statsData = new Vue({
+        el: '#transactiontDiv',
+        data:{
+            labels:[0,1,3,4],
+            data:[0,0,0,0],
+            backgroundColor:'#02ff1030',
+            color:'#4daf51',
+            pointBackgroundColor:'#fff'
+
+        }
+    })
     if(data){
 		renda.loader('stop');
 		try{
             JSON.parse(data);
+            sessionStorage.monthlyTrans = data;                        
             data = JSON.parse(data);
 		}catch(err){
 			stopLoad()
@@ -134,7 +148,6 @@ function dashboardStats(data){
             console.log(data)
             data.data = modResult(data);
             if(data.data){
-                sessionStorage.monthlyTrans = JSON.stringify(data);
                 var counter = 0;
                 statsData.data = [];
                 statsData.labels=[];
@@ -201,3 +214,5 @@ function dashboardStats(data){
     }
     return false;
 }
+
+dashboardStats();

@@ -34,7 +34,6 @@
 				  			<img class="icon-new-mod" style="width: 120px; margin-top: 0px;" src="img/LineIcons/GoalCategories(Icons)/pdi_gc_custom_goal_icon.png">
 				  			</span>
 				  		</div>
-				  		
 				  	</center>
 				  		
 				</div>
@@ -163,12 +162,12 @@
 			<div class="w3-modal-content" style="margin-top:50px">
 				<div id="editGoal" style="display:none" class="extendGoalDivs">
 					
-					<header class="w3-container w3-padding w3-text-white input-text-medium" style="background:#29313C"> 
+					<header class=" w3-padding w3-text-white input-text-medium" style="background:#29313C"> 
 						<span onclick="document.getElementById('extendedGoalUI').style.display='none'" style="background:transparent" class="w3-button w3-display-topright input-text-large">&times;</span>
 						Edit Goal
 					</header>
 
-					<div id='' class="" >
+					<div id='' class="w3-container" >
 						<section id="editGoalDivApp" class="w3-white" style="font-weight: 0px;">
 							<div class=" col-lg-12 w3-margin-left w3-padding">
 								<div class="">
@@ -269,13 +268,13 @@
 									
 									<label class="input-text-goal w3-left">Select A Card:</label>
 									<div class="card-holder">
-										<span v-if="sgdata.userCards">
-										<select v-if="sgdata.userCards[0].CardNo" class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+										<span>
+										<select v-if="sgdata.userCards" class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
 											<option></option>
 											<option v-for="n in sgdata.userCards" :fwCode='n.FWCode' :id="n.Id">{{ n.CardNo }}</option>
 										</select>
 										</span>	
-										<span v-if="!sgdata.userCards">
+										<span>
 										<button v-if="!sgdata.userCards" class="w3-button w3-green w3=margin w3-padding" onclick="renda.component('card','view','dashboardDisplayDiv');">Add Card</button>
 										</span><br>
 									</div>
@@ -289,8 +288,8 @@
 								</div>
 								<div class="col-lg-11 form-group">
 									<br>
-									<button type="" class="w3-bar w3-button w3-border-0 w3-text-white w3-large w3-third w3-left header-color" style="width:40%!important" onclick="document.getElementById('extendedGoalUI').style.display='none';goalTab('viewGoals')">Cancel</button>									
-									<button type="submit" class="w3-bar w3-button w3-border-0 w3-text-white w3-large e3-third w3-right header-color" style="width:40%!important" onclick="editGoal(null)">Modify Goal</button>
+									<button type="" class="w3-bar w3-button w3-border-0 w3-text-white w3-medium w3-third w3-left header-color" style="width:40%!important" onclick="document.getElementById('extendedGoalUI').style.display='none';goalTab('viewGoals')">Cancel</button>									
+									<button type="submit" class="w3-bar w3-button w3-border-0 w3-text-white w3-medium w3-third w3-right header-color" style="width:40%!important" onclick="editGoal(null)">Modify Goal</button>
 								</div>
 								</form>
 					
@@ -488,7 +487,7 @@
 			</div>
 		</div>
 	<div id='createGoal' class="goalTabs" >
-	    <section id="createGoalDivApp" class="w3-white" style="font-weight: 0px;">
+	    <section id="createGoalDivApp" class="w3-white w3-container" style="font-weight: 0px;">
 	    <div class=" col-lg-12 w3-margin-left w3-padding">
 	        <div class="">
 	            <form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
@@ -510,18 +509,15 @@
 	                <br/>
 	             <div class="form-group inline col-lg-5 left margin">
 	              <label class="input-text-goal w3-left">Total Amount of Goal:</label>
-	              <input type="text" class="form-control w3-input custom-amount number" style="height: 3.2rem; padding-left:10px;width:100%" placeholder="Enter Goal Amount" v-model="cgvm.GoalAmount" required="" id="custom-amount" value="">
+	              <input type="text" class="form-control w3-input custom-amount number" style="height: 3.2rem; padding-left:10px;width:100%" placeholder="Enter Goal Amount" v-model="cgvm.GoalAmount" required="" id="custom-amount" value="" onchange="calculateGoalDuration()">
 	            </div>
 	             <div class="form-group inline col-lg-5 left margin">
 	              <label class="input-text-goal w3-left">You will invest the sum of:</label>
-	              <input type="text" style="height: 3.2rem; padding-left:10px " required="" v-model="cgvm.MonthlyDeduction" class="form-control w3-input custom-deduction number" id="custom-deduction" value="">
+	              <input type="text" style="height: 3.2rem; padding-left:10px " required="" v-model="cgvm.MonthlyDeduction" class="form-control w3-input custom-deduction number" id="custom-deduction" value="" onchange="calculateGoalDuration()">
 	            </div>
-	                 <div class="form-group inline col-lg-1 left margin">
-	                </div>
-	             <div class="form-group inline col-lg-5 left margin">
-	              <label class="input-text-goal w3-left">Number of Deductions:</label>
-	              <input type="text" class="form-control w3-input custom-duration" style="height: 3.2rem; padding-left:10px " tabindex="-1" readonly="readonly" required="" v-model="cgvm.Duration" id="custom-duration" value="">
+	            <div class="form-group inline col-lg-1 left margin">
 	            </div>
+	             
 	            <div class="form-group inline col-lg-5 left margin">
 	              <label class="input-text-goal w3-left">Frequency:</label>
 	              <select v-model="cgvm.Frequency" required="" data-placement="bottom" id="frequency" class="form-control w3-input frequency" onchange="freqChange()">
@@ -533,7 +529,7 @@
 	            </div>
 	            <div class="form-group inline col-lg-1 left margin">
 	                </div>
-	             <div class="form-group inline col-lg-5 left margin " style="">
+	            <div class="form-group inline col-lg-5 left margin " style="">
 	              &nbsp;
 	              <label class="input-text-goal w3-left">Day To Be Debited:</label>
 	              <div class="col-xs-12 text-field" id="monthDays" v-if="cgvm.Frequency == 'Monthly'">
@@ -570,7 +566,7 @@
 						<option value="30">30</option>
 						<option value="31">31</option>
 					</select>
-				</div>
+					</div>
 
 	              <div class="col-xs-12 text-field" id="weekDays" v-if="cgvm.Frequency == 'Weekly'">
 	                  <select class="form-control w3-input" v-model="cgvm.weekDays" data-toggle="tooltip" data-placement="bottom" data-original-title="" title=""  v-if="cgvm.Frequency == 'Weekly'">
@@ -586,7 +582,12 @@
 				  
 				  
 				</div>
-	             
+				<div class="clearfix"></div>
+						<hr>
+				<div class="form-group inline col-lg-5 left margin">
+					<label class="input-text-goal w3-left">Number of Deductions:</label>
+					<input type="text" class="form-control w3-input custom-duration" style="height: 3.2rem; padding-left:10px " tabindex="-1" readonly="readonly" required="" :value="cgvm.Duration" id="custom-duration" v-model="cgvm.Duration">
+				  </div>
 
 						<div class="clearfix"></div>
 						<hr>
@@ -620,7 +621,7 @@
 	    </div>
 	    </section>
 	</div>
-	
+	 
 	<button onclick="goalTab('createGoal')" class="w3-button w3-circle w3-text-white floating-btn w3-buttom" style="background:#d8e2f1;padding-left: 10px;padding-right: 10px;padding-bottom: 5px!important; padding-top: 5px!important;">
 		<small><span class="" style="    font-size: 3em!important; padding-top: 4px"><img src="img/LineIcons/Secondary(Icons)/create_goal.png" class="navIcon"/></span></small>
 	</button>
@@ -631,6 +632,5 @@
 <script type="text/javascript" src="secured/controller/goal.js"></script>
 <script type="text/javascript" src="assets/js/jquery.validate.js"></script>
 <script type="text/javascript" src="assets/js/jquery-ui.js"></script>  
-<script type="text/javascript" src="assets/js/pwstrength.js"></script> 
 <script type="text/javascript" src="assets/js/index.js"></script> 
 

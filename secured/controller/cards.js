@@ -17,7 +17,8 @@ $(document).ready(function(){
          updateDataFromApi(null)
     }else{
         startLoad()
-        renda.get('/cards/'+sessionStorage.UserId,'stats','cards');
+        renda.post('PaymentDetails/FetchPaymentDetails',JSON.stringify(JSON.stringify({'UserId':sessionStorage.UserId})),'stats',null,null,'cards');
+
     }
     showAddCardForm('addNewCardForm')
 });
@@ -105,26 +106,30 @@ function deleteCard(data,id){
             JSON.parse(data);
         }catch(err){
             stopLoad();
-            toastr.error('An error occured while verfying user information.')
+            toastr.error(data)
             console.dir(err);
             return false;
         }
         stopLoad();
         console.dir(data)
         data = JSON.parse(data);
-        if (data.status == 200){         
-            toastr.success(data['message']);
+        if (data){         
+            toastr.success("Card Deleted Successfully");
         }else{
-            toastr.error(data['message']);
+            toastr.error(data);
             alert('An error occured while removing card. Please try again later.')    
         }           
         return false;
     }else{
         if(id){
             startLoad()
-            url = '/card/delete/'+id;   
-            renda.get(url,'deleteCard');
-            
+            url = 'PaymentDetails/Delete';   
+            data = {
+                "cardNo":id,
+                "UserId":sessionStorage.UserId
+            };
+            data = JSON.stringify(data)
+            renda.post(url,JSON.stringify(data),'deleteCard');
         }else{
             toastr.error('an error occured while identifying card')
         }

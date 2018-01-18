@@ -11,10 +11,10 @@ class FileUpload{
             "numOfTimesGenerated":0
             
         }
-        this.fileUpload = function(file){
+        this.Upload = function(file){
             
             var data = JSON.stringify({
-                "Password": this.serverSettings.Password,
+                "ProfilePic": file,
                 "EmailAddress": this.serverSettings.EmailAddress,
                 "Username": this.serverSettings.Username
               });

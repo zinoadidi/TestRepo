@@ -53,7 +53,11 @@ function register(data){
             // confirm user state
             renda.page('register_otp')             
         }else{
-            alert(result);    
+            if(result.message){
+                alert(result.message);    
+            }else{
+                alert(result)
+            }
         }
         return false;
     }else{
