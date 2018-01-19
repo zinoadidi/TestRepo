@@ -22,12 +22,15 @@
         }); 
         loginClass = new Login();
         loginClass.generateArmOneToken()
+
         // check app cache
       
     });
     /* Basic Functions */
     function login(data,option){
-        if (data) {
+        //alert("data:"+data+" option:"+option)
+        if (data || option == 'armOne') {
+            //alert('got back')
             try{
                 JSON.parse(data);
             }catch(err){
@@ -98,9 +101,12 @@
                 return false;
             }
         }else{
-            let email = document.getElementById('Username').value;
-            let pass = document.getElementById('Password').value; 
-            
+            var email = document.getElementById('Username').value;
+            var pass = document.getElementById('Password').value; 
+            if(email.length<4 || pass.length < 4){
+                alert('please provide username and password');
+                return false;
+            } 
             data = {
                 "Membershipkey": email,
                 "Password": pass,
@@ -110,6 +116,8 @@
             if (validateObj(data)){
                 renda.loader('start')
                 loginClass.authenticateUser(JSON.stringify(data));
+                //alert('passed')
+
             }else{
                 return false;
             }
@@ -127,7 +135,7 @@
                 console.dir(err);
                 return false;
             } 
-            let result = JSON.parse(data);
+            var result = JSON.parse(data);
             result = modResult(result)
             console.dir(result);
             if (result.status == 200){
@@ -161,7 +169,82 @@
         return false;  
     }
 
+    function forgot_password(data,option){
+        if (data) {
 
+            try{
+                JSON.parse(data);
+            }catch(err){
+                stopLoad()
+                toastr.error('An error occured while verfying user information.')
+                console.dir(err);
+                return false;
+            } 
+            let result = JSON.parse(data);
+            result = modResult(result)
+            console.dir(result);
+            if (result.status == 200){
+               if(option){
+                    toastr.success('Password reset was successful. please log in to continue')
+                    renda.page('login')
+                }else{
+                    sessionStorage.resetPasswordDetail = JSON.stringify()
+                    result.message = 'Please provide your security detail to continue';
+                    toastr.success(result.message); 
+                    $('#verify_user_account').show();
+                    $('#verify_email').hide();
+                }      
+            }else{
+                toastr.error(result['message']);    
+            }
+            stopLoad()                                    
+            return false;
+        }
+        if(option){
+            var userdetails = JSON.parse(sessionStorage.resetPasswordDetail)
+            console.dir(userdetails);
+            var SecurityQuestion = $('#resetSecurityQuestion').val();
+            var SecurityAnswer = $('#resetSecurityAnswer').val();
+            var password = $('#resetpassword').val();
+            var confirmPassword = $('#resetConfirmPassword').val();
+            if(userdetails.data.SecurityQuestion != SecurityQuestion){toastr.error('Your Security Question Does Not Match'); return false;}
+            if(userdetails.data.SecurityAnswer != SecurityAnswer){toastr.error('Your Security Answer Does Not Match'); return false;}
+            data = {
+                "Membershipkey": $('#'),
+                "OldPassword": "",
+                "NewPassword": "Costain2007",
+                "IsReset": true,
+                "Channel": "ARM_PAYDAY_MOBILE"
+            }
+            if (validateObj(data)){
+                renda.loader('start')
+                // old password restt
+                /* renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login'); */
+                data = JSON.stringify(data)
+                renda.post('Account/FetchUserByEmail',JSON.stringify(data),'forgot_password')            
+            }else{
+                return false;
+            }     
+        }else{
+            let email = document.getElementById('Username').value;
+            data = {
+                "Email":email
+            };
+            if (validateObj(data)){
+                renda.loader('start')
+                // old password restt
+                /* renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login'); */
+                data = JSON.stringify(data)
+                renda.post('Account/FetchUserByEmail',JSON.stringify(data),'forgot_password')            
+            }else{
+                return false;
+            }
+        }      
+        
+        return false;  
+    }
+
+    
     function checklogin(){
 
       if (typeof(Storage) !== "undefined") {
@@ -455,3 +538,17 @@ window.onbeforeunload = function (e) {
     // For Safari
     return 'Are You Sure?'; */
   };
+
+  function sendEmail(data){
+    var data= {
+        "RecipientEmail":'',
+        "Subject":'',
+        "body":'',
+        "isHtml":false,
+        "Attachment":''
+    }
+    data = JSON.stringify(data)
+    renda.post('Utility/SendEmail',JSON.stringify(data),data.callBack);
+
+    
+  }

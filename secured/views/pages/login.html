@@ -180,7 +180,7 @@
                 <div class="w3-text-white w3-center font-medium w3-padding w3-margin-left">
                     PLEASE LOGIN TO CONTINUE
                 </div> 
-                <form class="" onsubmit="event.preventDefault();login()">
+                <form class="" onsubmit="login();event.preventDefault();">
                     <div class="w3-margin">
                         <span class="fa fa-envelope-o w3-xxlarge"></span>
                         <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="email" placeholder="Enter Your Email"  id="Username" required="">
@@ -192,7 +192,7 @@
                     </div>
                     <div>
                         
-                        <button class="w3-button pdy-green w3-bar w3-margin font-small">Login</button>      
+                        <button class="w3-button pdy-green w3-bar w3-margin font-small" onclick="login()" type="button">Login</button>      
                         <center><span class=" w3-text-white font-small pdy-padding-left-ex forgot-password" onclick="renda.page('forgot_password')">Forgot Password?</span></center>                
                     </div>
                 </form>
@@ -203,7 +203,5 @@
             </div>
         </div>
 	</section>
-
- 
-
-<script>renda.loader('stop') </script>
+	
+ <script>renda.loader('stop') </script>

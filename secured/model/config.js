@@ -9,7 +9,7 @@
         trackUrlChanges:false,
         registerPageHistory:true, 
         viewPath:'secured/views/',
-        serverUrl:'http://192.168.250.29:8000/pdiv/',
+        serverUrl:'http://154.113.16.147:8000/pdiv/',
         appMode:'debug',
         httpReqHeaders:{
             "Content-Type": "application/json",
