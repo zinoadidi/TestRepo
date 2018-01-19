@@ -1,5 +1,5 @@
 var cardRegStep = 0;
-var cardVerificationVar = '';
+
 $(document).ready(function(){ 
     //load extra files
     $("#read-btn-1").click(function() {
@@ -23,15 +23,16 @@ $(document).ready(function(){
     showAddCardForm('addNewCardForm')
 });
 
-function createCard(data){
+function createCard(data,cardRegStep){
     var url ='';    
     if(data){
         try{
             JSON.parse(data);
         }catch(err){
             stopLoad();
+            checkInternet()            
             toastr.error('An error occured while verfying user information.')
-            console.dir(err);
+            console.log(err);
             return false;
         }
         stopLoad();
@@ -45,11 +46,29 @@ function createCard(data){
                 $('#verifyCardIframe').attr('src',data['data']['data']['authurl']);
                 $('#verifyCardDiv').show()*/
                 cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_blank', 'location=yes');
+               cardVerificationVar.addEventListener('loadstop', function(event) { 
+                   var url = event.url;
+                   var urlSearch = url.search('/card/tokinze/getFeedback/')
+                   alert(event.url); 
+                   if (urlSearch == -1){
+                   }else{
+                    cardVerificationVar.close();
+                    promiseXmlHTTP({url:url,method:'GET'}).then(function(result){
+                        createCard(result,'tokenizeResult')
+                    });
+                    toastr.warning('Finalizing transaction, Please wait.')
+                   }
+                   
+                }); 
                /*  cardVerificationVar.addEventListener('loadstop', function() { alert(event.url); }); */
+               
                 //navigator.app.loadUrl(encodeURI(data['data']['data']['authurl']),{openExternal:true});
+                cardRegStep = 2;
                 return false;
             }else{
                 toastr.success('Card Successfully Added!')
+                startLoad()
+                renda.component('card','view','dashboardDisplayDiv');
                 //showAddCardForm('addNewCardForm')  
             }
         }else{
@@ -66,13 +85,14 @@ function createCard(data){
         var cvc = myCard.CardJs('cvc');
 
         if(cardRegStep != 2){
-            url = '/card/tokinize';   
+            url = 'paydaypayment/card/tokinize';   
             data = {
                 "ExpiryYear":expiryYear,
                 "ExpiryMonth":expiryMonth,
                 "CardNo": cardNumber,
                 "CVV": cvc,
-                "UserId": sessionStorage.UserId
+                "UserId": sessionStorage.UserId,
+                "MembershipNumber":sessionStorage.UserId
             }
             if(String(cardNumber).lenght < 12){
                 toastr.error('Please Confirm The Lenght of Your Card Number')
@@ -83,7 +103,7 @@ function createCard(data){
                 return false
             }
             if (validateObj(data)){
-                startLoad()
+                startLoad() 
                 renda.post(url,JSON.stringify(data),'createCard');
             }else{
                 return false;

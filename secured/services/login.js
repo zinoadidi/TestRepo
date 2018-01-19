@@ -1,7 +1,7 @@
 class Login{
     constructor() {
         this.serverSettings={
-            "armOneBaseUrl": "http://154.113.16.147:8000/armauth",
+            "armOneBaseUrl": armOneBaseUrl,
             "Password": "abamiedA1980@arm.com",
             "EmailAddress": "zinoadidi@gmail.com",
             "Username": "PaydayMobile",
@@ -12,6 +12,7 @@ class Login{
             
         }
         this.generateArmOneToken = function(){
+            checkInternet()
             //alert('gen token')
             if(this.serverSettings.numOfTimesGenerated >= 3){
                 if(this.serverSettings.numOfTimesGenerated >= 7) {
@@ -63,7 +64,7 @@ class Login{
         }
         this.authenticateUser = function(data){
             //alert('auth user')
-            
+            checkInternet()
             var lastGenerated = new Date();
             var newtime = lastGenerated.getHours()+lastGenerated.getMinutes();
             if(newtime - loginClass.serverSettings.lastGenerated <= 10){

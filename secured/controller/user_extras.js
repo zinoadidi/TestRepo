@@ -22,7 +22,7 @@ function initInvestment101Page(){
 	  }
     });
     startLoad()
-    promiseXmlHTTP({url:'https://paydayinvestor.arm.com.ng/api/v1/investment-one',method:'GET'}).then(function(result){
+    promiseXmlHTTP({url:paydayWebBaseUrl+'/investment-one',method:'GET'}).then(function(result){
     updateUserExtras(result,'investment101')
     });
 	if(sessionStorage.investment101){

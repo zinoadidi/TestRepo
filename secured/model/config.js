@@ -35,8 +35,14 @@
         }
     };
     renda.config(appSettings);
- 
 
+    var paydayWebBaseUrl = "https://paydayinvestor.arm.com.ng/api/v1";
+    var armOneBaseUrl = "http://154.113.16.147:8000/armauth";
+    var paydayWebKongUrl = "http://192.168.250.29:8000/paydaypayment";
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////  TEST DATA STARTS HERE //////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  var USERDATA = {
     "status": 200,
     "message": "Login Successful",
@@ -63,37 +69,9 @@
         "SecurityQuestion": "TestQuestion",
         "SecurityAnswer": "TestAnswer"
     }
-} 
+ } 
 
-var TESTDATA = {
-    "status": 200,
-    "message": "",
-    "data": {
-        "UserId": "PIV1000213131",
-        "Surname": "Adidi",
-        "Firstname": "Zino",
-        "Middlename": "Adidi",
-        "BVN": "12345678909",
-        "BankName": "First Bank",
-        "BankAccountNo": "1234567890",
-        "Address": "vfgdf",
-        "Email": "zino@home.com",
-        "Phonenumber": "09090909090",
-        "RegistrationDate": "2017-11-23T16:39:36.177",
-        "Status": "active",
-        "ProfilePic": null,
-        "MaritalStatus": "Divorced",
-        "Gender": "Male",
-        "DOB": "2017-11-01T00:00:00",
-        "ProgressStatus": "KYC Submitted",
-        "Token": "56645",
-        "PRToken": null,
-        "SecurityQuestion": "TestQuestion",
-        "SecurityAnswer": "TestAnswer"
-    }
-}
-
-var TESTDASH = { 
+ var TESTDASH = { 
 
     "status": 200, 
     "message": "", 
@@ -122,10 +100,10 @@ var TESTDASH = {
             "AvailableBalance":4000
         }
     } 
-}
+ }
 
-var TESTcard = 
-{
+ var TESTcard = 
+ {
     "status":200,"message":null,
     "data":{
         "data":{
@@ -139,7 +117,7 @@ var TESTcard =
             "status":"success"
         }
     };
-var cardList ={
+ var cardList ={
     "status": 200,
     "message": "",
     "data": [
@@ -168,9 +146,9 @@ var cardList ={
         "DeductionDay": 27
         }
     ]
-}
+ }
 
-var funmiData={
+ var funmiData={
     "status": 200,
     "message": "",
     "data": {
@@ -307,9 +285,9 @@ var funmiData={
             "AccruedIntrest": 0
         }
     }
-}
+ }
 
-var armUserData = {"ResponseCode":"00","ResponseDescription":"User authenticated Successfully","SessionKey":"6hxaY9w98dzpcxeAzuIKi3HglUcvPcLfZC8MW+6qmv52UVzT6CqrqyY/S/F1/QwWzSb4V05w544JYqiyUxqiOi1bLS1JVi1bLX87l6RNUA7bL5GgeA30byl+aelLaJw92c53FLlrHkgr","RedirectURL":"https://stag-api.arm.com.ng/cookiemanager/Authenticate.aspx?Token=6hxaY9w98dzpcxeAzuIKi3HglUcvPcLfZC8MW%2b6qmv52UVzT6CqrqyY%2fS%2fF1%2fQwWzSb4V05w544JYqiyUxqiOi1bLS1JVi1bLX87l6RNUA7bL5GgeA30byl%2baelLaJw92c53FLlrHkgr&ReturnUrl=#!/dashboard&Action=Login","MembershipKey":0,"EmailAddress":"Testedd@gmail.com","FirstName":"TestFirstName","LastName":"TestSurname","SecurityQuestion":"TestQuestion","SecurityQuestion2":"","IsAccountActivated":true,"Subscription":[]}
+ var armUserData = {"ResponseCode":"00","ResponseDescription":"User authenticated Successfully","SessionKey":"6hxaY9w98dzpcxeAzuIKi3HglUcvPcLfZC8MW+6qmv52UVzT6CqrqyY/S/F1/QwWzSb4V05w544JYqiyUxqiOi1bLS1JVi1bLX87l6RNUA7bL5GgeA30byl+aelLaJw92c53FLlrHkgr","RedirectURL":"https://stag-api.arm.com.ng/cookiemanager/Authenticate.aspx?Token=6hxaY9w98dzpcxeAzuIKi3HglUcvPcLfZC8MW%2b6qmv52UVzT6CqrqyY%2fS%2fF1%2fQwWzSb4V05w544JYqiyUxqiOi1bLS1JVi1bLX87l6RNUA7bL5GgeA30byl%2baelLaJw92c53FLlrHkgr&ReturnUrl=#!/dashboard&Action=Login","MembershipKey":0,"EmailAddress":"Testedd@gmail.com","FirstName":"TestFirstName","LastName":"TestSurname","SecurityQuestion":"TestQuestion","SecurityQuestion2":"","IsAccountActivated":true,"Subscription":[]}
 
 var leyeTestData = {
         "UserId": "PIV1000615247",
@@ -347,3 +325,7 @@ var leyeTestData = {
 "IsReset": true,
 "Channel": "ARM_PAYDAY"
 } */
+
+
+
+//      serverUrl:'http://154.113.16.147:8000/pdiv/',

@@ -34,6 +34,7 @@ function register(data){
             var r = JSON.parse(data);
         }catch(err){
             stopLoad()
+            checkInternet()
             toastr.error('An error occured while performing request.')
             if(r.message){
                 alert(r.message);    

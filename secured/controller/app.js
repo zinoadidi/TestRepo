@@ -2,6 +2,7 @@
    $(document).ready(function(){ 
         //load extra files
         checklogin();   
+        checkInternet()
         $("#loadDashboardBtn").click(function(){
             loadDashboardStatsDiv();
         }); 
@@ -552,3 +553,26 @@ window.onbeforeunload = function (e) {
 
     
   }
+
+  function updateOnlineStatus() {
+    toastr.success('Connection established')
+  }
+
+  function updateOfflineStatus(){
+    toastr.warning('You device is offline. Please ensure you have adequate internet coverage')      
+  }
+
+window.addEventListener('online',  updateOnlineStatus);
+window.addEventListener('offline', updateOfflineStatus);
+
+function checkInternet() {
+   /*  if(navigator.connection.type){
+        var networkState = navigator.connection.type;
+        if(networkState == Connection.NONE || networkState == Connection.UNKNOWN) {
+            updateOfflineStatus();
+        } else {
+            return true;
+        }
+    } */
+    
+}

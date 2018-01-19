@@ -133,3 +133,4 @@ var transactions = {};
 var userProfile = {};
 
 var temporaryDashData = new Dashboard(null);
+var cardVerificationVar = '';
