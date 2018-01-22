@@ -17,6 +17,7 @@ var singleGoalApp = new Vue({
 	}
   });
 var isCard = '';
+
 /*createGoalApp.cgvm.UserId = sessionStorage.UserId*/
 //renda.get('/dashboardData/'+sessionStorage.UserId,'updateGoalList');
 /* if (option == 'new') {
@@ -28,7 +29,6 @@ var isCard = '';
 	dashboardApp.data = commonData;
 	stopLoad()
 } */
-renda.post('PaymentDetails/FetchPaymentDetails',JSON.stringify(JSON.stringify({'UserId':sessionStorage.UserId})),'updateCardList');
 
 renda.loader('stop')
 $('.frequency-depend').hide();
@@ -36,6 +36,7 @@ $('.frequencies').hide();
 goalTab('viewSingleGoal')
 
 function clear(){
+	loadDashboardData(null,'dashData')		
 	renda.component('goals','goal','dashboardDisplayDiv')
 }
 function onChangeInput(arg) {
@@ -77,8 +78,7 @@ function createGoal(data){
         }
     	stopLoad();
 		data = modResult(data)
-    	if (data.data.AppUserId){
-			loadDashboardData(null,'dashData')				
+    	if (data.data.AppUserId){			
 			toastr.success('Weldone!. Goal was created successfully')
 			clear();
 		}else{
@@ -121,17 +121,29 @@ function createGoal(data){
 			if (createGoalApp.cgvm.monthDays) {}else{
 				createGoalApp.cgvm.monthDays = '0'
 			}
-			var _duration =parseInt(createGoalApp.cgvm.GoalAmount.replace(",","")) / parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))
-			
+			try {var _duration =parseInt(createGoalApp.cgvm.GoalAmount.replace(",","")) / parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))}
+			catch(ex){
+				var _duration =parseInt(createGoalApp.cgvm.GoalAmount) / parseInt(createGoalApp.cgvm.MonthlyDeduction)
+			}
+			try {var GoalAmount =parseInt(createGoalApp.cgvm.GoalAmount.replace(",",""))}
+			catch(ex){
+				var GoalAmount =parseInt(createGoalApp.cgvm.GoalAmount)
+			}
+			try {var MonthlyDeduction =parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))}
+			catch(ex){
+				var MonthlyDeduction =parseInt(createGoalApp.cgvm.MonthlyDeduction)
+			}
+			var dateCreated = new Date();
 			var data = {
 				"UserId":sessionStorage.UserId,
 				"AppUserId":sessionStorage.UserId,
 				"ItemName":createGoalApp.cgvm.ItemName,
-				"GoalAmount":createGoalApp.cgvm.GoalAmount.replace(",",""),
-				"MonthlyDeduction":createGoalApp.cgvm.MonthlyDeduction.replace(",",""),
+				"GoalAmount":GoalAmount,
+				"MonthlyDeduction":MonthlyDeduction,
 				"Duration":_duration.toString(),				
 				"ProductId":"custom",
 				"GoalType":"custom",
+				"DateCreated":dateCreated.toJSON(),
 				"monthDays" : createGoalApp.cgvm.monthDays,
 				"weekDays" : createGoalApp.cgvm.weekDays,
 				"Day":createGoalApp.cgvm.Day,
@@ -156,6 +168,9 @@ function createGoal(data){
 }
 
 function viewSingleGoal(id){
+	if(sessionStorage.userCards){
+		updateCardList(JSON.stringify(sessionStorage.userCards))	
+	 }
 	console.log('id:',id)
 	if(typeof(id) !== null && typeof id === 'object'){
 		singleGoalApp.sgdata = id;
@@ -176,7 +191,6 @@ function viewSingleGoal(id){
 			}else{}
 		});
 	}
-	
 	goalTab('viewSingleGoal')	
 } 
 
@@ -187,13 +201,16 @@ function goalTab(tab){
 function updateCardList(data){
 	try{
 		data = JSON.parse(data);
+		data = JSON.parse(data);
+		
 		data = modResult(data);
-		sessionStorage.userCards = JSON.stringify(data);
+		console.log("=====================================================")
+		console.log(data)
 		if(data['data']){
 			isCard = true;
-			createGoalApp.cgvm.userCards = data['data'];	
-			singleGoalApp.sgdata.userCards = createGoalApp.cgvm.userCards
-				
+			createGoalApp.cgvm.userCards = data['data'];
+			singleGoalApp.sgdata.userCards = "";	
+			singleGoalApp.sgdata.userCards = data['data']
 		}else{
 			var confirmCreateCard = confirm('Hi. You have not added a payment method, Please click ok to add a card');
 			if(confirmCreateCard){
@@ -202,7 +219,6 @@ function updateCardList(data){
 				isCard = false;
 				goalTab('viewGoals')
 			}
-
 		}
 	  }catch(err){
 		console.dir(err);
@@ -220,6 +236,25 @@ goalTab('viewGoals')
 
 function onChangeCard(){
 	var element = $('#cards').find('option:selected'); 
+	createGoalApp.cgvm.userCards.CardNo = element.attr('id');
+	createGoalApp.cgvm.userCards.CardToken = element.attr('fwCode');
+	var data = JSON.parse(sessionStorage.userCards);
+	if(isCard == false){
+		var confirmCreateCard = confirm('Hi. You have not added a payment method, Please click ok to add a card');
+		if(confirmCreateCard){
+			renda.component('card','view','dashboardDisplayDiv');
+		}else{
+			isCard = false;
+			goalTab('viewGoals')
+		}	
+	}else{
+		
+	}
+}
+
+function onChangeCardEdit(){
+
+	var element = $('#cardsEdit').find('option:selected'); 
 	createGoalApp.cgvm.userCards.CardNo = element.attr('id');
 	createGoalApp.cgvm.userCards.CardToken = element.attr('fwCode');
 	var data = JSON.parse(sessionStorage.userCards);
@@ -276,11 +311,20 @@ function goalOptions(id,reqType){
 		var goal = singleGoalApp.sgdata; 
 		var data = '';
 		if(id == "Edit_Goal"){
+			
 			singleGoalApp.sgdata.userCards = createGoalApp.cgvm.userCards
 			$('#extendedGoalUI').show()
 			$('.extendGoalDivs').hide()
 			$('#editGoal').show()
-			//bhvgh
+			if(createGoalApp.cgvm.userCards){
+				var counter = 0;
+				for(counter = 0; counter < createGoalApp.cgvm.userCards.length; counter++){
+					var cards = createGoalApp.cgvm.userCards[counter]
+					$('#cardsEdit').append("<option fwCode='"+cards.FWCode+"' id='"+cards.Id+"'>"+cards.CardNo+ "</option>")					
+				}
+			}
+			
+
 			return false;
 		}
 		if(id == "Top_Up"){
@@ -369,12 +413,16 @@ function editGoal(data){
 		}
 		stopLoad();
 		data = JSON.parse(data);
+		data= modResult(data)
 		if (data.status == 200){
-			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
-			toastr.success(data['message'])
+			toastr.success('Goal Edited Successfuly')
 			clear();
 		}else{
-			toastr.error(data['message']);    
+			if(data['message']){
+				toastr.error(data['message']);    
+			}else{
+				toastr.error(data); 
+			}
 		}           
 		return false;
 	}else{
@@ -415,30 +463,42 @@ function editGoal(data){
 				createGoalApp.cgvm.monthDays = '0'
 			}
 			
+			try {var _duration =parseInt(createGoalApp.cgvm.GoalAmount.replace(",","")) / parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))}
+			catch(ex){
+				var _duration =parseInt(createGoalApp.cgvm.GoalAmount) / parseInt(createGoalApp.cgvm.MonthlyDeduction)
+			}
+			try {var GoalAmount =parseInt(createGoalApp.cgvm.GoalAmount.replace(",",""))}
+			catch(ex){
+				var GoalAmount =parseInt(createGoalApp.cgvm.GoalAmount)
+			}
+			try {var MonthlyDeduction =parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))}
+			catch(ex){
+				var MonthlyDeduction =parseInt(createGoalApp.cgvm.MonthlyDeduction)
+			}
 			var data = {
-				"AppUserId":sessionStorage.UserId,
 				"GoalId":singleGoalApp.sgdata.GoalId,
+				"AppUserId":sessionStorage.UserId,
 				"ItemName":createGoalApp.cgvm.ItemName,
-				"GoalAmount":createGoalApp.cgvm.GoalAmount,
-				"Duration":parseInt(createGoalApp.cgvm.GoalAmount) / parseInt(createGoalApp.cgvm.MonthlyDeduction),
-				"MonthlyDeduction":createGoalApp.cgvm.MonthlyDeduction,
-				"ProductId":'CustomProduct',
-				"AmountAttained":singleGoalApp.sgdata.AmountAttained,
-				"Status":singleGoalApp.sgdata.Status,
-				"DateCreate":singleGoalApp.sgdata.DateCreated,
-				"GoalType":'custom',				
+				"GoalAmount":GoalAmount,
+				"MonthlyDeduction":MonthlyDeduction,
+				"Duration":_duration.toString(),				
+				"ProductId":singleGoalApp.sgdata.ProductId,
+				"GoalType":singleGoalApp.sgdata.GoalType,
+				"monthDays" : createGoalApp.cgvm.monthDays,
+				"weekDays" : createGoalApp.cgvm.weekDays,
 				"Day":createGoalApp.cgvm.Day,
 				"Frequency":createGoalApp.cgvm.Frequency,
-				"GoalImage":GoalUpload
-				
-				/* "monthDays" : createGoalApp.cgvm.monthDays,
-				"weekDays" : createGoalApp.cgvm.weekDays,
+				"GoalImage":singleGoalApp.sgdata.GoalImage,
+				"Status":singleGoalApp.sgdata.Status,
 				"ItemDescription" : createGoalApp.cgvm.ItemDescription,
 				"CardId" : createGoalApp.cgvm.userCards.CardNo,
-				"ProductId":"1",
-				"CardToken" : createGoalApp.cgvm.userCards.CardToken */
+				"CardToken" : createGoalApp.cgvm.userCards.CardToken,
+				"DateCreated" : createGoalApp.cgvm.userCards.DateCreated,
+				"AmountAttained" : createGoalApp.cgvm.userCards.AmountAttained,
+				"ExcessFund" : createGoalApp.cgvm.userCards.ExcessFund
 			}  
 			if (validateObj(data)){
+				data = JSON.stringify(data)
 				renda.post(url,JSON.stringify(data),'editGoal');     
 			}else{
 				console.log('error occured');
@@ -503,6 +563,7 @@ function Top_Up_Goal(data,option){
 			}
 			if (validateObj(data)){
 				startLoad()
+				data = JSON.stringify(data)
 				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
 			}else{
 				console.log('error occured');
@@ -513,7 +574,7 @@ function Top_Up_Goal(data,option){
 			return false;       
 		}
 		if(option == 'wallet'){
-			url = '/wallet/transferToWallet';
+			url = 'Goal/WallettoGoal';
 			var element = $('#topUpCards').find('option:selected'); 
 			var cardToken = element.attr('fwCode');
 			
@@ -530,6 +591,7 @@ function Top_Up_Goal(data,option){
 			
 			if (validateObj(data)){
 				startLoad()
+				data = JSON.stringify(data)
 				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
 			}else{
 				console.log('error occured');
@@ -708,3 +770,14 @@ function topUpOptionsTab(tab){
 function transferToWallet(){
 	
 }
+
+ function updateGoalList(data){
+	viewGoalApp.commonData.Dashboard.goals.push(data)
+ }
+
+ if(sessionStorage.userCards){
+	updateCardList(JSON.stringify(sessionStorage.userCards))	
+ }else{
+	renda.post('PaymentDetails/FetchPaymentDetails',JSON.stringify(JSON.stringify({'UserId':sessionStorage.UserId})),'updateCardList');
+ }
+ 

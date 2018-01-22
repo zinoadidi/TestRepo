@@ -60,7 +60,6 @@ function Goal(obj){
 
 }
 
-
 function User(obj){
     this.UserId = obj == null ? '' : obj.UserId;
     this.Firstname = obj == null ? '' : obj.Firstname;
@@ -101,7 +100,6 @@ function existingUser(obj){
     this.State = obj == null ? '' : obj.State;
     this.Country = obj == null ? '' : obj.Country;
     this.State = obj == null ? '' : obj.State;
-    
 }
 
 function Cards(obj){
@@ -134,3 +132,6 @@ var userProfile = {};
 
 var temporaryDashData = new Dashboard(null);
 var cardVerificationVar = '';
+
+var mailTemplates = {
+}

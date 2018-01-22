@@ -22,7 +22,7 @@
 						</div>
 						
 					</div>  
-					
+					 
 				</div>
 			  </div>
 			  <div class="single-goal" style="" id="createGoalDiv" onclick="goalTab('createGoal')">
@@ -269,9 +269,10 @@
 									<label class="input-text-goal w3-left">Select A Card:</label>
 									<div class="card-holder">
 										<span>
-										<select v-if="sgdata.userCards" class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
+											
+										<select  class="form-control w3-input" onchange="onChangeCardEdit()"  id="cardsEdit" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">
 											<option></option>
-											<option v-for="n in sgdata.userCards" :fwCode='n.FWCode' :id="n.Id">{{ n.CardNo }}</option>
+											
 										</select>
 										</span>	
 										<span>
@@ -590,8 +591,6 @@
 				  </div>
 
 						<div class="clearfix"></div>
-						<hr>
-						
 						<label class="input-text-goal w3-left">Select A Card:</label>
 						<div class="card-holder">
 							<select v-if="cgvm.userCards[0].CardNo" class="form-control w3-input" onchange="onChangeCard()"  id="cards" required='' data-toggle="tooltip" data-placement="bottom" data-original-title="" title="">

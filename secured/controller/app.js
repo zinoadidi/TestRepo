@@ -540,39 +540,78 @@ window.onbeforeunload = function (e) {
     return 'Are You Sure?'; */
   };
 
-  function sendEmail(data){
-    var data= {
-        "RecipientEmail":'',
-        "Subject":'',
-        "body":'',
-        "isHtml":false,
+  function sendEmail(option,data){
+    switch (option) {
+        case 'register':
+            var subject ='Account Activation';
+            var message =  `
+            Hi ${data.data.Firstname}, <br/>
+            Welcome to PayDay Investor!<br/>
+            You have taken the first step towards achieving that financial goal. <br/>
+            Let’s get started! You can choose to invest weekly or monthly, directly from your Naira debit card.<br/>
+            Your username/email address is: ${data.data.Email}.<br/>
+            Please provide the code below as requested on Payday Mobile App to activate your account.<br/>
+            <br/><big><b>${data.data.Token}</b></big><br/><br/>
+            All the right answers are in our FAQ section. However, feel free to complete the Contact Us form if
+            you think your question requires special attention. We hope to give you a prompt and thorough response. <br/>
+            <br/>
+            Thank you for choosing to invest with PayDay Investor. 
+            <br/><br/>
+            Best Regards,<br/>
+            PayDay Investor Team
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email =data.data.Email;
+            break;
+        default:
+            break;
+    }
+    
+    var ndata= {
+        "RecipientEmail":email,
+        "Subject":subject,
+        "body":message,
+        "isHtml":true,
         "Attachment":''
     }
-    data = JSON.stringify(data)
-    renda.post('Utility/SendEmail',JSON.stringify(data),data.callBack);
-
-    
+    ndata = JSON.stringify(ndata)
+    renda.post('Utility/SendEmail',JSON.stringify(ndata),'mailResponse');
   }
 
+  function mailResponse(data){
+    console.log('========mail send response')
+    console.log(data)
+  }
   function updateOnlineStatus() {
-    toastr.success('Connection established')
+    toastr.info('Connection established')
   }
 
   function updateOfflineStatus(){
-    toastr.warning('You device is offline. Please ensure you have adequate internet coverage')      
+    toastr.clear()
+    toastr.warning('Your device is offline. Please ensure you have adequate internet coverage')      
   }
 
 window.addEventListener('online',  updateOnlineStatus);
 window.addEventListener('offline', updateOfflineStatus);
 
-function checkInternet() {
-   /*  if(navigator.connection.type){
-        var networkState = navigator.connection.type;
-        if(networkState == Connection.NONE || networkState == Connection.UNKNOWN) {
-            updateOfflineStatus();
-        } else {
-            return true;
-        }
-    } */
-    
+function checkInternet() {  
+    $.get("http://www.google.com").done(win).fail(fail);
+    function win(){
+        updateOnlineStatus();
+    }
+    function fail(){
+        updateOfflineStatus();
+    }
 }
+
+document.addEventListener("deviceready", function(e){
+    console.log(navigator.connection.type);
+    document.addEventListener("offline", function(e){
+        updateOfflineStatus()
+    }, false);  
+}, false);  

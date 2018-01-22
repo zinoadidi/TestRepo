@@ -56,6 +56,7 @@ function register(data){
             sessionStorage.UserInfo = JSON.stringify(result)
             updateUserData()
             // confirm user state
+            sendEmail('register',result);
             renda.page('register_otp')             
         }else{
             if(result.message){

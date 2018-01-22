@@ -31,7 +31,7 @@ function createCard(data,cardRegStep){
         }catch(err){
             stopLoad();
             checkInternet()            
-            toastr.error('An error occured while verfying user information.')
+            toastr.error('An error occured while performing request. Please try again')
             console.log(err);
             return false;
         }
@@ -46,16 +46,19 @@ function createCard(data,cardRegStep){
                 $('#verifyCardIframe').attr('src',data['data']['data']['authurl']);
                 $('#verifyCardDiv').show()*/
                 cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_blank', 'location=yes');
-               cardVerificationVar.addEventListener('loadstop', function(event) { 
+                cardVerificationVar.addEventListener('loadstop', function(event) { 
                    var url = event.url;
                    var urlSearch = url.search('/card/tokinze/getFeedback/')
-                   alert(event.url); 
+                   //alert(event.url); 
                    if (urlSearch == -1){
                    }else{
                     cardVerificationVar.close();
-                    promiseXmlHTTP({url:url,method:'GET'}).then(function(result){
-                        createCard(result,'tokenizeResult')
-                    });
+                    url = url.replace('http://41.216.170.131/api/v1/','')
+                    console.log(url)                    
+                    renda.get('paydaypayment/'+url,'createCard',2)
+                    /* promiseXmlHTTP({url:url,method:'GET'}).then(function(result){
+                        createCard(result,2)
+                    }); */
                     toastr.warning('Finalizing transaction, Please wait.')
                    }
                    
@@ -116,7 +119,7 @@ function createCard(data,cardRegStep){
         }
         return false;
     }
-
+ 
 }
 
 function deleteCard(data,id){
