@@ -93,6 +93,98 @@ class Login{
 
             }
             
+        
+        }
+        this.resetPassword = function(data){
+            //alert('auth user')
+            checkInternet()
+            var lastGenerated = new Date();
+            var newtime = lastGenerated.getHours()+lastGenerated.getMinutes();
+            if(newtime - loginClass.serverSettings.lastGenerated <= 10){
+                var data = data;
+                var xhr = new XMLHttpRequest();
+            
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        if(xhr.status == 401){
+                            //alert('arm auth failed')
+                            loginClass.generateArmOneToken()
+                            toastr.error('Failed to communicate with server. Check that you have good network coverage and try again. If this problem persist, please contact an administrator ')
+                        }
+                        reset_password(this.response)
+                    }
+                });
+                xhr.open("POST", loginClass.serverSettings.armOneBaseUrl+"/v1/ARMONE/ResetPassword");
+                xhr.setRequestHeader("Authorization", loginClass.serverSettings.CustomerReference);            
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(data);
+            }else{
+                //alert('generating new token old:'+loginClass.serverSettings.lastGenerated+' new:'+newtime)
+                this.generateArmOneToken()
+                this.resetPassword(data)
+            }
+        }
+
+        this.forgotPassword = function(data){
+            //alert('auth user')
+            checkInternet()
+            var lastGenerated = new Date();
+            var newtime = lastGenerated.getHours()+lastGenerated.getMinutes();
+            if(newtime - loginClass.serverSettings.lastGenerated <= 10){
+                var data = data;
+                var xhr = new XMLHttpRequest();
+            
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        if(xhr.status == 401){
+                            //alert('arm auth failed')
+                            loginClass.generateArmOneToken()
+                            toastr.error('Failed to communicate with server. Check that you have good network coverage and try again. If this problem persist, please contact an administrator ')
+                        }
+                        reset_password(this.response,'forgot_password')
+                    }
+                });
+                
+                xhr.open("POST", loginClass.serverSettings.armOneBaseUrl+"/v1/ARMONE/AnswerSecurityChallenge");
+                xhr.setRequestHeader("Authorization", loginClass.serverSettings.CustomerReference);            
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(data);
+            }else{
+                //alert('generating new token old:'+loginClass.serverSettings.lastGenerated+' new:'+newtime)
+                this.generateArmOneToken()
+                this.forgotPassword(data)
+
+            }
+            
+        }
+        this.changePassword = function(data){
+            //alert('auth user')
+            checkInternet()
+            var lastGenerated = new Date();
+            var newtime = lastGenerated.getHours()+lastGenerated.getMinutes();
+            if(newtime - loginClass.serverSettings.lastGenerated <= 10){
+                var data = data;
+                var xhr = new XMLHttpRequest();
+            
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        if(xhr.status == 401){
+                            //alert('arm auth failed')
+                            loginClass.generateArmOneToken()
+                            toastr.error('Failed to communicate with server. Check that you have good network coverage and try again. If this problem persist, please contact an administrator ')
+                        }
+                        change_password(this.response)
+                    }
+                });
+                xhr.open("POST", loginClass.serverSettings.armOneBaseUrl+"/v1/ARMONE/ResetPassword");
+                xhr.setRequestHeader("Authorization", loginClass.serverSettings.CustomerReference);            
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(data);
+            }else{
+                //alert('generating new token old:'+loginClass.serverSettings.lastGenerated+' new:'+newtime)
+                this.generateArmOneToken()
+                this.changePassword(data)
+            }
         }
             
     }

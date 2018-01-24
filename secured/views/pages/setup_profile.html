@@ -243,7 +243,13 @@
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </div>
                                 <div class="col-xs-10 text-field" id="username-field">
-                                    <input type="date" id="dob" placeholder="Date of Birth (yyyy-mm-dd)"  v-model="vm.DOB" required="" class="w3-input w3-select input-text-fixed">
+                                        <div class="col-xs-5 text-field" id="username-field">
+                                            <label class=" w3-select input-text-fixed" style="border:0px!important;"><strong style="color:white!important">Date of Birth:</strong></label>
+                                        </div>
+                                        <div class="col-xs-5 text-field" id="username-field">
+                                            <input type="date" id="dob" placeholder="Date of Birth (yyyy-mm-dd)"  v-model="vm.DOB" required="" class="w3-input w3-select input-text-fixed">
+                                            
+                                        </div>
                                 </div>
                             </div>
 

@@ -85,7 +85,7 @@ function initTransactionsPage(){
 	if(sessionStorage.transactions){
 		transactions.data = JSON.parse(sessionStorage.transactions);
     }
-    
+    filterTransactions()
 }
 
 function updateUserExtras(data,option){
@@ -358,6 +358,7 @@ function submitContactForm(data){
         }
         
         data = JSON.parse(data);
+        data = modResult(data)
         if(data['status'] == 200){
             toastr.success('Thank you for contacting us. We will get back to you shortly')
         }else{
@@ -381,7 +382,7 @@ function submitContactForm(data){
             "ContactOption":$('#ContactOption').val(),
             "Message":$('#Message').val(),
         } 
-        
+
         data = {
             "name": confirmData.FullName,
             "phone": confirmData.PhoneNumber,
@@ -391,10 +392,73 @@ function submitContactForm(data){
         }
         console.dir(data)            
         startLoad()
-        renda.post("/sendContactMessage",JSON.stringify(data),'prepareProfileUpload');     
+        sendEmail(data,'contactUs');
+        //sendEmail(data,'contactUsFeedback');
+        submitContactForm(JSON.stringify(data))
        
     }else{
         return false;
     }
       
+}
+
+function change_password(data){
+    if (data) {
+
+        try{
+            JSON.parse(data);
+        }catch(err){
+            stopLoad()
+            toastr.error('An error occured while performing request.')
+            console.dir(err);
+            return false;
+        } 
+        let result = JSON.parse(data);
+        
+        console.dir(result);
+        if (result.ResponseCode == "00"){
+            alert('Password change Successful. Please login to continue using your account')
+            logout()   
+        }else{
+            toastr.error(result['StatusMessage']); 
+            alert('Please confirm that you are not using your old password. Your new password should contain numbers, symbols and not less than 8 characters.')                       
+        }
+        stopLoad()                                    
+        return false;
+    }else{
+        var SecurityQuestion = $('#resetSecurityQuestion').val();
+        var SecurityAnswer = $('#resetSecurityAnswer').val();
+        var password = $('#resetNewPassword').val();
+        var confirmPassword = $('#resetConfirmPassword').val();
+        var oldPassword = $('#resetOldPassword').val();
+       
+
+        data = {
+            "Membershipkey": payday.user.Email,
+            "OldPassword": oldPassword,
+            "NewPassword": password,
+            "IsReset": true,
+            "Channel": "ARM_PAYDAY_MOBILE"
+        }
+        if(password == '' || password != confirmPassword || password.length<8||oldPassword==''){toastr.error('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
+        
+        if (validateObj(data)){
+            renda.loader('start')
+            loginClass.changePassword(JSON.stringify(data))
+            //renda.post('armAuth/v1/ARMONE/ResetPassword',JSON.stringify(data),'reset_password')            
+        }else{
+            return false;
+        } 
+       
+    }      
+    
+    return false; 
+}
+
+function initContactForm(){
+    
+    $('#FullName').val(payday.user.Firstname +' ' + payday.user.Surname);
+    $('#PhoneNumber').val(payday.user.Phonenumber);
+    $('#Email').val(payday.user.Email);
+    
 }

@@ -80,6 +80,10 @@ function createGoal(data){
 		data = modResult(data)
     	if (data.data.AppUserId){			
 			toastr.success('Weldone!. Goal was created successfully')
+			data.data.Firstname = payday.user.Firstname;
+			data.data.Email = payday.user.Email;
+			
+			sendEmail('createGoal',data);
 			clear();
 		}else{
             toastr.error('Request failed. Please try again');    
@@ -97,13 +101,24 @@ function createGoal(data){
 			GoalUpload.then(function(result) {
 				GoalUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				console.log(result)
-				sendGoalReq();
+				uploadGoalImage();
 			});
 		}else{
 			GoalUpload = undefined;
 			sendGoalReq()
 		}
-		
+		function uploadGoalImage(data){
+			if(data){
+				stopLoad()
+				data = JSON.parse(data)				
+				//if()
+				sendGoalReq();
+			}else{
+				startLoad()
+				var data = {"ProfilePic":GoalUpload}
+				renda.post('paydaypayment/uploadimage',JSON.stringify(data),'createGoal.uploadGoalImage')				
+			}
+		}
 		function sendGoalReq(){
 			console.log('ready to lunch')
 			if (createGoalApp.cgvm.Day) {}else{
@@ -287,6 +302,7 @@ function goalOptions(id,reqType){
 			}else{
 				toastr.error(id)
 			}
+
 		}
 		try{
             JSON.parse(id);
@@ -296,12 +312,15 @@ function goalOptions(id,reqType){
 			
 			return false;			
         }
-		data = JSON.parse(id);
+		var data = JSON.parse(id);
 		data = modResult(data)
 
 		if(data['data']){
 			toastr.success('Goal Updated Successful')
 			singleGoalApp.sgdata = data['data']
+			data.data.Firstname = payday.user.Firstname;
+			data.data.Email = payday.user.Email;
+			sendEmail('editGoal',data);
 			
 		}else{
 			toastr.warning(data)
@@ -329,6 +348,13 @@ function goalOptions(id,reqType){
 		}
 		if(id == "Top_Up"){
 			singleGoalApp.sgdata.userCards = createGoalApp.cgvm.userCards
+			if(createGoalApp.cgvm.userCards){
+				var counter = 0;
+				for(counter = 0; counter < createGoalApp.cgvm.userCards.length; counter++){
+					var cards = createGoalApp.cgvm.userCards[counter]
+					$('#topUpCards').append("<option fwCode='"+cards.FWCode+"' id='"+cards.Id+"'>"+cards.CardNo+ "</option>")					
+				}
+			}
 			$('#extendedGoalUI').show()
 			$('.extendGoalDivs').hide()			
 			$('#topUpGoal').show()
@@ -416,6 +442,10 @@ function editGoal(data){
 		data= modResult(data)
 		if (data.status == 200){
 			toastr.success('Goal Edited Successfuly')
+			data.data.Email = payday.user.Email;
+			data.data.Firstname = payday.user.Firstname;
+			
+			sendEmail('editGoal',data)
 			clear();
 		}else{
 			if(data['message']){
@@ -524,6 +554,14 @@ function Top_Up_Goal(data,option){
 		}catch(err){
 			stopLoad()
 			toastr.error('An error occured while performing request.')
+			if(data){
+				if(data.length<70){
+					alert(data)
+				}else{
+
+				}
+				
+			}
 			console.dir(err);
 			return false;
 		}
@@ -540,15 +578,17 @@ function Top_Up_Goal(data,option){
 		return false;
 	}else{
 		if(option == 'card'){
-			url = '/goal/topup';
+			url = 'paydaypayment/goal/topup';
 			var element = $('#topUpCards').find('option:selected'); 
 			var cardToken = element.attr('fwCode');
 			
 			var data = {
 				"UserId":sessionStorage.UserId,
+				"UserId":sessionStorage.UserId,
 				"GoalId":singleGoalApp.sgdata.GoalId,
 				"GoalAmount":$('#GoalAmount').val(),
-				"CardToken" : cardToken
+				"CardToken" : cardToken,
+				"MembershipNumber":sessionStorage.UserId
 			}  
 			if(data.GoalAmount){
 			}else{
@@ -563,7 +603,6 @@ function Top_Up_Goal(data,option){
 			}
 			if (validateObj(data)){
 				startLoad()
-				data = JSON.stringify(data)
 				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
 			}else{
 				console.log('error occured');
@@ -658,7 +697,6 @@ function redeemGoal(data){
 			return false;
 		} 
 		return false;       
-		
 	}
 }
 
@@ -720,26 +758,27 @@ function moveExcess(data){
 		}catch(err){
 			stopLoad()
 			toastr.error('An error occured while performing request.')
+			alert(data)
 			console.dir(err);
 			return false;
 		}
 		stopLoad();
 		data = JSON.parse(data);
-		if (data.status == 200){
-			renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
-			toastr.success(data['message'])
+		if (data){
+			//renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
+			toastr.success(data)
 			clear();
 			updateDataFromApi(null)
 		}else{
-			toastr.error(data['message']);    
+			toastr.error(data);    
 		}           
 		return false;
 	}else{
-		url = '/goal/moveExess';
+		url = 'Goal/ExcessFund';
 		var data = {
 			
 			"GoalId":singleGoalApp.sgdata.GoalId,
-			"Excess":$('#excessAmount').val()
+			"Amount":$('#excessAmount').val()
 			
 		}  
 		if(data.Amount){
@@ -750,6 +789,7 @@ function moveExcess(data){
 		
 		if (validateObj(data)){
 			startLoad()
+			data = JSON.stringify(data);
 			renda.post(url,JSON.stringify(data),'moveExcess');     
 		}else{
 			console.log('error occured');
@@ -767,8 +807,62 @@ function topUpOptionsTab(tab){
 	$('#'+tab).show()
 }
 
-function transferToWallet(){
-	
+function transferToWallet(data){
+	if(data){
+		renda.loader('stop');
+		try{
+			JSON.parse(data);
+		}catch(err){
+			stopLoad()
+			toastr.error('An error occured while performing request.')
+			if(data){
+				
+				alert(data)
+				
+			}
+			console.dir(err);
+			return false;
+		}
+		stopLoad();
+		data = JSON.parse(data);
+		if (data){
+			//renda.get('/dashboardData/'+sessionStorage.UserId,'stats','new');				
+			toastr.success(data)
+			clear();
+			updateDataFromApi(null)
+		}else{
+			toastr.error(data);    
+		}           
+		return false;
+	}else{
+		
+		url = 'Goal/PartWithdrawal';
+		
+		
+		var data = {
+			"UserId":sessionStorage.UserId,
+			"GoalId":singleGoalApp.sgdata.GoalId,
+			"Amount":$('#walletTransferAmount').val()
+		}  
+		if(data.Amount){
+		}else{
+			toastr.warning('Please Enter Amount')
+			return false;
+		}
+		
+		if (validateObj(data)){
+			startLoad()
+			data = JSON.stringify(data)
+			renda.post(url,JSON.stringify(data),'transferToWallet');     
+		}else{
+			console.log('error occured');
+			console.dir(data)
+			stopLoad()
+			return false;
+		} 
+		return false;       
+		
+	}
 }
 
  function updateGoalList(data){

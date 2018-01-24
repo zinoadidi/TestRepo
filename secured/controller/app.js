@@ -125,7 +125,9 @@
         }   
         return false;  
     }
-    function forgot_password(data,option){
+    
+
+    function reset_password(data,option){
         if (data) {
 
             try{
@@ -136,37 +138,68 @@
                 console.dir(err);
                 return false;
             } 
-            var result = JSON.parse(data);
-            result = modResult(result)
+            let result = JSON.parse(data);
+            
             console.dir(result);
-            if (result.status == 200){
+            if (result.ResponseCode == "00"){
                if(option){
-                 
-               }else{
-                result.message = 'Please provide your security detail to continue';
-                toastr.success(result.message); 
-                $('#verify_user_account').show();
-                $('#verify_email').hide();
-               }      
+                    toastr.success('Account Details Confirmed. Initiating password reset, please wait.')
+                    var userdetails = JSON.parse(sessionStorage.resetPasswordDetail)
+                    console.dir(userdetails);
+                    var SecurityQuestion = $('#resetSecurityQuestion').val();
+                    var SecurityAnswer = $('#resetSecurityAnswer').val();
+                    var password = $('#resetpassword').val();
+                    var confirmPassword = $('#resetConfirmPassword').val();
+                    
+                    data = {
+                        "Membershipkey": userdetails.data.Email,
+                        "OldPassword": "",
+                        "NewPassword": password,
+                        "IsReset": true,
+                        "Channel": "ARM_PAYDAY_MOBILE"
+                    }
+                    if (validateObj(data)){
+                        renda.loader('start')
+                        loginClass.resetPassword(JSON.stringify(data))
+                        //renda.post('armAuth/v1/ARMONE/ResetPassword',JSON.stringify(data),'reset_password')            
+                    }else{
+                        return false;
+                    } 
+                }else{
+                    alert('Password Reset Successful. Please login to continue')
+                    logout()
+
+                }      
             }else{
-                toastr.error(result['message']);    
+                if(option){
+                    toastr.error(result['StatusMessage']);                                            
+                }else{
+                    toastr.error(result['StatusMessage']); 
+                    alert('Please confirm that you are not using your old password. Your new password should contain numbers, symbols and not less than 8 characters.')                       
+                }
+                
             }
             stopLoad()                                    
             return false;
         }
-        let email = document.getElementById('Username').value;
-        data = {
-            "Email":email
-        };
-        if (validateObj(data)){
-            renda.loader('start')
-            // old password restt
-            /* renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login'); */
-            data = JSON.stringify(data)
-            renda.post('Account/FetchUserByEmail',JSON.stringify(data),'forgot_password')            
+        if(option){
+           
         }else{
-            return false;
-        }
+            let email = document.getElementById('Username').value;
+            data = {
+                "Email":email
+            };
+            if (validateObj(data)){
+                renda.loader('start')
+                // old password restt
+                /* renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login'); */
+                data = JSON.stringify(data)
+                renda.post('Account/FetchUserByEmail',JSON.stringify(data),'forgot_password')            
+            }else{
+                return false;
+            }
+        }      
+        
         return false;  
     }
 
@@ -184,19 +217,19 @@
             let result = JSON.parse(data);
             result = modResult(result)
             console.dir(result);
-            if (result.status == 200){
+            if (result.data.UserId){
                if(option){
                     toastr.success('Password reset was successful. please log in to continue')
                     renda.page('login')
                 }else{
-                    sessionStorage.resetPasswordDetail = JSON.stringify()
+                    sessionStorage.resetPasswordDetail = JSON.stringify(result)
                     result.message = 'Please provide your security detail to continue';
                     toastr.success(result.message); 
                     $('#verify_user_account').show();
                     $('#verify_email').hide();
                 }      
             }else{
-                toastr.error(result['message']);    
+                toastr.error(result.data['message']);    
             }
             stopLoad()                                    
             return false;
@@ -208,21 +241,22 @@
             var SecurityAnswer = $('#resetSecurityAnswer').val();
             var password = $('#resetpassword').val();
             var confirmPassword = $('#resetConfirmPassword').val();
-            if(userdetails.data.SecurityQuestion != SecurityQuestion){toastr.error('Your Security Question Does Not Match'); return false;}
-            if(userdetails.data.SecurityAnswer != SecurityAnswer){toastr.error('Your Security Answer Does Not Match'); return false;}
-            data = {
-                "Membershipkey": $('#'),
-                "OldPassword": "",
-                "NewPassword": "Costain2007",
-                "IsReset": true,
+            if(SecurityQuestion == '' || SecurityQuestion == null){toastr.error('Please Provide Security Question'); return false;}
+            if(SecurityAnswer == '' || SecurityAnswer == null){toastr.error('Please Provide Security Answer'); return false;}
+            if(password == '' || password != confirmPassword || password.length<8){toastr.error('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
+            
+            var data = {
+                "UserId": userdetails.data.Email,
+                "SecurityQuestion": SecurityQuestion,
+                "SecurityQuestion2": "",
+                "SecurityAnswer": SecurityAnswer,
+                "SecurityAnswer2": "",
                 "Channel": "ARM_PAYDAY_MOBILE"
             }
             if (validateObj(data)){
                 renda.loader('start')
-                // old password restt
-                /* renda.post('/authentication/email/passwordReset',JSON.stringify(data),'login'); */
-                data = JSON.stringify(data)
-                renda.post('Account/FetchUserByEmail',JSON.stringify(data),'forgot_password')            
+                loginClass.forgotPassword(JSON.stringify(data))                
+                //renda.post('v1/ARMONE/AnswerSecurityChallenge',JSON.stringify(data),'reset_password',null,null,'forgot_password')            
             }else{
                 return false;
             }     
@@ -541,6 +575,8 @@ window.onbeforeunload = function (e) {
   };
 
   function sendEmail(option,data){
+      console.log('option',option)
+      console.log(data)
     switch (option) {
         case 'register':
             var subject ='Account Activation';
@@ -568,19 +604,167 @@ window.onbeforeunload = function (e) {
             `;
             var email =data.data.Email;
             break;
+
+        case 'resendRegisterToken':
+            var subject ='Account Activation';
+            var message =  `
+            Hi ${data.data.Firstname}, <br/>
+            Welcome to PayDay Investor!<br/>
+            You have taken the first step towards achieving that financial goal. <br/>
+            Let’s get started! You can choose to invest weekly or monthly, directly from your Naira debit card.<br/>
+            Your username/email address is: ${data.data.Email}.<br/>
+            Please provide the code below as requested on Payday Mobile App to activate your account.<br/>
+            <br/><big><b>${data.data.Token}</b></big><br/><br/>
+            All the right answers are in our FAQ section. However, feel free to complete the Contact Us form if
+            you think your question requires special attention. We hope to give you a prompt and thorough response. <br/>
+            <br/>
+            Thank you for choosing to invest with PayDay Investor. 
+            <br/><br/>
+            Best Regards,<br/>
+            PayDay Investor Team
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email =data.data.Email;
+            break;
+        case 'createGoal':
+            var subject ='Create Goal';
+            var message =  `
+            Hi ${data.data.Firstname}, <br/>
+            Thank you for investing via PayDay Investor!<br/>
+            Congratulations, you have successfully set up a goal. Please see the details of your goal below:<br/>
+            <br/>
+            Goal Name: ${data.data.ItemName}<br/>
+            Target Amount: NGN ${data.data.GoalAmount}<br/>
+            Periodic Contribution Amount: NGN ${data.data.MonthlyDeduction} <br/><br/>
+            You will reach your goal in ${data.data.Duration}<br/><br/>
+            Let the countdown begin!<br/>
+
+            <br/>
+            If you did NOT initiate this action, kindly complete the Contact Us form on the PayDay Investor App or Website for immediate assistance
+            <br/><br/>
+            Best Regards,<br/>
+            PayDay Investor Team
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email =data.data.Email;
+            break;
+        case 'deleteGoal':
+            var subject ='Goal Deleted';
+            var message =  `
+            Hi ${data.data.Firstname}, <br/>
+            :( Your Goal ${data.data.ItemName} has been deleted from the Payday App.<br/>            <br/>
+            If you did NOT initiate this action, kindly complete the Contact Us form on the PayDay Investor App or Website for immediate assistance
+            <br/>
+            Interested in setting up another goal? Log on to your Payday Mobile App to get started.
+            <br/>
+            Best Regards,<br/>
+            PayDay Investor Team
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email =data.data.Email;
+            break;
+        case 'editGoal':
+            var subject ='Goal Modified';
+            var message =  `
+            Hi ${data.data.Firstname}, <br/>
+            You recently modified your Goal. Please see the new details of your goal below:<br/>
+            <br/>
+            Goal Name: ${data.data.ItemName}<br/>
+            Target Amount: NGN ${data.data.GoalAmount}<br/>
+            Periodic Contribution Amount: NGN ${data.data.MonthlyDeduction} <br/><br/>
+            You will reach your goal in ${data.data.Duration}<br/><br/>
+            Let the countdown begin!<br/>
+
+            <br/>
+            If you did NOT initiate this action, kindly complete the Contact Us form on the PayDay Investor App or Website for immediate assistance
+            <br/><br/>
+            Best Regards,<br/>
+            PayDay Investor Team
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email =data.data.Email;
+            break;
+        case 'suspendGoal':
+            var subject ='Goal Suspended';
+            var dateSuspended = new Data();
+            dateSuspended = dateSuspended.toDateString();
+            var message = `
+            Hi ${data.data.Firstname}, <br/>
+            You have successfully suspended your goal. Your automated debits to this goal have also been suspended.  <br/>
+            Please see the new details of your goal below:<br/>
+            <br/>
+            Goal Name: ${data.data.ItemName}<br/>
+            Amount Attained: NGN ${data.data.AmountAttained}<br/>
+            Date Suspended: NGN ${dateSuspended} <br/><br/>
+           <br/>
+            If you wish to continue with this goal, kindly log into your account and click the Resume Goal button to continue investing towards your goal. 
+            <br/>
+            For more information, please read the Frequently Asked Questions (FAQs) or complete the Contact Us form on the PayDay Investor App or Website.
+            <br/><br/>
+            Best Regards,<br/>
+            PayDay Investor Team
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email =data.data.Email;
+            break;
+        case 'contactUs':
+            var subject =data.Subject;
+            var message =  `
+            Enquiry from ${data.name} (${data.email})<br/><br/>
+            ${data.message}
+            <br/><br/>
+            
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email ="hello@paydayinvestor.ng";
+            break;
         default:
             break;
     }
-    
-    var ndata= {
-        "RecipientEmail":email,
-        "Subject":subject,
-        "body":message,
-        "isHtml":true,
-        "Attachment":''
+    if(email){
+        var ndata= {
+            "RecipientEmail":email,
+            "Subject":subject,
+            "body":message,
+            "isHtml":true,
+            "Attachment":''
+        }
+        ndata = JSON.stringify(ndata)
+        renda.post('Utility/SendEmail',JSON.stringify(ndata),'mailResponse');
+    }else{
+        console.log('error performing request. Data missing')
     }
-    ndata = JSON.stringify(ndata)
-    renda.post('Utility/SendEmail',JSON.stringify(ndata),'mailResponse');
+    
   }
 
   function mailResponse(data){
@@ -594,7 +778,8 @@ window.onbeforeunload = function (e) {
   function updateOfflineStatus(){
     toastr.clear()
     toastr.warning('Your device is offline. Please ensure you have adequate internet coverage')      
-  }
+    
+}
 
 window.addEventListener('online',  updateOnlineStatus);
 window.addEventListener('offline', updateOfflineStatus);

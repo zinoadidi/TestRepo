@@ -48,6 +48,7 @@ function createCard(data,cardRegStep){
                 cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_blank', 'location=yes');
                 cardVerificationVar.addEventListener('loadstop', function(event) { 
                    var url = event.url;
+                   //alert(url)
                    var urlSearch = url.search('/card/tokinze/getFeedback/')
                    //alert(event.url); 
                    if (urlSearch == -1){

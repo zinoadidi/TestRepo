@@ -9,27 +9,31 @@ class FileUpload{
             "CustomerReference":"",
             "lastGenerated":"",
             "numOfTimesGenerated":0
-            
         }
         this.Upload = function(file){
             
             var data = JSON.stringify({
-                "ProfilePic": file,
-                "EmailAddress": this.serverSettings.EmailAddress,
-                "Username": this.serverSettings.Username
-              });
-              
-            var xhr = new XMLHttpRequest();
-               
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    
-                }
+                "ProfilePic": file
             });
-              
-            xhr.open("POST", this.serverSettings.armOneBaseUrl+"/OAuth/Token");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(data);
+            request({url: "employees.json"})
+            .then(data => {
+                let employees = JSON.parse(data);
+                let html = "";
+                employees.forEach(employee => {
+                    html += `
+                        <div>
+                            <img src='${employee.picture}'/>
+                            <div>
+                                ${employee.firstName} ${employee.lastName}
+                                <p>${employee.phone}</p>
+                            </div>
+                        </div>`;
+                });
+                document.getElementById("list").innerHTML = html;
+            })
+            .catch(error => {
+                console.log(error);
+            });
         }
         
             

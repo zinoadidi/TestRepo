@@ -132,6 +132,7 @@ function activateOtp(data){
             JSON.parse(data);
         }catch(err){
             toastr.error('An error occured while performing request.')
+            $('#resendUserTokenDiv').show();
             console.dir(err);
             return false;
         }        
@@ -157,6 +158,7 @@ function activateOtp(data){
                 UserInfo.data.Status = 'active';
             }else{
                 toastr.error('Account Verification Failed!. Please confirm the code entered matches the one in your mail')
+                $('#resendUserTokenDiv').show();
                 return false;
             }
         }else{
@@ -285,6 +287,16 @@ function regExistingClient(data){
     return false;  
 }
 
+function resendUserToken(data){
+    let UserInfo = JSON.parse(sessionStorage.UserInfo);
+    if(confirm('We will resend your account activation code to your email. Continue?')){
+        sendEmail('resendRegisterToken',UserInfo)    
+        $('#resendUserTokenDiv').hide();
+        toastr.success('Please enter the code that was sent to your email to activate your account.')
+        
+    }else{
+    }
+}
 function showRegDiv(el){
     $('.register-divs').hide();
      $('#'+el).fadeIn();       
