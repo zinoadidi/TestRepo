@@ -36,8 +36,12 @@ function register(data){
             stopLoad()
             checkInternet()
             toastr.error('An error occured while performing request.')
-            if(r.message){
-                alert(r.message);    
+            if(r){
+                if(r.message){
+                    alert(r.message);                        
+                }else{
+                    alert(data)
+                }
             }else{
                 alert(data)
             }
@@ -79,8 +83,8 @@ function register(data){
             showRegStep('register-step-1')
             return false;
         }
-        if(temporaryApp.regVm.Password.length = '' || temporaryApp.regVm.Password.length < 8){
-            toastr.error('Please Use a stronger password not less than 8 digit. Password must contain numbers and characters.');
+        if(temporaryApp.regVm.Password.length = '' || temporaryApp.regVm.Password.length < 8 || sessionStorage.passwordStrenght !='strong'){
+            alert('Please review your password. Strong password should consist of  minimum password length of 8 characters and it must contain a digit, uppercase, lowercase and non numeric character.');
             return false;
         }
         if(files){
@@ -273,8 +277,8 @@ function regExistingClient(data){
         toastr.error('Please confirm that your password matches "confirm password" field')
         return false
     }
-    if(existingApp.armOneDetail.Password.length = '' || existingApp.armOneDetail.Password.length < 8){
-        toastr.error('Please Use a stronger password not less than 8 digit. Password must contain numbers and characters.');
+    if(existingApp.armOneDetail.Password.length = '' || existingApp.armOneDetail.Password.length < 8 || sessionStorage.passwordStrenght !='strong'){
+        alert('Please Use a stronger password not less than 8 digit. Password must contain numbers and characters.');
         return false;
     }  
     if (validateObj(data)){

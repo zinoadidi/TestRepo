@@ -299,7 +299,7 @@
 								</div>
 								<div class="">
 									<span class="fa fa-lock w3-xxlarge"></span>
-									<input type="password" id="password" placeholder="Password" v-model="regVm.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium">
+									<input type="password" id="password" placeholder="Password" v-model="regVm.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium checkPass">
 								</div> 
 								<div class="">
 									<span class="fa fa-lock w3-xxlarge"></span>
@@ -386,7 +386,7 @@
 										<div class="form-group form-field-holder">
 											<div class="">
 												<span class="fa fa-lock 3-xxlarge"></span>
-												<input type="password" id="password" placeholder="Password" v-model="armOneDetail.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium">
+												<input type="password" id="password" placeholder="Password" v-model="armOneDetail.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium checkPass">
 											</div>
 										</div>
 										<div class="">
@@ -440,6 +440,6 @@
 
 
 <script type="text/javascript" src="secured/controller/users.js"></script>
-<script>initRegApp();initExistingClientApp();stopLoad('stop')</script>
+<script>initRegApp();initExistingClientApp();stopLoad('stop');checkPasswordStrenght()</script>
 
 

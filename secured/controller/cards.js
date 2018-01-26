@@ -18,9 +18,14 @@ $(document).ready(function(){
     }else{
         startLoad()
         renda.post('PaymentDetails/FetchPaymentDetails',JSON.stringify(JSON.stringify({'UserId':sessionStorage.UserId})),'stats',null,null,'cards');
-
     }
     showAddCardForm('addNewCardForm')
+    if(checKycStatus()){
+        console.log('===============check kyc passed')
+    }else{
+        var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. Do note: You will not be able to add a perform any transaction until your KYC is verified')        
+        if(confirm){renda.page('setup_profile')}else{}
+    }
 });
 
 function createCard(data,cardRegStep){
@@ -81,13 +86,21 @@ function createCard(data,cardRegStep){
         }           
         return false;
     }else{
+        if(checKycStatus()){
+            console.log('===============check kyc passed')
+        }else{
+            var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. Do note that you will not be able to add a perform any transaction until your KYC is verified');
+            if(confirm){renda.page('setup_profile')}else{
+            }
+            return false;
+        }
         var myCard = $('#add-card-form');
         var cardNumber = myCard.CardJs('cardNumber');
         var cardType = myCard.CardJs('cardType');
         var expiryMonth = myCard.CardJs('expiryMonth');
         var expiryYear = myCard.CardJs('expiryYear');
         var cvc = myCard.CardJs('cvc');
-
+        cardNumber = cardNumber.replace(/\s/g, '');
         if(cardRegStep != 2){
             url = 'paydaypayment/card/tokinize';   
             data = {

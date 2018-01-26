@@ -25,7 +25,7 @@
         loginClass.generateArmOneToken()
 
         // check app cache
-      
+        
     });
     /* Basic Functions */
     function login(data,option){
@@ -243,7 +243,7 @@
             var confirmPassword = $('#resetConfirmPassword').val();
             if(SecurityQuestion == '' || SecurityQuestion == null){toastr.error('Please Provide Security Question'); return false;}
             if(SecurityAnswer == '' || SecurityAnswer == null){toastr.error('Please Provide Security Answer'); return false;}
-            if(password == '' || password != confirmPassword || password.length<8){toastr.error('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
+            if(password == '' || password != confirmPassword || password.length<8|| sessionStorage.passwordStrenght !='strong'){alert('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
             
             var data = {
                 "UserId": userdetails.data.Email,
@@ -800,3 +800,33 @@ document.addEventListener("deviceready", function(e){
         updateOfflineStatus()
     }, false);  
 }, false);  
+
+
+function checkPasswordStrenght(){
+    $('.checkPass').keyup(function(e) {
+        var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+        if (false == enoughRegex.test($(this).val())) {
+                sessionStorage.passwordStrenght ='More Characters';
+        } else if (strongRegex.test($(this).val())) {
+                //$('#passstrength').className = 'ok';
+                sessionStorage.passwordStrenght ='strong';
+        } else if (mediumRegex.test($(this).val())) {
+                //$('#passstrength').className = 'alert';
+                sessionStorage.passwordStrenght ='medium';
+        } else {
+               // $('#passstrength').className = 'error';
+               sessionStorage.passwordStrenght ='weak';
+        }
+        return true;
+   });
+}
+
+function checKycStatus(){
+    if(payday.user.ProgressStatus == 'KYC Approved' || payday.user.ProgressStatus == 'Existing Customer'){
+        return true;
+    }else{
+        return false;
+    }
+}

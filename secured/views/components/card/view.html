@@ -81,7 +81,7 @@
 	</div>
 	<div id='viewCards' class="w3-container" class="hideCardPageDivs">		
 		<div id="cardsDiv" style="">
-		  <div v-for="item in cards" class="single-card " :id="item.Id" style="margin-bottom: 3px" >
+		  <div v-for="item in cards" class="single-card" :id="item.Id" style="margin-bottom: 3px;display:none" >
 		  	<div style="background: #1d232c; height:auto;  overflow: hidden;" class="w3-text-white w3-card-4 w3-round w3-container w3-padding " >
 			  	<div class="display-block input-text-medium w3-padding" style="margin-top: 3px;">
 			  		Card ID: {{ item.Id }}
@@ -118,7 +118,11 @@
 <script src="secured/assets/js/card-js.min.js"></script>
 <script src="secured/controller/cards.js"></script>
 <script src="secured/assets/js/card.js"></script>
-
+<script>
+  if(cardsApp.cards[0]){
+    $('.single-card').show();
+  }
+</script>
 
 <style>
   .demo-container {

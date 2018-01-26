@@ -442,7 +442,7 @@ function change_password(data){
             "IsReset": false,
             "Channel": "ARM_PAYDAY_MOBILE"
         }
-        if(password == '' || password != confirmPassword || password.length<8||oldPassword==''){toastr.error('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
+        if(password == '' || password != confirmPassword || password.length<8||oldPassword==''||sessionStorage.passwordStrenght !='strong'){alert('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
         
         if (validateObj(data)){
             renda.loader('start')
