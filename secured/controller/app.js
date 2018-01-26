@@ -632,6 +632,7 @@ window.onbeforeunload = function (e) {
             var email =data.data.Email;
             break;
         case 'createGoal':
+            var duration_type = data.data.Frequency.replace("ly", "(s)");;
             var subject ='Create Goal';
             var message =  `
             Hi ${data.data.Firstname}, <br/>
@@ -641,7 +642,7 @@ window.onbeforeunload = function (e) {
             Goal Name: ${data.data.ItemName}<br/>
             Target Amount: NGN ${data.data.GoalAmount}<br/>
             Periodic Contribution Amount: NGN ${data.data.MonthlyDeduction} <br/><br/>
-            You will reach your goal in ${data.data.Duration}<br/><br/>
+            You will reach your goal in ${data.data.Duration} ${duration_type}<br/><br/>
             Let the countdown begin!<br/>
 
             <br/>
@@ -746,7 +747,7 @@ window.onbeforeunload = function (e) {
                 }
             </style>
             `;
-            var email ="hello@paydayinvestor.ng";
+            var email ="enquiries@arminvestmentcenter.com,IT@arm.com.ng,ittransformation@arm.com.ng,"+data.email;
             break;
         default:
             break;
@@ -776,7 +777,6 @@ window.onbeforeunload = function (e) {
   }
 
   function updateOfflineStatus(){
-    toastr.clear()
     toastr.warning('Your device is offline. Please ensure you have adequate internet coverage')      
     
 }

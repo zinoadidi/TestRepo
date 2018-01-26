@@ -248,7 +248,8 @@ function initUserProfilePage(){
            "BankAccountNo":"",
            "Phonenumber":"",
            "Email":"",
-           "AccountStatus":""
+           "AccountStatus":"",
+           "UserId":""
         },
         userExtras:{
             "ProgressStatus":"",
@@ -272,6 +273,7 @@ function initUserProfilePage(){
 		userProfile.userDetails.Email = data['data'].Email;
 		userProfile.userDetails.AccountStatus = data['data'].Status;
 		userProfile.userExtras.ProgressStatus = data['data'].ProgressStatus;
+		userProfile.userDetails.UserId = data['data'].UserId;
         if(data['data'].ProfilePic){
             userProfile.userExtras.ProfilePic = data['data'].ProfilePic;
         }else{
@@ -437,7 +439,7 @@ function change_password(data){
             "Membershipkey": payday.user.Email,
             "OldPassword": oldPassword,
             "NewPassword": password,
-            "IsReset": true,
+            "IsReset": false,
             "Channel": "ARM_PAYDAY_MOBILE"
         }
         if(password == '' || password != confirmPassword || password.length<8||oldPassword==''){toastr.error('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}

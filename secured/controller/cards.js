@@ -96,6 +96,7 @@ function createCard(data,cardRegStep){
                 "CardNo": cardNumber,
                 "CVV": cvc,
                 "UserId": sessionStorage.UserId,
+                "AppUserId": sessionStorage.UserId,
                 "MembershipNumber":sessionStorage.UserId
             }
             if(String(cardNumber).lenght < 12){

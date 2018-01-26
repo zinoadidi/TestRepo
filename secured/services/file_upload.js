@@ -2,38 +2,43 @@ class FileUpload{
     constructor() {
         this.serverSettings={
             "armOneBaseUrl": "http://192.168.250.29:8000/armauth",
-            "Password": "abamiedA1980@arm.com",
-            "EmailAddress": "zinoadidi@gmail.com",
-            "Username": "PaydayMobile",
-            "IPAddress": "null",
-            "CustomerReference":"",
-            "lastGenerated":"",
             "numOfTimesGenerated":0
         }
-        this.Upload = function(file){
+       
+        this.uploadGoalImage = function(data){
+            //alert('auth user')
+            checkInternet()
+            var lastGenerated = new Date();
+            var newtime = lastGenerated.getHours()+lastGenerated.getMinutes();
+            if(newtime - loginClass.serverSettings.lastGenerated <= 10){
+                var data = data;
+                var xhr = new XMLHttpRequest();
             
-            var data = JSON.stringify({
-                "ProfilePic": file
-            });
-            request({url: "employees.json"})
-            .then(data => {
-                let employees = JSON.parse(data);
-                let html = "";
-                employees.forEach(employee => {
-                    html += `
-                        <div>
-                            <img src='${employee.picture}'/>
-                            <div>
-                                ${employee.firstName} ${employee.lastName}
-                                <p>${employee.phone}</p>
-                            </div>
-                        </div>`;
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        if(xhr.status == 200){
+                            //alert('arm auth failed')
+                            loginClass.generateArmOneToken()
+                            toastr.error('Login attempt failed. Check that you have good network coverage and try again. If this problem persist, please contact an administrator ')
+                        }else{
+                            alert('An error occured while uploading file. Please try again')
+                        }
+                        login(this.response,'armOne')
+                    }
                 });
-                document.getElementById("list").innerHTML = html;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                
+                xhr.open("POST", loginClass.serverSettings.armOneBaseUrl+"/v1/ARMONE/Login");
+                xhr.setRequestHeader("Authorization", "Basic "+authToken);            
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+
+                xhr.send(data);
+            }else{
+               
+            }
+            
+        
         }
         
             

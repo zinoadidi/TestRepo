@@ -12,15 +12,54 @@
         <button class="w3-button w3-bottombar " style="display: inline-block; color:#354357; width:30%"  onclick="profileTab('editProfile')"><span class="fa fa-pencil-square-o input-text-large"></span></button>
         <button class="w3-button w3-bottombar " style="display: inline-block; color:#354357; width:30%"  onclick="profileTab('changePassword')"><i class=""><img src="img/LineIcons/Secondary(Icons)/change_password.png" class="accountIcon"></i></button>
     </div> 
-    <div id="viewProfile" class="profileTab w3-container" style="display:none">
+    <div id="viewProfile" class="profileTab" style="display:none">
         <div id="viewProfileDiv" style="margin-left:6%" class="w3-animate-left w3-white">
             <center><div class="input-text-medium w3-padding">My Profile</div>
             <div class="input-text-goal w3-padding"><b>Account Status: </b>{{userExtras.ProgressStatus}}</div></center>
             <ul  class="w3-padding w3-white " onclick="">
-             
-                <li style="" class="w3-padding input-text-goal" v-for="(item,key) in userDetails">
-                    <span><b>{{key}}: </b></span>
-                    <span>{{item}}</span> 
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>User ID: </b></span>
+                    <span>{{userDetails.UserId}}</span> 
+                </li>
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Surname: </b></span>
+                    <span>{{userDetails.Surname}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>First Name: </b></span>
+                    <span>{{userDetails.Firstname}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Other Name(s): </b></span>
+                    <span>{{userDetails.Middlename}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Security Question: </b></span>
+                    <span>{{userDetails.SecurityQuestion}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Security Answer: </b></span>
+                    <span>{{userDetails.SecurityAnswer}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Bank Name: </b></span>
+                    <span>{{userDetails.BankName}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Bank Account Number: </b></span>
+                    <span>{{userDetails.BankAccountNo}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Phone Number: </b></span>
+                    <span>{{userDetails.Phonenumber}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Email Address: </b></span>
+                    <span>{{userDetails.Email}}</span> 
+                </li>  
+                <li style="" class="w3-padding input-text-goal" >
+                    <span><b>Account Status: </b></span>
+                    <span>{{userDetails.AccountStatus}}</span> 
                 </li>  
          
             </ul>

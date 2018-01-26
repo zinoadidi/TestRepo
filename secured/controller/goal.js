@@ -93,30 +93,43 @@ function createGoal(data){
 		startLoad()
 		var files = '';
 		var url = 'Goal/Create';   
-    	files = document.getElementById('GoalUpload').files[0]
+    	files = document.getElementById('GoalUploadCreate').files[0]
 		console.log('---------------------before send')
 		var GoalUpload = '';
 		if(files){
 			GoalUpload = renda.fileToBase64(files);			
 			GoalUpload.then(function(result) {
 				GoalUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
+				console.log('===============================goal image')
 				console.log(result)
 				uploadGoalImage();
 			});
 		}else{
+			console.log('got here=======no image')
 			GoalUpload = undefined;
 			sendGoalReq()
 		}
 		function uploadGoalImage(data){
 			if(data){
 				stopLoad()
-				data = JSON.parse(data)				
+				console.log(data)
+				//newdata = JSON.parse(data)	
+				GoalUpload = data.imagepath
+				console.log(GoalUpload)	
 				//if()
 				sendGoalReq();
 			}else{
 				startLoad()
 				var data = {"ProfilePic":GoalUpload}
-				renda.post('paydaypayment/uploadimage',JSON.stringify(data),'createGoal.uploadGoalImage')				
+				console.log(data)
+				promiseXmlHTTP({
+					url:renda.Config.serverUrl+'paydaypayment/uploadimage',
+					method:'POST',
+					data:data,
+					Authorization:'Basic '+authToken
+				}).then(function(result){
+					uploadGoalImage(result)
+				});
 			}
 		}
 		function sendGoalReq(){
@@ -171,6 +184,8 @@ function createGoal(data){
 			}  
 	        if (validateObj(data)){
 				data = JSON.stringify(data)
+				console.log(data)
+				stopLoad()				
 	            renda.post(url,JSON.stringify(data),'createGoal');     
 	        }else{
 	        	console.log('error occured');
@@ -539,7 +554,7 @@ function editGoal(data){
 		}        
 	}
 
-}
+} 
 
 function freqChange(){
 	var currentVal = $('#frequency').val()
@@ -583,7 +598,7 @@ function Top_Up_Goal(data,option){
 			var cardToken = element.attr('fwCode');
 			
 			var data = {
-				"UserId":sessionStorage.UserId,
+				"AppUserId":sessionStorage.UserId,
 				"UserId":sessionStorage.UserId,
 				"GoalId":singleGoalApp.sgdata.GoalId,
 				"GoalAmount":$('#GoalAmount').val(),
@@ -603,6 +618,7 @@ function Top_Up_Goal(data,option){
 			}
 			if (validateObj(data)){
 				startLoad()
+				console.log(data)
 				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
 			}else{
 				console.log('error occured');
