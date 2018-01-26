@@ -110,7 +110,7 @@ function createCard(data,cardRegStep){
                 "CVV": cvc,
                 "UserId": sessionStorage.UserId,
                 "AppUserId": sessionStorage.UserId,
-                "MembershipNumber":sessionStorage.UserId
+                "MembershipNumber":sessionStorage.MembershipNumber
             }
             if(String(cardNumber).lenght < 12){
                 toastr.error('Please Confirm The Lenght of Your Card Number')
