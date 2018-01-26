@@ -164,7 +164,8 @@ function deleteCard(data,id){
             url = 'PaymentDetails/Delete';   
             data = {
                 "cardNo":id,
-                "UserId":sessionStorage.UserId
+                "UserId":sessionStorage.UserId,
+                "PaymentDetId":id
             };
             data = JSON.stringify(data)
             renda.post(url,JSON.stringify(data),'deleteCard');
