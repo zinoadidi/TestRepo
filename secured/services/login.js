@@ -67,7 +67,7 @@ class Login{
             checkInternet()
             var lastGenerated = new Date();
             var newtime = lastGenerated.getHours()+lastGenerated.getMinutes();
-            if(newtime - loginClass.serverSettings.lastGenerated <= 10){
+            if(newtime - loginClass.serverSettings.lastGenerated <= 5){
                 var data = data;
                 var xhr = new XMLHttpRequest();
             
