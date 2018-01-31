@@ -189,7 +189,7 @@
 		color: white!important;
 		font-size: 22px!important;
 		margin-top: 8px;
-				
+		background: #383d43;
 	}
 	select,option{
 		background: transparent!important;
@@ -198,57 +198,59 @@
 	
 </style>
 <section class="backgroundImg">
-	<div class=" w3-display-container height-cover font-family-montserrat  ">
+	<div class=" w3-display-container height-cover font-family-montserrat">
 		<div>
 			<div class="w3-display-topright pdy-padding w3-margin  ">
-				<a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px">Existing ARM client?</a>
+				<a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px">Existing PayDay client?</a>
 				<button class="w3-button w3-margin font-small w3-transparent pdy-border w3-text-white pdy-padding-left-ex pdy-padding-right-ex" onclick="renda.page('login')">Login</button>                    
 			</div>
-			<div class="w3-display-middle  " style="overflow: hidden">
+			<div class="w3-display-middle" style="overflow: hidden">
 				<div class="w3-container w3-center">
 					<img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding"/>
 				</div>
 				<div class="center register-divs w3-container" id="welcomeDiv">
-					<p class="welcome-text center w3-padding w3-margin w3-text-white" style="font-size: 3vw;">
-						<span class="w3-block">Welcome to Payday Investor</span>
-						<span>Please select one of the options below.</span>         
+					<p class="welcome-text center w3-text-white" style="font-size: 4vw;">
+						<span class="w3-block">Welcome to PayDay</span>
+						<span>Please select one option</span>         
 					</p>
 				
 					<div>
 						<div class="row">
 							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
 							<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
-								<button class="w3-button  input-text-medium" style="background: #1794b9; width: 100%;padding: 15px;" onclick="showRegDiv('new')"><small>NEW TO ARM</small></button>
+								<button class="w3-button  input-text-medium" style="background: #1e96d3; width: 100%;padding: 15px;" onclick="showRegDiv('new')">NEW TO ARM</button>
 							</div>
 							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
 						</div>
 						<div class="row">
 							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
 							<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
-								<button class="w3-button input-text-medium" style="background: #337ab7;width: 100%;padding: 15px;" onclick="showRegDiv('existing')">Existing ARM Client</button>
+								<button class="w3-button input-text-medium" style="background: #249ba0;width: 100%;padding: 15px;" onclick="showRegDiv('existing')">EXISTING ARM CLIENT</button>
 							
 							</div>
 							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
 						</div>
-						<div class="row" >
+						<!-- <div class="row" >
 							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
 							<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
 								<button class="w3-button  input-text-medium" style="background: #438cb9;width: 100%;padding: 15px;" onclick="renda.page('login')"><small>LOGIN</small></button>
 							</div>
 							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
-						</div>
+						</div> -->
 					</div>
 				
 				</div>
 				<div class=" register-divs" id="new">
 					
 					<div>
-						<div class="w3-text-white w3-center font-medium w3-padding w3-margin-left">
-							NEW TO ARM? CREATE AN ACCOUNT
-						</div>
+						
 						<form class="" onsubmit="event.preventDefault();">
 							<div class="reg-step register-step-0">
 								<div class="w3-margin w3-container">
+									<div class="w3-text-white w3-center font-medium">
+										NEW TO ARM? 
+										<br/>CREATE AN ACCOUNT
+									</div>
 									<div>
 										<div  class="w3-half ">
 											<input class=" w3-text-white font-medium pdy-input pdy-mod-input"  type='text' placeholder="Surname" class="w3-input input-text-goal padding-left-2" v-model="regVm.Surname" required="" onfocusout="checkValue(this)" aria-required="true">                        
@@ -324,13 +326,13 @@
 									<input type="text" style="" placeholder="Answer to security question" v-model="regVm.SecurityAnswer" value= "" class="w3-input w3-text-white w3-padding customized-input font-medium" required="" onfocusout="checkValue(this)" aria-required="true">
 								</div> 
 
-								<div class="w3-text-white">
+								<div class="w3-text-white w3-small">
 									<input type="checkbox" v-model="regVm.terms" required="" onfocusout="checkValue(this)" aria-required="true" class=" w3-checkbox w3-check" >
-									By Registering, you hereby agree with our <a class="terms-link register-here-link" href="javascript:void(0)">Terms and Conditions</a>
+									By Registering, you agree with our <a class="terms-link register-here-link" href="javascript:void(0)">Terms & Conditions</a>
 								</div>
 								<div class="" style="margin-top:8px!important;text-align: center"> 
 									<button type="button" class="w3-button"  onclick="showRegStep('register-step-1')" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">BACK</button>
-									<button type="button" class="w3-button pdy-green" onclick="register(null)" style=" display: inline-block!important;width:48%">REGISTER</button>
+									<button type="button" class="w3-button pdy-green" onclick="register(null)" style=" display: inline-block!important;width:48%"><small><b>REGISTER</b></small></button>
 								</div>
 				
 							</div>
@@ -343,7 +345,7 @@
 					<div class="main-container login-main-container col-lg-12">
 					
 						<center>
-						<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Welcome to Payday. Please Provide Your ARM User ID and Password</p></center>
+						<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Welcome to PayDay. Please Provide Your ARM User ID and Password</p></center>
 					
 						<div class="form-holder">
 							<div >
@@ -351,7 +353,7 @@
 									<div class="col-lg-4"></div>
 									<div class="">
 										<span class="fa fa-envelope-o w3-xxlarge"></span>
-										<input type="email" placeholder="User ID" value="" id="Username" required="" class="w3-input w3-text-white w3-padding customized-input font-medium">
+										<input type="email" placeholder="Membership ID" value="" id="Username" required="" class="w3-input w3-text-white w3-padding customized-input font-medium">
 									</div> 
 									
 								</div>

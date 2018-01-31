@@ -21,7 +21,7 @@ class Login{
                     renda.page('login');  
                     return false;                  
                 }
-                console.log('token request exceed maximum')
+                //console.log('token request exceed maximum')
                 //alert('token request exceed maximum')
                 stopLoad();
                 
@@ -46,7 +46,7 @@ class Login{
                         loginClass.serverSettings.numOfTimesGenerated = 0;                                            
                     }else{
                         //alert('ARM token request failed')
-                        console.log('ARM token request failed')
+                        //console.log('ARM token request failed')
                         toastr.error('An error occured while performing request. Please confirm you that your device has network coverage. If the problem persist, please contact an administrator.')
                         loginClass.serverSettings.numOfTimesGenerated = 0;                                                
                     }

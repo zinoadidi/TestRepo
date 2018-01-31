@@ -285,19 +285,23 @@ function initUserProfilePage(){
     
 }
 
+var ProfileUpload ='';
+
 function prepareProfileUpload(data){
     if (data) {
         stopLoad()
         try{
             JSON.parse(data);
         }catch(err){
-            toastr.error('An error occured while verfying user information.')
+            toastr.error('An error occured while performing request.')
             console.dir(err);
             return false;
         }
         
         data = JSON.parse(data);
+        data = modResult(data)
         if(data['status'] == 200){
+            data.message = 'Profile Updated Successfully';
             toastr.success(data['message'])
             if(confirm('would you like to logout to refresh your account?')){
                 logout();
@@ -315,27 +319,67 @@ function prepareProfileUpload(data){
     var files = '';
     files = document.getElementById('ProfileUpload').files[0]
     if(files){
-        var ProfileUpload = renda.fileToBase64(files);
+        ProfileUpload = renda.fileToBase64(files);
         ProfileUpload.then(function(result) {
             userProfile.userExtras.ProfilePic = result
             ProfileUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
-            sendRegReq()
+            uploadProfileImage()
         });
     }else{
         toastr.error('Please Select An Image');
         return false;
     }
+
+    function uploadProfileImage(data){
+        
+        if(data){
+            stopLoad()
+            console.log(data)
+            //newdata = JSON.parse(data)	
+            try {
+                var ndata = JSON.parse(data);
+                data = ndata;
+            } catch (error) {
+                console.log('Failed to parse',data)
+                toastr.error('An error occured during profile picture update. Please try again later')
+            }
+            if(data['data'].imagepath){
+                ProfileUpload = data['data'].imagepath
+                console.log(ProfileUpload)	
+                sendRegReq();
+                
+            }else{
+                toastr.success('Profile Picture Updated Successfully')
+
+            }
+            return false;
+            //if()
+        }else{
+            startLoad()
+            var data = {"ProfilePic":ProfileUpload};
+            console.log(data)
+            var url = renda.Config.serverUrl+'paydaypayment/uploadimage';
+            promiseXmlHTTP({
+                url:url,
+                method:'POST',
+                data:data,
+                Authorization:'Basic '+authToken
+            }).then(function(result){
+                uploadProfileImage(JSON.stringify(result))
+            });
+        }
+    }
     function sendRegReq(){
         var confirmUpload = window.confirm('Your profile picture is about to be updated. Continue?')
         if(confirmUpload){
-            data = {
-                "ProfilePic":ProfileUpload,
-                "UserId":sessionStorage.UserId
-            } 
+            var UserInfo = JSON.parse(sessionStorage.UserInfo);
+            UserInfo.data.ProfilePic =  ProfileUpload;
+            data = UserInfo.data;
             if (validateObj(data)){
+                data = JSON.stringify(data);
                 console.dir(data)
                 startLoad()
-                renda.post("/user/update",JSON.stringify(data),'prepareProfileUpload');     
+                renda.post("Account/Update",JSON.stringify(data),'prepareProfileUpload');     
             }else{
                 return false;
             }

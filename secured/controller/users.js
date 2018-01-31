@@ -91,7 +91,7 @@ function register(data){
             var ProfileUpload = renda.fileToBase64(files);
             ProfileUpload.then(function(result) {
                 ProfileUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
-                sendRegReq()
+                uploadProfileImage()
             });
         }else{
             /* toastr.error('Please Upload Profile Picture');
@@ -100,6 +100,36 @@ function register(data){
             sendRegReq()
             
         }
+        function uploadProfileImage(data){
+			if(data){
+				stopLoad()
+				//console.log(data)
+				//newdata = JSON.parse(data)	
+				try {
+					var ndata = JSON.parse(data);
+					data = ndata;
+				} catch (error) {
+					//console.log('Failed to parse',data)
+				}
+				ProfileUpload = data['data'].imagepath
+				//console.log(ProfileUpload)	
+				//if()
+				sendRegReq();
+			}else{
+				startLoad()
+				var data = {"ProfilePic":ProfileUpload};
+				//console.log(data)
+				var url = renda.Config.serverUrl+'paydaypayment/uploadimage';
+				promiseXmlHTTP({
+					url:url,
+					method:'POST',
+					data:data,
+					Authorization:'Basic '+authToken
+				}).then(function(result){
+					uploadProfileImage(JSON.stringify(result))
+				});
+			}
+		}
         function sendRegReq(){
             var token = generateToken(5);
             data = {
@@ -313,7 +343,7 @@ function checkValue(el){
 }
 
 function showRegStep(id){
-    console.log(id)
+    //console.log(id)
     $('.reg-step').hide();
     $('.'+id).show();
 

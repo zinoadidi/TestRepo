@@ -145,7 +145,7 @@ function dashboardStats(data){
 		stopLoad();
 		
 		if (data){
-            console.log(data)
+            //console.log(data)
             data.data = modResult(data);
             if(data.data){
                 var counter = 0;
@@ -190,7 +190,7 @@ function dashboardStats(data){
                 }
             });
         }else{
-			console.log(data);    
+			//console.log(data);    
 		}           
 		return false;
 	}else{

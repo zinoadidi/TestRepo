@@ -9,7 +9,7 @@
    <div class="w3-sidebar w3-bar-block w3-striped w3-card-4 w3-animate-left w3-top w3-bottombar border-purple" style="display:none; display: block;  left: 0px; clip: rect(0px);" id="mySidebar" >
  
     <ul class='w3-ul w3-striped' style="overflow:scroll">
-      <li class=' w3-text-white w3-medium w3-center' id='profileArea' style="">
+      <li class=' w3-text-white w3-medium w3-center' id='profileArea' style="" onclick="renda.component('userExtras','account','dashboardDisplayDiv');">
         <p v-show="!commonData.User.ProfilePic"></p>
         <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:70%;height:105px"></img>
         <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:200px; height:210px"></img>
@@ -40,7 +40,7 @@
 
         <button id="loadFAQBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2" onclick=""><i class=" w3-margin-right"><img src="img/LineIcons/Menu(Icons)/pdi_faqs.png" class="navIcon"></i><span class="navFontSize">FAQs</span></button>
 
-       <button id="logoutBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2"><i class=" w3-margin-right"><img src="img/LineIcons/Secondary(Icons)/pdi_logout_icon.png" class="navIcon"></i><span class="navFontSize" onclick="logout();">Logout</span></button>
+       <button id="logoutBtn" class= "w3-padding w3-bar-item w3-button w3-hover-grey r-nav-item nav-text-color darken-2"><i class=" w3-margin-right"><img src="img/LineIcons/Secondary(Icons)/pdi_logout_icon.png" class="navIcon" style="width: 6.5vw;margin-left: 4px;"></i><span class="navFontSize" onclick="logout();">Logout</span></button>
     </small>
     </ul>
     </div>

@@ -1,6 +1,8 @@
     
    $(document).ready(function(){ 
         //load extra files
+        // goToTest();
+
         checklogin();   
         checkInternet()
         $("#loadDashboardBtn").click(function(){
@@ -52,7 +54,7 @@
                     }else{
                         result.StatusMessage = 'Login successful. Please wait while we prepare your account';
                     }
-                    toastr.success(result.StatusMessage);
+                    //toastr.success(result.StatusMessage);
                     data = {
                         "Email":result.EmailAddress
                     };
@@ -64,7 +66,7 @@
                 } 
                 return false
             }else{
-                console.log(result)
+                //console.log(result)
                 if (result.UserId){
                     result = modResult(result);
                     result.message = 'Welcome Back '+result.data.Firstname;
@@ -105,7 +107,7 @@
             var email = document.getElementById('Username').value;
             var pass = document.getElementById('Password').value; 
             if(email.length<4 || pass.length < 4){
-                alert('please provide username and password');
+                alert('Please provide username and password');
                 return false;
             } 
             data = {
@@ -125,8 +127,6 @@
         }   
         return false;  
     }
-    
-
     function reset_password(data,option){
         if (data) {
 
@@ -202,7 +202,6 @@
         
         return false;  
     }
-
     function forgot_password(data,option){
         if (data) {
 
@@ -278,8 +277,6 @@
         
         return false;  
     }
-
-    
     function checklogin(){
 
       if (typeof(Storage) !== "undefined") {
@@ -323,7 +320,7 @@
             }
         }else{
             alert('error with JS')
-            console.log('Error with javascript');
+            ////console.log('Error with javascript');
         }
     }
     function authenticateUser(){
@@ -339,15 +336,14 @@
                 },
             success: function (response) {
                 var authenticate =response.status;
-                if (authenticate != true){logout();}else{console.log('User Authenticated Successfully');}
+                if (authenticate != true){logout();}else{////console.log('User Authenticated Successfully');}
                 $('#msgDiv').html("<b>...</b>");
             },
             error: function (error) {
-                console.log(error);
+                //console.log(error);
             }
         });*/
     }
-
     function populateDataTable(data,columns,table){
         
         if ( $.fn.dataTable.isDataTable( '#'+table ) ) {
@@ -366,7 +362,6 @@
         }
         styleDataTable();
     }
-
     function populateGridView(data,element,action){
         
         if ( $.fn.dataTable.isDataTable( '#'+table ) ) {
@@ -396,7 +391,6 @@
         $(".current").find('a').addClass( "w3-indigo" );
 
     }
-
     function styleGridView(){
         $( "input[type='search']" ).addClass( " w3-text-black w3-input w3-half");
         $( "th" ).addClass( " w3-text-white " );
@@ -406,7 +400,6 @@
         $(".current").find('a').addClass( "w3-indigo" );
 
     }
-
     function validateObj(obj,silentMode){
         var errorFound = 0;
         $.each( obj, function( key, value ) {
@@ -442,7 +435,6 @@
         renda.page('login');
         window.clearTimeout(timer_);
     }
-
     function stopLoad(){
         $(".loadingbar").hide();
         $("#loadingbar").hide();
@@ -450,25 +442,19 @@
         $("#loader").hide();
         $(".showAjaxLoad").removeClass('w3-animate-fading');
     }
-
     function startLoad(){
         $(".loadingbar").show();
         $("#loadingbarr").show();
         $("#loader").show();
         $(".showAjaxLoad").addClass('w3-animate-fading');
     }
-
-    // update app cache
-
-
     function updateDataFromApi(data){
         loadDashboardData(null,'dashData')
         loadDashboardData(null,'cards')
         return false;  
     }
-
     function stats(data,option){
-        console.log(data)
+        //console.log(data)
         if (data) {
             stopLoad()
             try{
@@ -507,13 +493,12 @@
             //drawChart()
         }
     }
-
     //toastr options
     toastr.options.closeButton = true;
     toastr.options.timeOut = 4000;
     toastr.options.closeEasing = 'swing';
     toastr.options.preventDuplicates = true;
-    toastr.options.positionClass='toast-top-right';
+    toastr.options.positionClass='toast-top-center';
     toastr.options.fontSize = '200em';
 
     window.onload = canceltimer;
@@ -575,8 +560,8 @@ window.onbeforeunload = function (e) {
   };
 
   function sendEmail(option,data){
-      console.log('option',option)
-      console.log(data)
+      //console.log('option',option)
+      //console.log(data)
     switch (option) {
         case 'register':
             var subject ='Account Activation';
@@ -763,27 +748,22 @@ window.onbeforeunload = function (e) {
         ndata = JSON.stringify(ndata)
         renda.post('Utility/SendEmail',JSON.stringify(ndata),'mailResponse');
     }else{
-        console.log('error performing request. Data missing')
+        //console.log('error performing request. Data missing')
     }
     
   }
-
   function mailResponse(data){
-    console.log('========mail send response')
-    console.log(data)
+    //console.log('========mail send response')
+    //console.log(data)
   }
   function updateOnlineStatus() {
-    toastr.info('Connection established')
+    //toastr.info('Connection established')
   }
-
   function updateOfflineStatus(){
     toastr.warning('Your device is offline. Please ensure you have adequate internet coverage')      
-    
 }
-
 window.addEventListener('online',  updateOnlineStatus);
 window.addEventListener('offline', updateOfflineStatus);
-
 function checkInternet() {  
     $.get("http://www.google.com").done(win).fail(fail);
     function win(){
@@ -793,15 +773,12 @@ function checkInternet() {
         updateOfflineStatus();
     }
 }
-
 document.addEventListener("deviceready", function(e){
-    console.log(navigator.connection.type);
+    //console.log(navigator.connection.type);
     document.addEventListener("offline", function(e){
         updateOfflineStatus()
     }, false);  
 }, false);  
-
-
 function checkPasswordStrenght(){
     $('.checkPass').keyup(function(e) {
         var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
@@ -822,7 +799,6 @@ function checkPasswordStrenght(){
         return true;
    });
 }
-
 function checKycStatus(){
     if(payday.user.ProgressStatus == 'KYC Approved' || payday.user.ProgressStatus == 'Existing Customer'){
         return true;
@@ -830,3 +806,15 @@ function checKycStatus(){
         return false;
     }
 }
+
+
+function goToTest(){
+    renda.Config.serverUrl = 'http://192.168.250.29:8000/pdiv/';
+    paydayWebBaseUrl = "https://paydayinvestor.arm.com.ng/api/v1";
+    armOneBaseUrl = "http://192.168.250.29:8000/armauth";
+    paydayWebKongUrl = "http://192.168.250.29:8000/paydaypayment";
+    renda.Config.httpRequestAuth.authToken = "YXJtOkBybTFrMHkxbEBnMHM=";
+    
+}
+
+function addCommas(str) {return (str+"").replace(/.(?=(?:[0-9]{3})+\b)/g, '$&,');}

@@ -40,7 +40,7 @@ function clear(){
 	renda.component('goals','goal','dashboardDisplayDiv')
 }
 function onChangeInput(arg) {
-	console.log(arg)
+	//console.log(arg)
 	return false;
 	    if(arg === 'Weekly') 
 	    {
@@ -94,46 +94,53 @@ function createGoal(data){
 		var files = '';
 		var url = 'Goal/Create';   
     	files = document.getElementById('GoalUploadCreate').files[0]
-		console.log('---------------------before send')
+		//console.log('---------------------before send')
 		var GoalUpload = '';
 		if(files){
 			GoalUpload = renda.fileToBase64(files);			
 			GoalUpload.then(function(result) {
 				GoalUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
-				console.log('===============================goal image')
-				console.log(result)
+				/* //console.log('===============================goal image')
+				//console.log(result) */
 				uploadGoalImage();
 			});
 		}else{
-			console.log('got here=======no image')
+			//console.log('got here=======no image')
 			GoalUpload = undefined;
 			sendGoalReq()
 		}
 		function uploadGoalImage(data){
 			if(data){
 				stopLoad()
-				console.log(data)
+				//console.log(data)
 				//newdata = JSON.parse(data)	
-				GoalUpload = data.imagepath
-				console.log(GoalUpload)	
+				try {
+					var ndata = JSON.parse(data);
+					data = ndata;
+				} catch (error) {
+					//console.log('Failed to parse',data)
+				}
+				GoalUpload = data['data'].imagepath
+				//console.log(GoalUpload)	
 				//if()
 				sendGoalReq();
 			}else{
 				startLoad()
-				var data = {"ProfilePic":GoalUpload}
-				console.log(data)
+				var data = {"ProfilePic":GoalUpload};
+				//console.log(data)
+				var url = renda.Config.serverUrl+'paydaypayment/uploadimage';
 				promiseXmlHTTP({
-					url:renda.Config.serverUrl+'paydaypayment/uploadimage',
+					url:url,
 					method:'POST',
 					data:data,
 					Authorization:'Basic '+authToken
 				}).then(function(result){
-					uploadGoalImage(result)
+					uploadGoalImage(JSON.stringify(result))
 				});
 			}
 		}
 		function sendGoalReq(){
-			console.log('ready to lunch')
+			//console.log('ready to lunch')
 			if (createGoalApp.cgvm.Day) {}else{
 				createGoalApp.cgvm.Day = createGoalApp.cgvm.weekDays
 				if (createGoalApp.cgvm.Day) {}else{
@@ -184,11 +191,11 @@ function createGoal(data){
 			}  
 	        if (validateObj(data)){
 				data = JSON.stringify(data)
-				console.log(data)
+				//console.log(data)
 				stopLoad()				
 	            renda.post(url,JSON.stringify(data),'createGoal');     
 	        }else{
-	        	console.log('error occured');
+	        	//console.log('error occured');
 	        	console.dir(data)
 				stopLoad()
 				return false;
@@ -201,7 +208,7 @@ function viewSingleGoal(id){
 	if(sessionStorage.userCards){
 		updateCardList(JSON.stringify(sessionStorage.userCards))	
 	 }
-	console.log('id:',id)
+	//console.log('id:',id)
 	if(typeof(id) !== null && typeof id === 'object'){
 		singleGoalApp.sgdata = id;
 		if(singleGoalApp.sgdata.GoalImage){
@@ -234,8 +241,8 @@ function updateCardList(data){
 		data = JSON.parse(data);
 		
 		data = modResult(data);
-		console.log("=====================================================")
-		console.log(data)
+		//console.log("=====================================================")
+		//console.log(data)
 		if(data['data']){
 			isCard = true;
 			createGoalApp.cgvm.userCards = data['data'];
@@ -310,7 +317,7 @@ function goalOptions(id,reqType){
 	
 	if(reqType){
 		stopLoad()
-		console.log(reqType)
+		//console.log(reqType)
 		if(reqType == 'delete'){
 			if(id == true || id == 'true'){
 				clear()
@@ -476,22 +483,52 @@ function editGoal(data){
 		var files = '';
 		var url = 'Goal/Update';   
 		files = document.getElementById('GoalUpload').files[0]
-		console.log('---------------------before send')
+		//console.log('---------------------before send')
 		var GoalUpload = '';
 		if(files){
 			GoalUpload = renda.fileToBase64(files);			
 			GoalUpload.then(function(result) {
 				GoalUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
-				console.log(result)
-				sendGoalReq();
+				//console.log(result)
+				uploadGoalImage();
 			});
 		}else{
 			GoalUpload = singleGoalApp.sgdata.GoalImage;
 			sendGoalReq()
 		}
-		
+		function uploadGoalImage(data){
+			if(data){
+				stopLoad()
+				//console.log(data)
+				//newdata = JSON.parse(data)	
+				try {
+					var ndata = JSON.parse(data);
+					data = ndata;
+				} catch (error) {
+					//console.log('Failed to parse',data)
+				}
+				GoalUpload = data['data'].imagepath
+				//console.log(GoalUpload)	
+				singleGoalApp.sgdata.GoalImage = GoalUpload
+				//if()
+				sendGoalReq();
+			}else{
+				startLoad()
+				var data = {"ProfilePic":GoalUpload};
+				//console.log(data)
+				var url = renda.Config.serverUrl+'paydaypayment/uploadimage';
+				promiseXmlHTTP({
+					url:url,
+					method:'POST',
+					data:data,
+					Authorization:'Basic '+authToken
+				}).then(function(result){
+					uploadGoalImage(JSON.stringify(result))
+				});
+			}
+		}
 		function sendGoalReq(){
-			console.log('ready to lunch')
+			//console.log('ready to lunch')
 			if (createGoalApp.cgvm.Day) {}else{
 				createGoalApp.cgvm.Day = createGoalApp.cgvm.weekDays
 				if (createGoalApp.cgvm.Day) {}else{
@@ -546,7 +583,7 @@ function editGoal(data){
 				data = JSON.stringify(data)
 				renda.post(url,JSON.stringify(data),'editGoal');     
 			}else{
-				console.log('error occured');
+				//console.log('error occured');
 				console.dir(data)
 				stopLoad()
 				return false;
@@ -618,10 +655,10 @@ function Top_Up_Goal(data,option){
 			}
 			if (validateObj(data)){
 				startLoad()
-				console.log(data)
+				//console.log(data)
 				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
 			}else{
-				console.log('error occured');
+				//console.log('error occured');
 				console.dir(data)
 				stopLoad()
 				return false;
@@ -649,7 +686,7 @@ function Top_Up_Goal(data,option){
 				data = JSON.stringify(data)
 				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
 			}else{
-				console.log('error occured');
+				//console.log('error occured');
 				console.dir(data)
 				stopLoad()
 				return false;
@@ -707,7 +744,7 @@ function redeemGoal(data){
 			startLoad()
 			renda.post(url,JSON.stringify(data),'redeemGoal');     
 		}else{
-			console.log('error occured');
+			//console.log('error occured');
 			console.dir(data)
 			stopLoad()
 			return false;
@@ -756,7 +793,7 @@ function partWithdrawal(data){
 			startLoad()
 			renda.post(url,JSON.stringify(data),'partWithdrawal');     
 		}else{
-			console.log('error occured');
+			//console.log('error occured');
 			console.dir(data)
 			stopLoad()
 			return false;
@@ -808,7 +845,7 @@ function moveExcess(data){
 			data = JSON.stringify(data);
 			renda.post(url,JSON.stringify(data),'moveExcess');     
 		}else{
-			console.log('error occured');
+			//console.log('error occured');
 			console.dir(data)
 			stopLoad()
 			return false;
@@ -871,7 +908,7 @@ function transferToWallet(data){
 			data = JSON.stringify(data)
 			renda.post(url,JSON.stringify(data),'transferToWallet');     
 		}else{
-			console.log('error occured');
+			//console.log('error occured');
 			console.dir(data)
 			stopLoad()
 			return false;
