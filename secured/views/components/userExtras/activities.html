@@ -63,7 +63,7 @@
    
 	<div id='activitiesPageDiv' class="w3-container w3-margin-top w3-margin-bottom" >		
     <ul class="w3-ul w3-stripped">
-    <li v-for="item in data.data" class=" w3-white" :data-item="item" style="color: #1f6e22;">
+    <li v-for="item in data.data" class=" w3-white" :data-item="item" style="color: #1f6e22;text-align:left">
         <div v-if="item"><span class="input-text-goal"  style="color: #1f6e22;">{{item['Date']}}</span> <span class="input-text-goal" style="color: #1f6e22;">- {{ item['Description'] }}</span> </div>
     </li>
   </ul>
