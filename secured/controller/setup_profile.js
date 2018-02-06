@@ -115,12 +115,12 @@ function updateStage(data){
 				SignatureUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				sendReq();
 			});
-			files = document.getElementById('ThumbUpload').files[0]
+			/* files = document.getElementById('ThumbUpload').files[0]
 	    	var ThumbUpload = renda.fileToBase64(files);
 			ThumbUpload.then(function(result) {
 				ThumbUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				sendReq()
-			});
+			}); */
 			files = document.getElementById('IdentificationUpload').files[0]
 	    	var IdentificationUpload = renda.fileToBase64(files);
 			IdentificationUpload.then(function(result) {
@@ -138,7 +138,7 @@ function updateStage(data){
 	                "UserId": sessionStorage.UserId,
 	                "PassportUpload":PassportUpload,
 	                "SignatureUpload":SignatureUpload,
-	                "ThumbUpload":ThumbUpload,
+	                /* "ThumbUpload":ThumbUpload, */
 	                "IdentificationUpload":IdentificationUpload,
 	                "IdentificationNumber":temporaryApp.vm.IdentificationNumber,
                 	"UtilityUpload":UtilityUpload

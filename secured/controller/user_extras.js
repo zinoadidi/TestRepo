@@ -438,7 +438,7 @@ function submitContactForm(data){
         }
         console.dir(data)            
         startLoad()
-        sendEmail(data,'contactUs');
+        sendEmail('contactUs',data);
         //sendEmail(data,'contactUsFeedback');
         submitContactForm(JSON.stringify(data))
        
@@ -473,7 +473,7 @@ function change_password(data){
         return false;
     }else{
         var SecurityQuestion = $('#resetSecurityQuestion').val();
-        var SecurityAnswer = $('#resetSecurityAnswer').val();
+        var SecurityAnswer = $('#resetSecurityAnswer').val().toLowerCase();
         var password = $('#resetNewPassword').val();
         var confirmPassword = $('#resetConfirmPassword').val();
         var oldPassword = $('#resetOldPassword').val();

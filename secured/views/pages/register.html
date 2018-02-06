@@ -300,8 +300,12 @@
 									<img src="assets/images/pagination-2.png" class="img-responsive center paginated-tab" width="100%">
 								</div>
 								<div class="">
+									<p class="w3-tooltip"> 
 									<span class="fa fa-lock w3-xxlarge"></span>
 									<input type="password" id="password" placeholder="Password" v-model="regVm.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium checkPass">
+									<span style="position:absolute;left:0;bottom:40px;background:#35383f!important" class="w3-text w3-tag">
+										Your password should contain numbers, symbols, minimum of one uppercase letter and not less than 8 characters.
+									</span></p>
 								</div> 
 								<div class="">
 									<span class="fa fa-lock w3-xxlarge"></span>
@@ -320,7 +324,7 @@
 										<option value="In what city were you born">In what city were you born?</option>
 									</select>
 								</div> 
-								
+								 
 								<div class="">
 									<span class="fa  fa-question w3-xxlarge"></span>
 									<input type="text" style="" placeholder="Answer to security question" v-model="regVm.SecurityAnswer" value= "" class="w3-input w3-text-white w3-padding customized-input font-medium" required="" onfocusout="checkValue(this)" aria-required="true">
@@ -345,7 +349,7 @@
 					<div class="main-container login-main-container col-lg-12">
 					
 						<center>
-						<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Welcome to PayDay. Please Provide Your ARM User ID and Password</p></center>
+						<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Welcome to PayDay.<br/>Please Provide Your ARM Membership Number and Password</p></center>
 					
 						<div class="form-holder">
 							<div >
@@ -387,8 +391,12 @@
 									<div class="row" style="" v-if="!armOneDetail.IsARMOne">
 										<div class="form-group form-field-holder">
 											<div class="">
+												<p class="w3-tooltip"> 
 												<span class="fa fa-lock 3-xxlarge"></span>
 												<input type="password" id="password" placeholder="Password" v-model="armOneDetail.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium checkPass">
+												<span style="position:absolute;left:0;bottom:40px;background:#35383f!important" class="w3-text w3-tag">
+													Your password should contain numbers, symbols, minimum of one uppercase letter and not less than 8 characters.
+												</span></p>
 											</div>
 										</div>
 										<div class="">
@@ -416,11 +424,34 @@
 										   
 											</div>
 										</div>
-										<div class="row" style="" v-for="(value, key) in existingVm">
+										<div class="row" style="">
 											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">{{ key }}: {{ value }}</label>
+												<label class="w3-padding input-text-goal" style="display: block;">Membership Number: {{existingVm.MembershipNumber}}</label>
+											</div><br/>
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">Full Name: {{existingVm.FullName}}</label>
+											</div><br/>
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">Date of Birth: {{existingVm.DateOfBirthStr}}</label>
+											</div><br/>
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">Gender: {{existingVm.Gender}}</label>
+											</div><br/>
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">Mobile Number: {{existingVm.MobileNumber}}</label>
+											</div><br/>
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">Email Address: {{existingVm.EmailAddress}}</label>
+											</div><br/>
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">Home Address: {{existingVm.Address}}</label>
+											</div><br/>
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">State: {{existingVm.State}}</label>
 											</div>
-							
+											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
+												<label class="w3-padding input-text-goal" style="display: block;">Country: {{existingVm.Country}}</label>
+											</div>
 										</div>
 									</div>
 									<div class="" style="margin-top:8px!important;text-align: center"> 

@@ -1,10 +1,9 @@
     
    $(document).ready(function(){ 
         //load extra files
-        // goToTest();
+        //goToTest();
 
         checklogin();   
-        checkInternet()
         $("#loadDashboardBtn").click(function(){
             loadDashboardStatsDiv();
         }); 
@@ -143,7 +142,8 @@
             console.dir(result);
             if (result.ResponseCode == "00"){
                if(option){
-                    toastr.success('Account Details Confirmed. Initiating password reset, please wait.')
+                    toastr.success('Account Details Confirmed. please wait while we finalize the reset process.')
+                    startLoad()
                     var userdetails = JSON.parse(sessionStorage.resetPasswordDetail)
                     console.dir(userdetails);
                     var SecurityQuestion = $('#resetSecurityQuestion').val();
@@ -311,15 +311,15 @@
                 }
                 return false;
             }else{
-                if (renda.Config.currentPage == 'dashboard' || renda.Config.currentPage == '') {
+                if (renda.Config.currentPage == 'dashboard') {
                     renda.page('login');
                     return false;
                 }else{
-                    
+                    renda.page('splashscreen');
                 }
             }
         }else{
-            alert('error with JS')
+            alert('error while loading app')
             ////console.log('Error with javascript');
         }
     }
@@ -560,8 +560,9 @@ window.onbeforeunload = function (e) {
   };
 
   function sendEmail(option,data){
-      //console.log('option',option)
-      //console.log(data)
+      console.log('option',option)
+      console.log(data)
+      
     switch (option) {
         case 'register':
             var subject ='Account Activation';
@@ -747,14 +748,15 @@ window.onbeforeunload = function (e) {
         }
         ndata = JSON.stringify(ndata)
         renda.post('Utility/SendEmail',JSON.stringify(ndata),'mailResponse');
+        
     }else{
         //console.log('error performing request. Data missing')
     }
     
   }
   function mailResponse(data){
-    //console.log('========mail send response')
-    //console.log(data)
+    console.log('========mail send response')
+    console.log(data)
   }
   function updateOnlineStatus() {
     //toastr.info('Connection established')
@@ -765,7 +767,7 @@ window.onbeforeunload = function (e) {
 window.addEventListener('online',  updateOnlineStatus);
 window.addEventListener('offline', updateOfflineStatus);
 function checkInternet() {  
-    $.get("http://www.google.com").done(win).fail(fail);
+    $.get("http://paydayinvestor.ng/").done(win).fail(fail);
     function win(){
         updateOnlineStatus();
     }
@@ -818,3 +820,12 @@ function goToTest(){
 }
 
 function addCommas(str) {return (str+"").replace(/.(?=(?:[0-9]{3})+\b)/g, '$&,');}
+
+function showDropDown(){
+    var x = document.getElementById("walletOptions");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}

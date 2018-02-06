@@ -3,7 +3,7 @@
     var appSettings = {
         appTitle:'Payday',
         displayContainer:'display',
-        defaultPage:'login',
+        defaultPage:'splashscreen',
         errorPage:'login',
         loadDefaultPage:false,
         trackUrlChanges:false,
@@ -37,7 +37,7 @@
     
     renda.config(appSettings);
 
-    var paydayWebBaseUrl = "https://paydayinvestor.arm.com.ng/api/v1";
+    var paydayWebBaseUrl = "https://paydayinvestor.ng/api/v1";
     var armOneBaseUrl = "http://41.216.170.131:8000/armauth";
     var paydayWebKongUrl = "http://41.216.170.131:8000/paydaypayment";
     

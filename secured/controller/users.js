@@ -84,7 +84,7 @@ function register(data){
             return false;
         }
         if(temporaryApp.regVm.Password.length = '' || temporaryApp.regVm.Password.length < 8 || sessionStorage.passwordStrenght !='strong'){
-            alert('Please review your password. Strong password should consist of  minimum password length of 8 characters and it must contain a digit, uppercase, lowercase and non numeric character.');
+            alert('Please review your password. Your password should contain numbers, symbols, minimum of one uppercase letter and not less than 8 characters.');
             return false;
         }
         if(files){

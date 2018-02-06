@@ -16,7 +16,6 @@ class Login{
             //alert('gen token')
             if(this.serverSettings.numOfTimesGenerated >= 3){
                 if(this.serverSettings.numOfTimesGenerated >= 7) {
-                    toastr.warning('An error occured. Please try again')
                     alert('An error occured. Please try again')
                     renda.page('login');  
                     return false;                  

@@ -215,4 +215,88 @@ function dashboardStats(data){
     return false;
 }
 
+function showWithdrawPopUp(){
+    $('#extendedWalletUI').show()
+    $('.extendWalletDivs').hide()
+    $('#walletWithdrawal').show()
+    $('.walletWithdrawExtras').hide()
+    $('#walletWithdrawExtrasOtp').hide()
+    $('.walletWithdrawExtrasHide').show()
+}
+
+function walletWithdrawal(data,option){
+    if (data) {
+        stopLoad()
+        try{
+            JSON.parse(data);
+        }catch(err){
+            if(data){
+                alert(data)            
+                
+            }else{
+                toastr.error('An error occured while performing request.')
+            }
+            console.dir(err);
+            return false;
+        }            
+        let result = JSON.parse(data);
+        //let result = USERDATA;
+        console.dir(result);
+        if (option == 'otp'){
+            result = modResult(result);
+            result.message = 'Please provide the OTP code that was sent to your email';
+            alert(result.message); 
+            showWalletWithdrawExtras()
+        }else{
+            result = modResult(result);
+            result.message = 'Redemption request has been submitted successful';
+            alert(result.message); 
+            startLoad()
+            renda.component('dashboard','myDashboard','dashboardDisplayDiv')
+        }
+        return false;
+    }else{
+        var UserId = sessionStorage.UserId;
+        var url = '';
+        var data = {};
+        switch (option) {
+            case 'otp':
+                data = {"UserId":UserId}
+                url = 'Utility/SendOTP';
+                break;
+            case 'withdrawal':
+                data = {
+                    "AppUserId":UserId,
+                    "Amount":$('#walletAmount').val(),
+                    "Reason":$('#walletReason').val(),
+                    "OTP":$('#walletOtp').val(),
+                    "RedemptionType":'WalletRedemption'
+                }
+                url = 'UserTransactions/RedemptionRequest';
+                if(data.OTP == '' || data.Amount == '' || data.Reason == ''){
+                    alert('Please Provide All Fields to Process Redemption')
+                    return false;
+                }else{
+
+                }
+                break;
+            default:
+                break;
+        }
+        if(url){
+            data = JSON.stringify(data)
+            renda.post(url,JSON.stringify(data),'walletWithdrawal',null,null,option)            
+        }else{
+            alert('invalid command. Please try again')
+        }
+    }
+    
+    return false;  
+}
+
+function showWalletWithdrawExtras(){
+    $('.walletWithdrawExtras').show()
+    $('#walletWithdrawExtrasOtp').show()    
+    $('.walletWithdrawExtrasHide').hide()
+}
 dashboardStats();

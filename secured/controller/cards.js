@@ -62,7 +62,7 @@ function createCard(data,cardRegStep){
                     url = url.replace('http://41.216.170.131/api/v1/','')
                     url = url.replace('https://41.216.170.131/api/v1/','')
                     url = url.replace('http://paydayinvestor.arm.com.ng/api/v1/','')
-                    url = url.replace('https://paydayinvestor.arm.com.ng/api/v1/','')
+                    url = url.replace('https://paydayinvestor.ng/api/v1/','')
                     console.log(url)                    
                     renda.get('paydaypayment/'+url,'createCard',2)
                     /* promiseXmlHTTP({url:url,method:'GET'}).then(function(result){
