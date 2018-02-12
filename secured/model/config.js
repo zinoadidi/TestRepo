@@ -20,7 +20,7 @@
             "status": true,
             "authName":"Basic",
             "authToken": authToken
-        },
+        }, 
         loader:{
             active:true,
             useCustom:true,
@@ -36,7 +36,7 @@
     };
     
     renda.config(appSettings);
-
+    var paydayWebAuthToken =  btoa("paydayInvestor:13fc17edc2ea436f7dab66cad29eb9b2")
     var paydayWebBaseUrl = "https://paydayinvestor.ng/api/v1";
     var armOneBaseUrl = "http://41.216.170.131:8000/armauth";
     var paydayWebKongUrl = "http://41.216.170.131:8000/paydaypayment";

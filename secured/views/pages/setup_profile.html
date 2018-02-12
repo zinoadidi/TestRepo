@@ -31,7 +31,9 @@
                 color: #ccc;
             }
 
-
+        .capitalize {
+                text-transform: capitalize;
+            }
         #mobile-header{
             width:100%;
             z-index:999;
@@ -228,9 +230,8 @@
                         <img src="assets/images/pagination-2.png" class="img-responsive center paginated-tab" width="80%">
 
                         <p class="welcome-text center input-text-medium">
-                            Welcome <i>{{vm.Firstname}}</i>, <br>
-                            Your Payday account has been successfully created.<br>
-                            Please complete your profile below to continue.
+                            Welcome <i class="capitalize">{{vm.Firstname}}</i>, <br>
+                            Please provide the following detail to complete your PayDay Profile.
                         </p>
                     </div>
                 </div>
@@ -402,7 +403,7 @@
             </form>
             <form action="#" onsubmit="event.preventDefault();updateStage()" id="step2" method="post" class="w3-animate-right stages">
                 <img src="assets/images/pagination-3.png" class="img-responsive center paginated-tab" width="80%" >
-                <p class="welcome-text w3-card w3-border-bottom w3-border-black w3-center ">Hello {{vm.Firstname}}, Please please provide your KYC detail to continue.</p>
+                <p class="welcome-text w3-card w3-border-bottom w3-border-black w3-center ">Hello <strong  class="capitalize">{{vm.Firstname}}</strong>, Please please provide your KYC detail to continue.</p>
                 <div class="form-holder center ">
                 <div style="text-align: left"><h5>Identity</h5> </div>
                 <div class="form-group form-field-holder">
@@ -477,7 +478,6 @@
                 <div class="form-group submit-button-holder">
                     <button type="submit">UPDATE</button>
                 </div>
-
                 <a class="register-here-link " onclick="skip()"><p class="center"><b>Skip this step? Go to dashboard!</b></p></a>
             </form>
         </div>

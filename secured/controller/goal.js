@@ -128,12 +128,17 @@ function createGoal(data){
 				startLoad()
 				var data = {"ProfilePic":GoalUpload};
 				//console.log(data)
-				var url = renda.Config.serverUrl+'paydaypayment/uploadimage';
+				var url = renda.Config.serverUrl+'paydaypayment/image-upload';
 				promiseXmlHTTP({
 					url:url,
 					method:'POST',
-					data:data,
-					Authorization:'Basic '+authToken
+					data:JSON.stringify(data),
+					headers:{
+						"Authorization": "Basic " + paydayWebAuthToken,
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+						"Access-Control-Allow-Credentials":"true"
+					}
 				}).then(function(result){
 					uploadGoalImage(JSON.stringify(result))
 				});
@@ -324,7 +329,6 @@ function goalOptions(id,reqType){
 			}else{
 				toastr.error(id)
 			}
-
 		}
 		try{
             JSON.parse(id);
@@ -516,12 +520,17 @@ function editGoal(data){
 				startLoad()
 				var data = {"ProfilePic":GoalUpload};
 				//console.log(data)
-				var url = renda.Config.serverUrl+'paydaypayment/uploadimage';
+				var url = renda.Config.serverUrl+'paydaypayment/image-upload';
 				promiseXmlHTTP({
 					url:url,
 					method:'POST',
-					data:data,
-					Authorization:'Basic '+authToken
+					data:JSON.stringify(data),
+					headers:{
+						"Authorization": "Basic " + paydayWebAuthToken,
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+						"Access-Control-Allow-Credentials":"true"
+					}
 				}).then(function(result){
 					uploadGoalImage(JSON.stringify(result))
 				});
@@ -600,17 +609,29 @@ function freqChange(){
 
 function Top_Up_Goal(data,option){
 	if(data){
-		renda.loader('stop');
+		stopLoad()
+		if(option == 'cardTopUp' || option == 'cardTopUp'){
+			if(data==true){
+				alert('Goal Top Up Was Successful!')
+				document.getElementById('extendedGoalUI').style.display='none';				
+			}else{
+				toastr.error('An error occured while performing top up. Please try again later')					
+			}
+			return false; 					
+		}else{
+			
+		}
 		try{
 			JSON.parse(data);
-		}catch(err){
+			
+		}catch(err){			
 			stopLoad()
-			toastr.error('An error occured while performing request.')
+			
 			if(data){
 				if(data.length<70){
 					alert(data)
 				}else{
-
+					toastr.error('An error occured while performing request. Please try again later')
 				}
 				
 			}
@@ -629,25 +650,28 @@ function Top_Up_Goal(data,option){
 		}           
 		return false;
 	}else{
+		if(data == false && (option == 'cardTopUp' || option == 'walletTopUp')){
+			alert('An error occured while performing top up request. Please try again later')					
+			return false;			
+		}
 		if(option == 'card'){
-			url = 'paydaypayment/goal/topup';
+			url = 'UserTransactions/ChargeCard';
 			var element = $('#topUpCards').find('option:selected'); 
 			var cardToken = element.attr('fwCode');
+			var cardId = element.attr('id');
 			
 			var data = {
 				"AppUserId":sessionStorage.UserId,
-				"UserId":sessionStorage.UserId,
 				"GoalId":singleGoalApp.sgdata.GoalId,
-				"GoalAmount":$('#GoalAmount').val(),
-				"CardToken" : cardToken,
-				"MembershipNumber":sessionStorage.UserId
+				"Amount":$('#GoalAmount').val(),
+				"CardId" : cardId
 			}  
-			if(data.GoalAmount){
+			if(data.CardId){
 			}else{
 				toastr.warning('Please Enter Amount')
 				return false;
 			}
-			if(data.CardToken){
+			if(data.CardId){
 				
 			}else{
 				toastr.warning('Select a card to top up with. If you do not have a card on your account yet, please add one to continue')			
@@ -656,7 +680,8 @@ function Top_Up_Goal(data,option){
 			if (validateObj(data)){
 				startLoad()
 				//console.log(data)
-				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
+				data = JSON.stringify(data)
+				renda.post(url,JSON.stringify(data),'Top_Up_Goal',null,null,'cardTopUp');     
 			}else{
 				//console.log('error occured');
 				console.dir(data)
@@ -684,7 +709,7 @@ function Top_Up_Goal(data,option){
 			if (validateObj(data)){
 				startLoad()
 				data = JSON.stringify(data)
-				renda.post(url,JSON.stringify(data),'Top_Up_Goal');     
+				renda.post(url,JSON.stringify(data),'Top_Up_Goal',null,null,'walletTopUp');     
 			}else{
 				//console.log('error occured');
 				console.dir(data)

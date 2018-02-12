@@ -16,9 +16,16 @@ var step = 0;
 
  function checkProfileState(){
     if(payday.user["BVN"] == null || payday.user["Gender"] == null || 
-    	String(payday.user["ProgressStatus"]) != "Stage 2 Completed"){
-           step1()
-           return false;
+		String(payday.user["ProgressStatus"]) != "Stage 2 Completed" ){
+			if(
+				String(payday.user["ProgressStatus"]) == "KYC Submitted" ||
+				String(payday.user["ProgressStatus"]) == "KYC Rejected"){
+					step2()					
+				}else{
+					step1()
+					return false;
+				}
+          
     }else{
         step2()
     }
@@ -38,8 +45,9 @@ function step1(){
 function step2(){
 	step = 2;
 	if(String(payday.user["ProgressStatus"]) == "KYC Submitted"){
-        skip();
-        return false
+		alert('Your KYC is pending approval. You will not be able to perform any transaction until it is approved.')
+        //skip();
+        //return false
     }
 	$('#step1').hide()
 	$('#step2').show()
@@ -52,7 +60,7 @@ function updateStage(data){
             JSON.parse(data);
         }catch(err){
         	stopLoad();
-            toastr.error('An error occured while performing request.')
+            toastr.error('An error occured while submitting data. Please try again later.')
             console.dir(err);
             return false;
         }
@@ -104,12 +112,23 @@ function updateStage(data){
 	    	startLoad()
 	    	url = "Account/RegisterSTG3";
 	    	var files = '';
-	    	files = document.getElementById('PassportUpload').files[0]
+			files = document.getElementById('PassportUpload').files[0]
+			if(files.size > 525000){
+				alert('Please ensure that your passport photo is lesser than 500kb in size')
+				stopLoad()
+				return false;
+			}else{}   
 	    	var PassportUpload = renda.fileToBase64(files);
 			PassportUpload.then(function(result) {
 				PassportUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 			});
-	    	files = document.getElementById('SignatureUpload').files[0]
+			
+			files = document.getElementById('SignatureUpload').files[0]
+			if(files.size > 525000){
+				alert('Please ensure that your signature picture is not larger than 500kb in size')				
+				stopLoad()
+				return false;
+			}else{}   
 	    	var SignatureUpload = renda.fileToBase64(files);
 			SignatureUpload.then(function(result) {
 				SignatureUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
@@ -122,12 +141,22 @@ function updateStage(data){
 				sendReq()
 			}); */
 			files = document.getElementById('IdentificationUpload').files[0]
+			if(files.size > 525000){
+				alert('Please ensure that your identification document is not larger than 500kb in size')				
+				stopLoad()
+				return false;
+			}else{}   
 	    	var IdentificationUpload = renda.fileToBase64(files);
 			IdentificationUpload.then(function(result) {
 				IdentificationUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
 				sendReq()
 			});
 			files = document.getElementById('UtilityUpload').files[0]
+			if(files.size > 525000){
+				alert('Please ensure that your utility document is not larger than 500kb in size')
+				stopLoad()
+				return false;
+			}else{}   
 	    	var UtilityUpload = renda.fileToBase64(files);
 			UtilityUpload.then(function(result) {
 				UtilityUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
@@ -144,7 +173,12 @@ function updateStage(data){
                 	"UtilityUpload":UtilityUpload
 	            } 
 	            if (validateObj(data,true)){
-					if(typeof(data.UtilityUpload) !== 'string'){
+					if(
+						typeof(data.UtilityUpload) !== 'string' ||
+						typeof(data.PassportUpload) !== 'string' ||
+						typeof(data.SignatureUpload) !== 'string' ||
+						typeof(data.IdentificationUpload) !== 'string'
+					){
 						return false;
 					}else{
 						renda.loader('start')

@@ -17,8 +17,8 @@
         </div>
         <div class="w3-container w3-white w3-card" style="margin-top:0px" >
           <div class="display-inline w3-left center w3-padding">
-            <span class="display-block w3-text-green" v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.client_balance.AccruedIntrest}}</span>
-            <span class="display-block input-text-medium"><small><small>Accrued Intrest</small></small></span>
+            <span class="display-block w3-text-green" v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.client_balance.AccruedInterest}}</span>
+            <span class="display-block input-text-medium"><small><small>Accrued Interest</small></small></span>
           </div>
           <div class="display-inline w3-right center w3-padding">
             <div class="w3-dropdown-click" onclick="showDropDown()">
@@ -160,7 +160,7 @@
                    </div>
                    <div class="w3-third" style="width:30%!important">
                       <div class="col-xs-12 col-lg-12">
-                          <div class="text-muted">Intrest Rate</div>
+                          <div class="text-muted">Interest Rate</div>
                       </div>
 
                       <div class="col-xs-12 col-lg-12">
@@ -229,7 +229,7 @@
               <form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
                 <div class="w3-margin">
                   <span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
-                  <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Amount to Redeem"  id="RedeemAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+                  <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="text" placeholder="Enter Amount to Redeem"  id="RedeemAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
                 </div>
                 <div class="w3-margin">
                   <span class="fa fa-question-circle w3-xxlarge" style="position:absolute;margin-left: 3px;"></span>                            
@@ -283,6 +283,6 @@
     </div>
   </div>
 </div>
-<script src="secured/controller/myDashboard.js"></script>
 
+<script src="secured/controller/myDashboard.js"></script>
 

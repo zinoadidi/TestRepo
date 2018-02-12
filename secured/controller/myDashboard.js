@@ -6,12 +6,6 @@ dashboardApp = new Vue({
       	commonData:commonData
   }
 }); 
-var navApp = new Vue({
-  el: '#mySidebar',
-  data: {
-      	commonData:commonData
-  }
-});
 
 if(renda.Config.currentPage =='dashboard'){
     statsData = new Vue({
@@ -41,49 +35,51 @@ if (testDash != 'undefined' && testDash != 'null' && testDash != ''){
 $( document ).ready(function() {
     $(window).scrollTop(0);
   w3_close()
-  $('#loadInvestment101Btn').click(function(){
+  $('#loadInvestment101Btn').unbind().click(function(){
       w3_close()
       startLoad()
       renda.component('userExtras','investment101','dashboardDisplayDiv');
   });
-  $('#loadDashboardBtn').click(function(){
+  $('#loadDashboardBtn').unbind().click(function(){
       w3_close()
       startLoad()
       renda.component('dashboard','myDashboard','dashboardDisplayDiv')
     });
-  $('#loadGoalManagementBtn').click(function(){
+  $('#loadGoalManagementBtn').unbind().click(function(){
       w3_close()
+     
       startLoad()
       renda.component('goals','goal','dashboardDisplayDiv');
+      return false
   });
 
-  $('#loadCardManagementBtn').click(function(){
+  $('#loadCardManagementBtn').unbind().click(function(){
       w3_close()
       startLoad()
       renda.component('card','view','dashboardDisplayDiv');
   });
-  $('#loadTransactionBtn').click(function(){
+  $('#loadTransactionBtn').unbind().click(function(){
       w3_close()
       startLoad()
       renda.component('userExtras','transactions','dashboardDisplayDiv');
   });
 
-  $('#loadAccountSettings').click(function(){
+  $('#loadAccountSettings').unbind().click(function(){
       w3_close()
       startLoad()
       renda.component('userExtras','account','dashboardDisplayDiv');
   });
-  $('#loadActivitiesBtn').click(function(){
+  $('#loadActivitiesBtn').unbind().click(function(){
       w3_close()
       startLoad()
       renda.component('userExtras','activities','dashboardDisplayDiv');
   });
-  $('#loadContactUsBtn').click(function(){
+  $('#loadContactUsBtn').unbind().click(function(){
     w3_close()
     startLoad()
     renda.component('userExtras','contact','dashboardDisplayDiv');
   });
-  $('#loadFAQBtn').click(function(){
+  $('#loadFAQBtn').unbind().click(function(){
     w3_close()
     startLoad()
     renda.component('userExtras','faq','dashboardDisplayDiv');

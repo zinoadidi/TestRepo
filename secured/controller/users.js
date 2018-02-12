@@ -119,12 +119,17 @@ function register(data){
 				startLoad()
 				var data = {"ProfilePic":ProfileUpload};
 				//console.log(data)
-				var url = renda.Config.serverUrl+'paydaypayment/uploadimage';
+				var url = renda.Config.serverUrl+'paydaypayment/image-upload';
 				promiseXmlHTTP({
 					url:url,
 					method:'POST',
 					data:data,
-					Authorization:'Basic '+authToken
+					headers:{
+						"Authorization": "Basic " + paydayWebAuthToken,
+						"Content-Type": "application/json",
+						"Accept": "application/json",
+						"Access-Control-Allow-Credentials":"true"
+					}
 				}).then(function(result){
 					uploadProfileImage(JSON.stringify(result))
 				});

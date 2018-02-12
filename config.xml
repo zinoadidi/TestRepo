@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.payday.arm" version="0.1.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Payday</name>
+<widget id="com.payday.arm" version="0.1.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PayDay</name>
     <description>
         The Payday Investor is an application for anyone who wishes to make better financial decisions, whether it is to save more, acquire an asset, or simply invest in their future.
     </description>

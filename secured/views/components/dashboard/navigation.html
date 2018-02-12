@@ -13,8 +13,8 @@
         <p v-show="!commonData.User.ProfilePic"></p>
         <img  v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-medium w3-hide-large" style="width:70%;height:105px"></img>
         <img v-bind:src="commonData.User.ProfilePic" class="w3-circle w3-hide-small" style="width:200px; height:210px"></img>
-        <span class="navFontSize" v-if="commonData.User.Firstname">
-            <br/><small>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
+        <span class="navFontSize" v-show="commonData.User.Firstname">
+            <br/><small v-if='commonData.User.Email'>{{commonData.User.Firstname}} {{commonData.User.Surname}}<small style="display: block">{{commonData.User.Email}}</small></small>
         </span>
       </li>
      <small>
@@ -70,4 +70,10 @@
     </script>
                 
              
-                
+<script>var navApp = new Vue({
+    el: '#mySidebar',
+    data: {
+            commonData:commonData
+    }
+    });
+    </script>
