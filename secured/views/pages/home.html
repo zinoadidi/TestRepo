@@ -65,7 +65,7 @@
 			}
 			.pdy-logo{
 				width: 100px !important;
-				margin-left: 40px!important;
+				/* margin-left: 40px!important; */
 			}
 			input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 				background-color: transparent !important;
@@ -140,7 +140,7 @@
 			}
 			.pdy-logo{
 				width: 130px !important;
-				margin-left: 40px!important;
+				/* margin-left: 40px!important; */
 			}
 			input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 				background-color: transparent !important;
@@ -170,38 +170,32 @@
     <section style="background:#363d48!important">
         <div class="backgroundImg w3-display-container height-cover font-family-montserrat  ">
            
-            <div class="w3-display-topright pdy-padding w3-margin  ">
-                <a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px  w3-hide-small">New to ARM?</a>
-                <button class="w3-button w3-margin font-small w3-transparent pdy-border w3-text-white pdy-padding-left-ex pdy-padding-right-ex" onclick="renda.page('register')">Register</button>                    
-            </div>
+           
             <div class="w3-display-middle  ">
                 <div class="w3-container w3-center">
                     <img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding w3-margin"/>
                 </div>
-               <!--  <div class="w3-text-white w3-center font-medium w3-padding w3-margin-left">
-                    PLEASE LOGIN TO CONTINUE
-                </div>  -->
-                <form class="" onsubmit="login();event.preventDefault();">
+                <div class="w3-text-white w3-center w3-container font-medium ">
+                    <p class="  ">WELCOME</p>
+                    <center><p class="w3-green " style="width:40px;height:2px"></p></center>
+                </div> 
+                <div class="w3-text-white w3-center font-medium w3-padding ">
+                    Please select an option
+                </div> 
+                <form class="" onsubmit="event.preventDefault();">
                     <div class="w3-margin">
-                        <span class="fa fa-envelope-o w3-xxlarge"></span>
-                        <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="email" placeholder="Enter Your Email"  id="Username" required="" onchange="preloadServer(null,this.id)">
+                        <button class="w3-btn font-small w3-border-white w3-text-white w3-padding w3-bordered w3-border" onclick="renda.page('login')" style="width:100%" type="button"><b>EXISTING PAYDAY CLIENT? LOGIN -></b></button>      
+                        
                     </div>     
                     <div class="w3-margin">
-                        <span class="fa fa-lock w3-xxlarge"></span>                            
-                        <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="password" placeholder="Enter Your Password"  id="Password" required="">      
+                        
+                        <button class="w3-btn pdy-green font-small w3-padding w3-bordered w3-border w3-border-green" onclick="renda.page('register')" style="width:100%" type="button"><b>NEW TO PAYDAY? CREATE AN ACCOUNT -></b></button>      
                                             
                     </div>
-                    <div>
-                        
-                        <button class="w3-button pdy-green w3-bar w3-margin font-small" onclick="login()" type="button">Login</button>      
-                        <center><span class=" w3-text-white font-small pdy-padding-left-ex forgot-password" onclick="renda.page('forgot_password')">Forgot Password?</span></center>                
-                    </div>
+                    
                 </form>
             </div>
-            <div class="w3-display-bottommiddle w3-margin  w3-hide-small">
-                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-right mobileBlock">Need Help?</a>
-                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-left mobileBlock">Private Policy</a>                    
-            </div>
+          
         </div>
 	</section>
 	

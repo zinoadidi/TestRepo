@@ -13,13 +13,15 @@ if(renda.Config.currentPage =='dashboard'){
         data:{
             labels:[0,1,3,4],
             data:[0,0,0,0],
-            backgroundColor:'#02ff1030',
+            backgroundColor:'#2ae532',
             color:'#4daf51',
             pointBackgroundColor:'#fff'
 
         }
     })
 }
+
+//Trand=sparent background #02ff1030
  
 
 /*request stat data*/
@@ -121,7 +123,7 @@ function dashboardStats(data){
         data:{
             labels:[0,1,3,4],
             data:[0,0,0,0],
-            backgroundColor:'#02ff1030',
+            backgroundColor:'#2ae532',
             color:'#4daf51',
             pointBackgroundColor:'#fff'
 
@@ -170,7 +172,7 @@ function dashboardStats(data){
                     datasets: [{
                         label: '#Transaction',
                         data: statsData.data,
-                        backgroundColor: statsData.backgroundColor,
+                        backgroundColor: '#02ff1030',
                         borderColor: statsData.color,
                         pointBackgroundColor:statsData.pointBackgroundColor
                     }]
@@ -296,3 +298,5 @@ function showWalletWithdrawExtras(){
     $('.walletWithdrawExtrasHide').hide()
 }
 dashboardStats();
+
+//dashboardTour()

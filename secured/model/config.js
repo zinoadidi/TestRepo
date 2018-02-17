@@ -9,8 +9,8 @@
         trackUrlChanges:false,
         registerPageHistory:true, 
         viewPath:'secured/views/',
-        serverUrl:'http://41.216.170.131:8000/pdiv/',
-        appMode:'debug',
+        serverUrl:'https://41.216.170.131:8443/pdiv/',
+        appMode:'live',
         httpReqHeaders:{
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -38,8 +38,8 @@
     renda.config(appSettings);
     var paydayWebAuthToken =  btoa("paydayInvestor:13fc17edc2ea436f7dab66cad29eb9b2")
     var paydayWebBaseUrl = "https://paydayinvestor.ng/api/v1";
-    var armOneBaseUrl = "http://41.216.170.131:8000/armauth";
-    var paydayWebKongUrl = "http://41.216.170.131:8000/paydaypayment";
+    var armOneBaseUrl = "https://41.216.170.131:8443/armauth";
+    var paydayWebKongUrl = "https://41.216.170.131:8443/paydaypayment";
     
     /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////Test Data\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

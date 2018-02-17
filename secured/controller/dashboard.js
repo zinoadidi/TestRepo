@@ -102,7 +102,7 @@ function loadDashboardData(data,option){
       case 'Rate':
         try{
           data = JSON.parse(data);
-          temporaryDashData.yield_rate = data.EffectiveYield;
+          temporaryDashData.yield_rate = data.EffectiveYield.toFixed(2)
         }catch(err){
           console.dir(err);
           temporaryDashData.yield_rate = 0.00;
@@ -133,11 +133,14 @@ function loadDashboardData(data,option){
             }
 
           }
-          console.log(data);   
+          //console.log(data);   
 
         }catch(err){
           console.dir(err);
         }
+        /* if(goals_suspended == 0){
+          goals_suspended = goals_active
+        } */
         temporaryDashData.goals_done = goals_done;
         temporaryDashData.goals_total = goals_total;
         temporaryDashData.goals_pending = goals_pending;
@@ -158,6 +161,8 @@ function loadDashboardData(data,option){
         try{
           data = JSON.parse(data);
           temporaryDashData.fetchWallet = data;
+          temporaryDashData.fetchWallet.Amount = addCommas(data.Amount)
+          
         }catch(err){
           console.dir(err);
           temporaryDashData.fetchWallet.UserId = data.UserId;
@@ -175,12 +180,16 @@ function loadDashboardData(data,option){
         try{
           data = JSON.parse(data);
           temporaryDashData.client_balance = data;
+          temporaryDashData.client_balance.AvailableBalance = addCommas(data.AvailableBalance)
+          temporaryDashData.client_balance.BookBalnce = addCommas(data.BookBalnce)
+          temporaryDashData.client_balance.AccruedIntrest = addCommas(data.AccruedIntrest)
+                  
         }catch(err){
           console.dir(err);
         }
         break;
       case 'cards':
-        console.log(data)
+        //console.log(data)
       }
       
       if(option == 'cards'){

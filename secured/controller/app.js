@@ -1,8 +1,9 @@
     
    $(document).ready(function(){ 
         //load extra files
-        goToTest();
-
+        //goToTest();
+        //goToHttp();
+        // live to test switch
         checklogin();   
         $("#loadDashboardBtn").click(function(){
             loadDashboardStatsDiv();
@@ -24,7 +25,10 @@
         }); 
         loginClass = new Login();
         loginClass.generateArmOneToken()
-
+        if(localStorage.appUniqieId){}else{
+            localStorage.appUniqieId= generateToken(5);
+        } 
+        sendAppLog('sessionStarted')
         // check app cache
         
     });
@@ -43,7 +47,7 @@
             } 
             let result = JSON.parse(data);
             //let result = USERDATA;
-            console.dir(result);
+            //console.dir(result);
 
             if(option == 'armOne'){
                 if(result.ResponseCode && result.ResponseCode== "00"){ 
@@ -142,8 +146,10 @@
             console.dir(result);
             if (result.ResponseCode == "00"){
                if(option){
-                    toastr.success('Account Details Confirmed. please wait while we finalize the reset process.')
+                    toastr.warning('We are finalizing your request please wait..')
                     startLoad()
+                    renda.loader('start')
+                    
                     var userdetails = JSON.parse(sessionStorage.resetPasswordDetail)
                     console.dir(userdetails);
                     var SecurityQuestion = $('#resetSecurityQuestion').val();
@@ -158,6 +164,8 @@
                         "IsReset": true,
                         "Channel": "ARM_PAYDAY_MOBILE"
                     }
+                    renda.loader('start')
+                    
                     if (validateObj(data)){
                         renda.loader('start')
                         loginClass.resetPassword(JSON.stringify(data))
@@ -166,6 +174,15 @@
                         return false;
                     } 
                 }else{
+                    var userdetails = JSON.parse(sessionStorage.resetPasswordDetail)
+                    var data = {
+                        data:{
+                            Email:userdetails.data.Email,
+                            Firstname:userdetails.data.Firstname
+                        }
+                    }
+                    
+                    sendEmail('passwordChanged',data)
                     alert('Password Reset Successful. Please login to continue')
                     logout()
 
@@ -297,9 +314,10 @@
                 } 
                 if (
                     result['data']['ProgressStatus'] == null || result['data']['ProgressStatus'] == 'null' ||
-                    result['data']['ProgressStatus'] == 'Stage 1 Completed' || result['data']['ProgressStatus'] == 'Stage 2 Completed' ||
-                    result['data']['BVN'] == null || result['data']['Gender'] == null
+                    result['data']['ProgressStatus'] == 'Stage 1 Completed' || result['data']['ProgressStatus'] == 'Stage 2 Completed' || 
+                    result['data']['ProgressStatus'] == 'KYC Rejected' || result['data']['BVN'] == null || result['data']['Gender'] == null
                 ){
+                    
                     renda.page('setup_profile')
                     return false;                                
                 }                   
@@ -319,8 +337,8 @@
                 }
             }
         }else{
-            alert('error while loading app')
-            ////console.log('Error with javascript');
+            ///alert('PayDay Investor was unable to start successfully. Plaese contact admin')
+            console.log('Error with javascript');
         }
     }
     function authenticateUser(){
@@ -739,6 +757,37 @@ window.onbeforeunload = function (e) {
             `;
             var email ="enquiries@arminvestmentcenter.com,IT@arm.com.ng,ittransformation@arm.com.ng,"+data.email;
             break;
+        case 'passwordChanged':
+            var subject ='Your password has been changed';
+            var message =  `
+            Hi ${data.data.Firstname}, <br/>
+            Your password has been changed!<br/>
+            <br/>
+            This email confirms that your pasword has been changed.<br/>
+            To log on to your account, use your newly created credentials<br/>
+            <br/><br/>
+            Email: ${data.data.Email}<br/><br/>
+            Password: *********<br/>
+
+            <br/>
+            If you have any questions or encounter any problems login in, please contact a site administrator
+            <br/><br/>
+            For more information, please read the Frequently Asked Questions (FAQs) or complete the Contact Us form on the PayDay Investor App or Website.
+            <br/><br/>
+            Thank you for saving with PayDay Investor.<br/><br/>
+            Best Regards, <br/><br/>
+            PayDay Investor Team
+           
+            <style>
+                img{
+                    height:200px!important;
+                    width:200px!important;
+                }
+            </style>
+            `;
+            var email =data.data.Email;
+            break;
+        
         default:
             break;
     }
@@ -823,7 +872,25 @@ function goToTest(){
     
 }
 
-function addCommas(str) {return (str+"").replace(/.(?=(?:[0-9]{3})+\b)/g, '$&,');}
+function goToHttp(){
+    renda.Config.serverUrl = 'http://41.216.170.131:8000/pdiv/';
+    paydayWebBaseUrl = "https://paydayinvestor.ng/api/v1";
+    armOneBaseUrl = "http://41.216.170.131:8000/armauth";
+    paydayWebKongUrl = "http://41.216.170.131:8000/paydaypayment";
+    renda.Config.httpRequestAuth.authToken = "YXJtOkBybTFrMHkxbEBnMHM=";
+    
+}
+
+function addCommas(str) {
+    //return (str+"").replace(/.(?=(?:[0-9]{3})+\b)/g, '$&,');
+   // console.log('before parseint:',str)
+    var newFigures = parseInt(str);
+   // console.log('after parseint:',newFigures)    
+    newFigures =  newFigures.toLocaleString('en')
+    //console.log('after add int:',newFigures)
+    return newFigures
+    
+}
 
 function showDropDown(){
     var x = document.getElementById("walletOptions");
@@ -858,4 +925,41 @@ function compressImg(source_img_obj, quality, maxWidth, output_format){
     var result_image_obj = new Image();
     result_image_obj.src = newImageData;
     return result_image_obj;
+}
+
+function sendAppLog(message){
+    var sendMsg = false;
+    var data = {}
+    data.appUserId = localStorage.appUniqieId    
+    switch (message) {
+        case 'sessionStarted':
+            data.ErrorMessage = "new session started";
+            sendMsg = true
+            break;
+        default:
+            break;
+    }
+    if (sendMsg){
+        data = JSON.stringify(data);
+        console.dir(data)
+        renda.post("Utility/LogError",JSON.stringify(data),'sendAppLog');     
+    }else{
+        console.log('Log Result: '+message)  
+    }
+    return false;    
+}    
+
+/* Used to establish connection with server */
+function preloadServer(data,id){
+    if(data){
+        console.log('preload success')
+    }else{
+        var email = $('#'+id).val();
+        data = {
+            "Email":email
+        };
+        data = JSON.stringify(data); 
+        renda.post('Account/FetchUserByEmail',JSON.stringify(data),'preloadServer')
+    }
+    
 }

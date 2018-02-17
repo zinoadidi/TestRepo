@@ -117,7 +117,7 @@ function register(data){
 				sendRegReq();
 			}else{
 				startLoad()
-				var data = {"ProfilePic":ProfileUpload};
+				var data = JSON.stringify({"ProfilePic":ProfileUpload});
 				//console.log(data)
 				var url = renda.Config.serverUrl+'paydaypayment/image-upload';
 				promiseXmlHTTP({
@@ -219,7 +219,10 @@ function VerifyExistingClient(data){
         }catch(err){
             toastr.error('An error occured while verfying user information.')
             console.dir(err);
-            alert(data)                                               
+            if(data.length > 100){
+            }else{
+                alert(data)                                               
+            }
             return false;
         }            
         let result = JSON.parse(data);

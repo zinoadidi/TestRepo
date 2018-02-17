@@ -17,6 +17,10 @@ var singleGoalApp = new Vue({
 	}
   });
 var isCard = '';
+function openImgHolder(){
+	document.getElementById('GoalUploadCreate').click()
+	
+}
 
 /*createGoalApp.cgvm.UserId = sessionStorage.UserId*/
 //renda.get('/dashboardData/'+sessionStorage.UserId,'updateGoalList');
@@ -39,32 +43,33 @@ function clear(){
 	loadDashboardData(null,'dashData')		
 	renda.component('goals','goal','dashboardDisplayDiv')
 }
+var ___duration = 0;
 function onChangeInput(arg) {
-	//console.log(arg)
-	return false;
-	    if(arg === 'Weekly') 
-	    {
-	       $('.frequency-depend').fadeIn();
-	       $('.frequencies').hide();
-	       $('#weekDays').show();
-	       createGoalApp.cgvm.Duration = $('#custom-duration').val() +' Weeks';
-	    }
-	    
-	    if(arg =='Daily') 
-	    {
-	       $('.frequency-depend').hide();
-	       $('.frequencies').hide();
-	       createGoalApp.cgvm.Duration = $('#custom-duration').val() +' Days';
-	    }
 
-	    if(arg=='Monthly') 
-	    {
-	       $('.frequency-depend').fadeIn();
-	       $('.frequencies').hide();
-	       $('#monthDays').show();
-	       createGoalApp.cgvm.Duration = $('#custom-duration').val() +' Months';
-	    }
+	arg = $('#frequency').val()
+	createGoalApp.cgvm.Frequency = arg;
+	calculateGoalDuration()
+	//console.log(arg)
+	addCommaToGoal('monthly-deduct1')
+	addCommaToGoal('goal-amount1')
+	return false;
 }
+var rawGoalImage = '';
+function prepareGoalUpload(files){
+	files = document.getElementById('GoalUploadCreate').files[0]
+    if(files){
+        rawGoalImage = renda.fileToBase64(files);
+        rawGoalImage.then(function(result) {
+            createGoalApp.cgvm.GoalImage = result
+            rawGoalImage = result.replace(/^data:image\/[a-z]+;base64,/, "");
+        });
+    }else{
+        toastr.error('Please Select An Image');
+        return false;
+	}
+	return false;
+}
+
 function createGoal(data){
     if(data){
     	renda.loader('stop');
@@ -79,7 +84,7 @@ function createGoal(data){
     	stopLoad();
 		data = modResult(data)
     	if (data.data.AppUserId){			
-			toastr.success('Weldone!. Goal was created successfully')
+			toastr.success('Weldone!. Goal created successfully')
 			data.data.Firstname = payday.user.Firstname;
 			data.data.Email = payday.user.Email;
 			
@@ -158,6 +163,12 @@ function createGoal(data){
 				stopLoad()
 				return false;
 			}
+			if (createGoalApp.cgvm.ItemName) {}else{
+				alert('Please Enter Goal Name');
+				stopLoad()
+				return false;
+			}
+			
 			if (createGoalApp.cgvm.monthDays) {}else{
 				createGoalApp.cgvm.monthDays = '0'
 			}
@@ -173,6 +184,10 @@ function createGoal(data){
 			catch(ex){
 				var MonthlyDeduction =parseInt(createGoalApp.cgvm.MonthlyDeduction)
 			}
+
+			//knock out item discription on new create goal form
+			createGoalApp.cgvm.ItemDescription = createGoalApp.cgvm.ItemName
+
 			var dateCreated = new Date();
 			var data = {
 				"UserId":sessionStorage.UserId,
@@ -195,9 +210,9 @@ function createGoal(data){
 				"CardToken" : createGoalApp.cgvm.userCards.CardToken
 			}  
 	        if (validateObj(data)){
+				console.dir(data)				
 				data = JSON.stringify(data)
-				//console.log(data)
-				stopLoad()				
+				startLoad()				
 	            renda.post(url,JSON.stringify(data),'createGoal');     
 	        }else{
 	        	//console.log('error occured');
@@ -312,10 +327,67 @@ function onChangeCardEdit(){
 		
 	}
 }
-
+var __duration =0;
 function calculateGoalDuration(){
-	var _duration =parseInt(createGoalApp.cgvm.GoalAmount.replace(",","")) / parseInt(createGoalApp.cgvm.MonthlyDeduction.replace(",",""))
-	createGoalApp.cgvm.Duration = _duration;
+	var goalAmount = createGoalApp.cgvm.GoalAmount.replace(/\,/g, '');
+	//console.log('Here comes goalAmount',goalAmount)
+	
+	var monthlyDeduct = createGoalApp.cgvm.MonthlyDeduction.replace(/\,/g, '');
+	//console.log('Here comes monthlyDeduct',monthlyDeduct)
+	
+	__duration = parseInt(goalAmount) / parseInt(monthlyDeduct)
+	createGoalApp.cgvm.Duration= Math.round(__duration * 100) / 100;
+	//console.log('Here comes duration',__duration)
+}
+
+function addCommaToGoal(id){
+	
+	var newValue = $('#'+id).val()
+	newValue = newValue.replace(/\,/g, '');
+	newValue = newValue.replace(/\./g, '');
+	if(newValue){
+		newValue = addCommas(newValue);
+	}else{
+		if(newValue == '' || parseInt(newValue)==NaN || newValue=='NaN'){
+			newValue = '';
+		}else{newValue = 0;}
+	}
+	if(newValue == '' || parseInt(newValue)==NaN || newValue=='NaN'){
+		newValue = '';
+	}
+	//newValue = newValue.replace(/\,/g, '.');
+	/* if(newValue == NaN || newValue == null){
+		newValue = 0;
+	} */
+	document.getElementById(id).value = newValue;
+	///////////////////
+		newValue = newValue = $('#monthly-deduct1').val()
+		newValue = newValue.replace(/\,/g, '');
+		newValue = newValue.replace(/\./g, '');
+		createGoalApp.cgvm.MonthlyDeduction = newValue;
+		
+		newValue = addCommas(newValue);
+		if(newValue == '' || parseInt(newValue)==NaN || newValue=='NaN'){
+			newValue = '';
+		}
+		document.getElementById('monthly-deduct1').value = newValue;	
+		///////////////////
+		newValue = $('#goal-amount1').val()
+		newValue = newValue.replace(/\,/g, '');
+		newValue = newValue.replace(/\./g, '');
+		createGoalApp.cgvm.GoalAmount = newValue;
+		
+		newValue = addCommas(newValue);
+		if(newValue == '' || parseInt(newValue)==NaN || newValue=='NaN'){
+			newValue = '';
+		}
+		document.getElementById('goal-amount1').value = newValue;		
+		
+		
+	//////////////////////////
+
+	calculateGoalDuration()
+	
 }
 
 function goalOptions(id,reqType){
@@ -459,7 +531,7 @@ function editGoal(data){
 			JSON.parse(data);
 		}catch(err){
 			stopLoad()
-			toastr.error('An error occured while verfying user information.')
+			toastr.error('An error occured while verifying user information.')
 			console.dir(err);
 			return false;
 		}
@@ -467,7 +539,7 @@ function editGoal(data){
 		data = JSON.parse(data);
 		data= modResult(data)
 		if (data.status == 200){
-			toastr.success('Goal Edited Successfuly')
+			toastr.success('Goal Edited Successfully')
 			data.data.Email = payday.user.Email;
 			data.data.Firstname = payday.user.Firstname;
 			
@@ -604,7 +676,8 @@ function editGoal(data){
 
 function freqChange(){
 	var currentVal = $('#frequency').val()
-
+	addCommaToGoal('monthly-deduct1')
+	addCommaToGoal('goal-amount1')
 }
 
 function Top_Up_Goal(data,option){

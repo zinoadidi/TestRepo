@@ -23,7 +23,7 @@ $(document).ready(function(){
     if(checKycStatus()){
         console.log('===============check kyc passed')
     }else{
-        var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. Do note: You will not be able to add a perform any transaction until your KYC is verified')        
+        var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. You will not be able to add a card or perform any transaction until your KYC is approved')        
         if(confirm){renda.page('setup_profile')}else{}
     }
 });
@@ -37,6 +37,8 @@ function createCard(data,cardRegStep){
             stopLoad();
             checkInternet()            
             toastr.error('An error occured while performing request. Please try again')
+            alert(err);
+            alert(data)
             console.log(err);
             return false;
         }
@@ -45,58 +47,57 @@ function createCard(data,cardRegStep){
         data = JSON.parse(data);
         if (data.status == 200){            
             if(cardRegStep != 2){
-                toastr.success('Card submission successful. kindly verify your card on the page that will be displayed to you soon')
+                toastr.success('kindly verify your card on the page that will be displayed to you soon')
                 
                 cardVerificationVar = window.open(encodeURI(data['data']['data']['authurl']), '_blank', 'location=yes');
-                cardVerificationVar.addEventListener('loadstop', function(event) { 
-                   var url = event.url;
-                   //alert(url)
-                   var urlSearch = url.search('tokinze/card/getFeedback/')
-                   //alert(event.url); 
-                   if (urlSearch == -1){
-                   }else{
-                    cardVerificationVar.close();
-                    url = url.replace('http://41.216.170.131/api/v1/','')
-                    url = url.replace('https://41.216.170.131/api/v1/','')
-                    url = url.replace('http://paydayinvestor.arm.com.ng/api/v1/','')
-                    url = url.replace('https://paydayinvestor.ng/api/v1/','')
-                    console.log(url) 
-                    var oldAuthToken = renda.Config.httpRequestAuth.authToken
-                    renda.Config.httpRequestAuth.authToken = paydayWebAuthToken;                   
-                    renda.get('paydaypayment/'+url,'createCard',2)
-                    renda.Config.httpRequestAuth.authToken = oldAuthToken;
-                    
-                    /* promiseXmlHTTP({url:url,method:'GET'}).then(function(result){
-                        createCard(result,2)
-                    }); */
-                    toastr.warning('Finalizing transaction, Please wait.')
-                   }
-                   
-                }); 
+                
                 cardVerificationVar.addEventListener('loadstart', function(event) { 
                     var url = event.url;
                     //alert(url)
                     var urlSearch = url.search('/card/tokinze/getFeedback/')
+                    var urlSearch2 = url.search('tokinze/card/')
                     //alert(event.url); 
-                    if (urlSearch == -1){
+                    if(urlSearch2 == -1){
+
                     }else{
+                        sendRequest()
+                    }
+                    if (urlSearch == -1){
+                       
+                    }else{
+                        sendRequest()
+                    }
+                    function sendRequest(){
                      cardVerificationVar.close();
                      url = url.replace('http://41.216.170.131/api/v1/','')
                      url = url.replace('https://41.216.170.131/api/v1/','')
                      url = url.replace('http://paydayinvestor.arm.com.ng/api/v1/','')
                      url = url.replace('https://paydayinvestor.ng/api/v1/','')
+                     url = url.replace('http://paydayinvestor.ng/api/v1/','')
+                     //url = url.replace('tokinze/card/','card/tokinze/')
                      console.log(url)       
-                     var oldAuthToken = renda.Config.httpRequestAuth.authToken
-                     renda.Config.httpRequestAuth.authToken = paydayWebAuthToken;             
-                     renda.get('paydaypayment/'+url,'createCard',2)
-                    renda.Config.httpRequestAuth.authToken = oldAuthToken;
+                     //var oldAuthToken = renda.Config.httpRequestAuth.authToken
+                     //renda.Config.httpRequestAuth.authToken = paydayWebAuthToken;  
+                     promiseXmlHTTP({
+                        url:renda.Config.serverUrl+'paydaypayment/'+url,
+                        method:'GET',
+                        headers:{
+                            "Authorization": "Basic " + paydayWebAuthToken,
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                            "Access-Control-Allow-Credentials":"true"
+                        }
+                    }).then(function(result){
+                        createCard(result,2)
+                    });           
+                     //renda.get('paydaypayment/'+url,'createCard',2)
+                    //renda.Config.httpRequestAuth.authToken = oldAuthToken;
                      
                      /* promiseXmlHTTP({url:url,method:'GET'}).then(function(result){
                          createCard(result,2)
                      }); */
                      toastr.warning('Finalizing transaction, Please wait.')
                     }
-                    
                  }); 
                /*  cardVerificationVar.addEventListener('loadstop', function() { alert(event.url); }); */
                
@@ -113,7 +114,7 @@ function createCard(data,cardRegStep){
             if(data[message]){
                 alert(data['message']);
             }else{
-                alert('An error occured while adding card. Please try again later.')    
+                alert('An error occurred while adding card. Please try again later.')    
             }
         }           
         return false;
@@ -121,7 +122,7 @@ function createCard(data,cardRegStep){
         if(checKycStatus()){
             console.log('===============check kyc passed')
         }else{
-            var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. Do note that you will not be able to add a card or perform any transaction until your KYC is verified');
+            var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. You will not be able to add a card or perform any transaction until your KYC is approved');
             if(confirm){renda.page('setup_profile')}else{
             }
             return false;
@@ -145,11 +146,11 @@ function createCard(data,cardRegStep){
                 "MembershipNumber":payday.user.MembershipNumber
             }
             if(String(cardNumber).lenght < 12){
-                toastr.error('Please Confirm The Lenght of Your Card Number')
+                toastr.error('Kindly Confirm the Length of Your Card Number')
                 return false
             }
             if(String(cvc).lenght < 3){
-                toastr.error('Please Confirm That Your CVC is 3 Digits')
+                toastr.error('Kindly Confirm That Your CVC is 3 Digits')
                 return false
             }
             if (validateObj(data)){
@@ -200,7 +201,7 @@ function deleteCard(data,id){
             renda.component('card','view','dashboardDisplayDiv');
         }else{
             toastr.error(data);
-            alert('An error occured while removing card. Please try again later.')    
+            alert('An error occurred while removing card. Please try again later.')    
         }           
         return false;
     }else{

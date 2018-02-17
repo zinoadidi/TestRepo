@@ -303,11 +303,11 @@ function prepareProfileUpload(data){
         if(data['status'] == 200){
             data.message = 'Profile Updated Successfully';
             toastr.success(data['message'])
-            if(confirm('would you like to logout to refresh your account?')){
-                logout();
-            }else{
-                return false;
-            }
+            sessionStorage.UserInfo = JSON.stringify(data)
+            updateUserData()
+            renda.page('dashboard')            
+            return false;
+
         }else{
             toastr.error('An error occured while updating profile.')            
         }
@@ -378,6 +378,7 @@ function prepareProfileUpload(data){
         if(confirmUpload){
             var UserInfo = JSON.parse(sessionStorage.UserInfo);
             UserInfo.data.ProfilePic =  ProfileUpload;
+            UserInfo.data.Phonenumber =  '09098118400';
             data = UserInfo.data;
             if (validateObj(data)){
                 data = JSON.stringify(data);
@@ -467,6 +468,13 @@ function change_password(data){
         
         console.dir(result);
         if (result.ResponseCode == "00"){
+            var data = {
+                data:{
+                    Email:payday.user.Email,
+                    Firstname:payday.user.Firstname
+                }
+            }
+            sendEmail('passwordChanged',data)
             alert('Password change Successful. Please login to continue using your account')
             logout()   
         }else{

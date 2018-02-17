@@ -20,7 +20,8 @@ var step = 0;
 			if(
 				String(payday.user["ProgressStatus"]) == "KYC Submitted" ||
 				String(payday.user["ProgressStatus"]) == "KYC Rejected"){
-					step2()					
+					step2()	
+			
 				}else{
 					step1()
 					return false;
@@ -46,9 +47,12 @@ function step2(){
 	step = 2;
 	if(String(payday.user["ProgressStatus"]) == "KYC Submitted"){
 		alert('Your KYC is pending approval. You will not be able to perform any transaction until it is approved.')
-        //skip();
-        //return false
-    }
+        skip();
+        return false
+	}
+	if(payday.user["ProgressStatus"] == 'KYC Rejected'){
+		alert(`Hello, We noticed that the documents you submitted for KYC where not approved because "${payday.user.KYCFeedback}". Click ok to update your KYC `)
+	}	
 	$('#step1').hide()
 	$('#step2').show()
 }
@@ -125,7 +129,7 @@ function updateStage(data){
 			
 			files = document.getElementById('SignatureUpload').files[0]
 			if(files.size > 525000){
-				alert('Please ensure that your signature picture is not larger than 500kb in size')				
+				alert('Please ensure that your signature image is not larger than 500kb in size')				
 				stopLoad()
 				return false;
 			}else{}   
@@ -183,6 +187,10 @@ function updateStage(data){
 					}else{
 						renda.loader('start')
 						data = JSON.stringify(data)
+						var checkKyc = JSON.parse(sessionStorage.UserInfo);
+						if(checkKyc.data.ProgressStatus == 'KYC Rejected'){
+							url = "Account/UpdateKYC"
+						} 
 						renda.post(url,JSON.stringify(data),'updateStage');   
 					}
 		        }else{
