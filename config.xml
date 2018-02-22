@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.payday.arm" version="0.3.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PayDay</name>
+    <description>
+        PayDay Investor is the investment app that helps you achieve your goals faster.
+    </description>
+    <author email="hello@paydayinvestor.ng" href="https://paydayinvestor.ng">
+        Payday Investor Team
+    </author>
+    <icon src="icon.png" />
+    <content src="index.html" />
+    <splash src="splash.png" />
+    <access origin="https://127.0.0.1*" />
+    <access origin="https://localhost*" />
+    <allow-intent href="https://*/*" />
+    <allow-navigation href="*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <preference name="android-minSdkVersion" value="21" />        
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <preference name="orientation" value="portrait" />
+    <preference name="loadUrlTimeoutValue" value="120000" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+    <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <engine name="browser" spec="^5.0.1" />
+    <engine name="android" spec="^7.0.0" />
+</widget>

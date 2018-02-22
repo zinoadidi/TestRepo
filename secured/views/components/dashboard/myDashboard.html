@@ -1,0 +1,288 @@
+
+<div id="myDashboard">
+  <div id="statsDiv" class="w3-margin w3-padding">
+     
+    <div id="walletDiv" class="w3-animate-left">
+      <div class="input-text-medium w3-white w3-padding w3-card" style="margin-bottom:3px">Total Net Worth</div>
+      <div class="input-text-large w3-card">
+        <div class="w3-padding w3-white">
+          <div class="display-inline center">
+            <span class="display-block w3-text-green"  v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.client_balance.BookBalnce}}</span>
+            <span class="display-block input-text-medium"><small><small>Ledger Balance</small></small></span>
+          </div>
+          <div class="display-inline w3-right center">
+            <span class="display-block w3-text-green" v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.client_balance.AvailableBalance}}</span>
+            <span class="display-block input-text-medium"><small><small>Avaliable Balance</small></small></span>
+          </div>
+        </div>
+        <div class="w3-container w3-white w3-card" style="margin-top:0px" >
+          <div class="display-inline w3-left center w3-padding">
+            <span class="display-block w3-text-green" v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.client_balance.AccruedIntrest}}</span>
+            <span class="display-block input-text-medium"><small><small>Accrued Interest</small></small></span>
+          </div>
+          <div class="display-inline w3-right center w3-padding">
+            <div class="w3-dropdown-click" onclick="showDropDown()">
+              <span class="display-block w3-text-green" v-if="commonData.Dashboard">&#8358; {{commonData.Dashboard.fetchWallet.Amount}}</span>
+              <span class="display-block input-text-medium"><small><small>Wallet Balance</small></small></span>
+              <ul id="walletOptions" class="w3-dropdown-content w3-bar-block w3-border w3-ul">
+                <li onclick="showWithdrawPopUp()" class="w3-bar-item w3-button w3-small"><b>Withdraw Fund</b></li>
+              </ul>
+            </div>    
+          </div>
+        </div>
+        <div class="">
+          <div class="input-text-medium w3-padding w3-right w3-white w3-card" style="margin-top:3px">
+            <small class=" w3-padding w3-round"><b>Current Yield</b></small>
+            <span class="w3-text-green" v-if="commonData.Dashboard">{{commonData.Dashboard.yield_rate}}%</span>
+          </div>
+            
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div id="goalStatDiv" class="w3-animate-right">
+      <div class="input-text-medium w3-bottombar w3-white center w3-padding w3-card" style="margin-bottom:7px; margin-top:50px;"><span class="w3-padding ">Goal Summary</span></div>
+      <div class="input-text-medium">
+        <div class="center ">
+          <div class="center w3-circle w3-card-4 w3-white display-inline" style="color: #656C75; width:38vw; height:38vw;  border: 5px solid #656C75;">
+            <div style="position: relative;top: 25%;padding-top: 20px;"> 
+              <div class="input-text-medium center-element w3-white" style=""><b>
+                You Have<br/>
+                  <big>
+                      <big v-if="!commonData.Dashboard.goals_total">{{commonData.Dashboard.goals_total = 0}}</big>                      
+                      <big v-if="commonData.Dashboard.goals_total">{{commonData.Dashboard.goals_total}}</big>
+                  </big>
+                  <br/>
+                  Goal(s)</b>
+              </div>
+            </div>
+          </div>
+          <div class="center display-inline" style="color: #656C75; width:38vw;">
+            
+            <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
+              <span class="display-block input-text-goal">Pending Goals</span>
+              <span class="display-block" v-if="commonData.Dashboard">{{commonData.Dashboard.goals_pending}}</span>
+            </div>
+            <div class="w3-white w3-card w3-padding" style="margin-top: 2px">
+              <span class="display-block input-text-goal">Suspended Goals</span>
+              <span class="display-block" v-if="commonData.Dashboard" >{{commonData.Dashboard.goals_suspended}}</span>
+            </div>
+            <div class="w3-white w3-card w3-padding">
+              <span class="display-block input-text-goal">Completed Goals</span>
+              <span class="display-block" v-if="!commonData.Dashboard.goals_done">{{commonData.Dashboard.goals_done = 0}}</span>
+              <span class="display-block" v-if="commonData.Dashboard.goals_done">{{commonData.Dashboard.goals_done}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="topGoalDiv" class="w3-animate-zoom" style="display:none">
+      <div class="input-text-medium w3-bottombar w3-white center w3-padding w3-card" style="margin-bottom:7px; margin-top:30px;"><span class="w3-padding ">Top Goal</span></div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12" style="background: white;">
+          <div class="w3-twothird" class="width:60%!important">
+            <div class="chart-container" style="position: relative; height:auto; width:100%">
+              <canvas id="myPieChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="transactiontDiv" class="" style="">
+      <div class="input-text-medium w3-bottombar w3-white center w3-padding w3-card" style="margin-bottom:7px; margin-top:30px;"><span class="w3-padding ">Transaction History</span></div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12" style="background: white;">
+          <div class="chart-container" style="position: relative; height:auto; width:100%">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+  
+    <div id="investmentCalculatorDiv" class="w3-animate-bottom">
+      <center>
+      <div class="col-md-6 col-xl-4">
+        <div class="box">
+          <div class="box-header input-text-medium w3-bottombar w3-white center w3-padding w3-card">
+            <center>Investment Calculator</center>
+          </div>
+          <div class="box-body b-t w3-white w3-card w3-padding">
+            <form  id="savings">
+              <div class="row" style="margin-top: 5px">
+                <div class="w3-third" style="width:50%!important; margin-right:10%!important">
+                  <div class="col-xs-12 col-lg-12">
+                      <div class="text-muted">Initial Investment</div>
+                  </div>
+
+                  <div class="col-xs-12 col-lg-12">
+                    <input name="initialdeposit" type="number"  class="w3-input w3-text-black form-control" placeholder="">
+                  </div>
+               </div>
+               <div class="w3-third" style="width:30%!important;">
+                  <div class="col-xs-12 col-lg-12">
+                      <div class="text-muted">Duration</div>
+                  </div>
+
+                  <div class="col-xs-12 col-lg-12">
+                       <select name="numyears" class="form-control w3-select w3-input">
+                          <option value="">Select years</option>
+                          <option value="1">1 year</option>
+                          <option value="2">2 years</option>
+                          <option value="3">3 years</option>
+                          <option value="4">4 years</option>
+                          <option value="5">5 years</option>
+                          <option value="6">6 years</option>
+                          <option value="7">7 years</option>
+                          <option value="8">8 years</option>
+                          <option value="9">9 years</option>
+                          <option value="10">10 years</option>
+                          <option value="15">15 years</option>
+                          <option value="20">20 years</option>
+                          <option value="25">25 years</option>
+                          <option value="30">30 years</option>
+                          <option value="30">35 years</option>
+                          
+                      </select>
+                  </div>
+               </div>
+              </div>
+              <div class="row" style="margin-top: 5px">
+                   <div class="w3-third" style="width:50%!important; margin-right:10%!important">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Monthly Investment</div>
+                      </div>
+
+                      <div class="col-xs-12 col-lg-12">
+                        <input name="monthlydeposit"  type="number"  class="w3-input w3-text-black form-control" placeholder="0">
+                      </div>
+                   </div>
+                   <div class="w3-third" style="width:30%!important">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Interest Rate</div>
+                      </div>
+
+                      <div class="col-xs-12 col-lg-12">
+                          <input type="text" name="interestrate" disabled="disabled"  class="w3-input w3-text-black form-control center" :placeholder="commonData.Dashboard.yield_rate" :value="commonData.Dashboard.yield_rate+'(%)'">
+                      </div>
+                   </div>
+              </div>
+
+               <div class="row">
+                  <div class="w3-third" style="width:40%!important; margin-right:10%!important">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Total investment</div>
+                      </div>
+
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="input-group m-b">
+                              <span class="input-group-addon">₦</span>
+                              <input id="annualamount" disabled="disabled" style="height:40px" type="text" class="w3-input w3-text-black form-control">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="w3-third" style="width:40%!important">
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="text-muted">Total Return</div>
+                      </div>
+  
+                      <div class="col-xs-12 col-lg-12">
+                          <div class="input-group m-b">
+                              <span class="input-group-addon">₦</span>
+                              <input id="result" disabled="disabled" style="height:40px" type="text" class="form-control w3-input w3-text-black ">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+            </form>
+          </div>
+            <div class="box-footer">
+               <div class="row" style="margin-top: 5px">
+                 <div class="col-xs-12 col-lg-12">
+
+                    <div class="col-xs-12 col-lg-12">
+                        <button onclick="Calculate(document.forms['savings'])" class="w3-button w3-bar input-text-medium w3-text-white" style="background:#656C75">Calculate</button>
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+         </div>
+      </center>
+    </div>
+  </div>
+</div>
+
+<div id="extendedWalletUI" class="w3-modal">
+  <div class="w3-modal-content" style="margin-top:50px">
+    <div id="redeemGoal" style="display:none" class="extendWalletDivs">
+      <div class=" center w3-padding" style="background:#29313C"> 
+        <span class="w3-margin w3-padding w3-text-white" style="padding-top:20px!important">Redeem Goal</span>
+      </div> 
+      <div id="redeemGoalDiv">
+        <section id="topUpGoalDivApp" class="w3-white" style="font-weight: 0px;">
+          <div class=" col-lg-12 w3-margin-left w3-padding">
+            <div class="">
+              <form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+                <div class="w3-margin">
+                  <span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+                  <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="text" placeholder="Enter Amount to Redeem"  id="RedeemAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+                </div>
+                <div class="w3-margin">
+                  <span class="fa fa-question-circle w3-xxlarge" style="position:absolute;margin-left: 3px;"></span>                            
+                  <textarea class="w3-input w3-text-white w3-padding customized-input font-medium" placeholder="Reason For Redemption"  id="RedeemReason" required="" style="padding-left:50px!important; width:86%;color:black!important"></textarea>      
+                </div>
+                <div class="" style="margin-top:8px!important;text-align: center"> 
+                  <button type="button" class="w3-button"  onclick="document.getElementById('extendedWalletUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+                  <button type="button" class="w3-button pdy-green" onclick="redeemGoal(null)" style=" display: inline-block!important;width:48%">Redeem Goal</button>
+                </div>
+              </form>
+        
+            </div>
+          </div>
+        </section>
+      </div>
+      
+    </div>
+    
+    <div id="walletWithdrawal" style="display:none" class="extendWalletDivs">
+      <div class=" center w3-padding" style="background:#29313C"> 
+        <span class="w3-margin w3-padding w3-text-white" style="padding-top:20px!important">Withdraw From Wallet</span>
+      </div> 
+      <div id="walletWithdrawalDiv">
+        <section id="walletWithdrawalDivApp" class="w3-white" style="font-weight: 0px;">
+          <div class=" col-lg-12 w3-margin-left w3-padding">
+            <div class="">
+              <form action="javascript:void(0)"onsubmit="event.preventDefault();" id="step1" method="post" class="w3-animate-right stages">
+                <div class="w3-margin">
+                  <span class="fa w3-xxlarge" style="position:absolute;margin-left: 3px;">&#8358;</span>                            
+                  <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Enter Amount to Withdraw"  id="walletAmount" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+                </div>
+                <div class="w3-margin" class="walletWithdrawExtras">
+                  <span class="fa fa-question w3-xxlarge" style="position:absolute;margin-left: 3px;"></span>                            
+                  <textarea class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="Reason for Withdrawal"  id="walletReason" required="" style="padding-left:50px!important; width:86%;color:black!important"></textarea>  
+                </div>
+                <div class="w3-margin" class="walletWithdrawExtras" id="walletWithdrawExtrasOtp">
+                  <span class="fa fa-key w3-xxlarge" style="position:absolute;margin-left: 3px;"></span>                            
+                  <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="number" placeholder="OTP Code"  id="walletOtp" required="" style="padding-left:50px!important; width:86%;color:black!important">      
+                </div>
+                <div class="" style="margin-top:8px!important;text-align: center"> 
+                  <button type="button" class="w3-button"  onclick="document.getElementById('extendedWalletUI').style.display='none'" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">Cancel</button>
+                  <button type="button" class="w3-button pdy-green walletWithdrawExtrasHide" onclick="walletWithdrawal(null,'otp')" style=" display: inline-block!important;width:48%">Request OTP</button>
+                  <button type="button" class="w3-button pdy-green walletWithdrawExtras" onclick="walletWithdrawal(null,'withdrawal')" style="important;width:48%">Redeem</button>
+                </div>
+              </form>
+        
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="secured/controller/myDashboard.js"></script>
+

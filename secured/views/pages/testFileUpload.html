@@ -1,0 +1,18 @@
+<input name="file" type="file" class="cloudinary-fileupload" data-cloudinary-field="image_id" 
+   data-form-data="[upload-preset-and-other-upload-options-as-html-escaped-JSON-data]"></input>
+
+   <script>
+       stopLoad()
+   $(document).ready(function() {
+        $.cloudinary.config({ 
+            'cloud_name': 'arm', 
+            'secure': true,
+            'api_key':'169264285654842',
+            'apy_secret':'M_8S1mNBX_Q4s8KCUrCJDk4wI0g'
+
+        });
+        $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload();
+        
+
+    });
+</script>

@@ -1,0 +1,187 @@
+<link href="secured/assets/css/card-js.min.css" rel="stylesheet" type="text/css" />
+<style>
+    .panel {
+      background-color: #F5F5F7;
+      border: 1px solid #ddd;
+      padding-top: 20px;
+      display: block;
+    }
+    .btnn {
+      background: #29313C; /* Old browsers */
+      
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#44afe7', endColorstr='#3198df',GradientType=0 );
+      color: #fff;
+      display: block;
+      width: 100%;
+      border: 1px solid rgba(46, 86, 153, 0.0980392);
+      border-bottom-color: rgba(46, 86, 153, 0.4);
+      border-top: 0;
+      
+      font-size: 17px;
+      text-shadow: rgba(46, 86, 153, 0.298039) 0px -1px 0px;
+      line-height: 34px;
+      -webkit-font-smoothing: antialiased;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .btnn:hover {
+      cursor: pointer;
+    }
+
+    .card-number{
+    	width: 88% !important;
+    	padding-right: 0px !important;
+    }
+
+    .cvc{
+      width: 75% !important;
+    }
+    .expiry{
+      width: 75% !important;
+    }
+    .name{
+      width: 99% !important;
+    }
+
+    .cvc,.card-number,.expiry{
+      font-size: 3.3vw !important;
+      font-weight: 400;
+    }
+
+    #verifyCardDiv{
+      
+
+
+    }
+    #verifyCardIframe{
+      
+      border: none;
+      
+      overflow: hidden;
+      
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+<div id='cardDiv'>
+	<div id='addCard' class="w3-container w3-margin-top w3-margin-bottom hideCardPageDivs" >		
+		<div id="addCardDiv" style="color: #29313C">
+		  <div  class="single-card" style="" >
+		  	<div class="center w3-card w3-white input-text-medium w3-padding w3-hover-gray" style="" onclick="showAddCardForm('addNewCardForm')">Add A New Card</div>
+		  	<div class="panel w3-hide" id="addNewCardForm">
+          <div><center>Please note that N2 will be deducted from your account to authenticate your card.</center></div>
+			    <form onsubmit="event.preventDefault();">
+			      <div class="card-js stripe" data-stripe="true" id="add-card-form">   
+            </div>
+			      <button type="submit" class="btnn w3-padding" id="read-btn-1">Add Card</button>
+			    </form>
+			 </div>
+		  </div>
+		</div>
+	</div>
+	<div id='viewCards' class="w3-container" class="hideCardPageDivs">		
+		<div id="cardsDiv" style="">
+		  <div v-for="item in cards" class="single-card" :id="item.Id" style="margin-bottom: 3px;display:none" >
+		  	<div style="background: #1d232c; height:auto;  overflow: hidden;" class="w3-text-white w3-card-4 w3-round w3-container w3-padding " >
+			  	<div class="display-block input-text-medium w3-padding" style="margin-top: 3px;">
+			  		Card ID: {{ item.Id }}
+			  	</div>
+			  	<div class="w3-padding" style="margin-top: 10px;margin-bottom: 5px">
+			  		<div class="input-text-large center w3-center">XXXX XXXX XXXX {{ item.CardNo }}</div>
+			  		<div class="input-text-fixed" style="margin-bottom: 3px; margin-top: 20px"><span class="w3-text-green input-text-medium">{{ item.Status }}</span><button class='w3-button w3-text-red w3-right w3-ripple w3-hover-opacity w3-hover-shadow w3-hover-gray w3-padding input-text-medium' :id="item.Id" onclick="deleteCard(null,this.id)">Delete Card</button></div>
+			  	</div>
+        </div>
+      <!--   <div class="demo-container">
+          <div class="card-wrapper"></div>
+        
+          <div class="form-container active" style="display:block">
+              <form action="" id="form">
+                  <input placeholder="Card number" type="tel" id="number" >
+                  <input placeholder="Full name" type="text" id="name">
+                  <input placeholder="MM/YY" type="tel" id="expiry">
+                  <input placeholder="CVC" type="number" id="cvc">
+              </form>
+          </div>
+        </div> -->
+		  </div>
+		</div>
+    <a onclick="showAddCardForm('addNewCardForm')" href="javascript:void(0)" style="background:transparent">
+      <span class="fa" style="font-size: 3.5em !important; padding-top: 4px;"><img src="img/LineIcons/Secondary(Icons)/add_credit_card.png" class="w3-button w3-circle w3-text-white floating-btn" style="width:30vw!important"/></span>
+      
+    </a>
+  </div>
+  <div id="verifyCardDiv" style="display: none" class='verifyCardDiv hideCardPageDivs'>
+    <embed src="" id="verifyCardIframe" class="verifyCardIframe w3-container" height="auto" width="100%"></embed>
+  </div>
+</div>
+
+<script src="secured/assets/js/card-js.min.js"></script>
+<script src="secured/controller/cards.js"></script>
+<script src="secured/assets/js/card.js"></script>
+<script>
+  if(cardsApp.cards[0]){
+    $('.single-card').show();
+  }
+</script>
+
+<style>
+  .demo-container {
+      width: 100%;
+      max-width: 350px;
+      margin: 50px auto;
+  }
+
+  form {
+      margin: 30px;
+  }
+  input {
+      width: 200px;
+      margin: 10px auto;
+      display: block;
+  }
+
+</style>
+
+
+<script>
+  var card = new Card({
+    // a selector or DOM element for the form where users will
+    // be entering their information
+    form: '#form', // *required*
+    // a selector or DOM element for the container
+    // where you want the card to appear
+    container: '.card-wrapper', // *required*
+
+    formSelectors: {
+        numberInput: 'input#number', // optional — default input[name="number"]
+        expiryInput: 'input#expiry', // optional — default input[name="expiry"]
+        cvcInput: 'input#cvc', // optional — default input[name="cvc"]
+        nameInput: 'input#name' // optional - defaults input[name="name"]
+    },
+
+    width: 200, // optional — default 350px
+    formatting: true, // optional - default true
+
+    // Strings for translation - optional
+    messages: {
+        validDate: 'valid\ndate', // optional - default 'valid\nthru'
+        monthYear: 'mm/yyyy', // optional - default 'month/year'
+    },
+
+    // Default placeholders for rendered fields - optional
+    placeholders: {
+        number: '•••• •••• •••• ••••',
+        name: 'Full Name',
+        expiry: '••/••',
+        cvc: '•••'
+    },
+
+    masks: {
+        cardNumber: '•' // optional - mask card number
+    },
+
+    // if true, will log helpful messages for setting up Card
+    debug: true // optional - default false
+});
+</script>

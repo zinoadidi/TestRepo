@@ -1,0 +1,46 @@
+.monetize_all {
+	position: relative;
+	width: 100%
+}
+
+.monetize_login_wrapper {
+	float:right;
+	position: relative;
+	right: 5%;
+	margin: 0;
+}
+
+.monetize_login_wrapper h2 {
+	text-align: center;
+	color:#fff;
+}
+
+.monetize-intro {
+	float: left;
+	left: 5%;
+	position: relative;
+    width: 40%;
+}
+
+.login_page {
+	background-image: url(../img/bg/bg1.jpg);
+	background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.intro-text h2 {
+	color:#fff;
+	font-size: 64px;
+	font-weight: 700;
+    height: 65px;
+
+}
+
+.intro-text p{
+	font-size: 20px;
+	color:#fff;
+}
+
+
+

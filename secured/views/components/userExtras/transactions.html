@@ -1,0 +1,97 @@
+
+<style>
+    .panel {
+      background-color: #F5F5F7;
+      border: 1px solid #ddd;
+      padding-top: 20px;
+      display: block;
+    }
+    .btnn {
+      background: #29313C; /* Old browsers */
+      
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#44afe7', endColorstr='#3198df',GradientType=0 );
+      color: #fff;
+      display: block;
+      width: 100%;
+      border: 1px solid rgba(46, 86, 153, 0.0980392);
+      border-bottom-color: rgba(46, 86, 153, 0.4);
+      border-top: 0;
+      
+      font-size: 17px;
+      text-shadow: rgba(46, 86, 153, 0.298039) 0px -1px 0px;
+      line-height: 34px;
+      -webkit-font-smoothing: antialiased;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .btnn:hover {
+      cursor: pointer;
+    }
+
+    .card-number{
+    	width: 88% !important;
+    	padding-right: 0px !important;
+    }
+
+    .cvc{
+      width: 75% !important;
+    }
+    .expiry{
+      width: 75% !important;
+    }
+    .name{
+      width: 99% !important;
+    }
+
+    .cvc,.card-number,.expiry{
+      font-size: 3.3vw !important;
+      font-weight: 400;
+    }
+  </style>
+<div id='transactionPage' class="w3-white" >
+  
+  <div class="input-text-goal w3-padding w3-center center"><b>
+    <b>     
+      <div class="input-text-goal m12 l12 s12  w3-center">Filter Transaction</div>
+      <div class="m3 s3 l3" style="display:inline;" >Start Date:</div>
+      <input style= "width:25%!important" type="date" class="input-text-goal" placeholder="Start Date" id="FromDate" style="margin-left:2px; margin-right:2px">
+      <div class="m3 s3 l3"style="display:inherit">:End Date:</div>
+      <input style= "width:25%!important" type="date" class="input-text-goal" placeholder="End Date" id="ToDate">
+      <br/>
+      <center class="center">
+      <select style= "width:40%!important;" class="input-text-goal w3-input w3-third w3-select" placeholder="End Date" id="TransactionType">
+          <option>Credit</option>
+          <option>Debit</option>
+      </select>
+      <button class="w3-button w3-green w3-third w3-margin-left w3-right" style= "width:20%!important" onclick="filterTransactions()">Filter</button>         
+    </center>
+    </b>
+  </div>
+	<div id='transactionPageDiv' class="w3-container w3-margin-top w3-margin-bottom  w3-center" >		
+      <ul class="w3-ul w3-stripped m12 s12 l12 w3-tiny"  v-if="data.data">
+        <li v-for="item in data['data']" class=" w3-white s12 m12 w3-container" style="color: #1f6e22;">
+          <div class="w3-padding">
+            <div class="w3-twothird w3-left" style="width:60%">
+              <div class="input-text-medium " style="display:block; text-align:left">{{item['GoalName']}}</div><br/>
+              <div class="">
+                <span class="input-text-goal " style='display:block;text-align:left'>{{item['TransactionDate']}}</span>
+              </div>
+            </div>
+            <div class="w3-rest w3-right">
+              <span class="w3-right input-text-medium" style="margin-top: 20px; right:5px!important">
+                <span v-if="item['TransactionType']=='Credit'" class="w3-text-green">&#8358;{{ item['Amount'] }}</span>
+                <span v-if="item['TransactionType']=='Debit'" class="w3-text-red">&#8358;{{ item['Amount'] }}</span>
+              </span> 
+            </div>
+          </div>
+        </tr>    
+      </ul>
+
+  </div>
+
+
+</div>
+
+<script src="secured/controller/user_extras.js"></script>
+<script type="text/javascript">initTransactionsPage()</script>

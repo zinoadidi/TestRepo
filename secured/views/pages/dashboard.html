@@ -1,0 +1,31 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">          
+
+    <style>body{font-family: 'Montserrat', sans-serif}</style>
+    <div id="dashboardDiv" class="img-background">
+        <div id="dashboardNavDiv"></div>
+        <div zclass="w3-main" id="main">
+            <div id="dashboadHeaderDiv" class=""></div> 
+            <div>  
+            <div class="loadingbar" style="position:fixed; top:45%; right:45%;z-index:1000" id="loadingbarr">
+                <div>
+                    <div id="dashLoader" class="w3-spin"></div>
+                </div>
+            </div>
+            <div class="w3-card w3-white w3-text-green input-text-medium w3-padding" style="margin-top: 15%;text-transform:capitalize" id="appTitleDisplayDiv">
+                <span v-if='title'>{{title}}</span> 
+                <span v-if='!title'>PAYDAY INVESTOR</span> 
+            </div>
+            <div id="dashboardDisplayDiv" style="margin-top: 5px"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    
+
+    <script src="secured/assets/ajax/libs/vue.js"></script>
+    <script src="secured/assets/js/moment.js"></script>
+    <script src="secured/assets/ajax/libs/Chart.min.js"></script>
+    <script type="text/javascript" src="secured/controller/dashboard.js"></script>
+    <script type="text/javascript" src="assets/js/calculator.js"></script>
+    <script type="text/javascript">stopLoad()</script>

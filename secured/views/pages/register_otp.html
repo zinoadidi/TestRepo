@@ -1,0 +1,55 @@
+
+	
+    <link rel="stylesheet" href="secured/assets/css/modified_styles.css"/>
+
+	<section style="background:#363d48!important">
+		<div class="backgroundImg w3-display-container height-cover font-family-montserrat  ">
+			
+		
+			<div class="w3-display-middle  ">
+				<div class="main-container login-main-container col-lg-12 ">
+				
+					<div class="login-form-container center" style="" id="login_form_container">
+					<div class="center logo-holder">
+						<a href="javascript:void(0)"> <img class="img-responsive center" src="assets/images/logo_white.png" style="width: 90px;!important"></a>
+					</div>
+					<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white">Please Enter The Code That Was Sent to Your Email to Activate Your Account</p>
+		
+					<div class="form-holder center">
+		
+					<div>
+						<div class="row" style="">
+							<div class="col-lg-4"></div>
+							<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12">
+								<div class="form-icon-holder  col-lg-2 col-md-2 col-sm-2 col-xs-2 w3-left" id="username-icon-holder">
+									<i class="fa fa-lock" aria-hidden="true"></i>
+								</div>
+								<div class="col-xs-10 col-lg-10 col-sm-10 col-md-10  text-field" id="username-field">
+									<input type="email" placeholder="Enter OTP Code" value="" id="Otp" required="" class="w3-input w3-text-white w3-padding customized-input font-medium" style="padding-left:40px!important;width: 46vw!important;">
+								</div>
+							</div>
+							<div class="col-lg-4"></div>
+						</div>
+						<div class="form-group submit-button-holder" onclick="activateOtp(null)">
+							<button class="w3-button pdy-green w3-bar font-small" id="loginBtn" type="submit" style="margin-bottom:6px">Activate Account</button>      								
+							<button class="w3-button w3-bar font-small" style="background: #323943; color:#fff!important" id="loginBtn" onclick="renda.page('register')">Back</button>      								
+						</div>
+						<div id="resendUserTokenDiv" style="padding-top:5px; text-align: -webkit-right !important;"><label onclick="resendUserToken()" class="w3-text-white">Resend Token</label></div>						
+						
+					</div>
+					</div>
+		
+					</div>
+				</div>
+			</div>
+			<div class="w3-display-bottommiddle w3-margin  w3-hide-small">
+				<a href="#" class="w3-text-white pdy-padding font-small w3-margin-right mobileBlock">Need Help?</a>
+				<a href="#" class="w3-text-white pdy-padding font-small w3-margin-left mobileBlock">Private Policy</a>                    
+			</div>
+		</div>
+	</section>
+	
+	 
+
+	<script type="text/javascript" src="secured/controller/users.js"></script>
+	
