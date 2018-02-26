@@ -118,7 +118,7 @@ function createCard(data,cardRegStep){
                 //showAddCardForm('addNewCardForm')  
             }
         }else{
-            if(data[message]){
+            if(data['message']){
                 alert(data['message']);
             }else{
                 alert('An error occurred while adding card. Please try again later.')    
