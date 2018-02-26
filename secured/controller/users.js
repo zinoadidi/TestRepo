@@ -366,9 +366,9 @@ function showRegStep(id){
 
 if(renda.Config.currentPage == "register" || renda.Config.currentPage == "login"){
     initRegApp();initExistingClientApp();stopLoad('stop');checkPasswordStrenght()
-    console.log('this is done')    
+  
     }else{
-        console.log(renda.Config.currentPage)
+
     } 
 
  

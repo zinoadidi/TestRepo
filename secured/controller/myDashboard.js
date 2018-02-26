@@ -242,6 +242,12 @@ function walletWithdrawal(data,option){
         var result = JSON.parse(data);
         //var result = USERDATA;
         console.dir(result);
+        if(checKycStatus()){
+            console.log('===============check kyc passed')
+        }else{
+            var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. You will not be able to perform withdrawal\'s until your KYC is approved')        
+            if(confirm){renda.page('setup_profile')}else{}
+        }
         if (option == 'otp'){
             result = modResult(result);
             result.message = 'Please provide the OTP code that was sent to your email';

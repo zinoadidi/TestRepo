@@ -1,7 +1,7 @@
     
    $(document).ready(function(){ 
         //load extra files
-        //goToTest();
+        goToTest();
         //goToHttp();
         // live to test switch
         checklogin();   
@@ -233,7 +233,13 @@
                 JSON.parse(data);
             }catch(err){
                 stopLoad()
-                toastr.error('An error occured while verfying user information.')
+              
+                if(data.lenght < 70){
+                    alert(data);                        
+                }else{
+                    toastr.error('An error occured while verfying user information.')
+                }
+                
                 console.dir(err);
                 return false;
             } 

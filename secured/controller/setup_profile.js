@@ -114,7 +114,7 @@ function updateStage(data){
 	        return false;
 	    }else if(step == 2){
 	    	startLoad()
-	    	url = "Account/RegisterSTG3";
+	    	url = "Account/UpdateKYC";
 	    	var files = '';
 			files = document.getElementById('PassportUpload').files[0]
 			if(files.size > 525000){
