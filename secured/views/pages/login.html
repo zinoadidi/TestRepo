@@ -31,9 +31,9 @@
 				font-family: 'Montserrat', sans-serif;
 			}
 			.customized-input{
-				padding-left: 15px!important;
+				padding-left: 30px!important;
 				height: auto!important;
-				text-align: right!important;
+				/* text-align: right!important; */
 			}
 			.font-medium{
 				font-size: 15px;
@@ -65,7 +65,7 @@
 			}
 			.pdy-logo{
 				width: 100px !important;
-				margin-left: 40px!important;
+				/* margin-left: 40px!important; */
 			}
 			input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 				background-color: transparent !important;
@@ -83,7 +83,7 @@
 				color: white!important;
 				font-size: 22px!important;
 				margin-top: 8px;
-				background: #383d43;
+				
 			}
 		}
 	
@@ -140,7 +140,7 @@
 			}
 			.pdy-logo{
 				width: 130px !important;
-				margin-left: 40px!important;
+				/* margin-left: 40px!important; */
 			}
 			input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 				background-color: transparent !important;
@@ -158,7 +158,6 @@
 				color: white!important;
 				font-size: 30px!important;
 				margin-top: 3px;
-				background: #383d43;
 			}
 		} 
 		.w3-button:hover{
@@ -167,41 +166,47 @@
 			color: #fff!important;
 		}
 	</style>
-    <section style="background:#363d48!important">
-        <div class="backgroundImg w3-display-container height-cover font-family-montserrat  ">
-           
-            <div class="w3-display-topright pdy-padding w3-margin  ">
-                <a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px  w3-hide-small">New to ARM?</a>
-                <button class="w3-button w3-margin font-small w3-transparent pdy-border w3-text-white pdy-padding-left-ex pdy-padding-right-ex" onclick="renda.page('register')">Register</button>                    
-            </div>
-            <div class="w3-display-middle  ">
-                <div class="w3-container w3-center">
-                    <img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding w3-margin"/>
-                </div>
-               <!--  <div class="w3-text-white w3-center font-medium w3-padding w3-margin-left">
-                    PLEASE LOGIN TO CONTINUE
-                </div>  -->
-                <form class="" onsubmit="login();event.preventDefault();">
-                    <div class="w3-margin">
-                        <span class="fa fa-envelope-o w3-xxlarge"></span>
-                        <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="email" placeholder="Enter Your Email"  id="Username" required="" onchange="preloadServer(null,this.id)">
-                    </div>     
-                    <div class="w3-margin">
-                        <span class="fa fa-lock w3-xxlarge"></span>                            
-                        <input class="w3-input w3-text-white w3-padding customized-input font-medium" type="password" placeholder="Enter Your Password"  id="Password" required="">      
-                                            
-                    </div>
-                    <div>
-                        
-                        <button class="w3-button pdy-green w3-bar w3-margin font-small" onclick="login()" type="button">Login</button>      
-                        <center><span class=" w3-text-white font-small pdy-padding-left-ex forgot-password" onclick="renda.page('forgot_password')">Forgot Password?</span></center>                
-                    </div>
-                </form>
-            </div>
-            <div class="w3-display-bottommiddle w3-margin  w3-hide-small">
-                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-right mobileBlock">Need Help?</a>
-                <a href="#" class="w3-text-white pdy-padding font-small w3-margin-left mobileBlock">Private Policy</a>                    
-            </div>
+    <section style="background:#363d48!important" class="">
+        <div class="backgroundImg w3-display-container height-cover font-family-montserrat ">
+			<div class="w3-animate-left ">
+
+				<div class="w3-display-topleft pdy-padding w3-margin" >
+					<strong class="w3-text-white w3-xlarge" onclick="renda.page('home')"><b>&larr;</b></strong>
+				</div>
+				<div class="w3-display-topmiddle pdy-padding w3-margin" style="position:relative!important">
+						<center><p class="w3-text-white"><span>LOGIN TO YOUR ACCOUNT</span></p>
+						<p class="w3-green " style="width:30px;height:2px"></p></center>
+				</div>
+				<div class="w3-padding w3-margin  ">
+					<div class="w3-margin">
+
+					<div class="w3-container w3-center">
+						<img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding w3-margin"/>
+					</div>
+				
+					<form class="" onsubmit="login();event.preventDefault();">
+						<div class="" style="overflow: hidden;">
+							<span class="fa fa-envelope-o w3-xxlarge"></span>
+							<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="email" placeholder="Email Address"  id="Username" required="" onchange="preloadServer(null,this.id)"  autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+						</div>     
+						<div class="" style="overflow: hidden;">
+							<span class="fa w3-xxlarge"><img src="assets/images/key-512.png" style="width:22px;padding-bottom: 18px;"/></span>                            
+							<input class="w3-input w3-text-white w3-padding customized-input font-medium" type="password" placeholder="Password"  id="Password" required=""  autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">      
+												
+						</div>
+						<div>
+							
+							<button class="w3-button pdy-green w3-bar w3-round" onclick="login()" type="button" style="padding-top: 12px;padding-bottom: 12px;">Login &rarr;</button>      
+						</div>
+						<div>
+							<center><div class=" w3-text-white w3-padding w3-margin" onclick="renda.page('forgot_password')">Forgot password?</div></center>                
+							
+						</div>
+					</form>
+					</div>
+				</div>
+            
+			</div>
         </div>
 	</section>
 	

@@ -51,7 +51,7 @@ function step2(){
         return false
 	}
 	if(payday.user["ProgressStatus"] == 'KYC Rejected'){
-		alert(`Hello, We noticed that the documents you submitted for KYC where not approved because "${payday.user.KYCFeedback}". Click ok to update your KYC `)
+		alert("Hello, We noticed that the documents you submitted for KYC where not approved because \"" + payday.user.KYCFeedback + "\". Click ok to update your KYC ");
 	}	
 	$('#step1').hide()
 	$('#step2').show()

@@ -110,11 +110,11 @@ function loadDashboardData(data,option){
         break;
 
       case 'Goals':
-        let goals_done = 0;
-        let goals_total = 0;
-        let goals_pending = 0;
-        let goals_suspended = 0;
-        let goals_active = 0;
+        var goals_done = 0;
+        var goals_total = 0;
+        var goals_pending = 0;
+        var goals_suspended = 0;
+        var goals_active = 0;
         try{
           
           data = JSON.parse(data);
@@ -203,7 +203,7 @@ function loadDashboardData(data,option){
     return false;
   }else{
     startLoad()
-    let UserId = {'UserId':sessionStorage.UserId}
+    var UserId = {'UserId':sessionStorage.UserId}
     UserId = JSON.stringify(UserId)
     switch (option) {
       case 'dashData':
@@ -223,24 +223,25 @@ function loadDashboardData(data,option){
   }
   
 }
-
-var httpReq = obj => {
-  return new Promise((resolve, reject) => {
-      let xhr = new XMLHttpRequest();
+var httpReq = function httpReq(obj) {
+  return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
       xhr.open(obj.method || "GET", obj.url);
       if (obj.headers) {
-          Object.keys(obj.headers).forEach(key => {
+          Object.keys(obj.headers).forEach(function (key) {
               xhr.setRequestHeader(key, obj.headers[key]);
           });
       }
-      xhr.onload = () => {
+      xhr.onload = function () {
           if (xhr.status >= 200 && xhr.status < 300) {
               resolve(xhr.response);
           } else {
               reject(xhr.statusText);
           }
       };
-      xhr.onerror = () => reject(xhr.statusText);
+      xhr.onerror = function () {
+          return reject(xhr.statusText);
+      };
       xhr.send(obj.body);
   });
 };

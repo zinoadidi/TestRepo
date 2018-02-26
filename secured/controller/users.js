@@ -370,3 +370,5 @@ if(renda.Config.currentPage == "register" || renda.Config.currentPage == "login"
     }else{
         console.log(renda.Config.currentPage)
     } 
+
+ 

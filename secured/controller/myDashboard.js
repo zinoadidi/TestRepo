@@ -239,8 +239,8 @@ function walletWithdrawal(data,option){
             console.dir(err);
             return false;
         }            
-        let result = JSON.parse(data);
-        //let result = USERDATA;
+        var result = JSON.parse(data);
+        //var result = USERDATA;
         console.dir(result);
         if (option == 'otp'){
             result = modResult(result);

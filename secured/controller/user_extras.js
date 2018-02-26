@@ -182,8 +182,8 @@ function filterTransactions(data){
             console.dir(err);
             return false;
         } 
-        let result = JSON.parse(data);
-        //let result = USERDATA;
+        var result = JSON.parse(data);
+        //var result = USERDATA;
         console.dir(result);
         if (result){
             updateUserExtras(data,'transactions')            
@@ -195,9 +195,9 @@ function filterTransactions(data){
         stopLoad()            
         return false;
     }else{
-        let FromDate = $('#FromDate').val();
-        let ToDate = $('#ToDate').val(); 
-        let TransactionType = $('#TransactionType').val(); 
+        var FromDate = $('#FromDate').val();
+        var ToDate = $('#ToDate').val(); 
+        var TransactionType = $('#TransactionType').val(); 
         data = {
             "UserId": sessionStorage.UserId,
             "AppUserId": sessionStorage.UserId,
@@ -464,7 +464,7 @@ function change_password(data){
             console.dir(err);
             return false;
         } 
-        let result = JSON.parse(data);
+        var result = JSON.parse(data);
         
         console.dir(result);
         if (result.ResponseCode == "00"){
@@ -520,3 +520,4 @@ function initContactForm(){
     $('#Email').val(payday.user.Email);
     
 }
+

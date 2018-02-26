@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.payday.arm" version="0.3.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.payday.arm" version="0.3.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>PayDay</name>
     <description>
         PayDay Investor is the investment app that helps you achieve your goals faster.
@@ -12,6 +12,8 @@
     <splash src="splash.png" />
     <access origin="https://127.0.0.1*" />
     <access origin="https://localhost*" />
+    <access origin="https://www.googletagmanager.com*" />
+    
     <allow-intent href="https://*/*" />
     <allow-navigation href="*" />
     <allow-intent href="tel:*" />
@@ -20,7 +22,7 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <preference name="android-minSdkVersion" value="21" />        
+        <preference name="android-minSdkVersion" value="16" />        
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -36,3 +38,4 @@
     <engine name="browser" spec="^5.0.1" />
     <engine name="android" spec="^7.0.0" />
 </widget>
+

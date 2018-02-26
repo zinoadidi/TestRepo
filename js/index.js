@@ -54,6 +54,9 @@ app.initialize();
 //window.location = "index.html";
 
 function DeviceReady(el){
+    document.addEventListener("backbutton", function(e){
+        performBackBtn()
+     }, false);
     /* window.FirebasePlugin.getToken(function(token) {
         // save this server-side and use it to push notifications to this device
         console.log(token);
