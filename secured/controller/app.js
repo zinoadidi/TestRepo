@@ -697,8 +697,8 @@ document.addEventListener("deviceready", function(e){
 }, false);  
 function checkPasswordStrenght(){
     $('.checkPass').keyup(function(e) {
-        var strongRegex = new RegExp('^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$%^[&_"<>)(?`~]).*$', "g");
-        var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var strongRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$%^[&_"<>)(?`~]).*$', "g");
+        var mediumRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$%^[&_"<>)(?`~]).*$', "g");
         var enoughRegex = new RegExp("(?=.{6,}).*", "g");
         if (false == enoughRegex.test($(this).val())) {
                 sessionStorage.passwordStrenght ='More Characters';
@@ -707,7 +707,7 @@ function checkPasswordStrenght(){
                 sessionStorage.passwordStrenght ='strong';
         } else if (mediumRegex.test($(this).val())) {
                 //$('#passstrength').className = 'alert';
-                sessionStorage.passwordStrenght ='medium';
+                sessionStorage.passwordStrenght ='strong';
         } else {
                // $('#passstrength').className = 'error';
                sessionStorage.passwordStrenght ='weak';
