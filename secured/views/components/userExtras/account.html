@@ -71,7 +71,7 @@
             <div class="w3-animate-right "  style="">
                 <center><div class="input-text-medium w3-padding">Edit Profile</div>
                 <div>
-                    <img v-bind:src="userExtras.ProfilePic"  class="w3-circle" style="width:150px; height:140px" onclick="$('#ProfileUpload').trigger('click');"/>
+                    <img v-bind:src="userExtras.ProfilePic"  class="w3-circle" style="width:150px; height:140px" onclick="$('#ProfileUpload').unbind().trigger('click');"/>
                     <div>
                         <p class="input-text-goal center">Select a new profile image</p>
                         <input type="file" id="ProfileUpload" value= "" class="w3-input input-text-goal padding-left-2 upload-button" data-toggle="tooltip" accept="image/*" required="" aria-required="true" style="width: 50%;" onchange ="prepareProfileUpload()">

@@ -20,17 +20,10 @@ $(document).ready(function(){
         renda.post('PaymentDetails/FetchPaymentDetails',JSON.stringify(JSON.stringify({'UserId':sessionStorage.UserId})),'stats',null,null,'cards');
     }
     showAddCardForm('addNewCardForm')
-    //obsolute: check for kyc
-   /* if(checKycStatus()){
+    if(IsKYCApproved){
         console.log('===============check kyc passed')
     }else{
         var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. You will not be able to add a card or perform any transaction until your KYC is approved')        
-        if(confirm){renda.page('setup_profile')}else{}
-    }*/
-if(payday.user.IsCXCreated){
-        console.log('===============check kyc passed')
-    }else{
-        var confirm = window.confirm('Your account has not been verified. You will not be able to add a card until your account is verified.')        
         if(confirm){renda.page('setup_profile')}else{}
     }
 });
@@ -126,13 +119,14 @@ function createCard(data,cardRegStep){
         }           
         return false;
     }else{
-        if(payday.user.IsCXCreated){
+        if(checKycStatus()){
             console.log('===============check kyc passed')
         }else{
-            var confirm = window.confirm('Your account has not been verified. You will not be able to add a card until your account is verified.')        
-            if(confirm){renda.page('setup_profile')}else{}
+            var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. You will not be able to add a card or perform any transaction until your KYC is approved');
+            if(confirm){renda.page('setup_profile')}else{
+            }
+            return false;
         }
-
         var myCard = $('#add-card-form');
         var cardNumber = myCard.CardJs('cardNumber');
         var cardType = myCard.CardJs('cardType');

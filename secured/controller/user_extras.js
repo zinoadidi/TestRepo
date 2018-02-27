@@ -484,8 +484,19 @@ function change_password(data){
         stopLoad()                                    
         return false;
     }else{
-        var SecurityQuestion = $('#resetSecurityQuestion').val();
-        var SecurityAnswer = $('#resetSecurityAnswer').val().toLowerCase();
+        var securityQ = '';
+        var securityA = '';
+        if($('#resetSecurityQuestion').val()){
+            securityQ = $('#resetSecurityQuestion').val();
+        }else{
+        }
+        if($('#resetSecurityAnswer').val()){
+            securityA = $('#resetSecurityAnswer').val().toLowerCase();
+        }else{
+        }
+        
+        var SecurityQuestion = securityQ;
+        var SecurityAnswer = securityA;
         var password = $('#resetNewPassword').val();
         var confirmPassword = $('#resetConfirmPassword').val();
         var oldPassword = $('#resetOldPassword').val();

@@ -1,7 +1,7 @@
     
    $(document).ready(function(){ 
         //load extra files
-        goToTest();
+        //goToTest();
         //goToHttp();
         // live to test switch
         checklogin();   
@@ -697,8 +697,8 @@ document.addEventListener("deviceready", function(e){
 }, false);  
 function checkPasswordStrenght(){
     $('.checkPass').keyup(function(e) {
-        var strongRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$%^[&_"<>)(?`~]).*$', "g");
-        var mediumRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$%^[&_"<>)(?`~]).*$', "g");
+        var strongRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$!%^[&_"<>)(?`~]).*$', "g");
+        var mediumRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$!%^[&_"<>)(?`~]).*$', "g");
         var enoughRegex = new RegExp("(?=.{6,}).*", "g");
         if (false == enoughRegex.test($(this).val())) {
                 sessionStorage.passwordStrenght ='More Characters';
@@ -722,7 +722,15 @@ function checKycStatus(){
         return false;
     }
 }
-
+/* 
+function checKycStatus(){
+    if(payday.user.ProgressStatus == 'KYC Approved' || payday.user.ProgressStatus == 'Existing Customer'){
+        return true;
+    }else{
+        return false;
+    }
+}
+ */
 
 function goToTest(){
     renda.Config.serverUrl = 'http://192.168.250.29:8000/pdiv/';

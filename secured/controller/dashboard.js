@@ -22,7 +22,6 @@ function loadDefaults(){
     renda.component('dashboard','navigation','dashboardNavDiv');    
     renda.component('dashboard','header','dashboadHeaderDiv');
     renda.component('dashboard','myDashboard','dashboardDisplayDiv');
-    
     stopLoad()
 }
 
@@ -37,12 +36,8 @@ function w3_open() {
   document.getElementById("mySidebar").style.clip = 'rect(0px 100% 736px 0.0px)';
   document.getElementById("openNav").style.display = 'none';
   document.getElementById("closeNav").style.display = 'inline-block';
-  
-  
-  
 }
-function w3_close() { 
-    
+function w3_close() {  
   navMan.status = 'close';
   $('#mySidebar').hide("slide", { direction: "left" }, 1);
   document.getElementById("mySidebar").style.zIndex = "11";
