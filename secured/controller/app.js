@@ -272,8 +272,8 @@
             var confirmPassword = $('#resetConfirmPassword').val();
             if(SecurityQuestion == '' || SecurityQuestion == null){toastr.error('Please Provide Security Question'); return false;}
             if(SecurityAnswer == '' || SecurityAnswer == null){toastr.error('Please Provide Security Answer'); return false;}
-            if(password == '' || password != confirmPassword || password.length<8|| sessionStorage.passwordStrenght !='strong'){alert('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
-            
+            if(password.length<8|| sessionStorage.passwordStrenght !='strong'){alert('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
+            if(password == '' || password != confirmPassword ){alert('The Password Entered Does Not Match Confirm Password Field.'); return false;}
             var data = {
                 "UserId": userdetails.data.Email,
                 "SecurityQuestion": SecurityQuestion,
@@ -697,21 +697,32 @@ document.addEventListener("deviceready", function(e){
 }, false);  
 function checkPasswordStrenght(){
     $('.checkPass').keyup(function(e) {
-        var strongRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$!%^[&_"<>)(?`~]).*$', "g");
-        var mediumRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$!%^[&_"<>)(?`~]).*$', "g");
-        var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+      /*   var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"); */
+        var letters = new RegExp(/[a-zA-Z]/);
+        var uppercase = new RegExp(/[A-Z]/);
+        var digits = new RegExp(/\d/);
+        var specials = new RegExp(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/);
+        var pass = $(this).val();
+        if(letters.test(pass) && digits.test(pass) && specials.test(pass) && pass.length >=8 && uppercase.test(pass)){
+            sessionStorage.passwordStrenght ='strong';
+        }else{
+            sessionStorage.passwordStrenght ='weak';
+        }
+        console.log('Letter:'+letters.test(pass)+';Specials:'+specials.test(pass)+';Digits:'+digits.test(pass)+';Uppercase:'+uppercase.test(pass)+'Lenght:'+pass.length)
+        /* var mediumRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$!%^[&_"<>)(?`~]).*$', "g"); */
+       /*  var enoughRegex = new RegExp("(?=.{6,}).*", "g");
         if (false == enoughRegex.test($(this).val())) {
                 sessionStorage.passwordStrenght ='More Characters';
         } else if (strongRegex.test($(this).val())) {
                 //$('#passstrength').className = 'ok';
                 sessionStorage.passwordStrenght ='strong';
-        } else if (mediumRegex.test($(this).val())) {
+        }  else if (mediumRegex.test($(this).val())) {
                 //$('#passstrength').className = 'alert';
                 sessionStorage.passwordStrenght ='strong';
-        } else {
+        }  else {
                // $('#passstrength').className = 'error';
-               sessionStorage.passwordStrenght ='weak';
-        }
+               //sessionStorage.passwordStrenght ='weak';
+        //} */
         return true;
    });
 }
@@ -836,7 +847,43 @@ function preloadServer(data,id){
     }
     
 }
-
+var backBtnCounter = 0;
 function performBackBtn(){
-    alert('back btn')
+    var currentPage = renda.Config.currentPage
+    switch (currentPage) {
+        case 'home':
+            backBtnCounter++;
+            if(backBtnCounter >=2){
+                var confirm = window.confirm('You are about to close PayDay Investor');
+                if(confirm){
+                    if (typeof cordova !== 'undefined') {
+                        if (navigator.app) {
+                            navigator.app.exitApp();
+                        }
+                        else if (navigator.device) {
+                            navigator.device.exitApp();
+                        }
+                    } else {
+                        window.close();
+                        $timeout(function () {
+                            self.showCloseMessage = true;  //since the browser can't be closed (otherwise this line would never run), ask the user to close the window
+                        });
+                    }
+                }else{
+                    backBtnCounter = 0;
+                }
+            }
+            break;
+        case 'login':
+            renda.page('home');
+            break;
+        case 'forgot_password':
+            renda.page('login');
+            break;
+        case 'register':
+            renda.page('home');
+            break;
+        default:
+            break;
+    }
 }
