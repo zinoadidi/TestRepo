@@ -1,7 +1,7 @@
     
    $(document).ready(function(){ 
         //load extra files
-        //goToTest();
+        goToTest();
         //goToHttp();
         // live to test switch
         checklogin();   
