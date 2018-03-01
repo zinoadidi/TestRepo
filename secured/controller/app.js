@@ -1,7 +1,7 @@
     
    $(document).ready(function(){ 
         //load extra files
-        goToTest();
+        //goToTest();
         //goToHttp();
         // live to test switch
         checklogin();   
@@ -272,8 +272,8 @@
             var confirmPassword = $('#resetConfirmPassword').val();
             if(SecurityQuestion == '' || SecurityQuestion == null){toastr.error('Please Provide Security Question'); return false;}
             if(SecurityAnswer == '' || SecurityAnswer == null){toastr.error('Please Provide Security Answer'); return false;}
-            if(password == '' || password != confirmPassword || password.length<8|| sessionStorage.passwordStrenght !='strong'){alert('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
-            
+            if(password.length<8|| sessionStorage.passwordStrenght !='strong'){alert('Please Confirm that you entered a new password and it matches the confirm password field. Note that your password cannot be lesser than 8 characters and should contain text, numbers and symbols'); return false;}
+            if(password == '' || password != confirmPassword ){alert('The Password Entered Does Not Match Confirm Password Field.'); return false;}
             var data = {
                 "UserId": userdetails.data.Email,
                 "SecurityQuestion": SecurityQuestion,
@@ -702,11 +702,15 @@ function checkPasswordStrenght(){
         var digits = new RegExp(/\d/);
         var specials = new RegExp(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/);
         var pass = $(this).val();
+
         if(letters.test(pass) && digits.test(pass) &&  pass.length >=8 && uppercase.test(pass)){
+      
             sessionStorage.passwordStrenght ='strong';
         }else{
             sessionStorage.passwordStrenght ='weak';
         }
+        console.log('Letter:'+letters.test(pass)+';Specials:'+specials.test(pass)+';Digits:'+digits.test(pass)+';Uppercase:'+uppercase.test(pass)+'Lenght:'+pass.length)
+        
         return true;
    });
 }
@@ -717,7 +721,15 @@ function checKycStatus(){
         return false;
     }
 }
-
+/* 
+function checKycStatus(){
+    if(payday.user.ProgressStatus == 'KYC Approved' || payday.user.ProgressStatus == 'Existing Customer'){
+        return true;
+    }else{
+        return false;
+    }
+}
+ */
 
 function goToTest(){
     renda.Config.serverUrl = 'http://192.168.250.29:8000/pdiv/';
@@ -823,7 +835,43 @@ function preloadServer(data,id){
     }
     
 }
-
+var backBtnCounter = 0;
 function performBackBtn(){
-    alert('back btn')
+    var currentPage = renda.Config.currentPage
+    switch (currentPage) {
+        case 'home':
+            backBtnCounter++;
+            if(backBtnCounter >=2){
+                var confirm = window.confirm('You are about to close PayDay Investor');
+                if(confirm){
+                    if (typeof cordova !== 'undefined') {
+                        if (navigator.app) {
+                            navigator.app.exitApp();
+                        }
+                        else if (navigator.device) {
+                            navigator.device.exitApp();
+                        }
+                    } else {
+                        window.close();
+                        $timeout(function () {
+                            self.showCloseMessage = true;  //since the browser can't be closed (otherwise this line would never run), ask the user to close the window
+                        });
+                    }
+                }else{
+                    backBtnCounter = 0;
+                }
+            }
+            break;
+        case 'login':
+            renda.page('home');
+            break;
+        case 'forgot_password':
+            renda.page('login');
+            break;
+        case 'register':
+            renda.page('home');
+            break;
+        default:
+            break;
+    }
 }

@@ -1,396 +1,377 @@
 <style>
-	@media (max-width:641px)  { 
-		/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-		.backgroundImg{
-			background: #29313C; 
-			background-size: cover;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
-			;
-			background-attachment: fixed!important;
-
-		}
-		.w3-container{
-			padding: 0.00em 0px!important;
-			margin: 0px!important; 
-			text-align: center!important
-		}
-		.w3-half{
-			width:100%!important;
-		}
-		.mobileBlock{
-			display: block;
-			padding: 0px!important;
-			margin:0px!important
-		}
-		
-		.w3-display-middle{
+		@media (max-width:641px)  { 
+			/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+			.backgroundImg{
+				background: #29313C; 
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
+				;
+				background-attachment: fixed!important;
+				
+			}
+			.w3-container{
+				padding: 0.00em 0px!important;
+				margin: 0px!important; 
+				text-align: center!important
+			}
+			.w3-half{
+				width:100%!important;
+			}
+			.mobileBlock{
+				display: block;
+				padding: 0px!important;
+				margin:0px!important
+			}
 			
+			.w3-display-middle{
+				
+			}
+			.height-cover{
+				height: -webkit-fill-available;
+			}
+			.font-family-montserrat{
+				font-family: 'Montserrat', sans-serif;
+			}
+			.customized-input{
+				padding-left: 40px!important;
+				height: auto!important;
+				text-align: left!important;
+			}
+			.font-medium{
+				font-size: 15px;
+			}
+			.font-small{
+				font-size: 10px;
+			}
+			.font-large{
+				font-size: 15px;
+			}
+			.pdy-green{
+				background: #2CB34A!important;
+				color:#fff!important;
+			}
+			.pdy-padding{
+				padding: 8px!important;
+			}
+			.pdy-padding-bottom-md{
+				padding-bottom: 30px!important;
+			}
+			.pdy-padding-left-ex{
+				padding-left:20px!important                
+			}
+			.pdy-padding-right-ex{
+				padding-right:20px!important
+			}
+			.pdy-border{
+				border:2px solid white;
+			}
+			.pdy-logo{
+				width: 100px !important;
+				
+			}
+			input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+				background-color: transparent !important;
+				background-image: none !important;
+				color: white!important
+			}
+			.forgot-password{
+				right: 0px !important;
+				position: absolute;
+				margin-bottom: 40px;
+			}
+			.pdy-mod-input{
+				/* border-right: 2px solid white !important; */
+				padding-left:3px;
+				width: 100%!important;
+			}
+			.pd-reg-button{
+				width: 97% !important;
+				
+				padding-top: 10px!important;
+				padding-bottom: 10px!important;
+			}
+			.pdy-input{
+				width: 100%!important;
+				padding-left:0px
+			}
+			.zero-margin{
+				padding-right: 15px;
+			}
 		}
-		.height-cover{
-			height: -webkit-fill-available;
-		}
-		.font-family-montserrat{
-			font-family: 'Montserrat', sans-serif;
-		}
-		.customized-input{
-			padding-left: 40px!important;
-			height: auto!important;
-			text-align: left!important;
-		}
-		.font-medium{
-			font-size: 15px;
-		}
-		.font-small{
-			font-size: 10px;
-		}
-		.font-large{
-			font-size: 15px;
-		}
-		.pdy-green{
-			background: #2CB34A!important;
-			color:#fff!important;
-		}
-		.pdy-padding{
-			padding: 8px!important;
-		}
-		.pdy-padding-bottom-md{
-			padding-bottom: 30px!important;
-		}
-		.pdy-padding-left-ex{
-			padding-left:20px!important                
-		}
-		.pdy-padding-right-ex{
-			padding-right:20px!important
-		}
-		.pdy-border{
-			border:2px solid white;
-		}
-		.pdy-logo{
-			width: 100px !important;
-			
-		}
-		input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-			background-color: transparent !important;
-			background-image: none !important;
-			color: white!important
-		}
-		.forgot-password{
-			right: 0px !important;
-			position: absolute;
-			margin-bottom: 40px;
-		}
-		.pdy-mod-input{
-			/* border-right: 2px solid white !important; */
-			padding-left:3px;
-			width: 100%!important;
-		}
-		.pd-reg-button{
-			width: 97% !important;
-			
-			padding-top: 10px!important;
-			padding-bottom: 10px!important;
-		}
-		.pdy-input{
-			width: 100%!important;
-			padding-left:0px
-		}
-		.zero-margin{
-			padding-right: 15px;
-		}
-	}
-	@media (min-width:642px)  { 
-		/* tablet, landscape iPad, lo-res laptops ands desktops */ 
-		.backgroundImg{
-			background: #29313C; 
-			background-size: cover;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-attachment: fixed!important;
-
-			background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
-			;
-		}
-		.height-cover{
-			height: -webkit-fill-available;
-		}
-		.font-family-montserrat{
-			font-family: 'Montserrat', sans-serif;
-		}
-		.customized-input{
-			padding-left: 40px!important;
-			height: auto!important;
-			text-align: left!important;
-		}
-		.font-medium{
-			font-size:1.5vw!important;
-		}
-		.font-small{
-			font-size:1.0vw!important;
-		}
-		.font-large{
-			font-size:3.0vw!important;
-		}
-		.pdy-green{
-			background: #2CB34A!important;
-			color:#fff!important;
-		}
-		.pdy-padding{
-			padding: 20px!important;
-		}
-		.pdy-padding-bottom-md{
-			padding-bottom: 30px!important;
-		}
-		.pdy-padding-left-ex{
-			padding-left:50px!important                
-		}
-		.pdy-padding-right-ex{
-			padding-right:50px!important
-		}
-		.pdy-border{
-			border:4px solid white;
-		}
-		.pdy-logo{
-			width: 130px !important;
-		}
-		input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-			background-color: transparent !important;
-			background-image: none !important;
-			color: white!important
-		}
-		.forgot-password{
-			right: 0px !important;
-			position: absolute;
-			margin-bottom: 40px;
-		}
-	   
-		.pdy-mod-input{
-			border-right: 2px solid white !important;
-			padding-left:3px
-		}
-		.pd-reg-button{
-			width: 100% !important;
-			margin-left: 30px!important;
-			padding-top: 10px!important;
-			padding-bottom: 10px!important;
-		}
-		.pdy-input{
-			padding-left:10px 
-		}
-	}
-	.w3-button{
-		color:white!important;
-	}
- 
-	.fa{
-		display: inline!important;
-		position: absolute!important;
-		color: white!important;
-		font-size: 22px!important;
-		margin-top: 8px;
-		background: #383d43;
-	}
-	select,option{
-		background: transparent!important;
-		color: #354357!important
-	}
+		@media (min-width:642px)  { 
+			/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+			.backgroundImg{
+				background: #29313C; 
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-attachment: fixed!important;
 	
-</style>
-<script type="text/javascript" src="secured/controller/users.js"></script>
-
-<section class="backgroundImg ">
-	<div class=" w3-display-container height-cover font-family-montserrat w3-animate-right">
-		<div>
-			<div class="w3-display-topright pdy-padding w3-margin  ">
-				<a href="javascript:void(0)" class="w3-text-white font-small" style="padding-right:0px; margin-right:0px">Existing PayDay client?</a>
-				<button class="w3-button w3-margin font-small w3-transparent pdy-border w3-text-white pdy-padding-left-ex pdy-padding-right-ex" onclick="renda.page('login')">Login</button>                    
-			</div>
-			<div class="w3-display-middle" style="overflow: hidden">
-				<div class="w3-container w3-center">
-					<img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding"/>
+				background-image: url("assets/images/PayDay-Investor-(Login-Page)_bg.jpg")
+				;
+			}
+			.height-cover{
+				height: -webkit-fill-available;
+			}
+			.font-family-montserrat{
+				font-family: 'Montserrat', sans-serif;
+			}
+			.customized-input{
+				padding-left: 40px!important;
+				height: auto!important;
+				text-align: left!important;
+			}
+			.font-medium{
+				font-size:1.5vw!important;
+			}
+			.font-small{
+				font-size:1.0vw!important;
+			}
+			.font-large{
+				font-size:3.0vw!important;
+			}
+			.pdy-green{
+				background: #2CB34A!important;
+				color:#fff!important;
+			}
+			.pdy-padding{
+				padding: 20px!important;
+			}
+			.pdy-padding-bottom-md{
+				padding-bottom: 30px!important;
+			}
+			.pdy-padding-left-ex{
+				padding-left:50px!important                
+			}
+			.pdy-padding-right-ex{
+				padding-right:50px!important
+			}
+			.pdy-border{
+				border:4px solid white;
+			}
+			.pdy-logo{
+				width: 130px !important;
+			}
+			input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+				background-color: transparent !important;
+				background-image: none !important;
+				color: white!important
+			}
+			.forgot-password{
+				right: 0px !important;
+				position: absolute;
+				margin-bottom: 40px;
+			}
+		   
+			.pdy-mod-input{
+				border-right: 2px solid white !important;
+				padding-left:3px
+			}
+			.pd-reg-button{
+				width: 100% !important;
+				margin-left: 30px!important;
+				padding-top: 10px!important;
+				padding-bottom: 10px!important;
+			}
+			.pdy-input{
+				padding-left:10px 
+			}
+		}
+		.w3-button{
+			color:white!important;
+		}
+	 
+		.fa{
+			display: inline!important;
+			position: absolute!important;
+			color: white!important;
+			font-size: 22px!important;
+			margin-top: 8px;
+			background: transparent;
+		}
+		select,option{
+			background: transparent!important;
+			color: #354357!important
+		}
+		.outerHidden {
+		overflow: hidden;
+		position: relative;
+		}
+		.innerHidden {
+		position: absolute;
+		height: 100px;
+		width: 100px;
+		right: -50px;
+		top: 50px;
+		}
+	</style>
+	<script type="text/javascript" src="secured/controller/users.js"></script>
+	
+	<section class="backgroundImg ">
+		<div class=" w3-display-container height-cover font-family-montserrat w3-animate-right ">
+			<div>
+				<a href="javascript:renda.page('home')" style="color: white!important;">
+				<div class="w3-display-topleft w3-margin" >
+					<strong class="w3-text-white w3-xlarge w3-aniimate-zoom" ><b style="font-weight: 1000!important;">&larr;</b></strong>
 				</div>
-				<div class="center register-divs w3-container" id="welcomeDiv">
-					<p class="welcome-text center w3-text-white" style="font-size: 4vw;">
-						<span class="w3-block">Welcome to PayDay</span>
-						<span>Please select one option</span>         
-					</p>
-				
-					<div>
-						<div class="row">
-							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
-							<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
-								<button class="w3-button  input-text-medium" style="background: #1e96d3; width: 100%;padding: 15px;" onclick="showRegDiv('new')">NEW TO ARM</button>
-							</div>
-							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
-						</div>
-						<div class="row">
-							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
-							<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
-								<button class="w3-button input-text-medium" style="background: #249ba0;width: 100%;padding: 15px;" onclick="showRegDiv('existing')">EXISTING ARM CLIENT</button>
-							
-							</div>
-							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
-						</div>
-						<!-- <div class="row" >
-							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
-							<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
-								<button class="w3-button  input-text-medium" style="background: #438cb9;width: 100%;padding: 15px;" onclick="renda.page('login')"><small>LOGIN</small></button>
-							</div>
-							<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
-						</div> -->
-					</div>
-				
+				<div class="w3-display-topmiddle pdy-padding w3-margin-right" style="position:relative!important">
+					<center><p class="w3-text-white"><span>CREATE AN ACCOUNT</span></p>
+					<p class="w3-green " style="width:30px;height:2px"></p></center>
 				</div>
-				<div class=" register-divs" id="new">
+				</a>
+				<div class="backgroundImg" style="overflow: hidden">
 					
-					<div>
-						
-						<form class="" onsubmit="event.preventDefault();">
+					<div class="w3-display-middle center register-divs w3-container " id="welcomeDiv">
+						<div class="w3-container w3-center">
+							<img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding"/>
+						</div>
+						<p class="welcome-text center w3-text-white" style="font-size: 4vw;">
+							<span class="w3-block">Welcome to PayDay</span>
+							<span>Please select one option</span>         
+						</p>
+					
+						<div>
+							<div class="row">
+								<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+								<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
+									<button class="w3-button  input-text-medium" style="background: #1e96d3; width: 100%;padding: 15px;" onclick="showRegDiv('new')">NEW TO ARM</button>
+								</div>
+								<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+								<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
+									<button class="w3-button input-text-medium" style="background: #249ba0;width: 100%;padding: 15px;" onclick="showRegDiv('existing')">EXISTING ARM CLIENT</button>
+								
+								</div>
+								<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+							</div>
+							<!-- <div class="row" >
+								<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+								<div class="form-group form-field-holder col-lg-4 col-md-10 col-sm-10 col-xs-10 no-padding">
+									<button class="w3-button  input-text-medium" style="background: #438cb9;width: 100%;padding: 15px;" onclick="renda.page('login')"><small>LOGIN</small></button>
+								</div>
+								<div class="col-lg-4 col-md-1 col-sm-1 col-xs-1"></div>
+							</div> -->
+						</div>
+					
+					</div>
+					<div class="w3-animate-zoom register-divs" id="new">
+						<form class="" onsubmit="event.preventDefault();register(null)">
 							<div class="reg-step register-step-0">
 								<div class="w3-margin w3-container">
-									<div class="w3-text-white w3-center font-medium">
-										
-										<br/>CREATE AN ACCOUNT
-									</div>
-									<div>
-										<div  class="w3-half ">
-											<input class=" w3-text-white font-medium pdy-input pdy-mod-input"  type='text' placeholder="Surname" class="w3-input input-text-goal padding-left-2" v-model="regVm.Surname" required="" onfocusout="checkValue(this)" aria-required="true">                        
+									<center>
+										<div class="" >
+											<img  v-show="regVm.ProfilePic" v-bind:src="regVm.ProfilePic"  class="w3-circle" style="width:150px; height:140px" onclick="openPicturePicker()"/>
+											<div v-if="!regVm.ProfilePic" class="">
+												<img src="secured/assets/img/camera.png" class="pdy-logo pdy-padding w3-circle" onclick="openPicturePicker()"/>
+											</div>  
 										</div>
-										<div class="w3-half">
-											<input class=" w3-text-white font-medium pdy-input" type='text' placeholder="First Name" v-model="regVm.Firstname" required="" onfocusout="checkValue(this)" aria-required="true">                                               
-										</div>
+									</center>
+									<div class="outerHidden">
+										<input type="file" id="ProfileUpload" value= "" class="w3-input w3-text-white w3-padding customized-input font-medium innerHidden" type='text' class="upload-button" data-toggle="tooltip" title="Select your profile image" accept="image/*" aria-required="true" onchange ="prepareRegistrationProfileUpload()">																																	
 									</div>
-									<div class="">
-										<input class="w3-input w3-text-white pdy-input font-medium" type="email" placeholder="Email"  id="userRegEmail" required="" v-model="regVm.Email" >
-									</div> 
+									
+									<div class="w3-text-white w3-padding w3-margin-left w3-margin-right">
+										<div> 
+											<input class="w3-input" type='text' placeholder="Surname" class="w3-input input-text-goal padding-left-2" v-model="regVm.Surname" required="" onfocusout="checkValue(this)" aria-required="true" style="border-color: white!important;">
+										</div>
+										<div class="row" style="margin-bottom: 0px;"> 
+											<input class="w3-input col s6" type='text' placeholder="First Name" v-model="regVm.Firstname" required="" onfocusout="checkValue(this)" aria-required="true">
+											<input class="w3-input col s6" type='text' placeholder="Other Names" v-model="regVm.Middlename" value= "" class="w3-input input-text-goal padding-left-2" >
+										</div>
+										<div> 
+											<input class="w3-input" type="email" placeholder="Email"  id="userRegEmail" required="" v-model="regVm.Email">
+										</div>
+										<div> 
+											<input class="w3-input" type="number" class="w3-input w3-text-white w3-padding customized-input font-medium" placeholder="Phone Number" v-model="regVm.Phonenumber" id="Phonenumber" value= "" class="w3-input ">
+										</div>
+										<div class="row w3-tooltip" style="margin-bottom: 0px;">
+											<div class=""> 
+												<input type="password" id="regPassword" placeholder="Password" v-model="regVm.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white checkPass col s6">
+												<span style="position:absolute;left:0;bottom:80px;background:#35383f!important" class="w3-text w3-tag">
+													Your password should contain numbers, symbols, minimum of one uppercase letter and not less than 8 characters.
+												</span>
+											</div>
+											<div class=""> 
+												<input class="w3-input col s6" type="password" placeholder="Confirm Password" id="confirmRegPassword" v-model="regVm.confirmPassword" required="" onfocusout="checkValue(this)" aria-required="true" onchange="preloadServer(null,'userRegEmail')">
+											</div>
+										</div>
+										<div> 
+											<select v-model="regVm.SecurityQuestion" required="" aria-required="true" class="w3-input w3-text-white w3-select">
+												<option value= "">Select a security question</option>
+												<option value="What is your favorite movie">What is your favorite movie?</option>
+												<option value="What is your mother's maiden name">What is your mother's maiden name?</option>
+												<option value="What street did you grow up on">What street did you grow up on?</option>
+												<option value="What was the make of your first car">What was the make of your first car?</option>
+												<option value="What is your father's middle name">What is your father's middle name?</option>
+												<option value="In what city were you born">In what city were you born?</option>
+											</select>
+										</div>
+										<div> 
+											<input type="text" placeholder="Security Answer" v-model="regVm.SecurityAnswer" value= "" class="w3-input w3-text-white" required="" onfocusout="checkValue(this)" aria-required="true" style="margin-top: 10px!important;">
+										</div>
+										<div>
+											<input class="" type="checkbox" checked="checked" v-model="regVm.terms"  onfocusout="checkValue(this)" >
+											<small>By Registering, you agree with our <a class="terms-link register-here-link" href="javascript:document.getElementById('termsDisplayModal').style.display='block';renda.component('userExtras','terms_and_condition','termsDisplayDiv');">Terms & Conditions</small></a>
+										</div>
+										<div>
+											<button class="w3-button pdy-green w3-bar w3-round" type="submit" type="button" style="padding-top: 12px;padding-bottom: 12px;">Register &rarr;</button>      
+										</div>
+									</div>									
 								</div>
-								
-								<div class="">
-									<button class="w3-button pdy-green font-small pd-reg-button" onclick="showRegStep('register-step-1')">Get Started</button>                    
-								</div>
-								
 							</div>
-							<div class="reg-step register-step-1" style="display: none;">
-								<div class="col-lg-6">
-									<img src="assets/images/pagination-1.png" class="img-responsive center paginated-tab" width="100%">
-								</div>
-								
-								<div class="">
-									<span class="fa fa-user w3-xxlarge"></span>
-									<input class="w3-input w3-text-white w3-padding customized-input font-medium" type='text' placeholder="Other Names" v-model="regVm.Middlename" value= "" class="w3-input input-text-goal padding-left-2" >
-								</div> 
-								
-								<div class="">
-									<span class="fa fa-phone w3-xxlarge"></span>
-									<input type="number" class="w3-input w3-text-white w3-padding customized-input font-medium" placeholder="Phone Number" v-model="regVm.Phonenumber" id="Phonenumber" value= "" class="w3-input input-text-goal padding-left-2">
-								</div> 
-								
-								<div class="">
-									<span class="fa fa-user-circle-o w3-xxlarge"></span>
-									<input type="file" id="ProfileUpload" value= "" class="w3-input w3-text-white w3-padding customized-input font-medium" type='text' class="upload-button" data-toggle="tooltip" title="Select your profile image" accept="image/*" required="" aria-required="true">
-								</div>
-				
-								<div class="" style="margin-top:8px!important;text-align: center"> 
-									<button type="button" class="w3-button"  onclick="showRegStep('register-step-0')" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">BACK</button>
-									<button type="button" class="w3-button pdy-green" onclick="showRegStep('register-step-2')" style=" display: inline-block!important;width:48%">NEXT</button>
-								</div>
-							</div>
-					
-							<div class="reg-step register-step-2" style="display: none;">
-								<div class="col-lg-6 ">
-									<img src="assets/images/pagination-2.png" class="img-responsive center paginated-tab" width="100%">
-								</div>
-								<div class="">
-									<p class="w3-tooltip"> 
-									<span class="fa fa-lock w3-xxlarge"></span>
-									<input type="password" id="password" placeholder="Password" v-model="regVm.Password" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium checkPass">
-									<span style="position:absolute;left:0;bottom:40px;background:#35383f!important" class="w3-text w3-tag">
-										Your password should contain numbers, symbols, minimum of one uppercase letter and not less than 8 characters.
-									</span></p>
-								</div> 
-								<div class="">
-									<span class="fa fa-lock w3-xxlarge"></span>
-									<input type="password" placeholder="Confirm Password" id="confirmPassword" v-model="regVm.confirmPassword" required="" onfocusout="checkValue(this)" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium" onchange="preloadServer(null,'userRegEmail')">
-								</div> 
-								
-								<div class="">
-									<span class="fa  fa-question-circle w3-xxlarge"></span>
-									<select v-model="regVm.SecurityQuestion" required="" aria-required="true" class="w3-input w3-text-white w3-padding customized-input font-medium" onchange="preloadServer(null,'userRegEmail')">
-										<option value= "">Select a security question</option>
-										<option value="What is your favorite movie">What is your favorite movie?</option>
-										<option value="What is your mother's maiden name">What is your mother's maiden name?</option>
-										<option value="What street did you grow up on">What street did you grow up on?</option>
-										<option value="What was the make of your first car">What was the make of your first car?</option>
-										<option value="What is your father's middle name">What is your father's middle name?</option>
-										<option value="In what city were you born">In what city were you born?</option>
-									</select>
-								</div> 
-								 
-								<div class="">
-									<span class="fa  fa-question w3-xxlarge"></span>
-									<input type="text" style="" placeholder="Answer to security question" v-model="regVm.SecurityAnswer" value= "" class="w3-input w3-text-white w3-padding customized-input font-medium" required="" onfocusout="checkValue(this)" aria-required="true">
-								</div> 
-
-								<div class="w3-text-white w3-small">
-									<input type="checkbox" v-model="regVm.terms" required="" onfocusout="checkValue(this)" aria-required="true" class=" w3-checkbox w3-check" >
-									By Registering, you agree with our <a class="terms-link register-here-link" href="javascript:document.getElementById('termsDisplayModal').style.display='block';renda.component('userExtras','terms_and_condition','termsDisplayDiv');">Terms & Conditions</a>
-								</div>
-								<div class="" style="margin-top:8px!important;text-align: center"> 
-									<button type="button" class="w3-button"  onclick="showRegStep('register-step-1')" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important">BACK</button>
-									<button type="button" class="w3-button pdy-green" onclick="register(null)" style=" display: inline-block!important;width:48%"><small><b>REGISTER</b></small></button>
-								</div>
-				
-							</div>
-								
-						</form>					
+						</form>
 					</div>
-				</div>
-					
-				<div class=" register-divs" id="existing">
-					<div class="main-container login-main-container col-lg-12">
-					
-						<center>
-						<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Welcome to PayDay.<br/>Please Provide Your ARM Membership Number and Password</p></center>
-					
-						<div class="form-holder">
-							<div >
-								<div class="row" style="">
-									<div class="col-lg-4"></div>
+						
+					<div class="register-divs w3-margin w3-padding" id="existing">
+						<div class="w3-container w3-center">
+							<img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding"/>
+						</div>
+						<div class="main-container login-main-container col-lg-12">
+						
+							<center>
+							<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Please Provide Your ARM Membership Number and Password</p></center>
+						
+							<div class="form-holder">
+								<div style="overflow:hidden">
 									<div class="">
 										<span class="fa fa-envelope-o w3-xxlarge"></span>
-										<input type="email" placeholder="Membership ID" value="" id="Username" required="" class="w3-input w3-text-white w3-padding customized-input font-medium" onchange="preloadServer(null,this.id)">
+										<input class="w3-input w3-text-white" type="email" placeholder="Membership Number"  id="Username" required="" onchange="preloadServer(null,this.id)"  autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="padding-left:30px">											
 									</div> 
 									
-								</div>
-								<div class="row" style="margin-bottom: 0px !important;">
-									<div class="col-lg-4"></div>
 									<div class="">
 										<span class="fa fa-lock w3-xxlarge"></span>
-										<input type="password" placeholder="Password" id="Password"  class="w3-input w3-text-white w3-padding customized-input font-medium">
+										<input type="password" placeholder="Password" id="Password"  class="w3-input w3-text-white" style="padding-left:30px">
 									</div> 
-									<div class="col-lg-4"></div>
-								</div>
-								<div class="" style="margin-top:8px!important;text-align: center"> 
-									<button type="button" class="w3-button" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important"onclick="showRegDiv('welcomeDiv')">Back</button>
-									<button type="button" class="w3-button pdy-green" onclick="VerifyExistingClient(null)" style=" display: inline-block!important;width:48%" id="loginBtn">Verify</button>
+									
+									<div class="" style="margin-top:8px!important;text-align: center"> 
+										<button type="button" class="w3-button" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important"onclick="showRegDiv('welcomeDiv')">Back</button>
+										<button type="button" class="w3-button pdy-green" onclick="VerifyExistingClient(null)" style=" display: inline-block!important;width:48%" id="loginBtn">Verify</button>
+									</div>
 								</div>
 							</div>
+							
 						</div>
-						
 					</div>
 				</div>
-			</div>
-			<div class="register-divs backgroundImg" id="confirm_existing" style="padding: 30px;top: 14%;position: absolute;"> 
-				<div class="main-container login-main-container col-lg-12">
-					<div class="login-form-container " style="" id="login_form_container">
-						<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Please Confirm Your Details to Continue</p>
-					
-						<div class="form-holder">
-					
-							<div>
+				<div class="register-divs backgroundImg" id="confirm_existing" style="padding: 30px;top: 14%;position: absolute;"> 
+					<div class="w3-container w3-center">
+						<img src="img/Logos/PayDay_Investor_White_Logo.png" class="pdy-logo pdy-padding"/>
+					</div>
+					<div class="main-container login-main-container col-lg-12" >
+						<div class="login-form-container " style="" id="login_form_container">
+							<p class="welcome-text w3-card w3-border-bottom w3-border-black w3-text-white center">Please Confirm Your Details to Continue</p>
+						
+							<div class="form-holder" style="overflow:hidden">
+						
 								<div>
+									<div id="confirm_existing_bindable">
+										
 									<div class="row" style="" v-if="!armOneDetail.IsARMOne">
+										
 										<div class="form-group form-field-holder">
 											<div class="">
 												<p class="w3-tooltip"> 
@@ -417,50 +398,61 @@
 												<option value="What is your father's middle name">What is your father's middle name?</option>
 												<option value="In what city were you born">In what city were you born?</option>
 											</select>
-										  
+											
 										</div>
 										<div class="col-xs-12"  style="padding-top: 15px;padding-bottom: 15px;padding-left: 0px">
 											<div class="">
 												<span class="fa fa-lock 3-xxlarge"></span>
 												<input type="text" style="" placeholder="Answer to security question" v-model="armOneDetail.SecurityAnswer" value= "" class="w3-input w3-text-white w3-padding customized-input font-medium" required="" onfocusout="checkValue(this)" aria-required="true">
-										   
+											
 											</div>
 										</div>
-										<div class="row" style="">
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Membership Number: {{existingVm.MembershipNumber}}</label>
-											</div><br/>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Full Name: {{existingVm.FullName}}</label>
-											</div><br/>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Date of Birth: {{existingVm.DateOfBirthStr}}</label>
-											</div><br/>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Gender: {{existingVm.Gender}}</label>
-											</div><br/>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Mobile Number: {{existingVm.MobileNumber}}</label>
-											</div><br/>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Email Address: {{existingVm.EmailAddress}}</label>
-											</div><br/>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Home Address: {{existingVm.Address}}</label>
-											</div><br/>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">State: {{existingVm.State}}</label>
+										<div class="w3-text-white w3-row-padding" style="overflow:scroll">
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Membership Number:</div>												
+												<div class="col s6">{{existingVm.MembershipNumber}}</div>												
 											</div>
-											<div class="form-group form-field-holder col-xs-12 col-lg-4 col-sm-12 col-md-12 left w3-left">
-												<label class="w3-padding input-text-goal" style="display: block;">Country: {{existingVm.Country}}</label>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Full Name:</div>												
+												<div class="col s6">{{existingVm.FullName}}</div>												
 											</div>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Date of Birth:</div>												
+												<div class="col s6">{{existingVm.DateOfBirthStr}}</div>												
+											</div>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Gender:</div>												
+												<div class="col s6">{{existingVm.Gender}}</div>												
+											</div>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Mobile Number:</div>												
+												<div class="col s6">{{existingVm.MobileNumber}}</div>												
+											</div>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Email Address:</div>												
+												<div class="col s6">{{existingVm.EmailAddress}}</div>												
+											</div>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Home Address:</div>												
+												<div class="col s6">{{existingVm.Address}}</div>												
+											</div>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">State: </div>												
+												<div class="col s6">{{existingVm.State}}</div>												
+											</div>
+											<div class="row" style="margin-bottom: 0px;"> 
+												<div class="col s6">Country: </div>												
+												<div class="col s6">{{existingVm.Country}}</div>												
+											</div>
+	
 										</div>
 									</div>
 									<div class="" style="margin-top:8px!important;text-align: center"> 
 										<button type="button" class="w3-button" style="display: inline-block!important;width:48%;background: #323943; color:#fff!important"onclick="showRegDiv('welcomeDiv')">Back</button>
 										<button type="button" class="w3-button pdy-green" style=" display: inline-block!important;width:48%" onclick="regExistingClient(null)">Register</button>
 									</div>
-						   
+							   
+									</div>
 								</div>
 							</div>
 						</div>
@@ -468,28 +460,25 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-
-<div id="termsDisplayModal" class="w3-modal">
-		<header class=" w3-padding w3-text-white input-text-medium" style="background:#29313C"> 
-				<span onclick="document.getElementById('termsDisplayModal').style.display='none'" style="background:transparent" class="w3-button w3-display-topright input-text-large">&times;</span>
-				Terms & Conditions
-			</header>
-	<div class="w3-modal-content" style="">
-		
-
-		<div id='termsDisplayDiv' class="w3-container" style="height:350px; overflow:scroll">
+	</section>
+	
+	<div id="termsDisplayModal" class="w3-modal">
+			<header class=" w3-padding w3-text-white input-text-medium" style="background:#29313C"> 
+					<span onclick="document.getElementById('termsDisplayModal').style.display='none'" style="background:transparent" class="w3-button w3-display-topright input-text-large">&times;</span>
+					Terms & Conditions
+				</header>
+		<div class="w3-modal-content" style="">
+			
+			<div id='termsDisplayDiv' class="w3-container" style="height:350px; overflow:scroll">
+			</div>
+			
 		</div>
-		
+		<div class="w3-text-white" style="background:#191b21;text-align:right">
+			<right>
+			<button class="w3-btn w3-xlarge" onclick="document.getElementById('termsDisplayModal').style.display='none'">Agree</button>	
+			</right>
+		</div>
 	</div>
-	<div class="w3-text-white" style="background:#191b21;text-align:right">
-		<right>
-		<button class="w3-btn w3-xlarge" onclick="document.getElementById('termsDisplayModal').style.display='none'">Agree</button>	
-		</right>
-	</div>
-</div>
-
-
-
-<script>initRegApp();initExistingClientApp();stopLoad('stop');checkPasswordStrenght();</script>
+	
+	
+	<script>initRegApp();initExistingClientApp();stopLoad('stop');checkPasswordStrenght();</script>

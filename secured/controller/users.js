@@ -9,12 +9,12 @@ $('#welcomeDiv').fadeIn();
         regVm: new User(null)
       }
     });
-    console.log('done this')
+    //console.log('done this')
  }
 var existingApp = '';
 function initExistingClientApp(){
     existingApp = new Vue({
-      el: '#confirm_existing',
+      el: '#confirm_existing_bindable',
       data: {
         existingVm: new existingUser(null),
         armOneDetail:{
@@ -81,7 +81,7 @@ function register(data){
         }
         if(temporaryApp.regVm.Phonenumber.length != 11){
             toastr.error('Phone number must be 11 digits');
-            showRegStep('register-step-1')
+            
             return false;
         }
         if(temporaryApp.regVm.Password.length = '' || temporaryApp.regVm.Password.length < 8 || sessionStorage.passwordStrenght !='strong'){
@@ -89,11 +89,17 @@ function register(data){
             return false;
         }
         if(files){
-            var ProfileUpload = renda.fileToBase64(files);
-            ProfileUpload.then(function(result) {
-                ProfileUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
+            if(temporaryApp.regVm.ProfilePic){
+                ProfileUpload=temporaryApp.regVm.ProfilePic.replace(/^data:image\/[a-z]+;base64,/, "");
                 uploadProfileImage()
-            });
+            }else{
+                var ProfileUpload = renda.fileToBase64(files);
+                ProfileUpload.then(function(result) {
+                    ProfileUpload = result.replace(/^data:image\/[a-z]+;base64,/, "");
+                    uploadProfileImage()
+                });
+            }
+            
         }else{
             /* toastr.error('Please Upload Profile Picture');
             showRegStep('register-step-1')
@@ -135,7 +141,7 @@ function register(data){
 					uploadProfileImage(JSON.stringify(result))
 				});
 			}
-		}
+		} 
         function sendRegReq(){
             var token = generateToken(5);
             data = {
@@ -153,7 +159,8 @@ function register(data){
                 "terms":true
             } 
             if (validateObj(data)){
-                //console.dir(data)
+                /* console.dir(data);
+                return false; */
                 data = JSON.stringify(data)
 
                 renda.loader('start')
@@ -165,6 +172,18 @@ function register(data){
     }                   
 }
 
+function openPicturePicker(){
+    $('#ProfileUpload').unbind().trigger('click');
+}
+
+function prepareRegistrationProfileUpload(){
+    var files = '';
+    files = document.getElementById('ProfileUpload').files[0]
+    var ProfileUpload = renda.fileToBase64(files);
+    ProfileUpload.then(function(result) {
+        temporaryApp.regVm.ProfilePic = result;
+    });
+}
 function activateOtp(data){
     if (data) {
         stopLoad()   
@@ -218,12 +237,12 @@ function VerifyExistingClient(data){
         try{
             JSON.parse(data);
         }catch(err){
-            toastr.error('An error occured while verfying user information.')
             console.dir(err);
             sendAppLog('custom',err+'::Verify Existing::'+'::'+data)
             //alert(':::'+err+'::Verify Existing::'+'::'+data)
-            
             if(data.length > 100){
+                toastr.error('An error occured while verfying user information.')
+                
             }else{
                 alert(data)                                               
             }
@@ -260,7 +279,12 @@ function VerifyExistingClient(data){
     }
     var email = document.getElementById('Username').value;
     var pass = document.getElementById('Password').value; 
-        
+    if(email=='' || pass == ''){
+        alert('Please provide your membership number and password')
+        return false;
+    }else{
+
+    }
     data = {
         "Username":email,
         "Password":pass
@@ -366,9 +390,9 @@ function showRegStep(id){
 
 if(renda.Config.currentPage == "register" || renda.Config.currentPage == "login"){
     initRegApp();initExistingClientApp();stopLoad('stop');checkPasswordStrenght()
-  
+    //console.log('this is done')    
     }else{
-
+        console.log(renda.Config.currentPage)
     } 
 
  
