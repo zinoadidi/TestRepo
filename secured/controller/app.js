@@ -697,20 +697,15 @@ document.addEventListener("deviceready", function(e){
 }, false);  
 function checkPasswordStrenght(){
     $('.checkPass').keyup(function(e) {
-        var strongRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$%^[&_"<>)(?`~]).*$', "g");
-        var mediumRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$%^[&_"<>)(?`~]).*$', "g");
-        var enoughRegex = new RegExp("(?=.{6,}).*", "g");
-        if (false == enoughRegex.test($(this).val())) {
-                sessionStorage.passwordStrenght ='More Characters';
-        } else if (strongRegex.test($(this).val())) {
-                //$('#passstrength').className = 'ok';
-                sessionStorage.passwordStrenght ='strong';
-        } else if (mediumRegex.test($(this).val())) {
-                //$('#passstrength').className = 'alert';
-                sessionStorage.passwordStrenght ='strong';
-        } else {
-               // $('#passstrength').className = 'error';
-               sessionStorage.passwordStrenght ='weak';
+        var letters = new RegExp(/[a-zA-Z]/);
+        var uppercase = new RegExp(/[A-Z]/);
+        var digits = new RegExp(/\d/);
+        var specials = new RegExp(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/);
+        var pass = $(this).val();
+        if(letters.test(pass) && digits.test(pass) &&  pass.length >=8 && uppercase.test(pass)){
+            sessionStorage.passwordStrenght ='strong';
+        }else{
+            sessionStorage.passwordStrenght ='weak';
         }
         return true;
    });
