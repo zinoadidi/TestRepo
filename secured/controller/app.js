@@ -697,19 +697,18 @@ document.addEventListener("deviceready", function(e){
 }, false);  
 function checkPasswordStrenght(){
     $('.checkPass').keyup(function(e) {
-      /*   var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"); */
         var letters = new RegExp(/[a-zA-Z]/);
         var uppercase = new RegExp(/[A-Z]/);
         var digits = new RegExp(/\d/);
         var specials = new RegExp(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/);
         var pass = $(this).val();
-        if(letters.test(pass) && digits.test(pass) && pass.length >=8 && uppercase.test(pass)){
+
+        if(letters.test(pass) && digits.test(pass) &&  pass.length >=8 && uppercase.test(pass)){
             sessionStorage.passwordStrenght ='strong';
         }else{
             sessionStorage.passwordStrenght ='weak';
         }
         console.log('Letter:'+letters.test(pass)+';Specials:'+specials.test(pass)+';Digits:'+digits.test(pass)+';Uppercase:'+uppercase.test(pass)+'Lenght:'+pass.length)
-       
         return true;
    });
 }
