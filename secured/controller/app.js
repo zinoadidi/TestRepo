@@ -703,26 +703,13 @@ function checkPasswordStrenght(){
         var digits = new RegExp(/\d/);
         var specials = new RegExp(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/);
         var pass = $(this).val();
-        if(letters.test(pass) && digits.test(pass) && specials.test(pass) && pass.length >=8 && uppercase.test(pass)){
+        if(letters.test(pass) && digits.test(pass) && pass.length >=8 && uppercase.test(pass)){
             sessionStorage.passwordStrenght ='strong';
         }else{
             sessionStorage.passwordStrenght ='weak';
         }
         console.log('Letter:'+letters.test(pass)+';Specials:'+specials.test(pass)+';Digits:'+digits.test(pass)+';Uppercase:'+uppercase.test(pass)+'Lenght:'+pass.length)
-        /* var mediumRegex = new RegExp('^.*(?=.{4,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!@*#$!%^[&_"<>)(?`~]).*$', "g"); */
-       /*  var enoughRegex = new RegExp("(?=.{6,}).*", "g");
-        if (false == enoughRegex.test($(this).val())) {
-                sessionStorage.passwordStrenght ='More Characters';
-        } else if (strongRegex.test($(this).val())) {
-                //$('#passstrength').className = 'ok';
-                sessionStorage.passwordStrenght ='strong';
-        }  else if (mediumRegex.test($(this).val())) {
-                //$('#passstrength').className = 'alert';
-                sessionStorage.passwordStrenght ='strong';
-        }  else {
-               // $('#passstrength').className = 'error';
-               //sessionStorage.passwordStrenght ='weak';
-        //} */
+       
         return true;
    });
 }
