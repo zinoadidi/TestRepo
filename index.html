@@ -121,27 +121,63 @@
 		<link rel="stylesheet" href="secured/assets/js/jquery-ui/jquery-ui.css">
 		<link href="secured/assets/css/toastr.css" rel="stylesheet"/>
 		<link rel="stylesheet" href="secured/assets/css/style.css"/>
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">          
-		
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">  
+		<script>dataLayer = []; </script>
+		        
+		<!-- Google analytics -->
+		<!-- Google Analytics -->
+		<script>
+			window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+			
+			ga('create', 'UA-115011701-2','auto', 'tracker2');
+			ga('create', 'UA-115011701-2','auto', 'tracker1');
+
+			// Requires plugins on tracker1.
+			ga('tracker1.require', 'eventTracker');
+			ga('tracker1.require', 'socialWidgetTracker');
+
+			// Requires plugins on tracker2.
+			ga('tracker2.require', 'eventTracker');
+			ga('tracker2.require', 'outboundLinkTracker');
+			ga('tracker2.require', 'pageVisibilityTracker');
+			ga('tracker2.require', 'urlChangeTracker');
+			// Sends the initial pageview for each tracker.
+
+			ga('require', 'urlChangeTracker', {
+			shouldTrackUrlChange: function(newPath, oldPath) {
+				// Strips the query string from the path values.
+				newPath = newPath.split('?')[0];
+				oldPath = oldPath.split('?')[0];
+
+				return newPath != oldPath;
+			}
+			});
+			ga('tracker2.send', 'pageview');
+			
+	</script>
+	<script async src="https://www.google-analytics.com/analytics.js"></script>
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+	<!-- End Google Analytics -->
+		<!-- End Google Analytics -->
 	</head>
 	<body>
 		
 		<div id="loadingbar" style="z-index: 1000; position: fixed;" class="w3-top">
 			<div id="preindexLoader" >
-				
-					
 			  <img src='img/Logos/PayDay_Investor_White_Logo.png' height="120" id="loadingImg" class="w3-hide-large small-screen">
 			  <img src='img/Logos/PayDay_Investor_White_Logo.png' height="170" id="loadingImg" class="w3-hide-small w3-hide-medium large-screen">
-			
 			  <div id="indexLoader"></div>
 			</div>	
 		</div>
 		<div id="display" style=''></div>
+
+		<!-- Google Tag Manager (noscript) -->
+		<!-- 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVKZRFV"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+		<!-- End Google Tag Manager (noscript) -->
 	</body>
 	
 	<footer>
 		
-		<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 		
 		<script type="text/javascript" src="cordova.js"></script>
 		<script src="js/index.js"></script>		
@@ -175,28 +211,7 @@
 			});
 		</script>
 		
-<!-- 		<script src="secured/assets/js/moment.js"></script>			
-		<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-auth.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-database.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-firestore.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-messaging.js"></script> -->
-		<!-- Leave out Storage -->
-		<!-- <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-storage.js"></script> -->
-		<script>
-			// Initialize Firebase
-		/* 	var config = {
-				apiKey: "AIzaSyAAv83iUyECbopLWGxgcHBho-1XDp4_ygk",
-				authDomain: "payday-investor.firebaseapp.com",
-				databaseURL: "https://payday-investor.firebaseio.com",
-				projectId: "payday-investor",
-				storageBucket: "payday-investor.appspot.com",
-				messagingSenderId: "140856865178"
-			};
-			firebase.initializeApp(config); */
-		</script>
-		<!-- scripts -->
-				
+		
 	
 	</footer>
 

@@ -1,9 +1,10 @@
     
    $(document).ready(function(){ 
         //load extra files
-        goToTest();
+        //goToTest();
         //goToHttp();
         // live to test switch
+        
         checklogin();   
         $("#loadDashboardBtn").click(function(){
             loadDashboardStatsDiv();
@@ -643,7 +644,7 @@ function sendEmail(option, data) {
         case 'contactUs':
             var subject = data.Subject;
             var message = '\n            Enquiry from ' + data.name + ' (' + data.email + ')<br/><br/>\n            ' + data.message + '\n            <br/><br/>\n            \n            <style>\n                img{\n                    height:200px!important;\n                    width:200px!important;\n                }\n            </style>\n            ';
-            var email = "enquiries@arminvestmentcenter.com,IT@arm.com.ng,ittransformation@arm.com.ng";
+            var email = "hello@paydayinvestor.ng,IT@arm.com.ng,ittransformation@arm.com.ng";
             break;
         case 'passwordChanged':
             var subject = 'Your password has been changed';
@@ -670,6 +671,13 @@ function sendEmail(option, data) {
 }
   function mailResponse(data){
     console.log('========mail send response')
+    if(data['message']){
+        sendAppLog('custom','Send Email'+'::'+data+'::'+renda.Config.currentPage);
+        if(renda.Config.currentPage == ''){
+            alert('If you did not recieve the token that was sent to your email address, kindly tap resend token.')
+            $('#resendUserTokenDiv').show()
+        }
+    }else{}
     console.log(data)
   }
   function updateOnlineStatus() {
@@ -697,18 +705,19 @@ document.addEventListener("deviceready", function(e){
 }, false);  
 function checkPasswordStrenght(){
     $('.checkPass').keyup(function(e) {
+      /*   var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"); */
         var letters = new RegExp(/[a-zA-Z]/);
         var uppercase = new RegExp(/[A-Z]/);
         var digits = new RegExp(/\d/);
         var specials = new RegExp(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/);
         var pass = $(this).val();
-
-        if(letters.test(pass) && digits.test(pass) &&  pass.length >=8 && uppercase.test(pass)){
+        if(letters.test(pass) && digits.test(pass) && pass.length >=8 && uppercase.test(pass)){
             sessionStorage.passwordStrenght ='strong';
         }else{
             sessionStorage.passwordStrenght ='weak';
         }
-        console.log('Letter:'+letters.test(pass)+';Specials:'+specials.test(pass)+';Digits:'+digits.test(pass)+';Uppercase:'+uppercase.test(pass)+'Lenght:'+pass.length)
+        //console.log('Letter:'+letters.test(pass)+';Specials:'+specials.test(pass)+';Digits:'+digits.test(pass)+';Uppercase:'+uppercase.test(pass)+'Lenght:'+pass.length)
+        
         return true;
    });
 }
@@ -719,15 +728,7 @@ function checKycStatus(){
         return false;
     }
 }
-/* 
-function checKycStatus(){
-    if(payday.user.ProgressStatus == 'KYC Approved' || payday.user.ProgressStatus == 'Existing Customer'){
-        return true;
-    }else{
-        return false;
-    }
-}
- */
+
 
 function goToTest(){
     renda.Config.serverUrl = 'http://192.168.250.29:8000/pdiv/';

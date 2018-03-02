@@ -256,6 +256,11 @@ function walletWithdrawal(data,option){
         }
         return false;
     }else{
+        if(payday.user.IsKYCApproved == false &&  payday.user.ProgressStatus != 'Existing Customer'){
+            var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. You will not be able to use this feature until your KYC is approved');
+            if(confirm){renda.page('setup_profile')}else{}
+            return false;
+        }
         var UserId = sessionStorage.UserId;
         var url = '';
         var data = {};

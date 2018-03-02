@@ -36,16 +36,24 @@ function register(data){
         }catch(err){
             stopLoad()
             checkInternet()
-            toastr.error('An error occured while performing request.')
             if(r){
                 if(r.message){
-                    alert(r.message);                        
+                    alert(r.message);   
                 }else{
-                    alert(data)
+                    if(data.length > 70){
+                        toastr.error('An error occured while performing request.')
+                    }else{
+                        alert(data)                    
+                    }
                 }
             }else{
-                alert(data)
+                if(data.length > 70){
+                    toastr.error('An error occured while performing request.')
+                }else{
+                    alert(data)                    
+                }
             }
+            sendAppLog('custom',err+'::'+'Register'+'::'+data+'::'+document.getElementById('userRegEmail').value)            
             console.dir(err);
             return false;
         } 
@@ -238,7 +246,7 @@ function VerifyExistingClient(data){
             JSON.parse(data);
         }catch(err){
             console.dir(err);
-            sendAppLog('custom',err+'::Verify Existing::'+'::'+data)
+            sendAppLog('custom',err+'::Verify Existing::'+'::'+data+'::'+document.getElementById('Username').value);
             //alert(':::'+err+'::Verify Existing::'+'::'+data)
             if(data.length > 100){
                 toastr.error('An error occured while verfying user information.')
