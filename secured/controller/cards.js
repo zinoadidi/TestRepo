@@ -38,6 +38,7 @@ if(payday.user.IsCXCreated){
 function createCard(data,cardRegStep){
     var url ='';    
     if(data){
+        alert(data);        
         try{
             JSON.parse(data);
         }catch(err){
@@ -151,7 +152,7 @@ function createCard(data,cardRegStep){
         cardNumber = cardNumber.replace(/\s/g, '');
         if(cardRegStep != 2){
             url = 'paydaypayment/tokinize/card';   
-            data = {
+            data = { 
                 "ExpiryYear":expiryYear,
                 "ExpiryMonth":expiryMonth,
                 "CardNo": cardNumber,
@@ -160,12 +161,21 @@ function createCard(data,cardRegStep){
                 "AppUserId": sessionStorage.UserId,
                 "MembershipNumber":payday.user.MembershipNumber
             }
-            if(String(cardNumber).lenght < 12){
+            alert(data )
+            if(String(cardNumber).length < 12){
                 toastr.error('Kindly Confirm the Length of Your Card Number')
                 return false
             }
-            if(String(cvc).lenght < 3){
+            if(String(cvc).length < 3){
                 toastr.error('Kindly Confirm That Your CVC is 3 Digits')
+                return false
+            }
+            if (String(expiryYear).length < 2) {
+                toastr.error('Kindly Confirm That You Entered Expiry Year')
+                return false
+            }
+            if (String(expiryMonth).length < 2) {
+                toastr.error('Kindly Confirm That You Entered Expiry Month')
                 return false
             }
             if (validateObj(data)){
