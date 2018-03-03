@@ -38,7 +38,6 @@ if(payday.user.IsCXCreated){
 function createCard(data,cardRegStep){
     var url ='';    
     if(data){
-        alert(data);        
         try{
             JSON.parse(data);
         }catch(err){
@@ -162,6 +161,13 @@ function createCard(data,cardRegStep){
                 "MembershipNumber":payday.user.MembershipNumber
             }
             alert(data )
+            if(expiryMonth.length<1){
+                var expiry = $('.expiry').val();
+                expiry = expiry.replace(/\s+/g, '');
+                expiry = expiry.split("/");
+                expiryMonth = expiry[0]
+                expiryYear = expiry[1]
+            }
             if(String(cardNumber).length < 12){
                 toastr.error('Kindly Confirm the Length of Your Card Number')
                 return false
