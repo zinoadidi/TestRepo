@@ -149,6 +149,13 @@ function createCard(data,cardRegStep){
         var expiryYear = myCard.CardJs('expiryYear');
         var cvc = myCard.CardJs('cvc');
         cardNumber = cardNumber.replace(/\s/g, '');
+        
+        var expiry = $('.expiry').val();
+        expiry = expiry.replace(/\s+/g, '');
+        expiry = expiry.split("/");
+        expiryMonth = expiry[0]
+        expiryYear = expiry[1]
+
         if(cardRegStep != 2){
             url = 'paydaypayment/tokinize/card';   
             data = { 
@@ -160,14 +167,7 @@ function createCard(data,cardRegStep){
                 "AppUserId": sessionStorage.UserId,
                 "MembershipNumber":payday.user.MembershipNumber
             }
-            alert(data )
-            if(expiryMonth.length<1){
-                var expiry = $('.expiry').val();
-                expiry = expiry.replace(/\s+/g, '');
-                expiry = expiry.split("/");
-                expiryMonth = expiry[0]
-                expiryYear = expiry[1]
-            }
+            alert('EXPMN:::'+data.ExpiryMonth+'EXPYR:'+data.ExpiryYear)  
             if(String(cardNumber).length < 12){
                 toastr.error('Kindly Confirm the Length of Your Card Number')
                 return false
