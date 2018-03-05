@@ -197,7 +197,7 @@ function createGoal(data){
 				"MonthlyDeduction":MonthlyDeduction,
 				"Duration":_duration.toString(),				
 				"ProductId":"custom",
-				"GoalType":"custom",
+				"GoalType":2,
 				"DateCreated":dateCreated.toJSON(),
 				"monthDays" : createGoalApp.cgvm.monthDays,
 				"weekDays" : createGoalApp.cgvm.weekDays,
@@ -646,7 +646,7 @@ function editGoal(data){
 				"MonthlyDeduction":MonthlyDeduction,
 				"Duration":_duration.toString(),				
 				"ProductId":singleGoalApp.sgdata.ProductId,
-				"GoalType":singleGoalApp.sgdata.GoalType,
+				"GoalType":2,
 				"monthDays" : createGoalApp.cgvm.monthDays,
 				"weekDays" : createGoalApp.cgvm.weekDays,
 				"Day":createGoalApp.cgvm.Day,
@@ -825,7 +825,7 @@ function redeemGoal(data){
 			"Reason":$('#RedeemReason').val(),
 			"OTP":payday.user.Token,
 			"RedemptionType":'Redemption',
-			"GoalType":singleGoalApp.sgdata.GoalType
+			"GoalType":2
 		}  
 		if(data.Amount){
 		}else{

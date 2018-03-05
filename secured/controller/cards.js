@@ -44,7 +44,7 @@ function createCard(data,cardRegStep){
             stopLoad();
             checkInternet()        
             if(data['status'] && data['status'] == 200){
-            
+                data=JSON.stringify(data);
             }else{
                 toastr.error('An error occured while adding card. Please try again')
                 return false;
@@ -218,7 +218,7 @@ function createCard(data,cardRegStep){
     }
  
 }
-
+var popCard = false;
 function deleteCard(data,id){
     var url ='';    
     if(data){
@@ -235,6 +235,10 @@ function deleteCard(data,id){
         data = JSON.parse(data);
         if (data){         
             toastr.success("Card Deleted Successfully");
+            if(popCard!=false){
+                sessionStorage.userCards = JSON.stringify(popCard)
+                popCard = false;
+            }
             startLoad()
             //renda.component('card','view','dashboardDisplayDiv');
             $('#loadCardManagementBtn').trigger('click');
@@ -252,6 +256,10 @@ function deleteCard(data,id){
                 "UserId":sessionStorage.UserId,
                 "PaymentDetId":id
             };
+            var popCard = JSON.parse(sessionStorage.userCards);
+            if(popCard.length<=1){
+                popCard = [];
+            }
             data = JSON.stringify(data)
             renda.post(url,JSON.stringify(data),'deleteCard');
         }else{
