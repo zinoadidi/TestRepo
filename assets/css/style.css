@@ -700,8 +700,8 @@ footer {
     width: 50%;
 }
 #faqs h3{ 
-    cursor:pointer; position: relative; background: #29313C; border-radius: 2px;
-    padding: 10px; font-weight: normal; margin: 0px 0 2px; font-size: 16px;
+    cursor:pointer; position: relative; background: #dcdcdc; border-radius: 2px;
+    padding: 10px; font-weight: normal; margin: 0px 0 2px; font-size: 16px;color:#4e335c;
 }
 #faqs h3:after { 
      content: "\f067"; position: absolute;

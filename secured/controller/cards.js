@@ -42,12 +42,17 @@ function createCard(data,cardRegStep){
             JSON.parse(data);
         }catch(err){
             stopLoad();
-            checkInternet()            
-            toastr.error('An error occured while adding card. Please try again')
+            checkInternet()        
+            if(data['status'] && data['status'] == 200){
+            
+            }else{
+                toastr.error('An error occured while adding card. Please try again')
+                return false;
+                
+            }    
             //alert(err);
             //alert(data)
             console.log(err);
-            return false;
         }
         stopLoad();
         console.dir(data)
@@ -97,7 +102,7 @@ function createCard(data,cardRegStep){
                         }
                     }).then(function(result){
                         createCard(result,2)
-                    });           
+                    });            
                      //renda.get('paydaypayment/'+url,'createCard',2)
                     //renda.Config.httpRequestAuth.authToken = oldAuthToken;
                      
