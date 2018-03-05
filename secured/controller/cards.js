@@ -31,7 +31,7 @@ if(payday.user.IsCXCreated){
     console.log('===============check kyc passed')
 }else{
     var confirm = window.confirm('Your account has not been verified. You will not be able to add a card until your account is verified.')        
-    if(confirm){renda.page('setup_profile')}else{}
+    if(confirm){}else{}
 }
 });
 
@@ -116,7 +116,8 @@ function createCard(data,cardRegStep){
             }else{
                 toastr.success('Card Successfully Added!')
                 startLoad()
-                renda.component('card','view','dashboardDisplayDiv');
+                //renda.component('card','view','dashboardDisplayDiv');
+                $('#loadCardManagementBtn').trigger('click');
                 //showAddCardForm('addNewCardForm')  
             }
         }else{
@@ -140,7 +141,8 @@ function createCard(data,cardRegStep){
             console.log('===============check kyc passed')
         }else{
             var confirm = window.confirm('Your account has not been verified. You will not be able to add a card until your account is verified.')        
-            if(confirm){renda.page('setup_profile')}else{}
+            if(confirm){}else{}
+            return false;
         }
         var myCard = $('#add-card-form');
         var cardNumber = myCard.CardJs('cardNumber');
@@ -153,8 +155,8 @@ function createCard(data,cardRegStep){
         var expiry = $('.expiry').val();
         expiry = expiry.replace(/\s+/g, '');
         expiry = expiry.split("/");
-        expiryMonth = expiry[0]
-        expiryYear = expiry[1]
+        expiryMonth = expiry[0];
+        expiryYear = expiry[1];
 
         if(cardRegStep != 2){
             url = 'paydaypayment/tokinize/card';   
@@ -167,7 +169,7 @@ function createCard(data,cardRegStep){
                 "AppUserId": sessionStorage.UserId,
                 "MembershipNumber":payday.user.MembershipNumber
             }
-            alert('EXPMN:::'+data.ExpiryMonth+'EXPYR:'+data.ExpiryYear)  
+              
             if(String(cardNumber).length < 12){
                 toastr.error('Kindly Confirm the Length of Your Card Number')
                 return false
@@ -229,7 +231,8 @@ function deleteCard(data,id){
         if (data){         
             toastr.success("Card Deleted Successfully");
             startLoad()
-            renda.component('card','view','dashboardDisplayDiv');
+            //renda.component('card','view','dashboardDisplayDiv');
+            $('#loadCardManagementBtn').trigger('click');
         }else{
             toastr.error(data);
             alert('An error occurred while removing card. Please try again later.')    

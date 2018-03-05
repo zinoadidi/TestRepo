@@ -72,7 +72,10 @@ function updateStage(data){
 		data = JSON.parse(data);     
     	if (data.UserId){
 			data = modResult(data);
-    		sessionStorage.UserInfo = JSON.stringify(data)                 
+			sessionStorage.UserInfo = JSON.stringify(data)  
+			if (data.data.IsCXCreated){
+				payday.user = data.data;        
+			}
 	        if(step == 1){
 	            toastr.success('Profile Update Was Successful')
 	            step2();
@@ -114,7 +117,8 @@ function updateStage(data){
 	        return false;
 	    }else if(step == 2){
 	    	startLoad()
-	    	url = "Account/RegisterSTG3";
+			//url = "Account/RegisterSTG3";
+			url = "Account/UpdateKYC";
 	    	var files = '';
 			files = document.getElementById('PassportUpload').files[0]
 			if(files.size > 525000){
