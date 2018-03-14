@@ -33,7 +33,7 @@ var app = {
         window.open = cordova.InAppBrowser.open;
         //window.location = "index.html";
         this.receivedEvent('deviceready');
-        screen.orientation.lock('portrait');
+        //window.screen.orientation.lock('portrait');
     },
 
     // Update DOM on a Received Event

@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-<html manifest="">
-<html lang="en"> 
-	<head>
-			<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://* https://* 'unsafe-eval' 'unsafe-inline' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' http://* https://* 'unsafe-inline'; media-src *; img-src 'self' http://* https://* data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link href="secured/assets/css/w3.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="secured/assets/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="secured/assets/font/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="secured/assets/css/shepherd-theme-arrows.css" />
 		
-	<!-- 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
-		<meta name="format-detection" content="telephone=no">
-		<meta name="msapplication-tap-highlight" content="no">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" href="secured/assets/js/jquery-ui/jquery-ui.css">
+		<link href="secured/assets/css/toastr.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="secured/assets/css/style.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">  
+        <!-- 
+		<script>dataLayer = []; </script>
+		        
 		
-			
-					
-		<title>Payday Investor</title>
-		<!-- Styles -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115011701-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'UA-115011701-2');
+        </script> -->
+        		<!-- Styles -->
 		<style type="text/css">
 			body,.display{
 		    	background: #29313C !important;
@@ -114,29 +139,12 @@
 			    }
 			}
 		</style>
-		<link href="secured/assets/css/w3.css" rel="stylesheet"/>
-		<link rel="stylesheet" href="secured/assets/css/materialize.min.css">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="secured/assets/font/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="secured/assets/css/shepherd-theme-arrows.css" />
-		
-		<link rel="stylesheet" href="secured/assets/js/jquery-ui/jquery-ui.css">
-		<link href="secured/assets/css/toastr.css" rel="stylesheet"/>
-		<link rel="stylesheet" href="secured/assets/css/style.css"/>
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">  
-		<script>dataLayer = []; </script>
-		        
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115011701-2"></script>
-		<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		
-		gtag('config', 'UA-115011701-2');
-		</script>
-	</head>
-	<body>
+        <title>PayDay Investor</title>
+        
+    </head>
+    <body>
+        
+        	
 		
 		<div id="loadingbar" style="z-index: 1000; position: fixed;" class="w3-top">
 			<div id="preindexLoader" >
@@ -146,51 +154,40 @@
 			</div>	
 		</div>
 		<div id="display" style=''></div>
-
-		<!-- Google Tag Manager (noscript) -->
-			<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=UA-115011701-2"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
+       <!--  <div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div> -->
+        
+	
 	</body>
 	
 	<footer>
 		
-		<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 		
-		<script type="text/javascript" src="cordova.js"></script>
-		<script src="js/index.js"></script>		
-		<script src="secured/assets/js/jquery-3.2.1.min.js"></script>		
+		
+
+		
+		
+			
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+
+
+         <script src="secured/assets/js/jquery-3.2.1.min.js"></script>		
 		<script src="secured/assets/js/jquery-ui/jquery-ui.js"></script>		
 		<script src="secured/assets/ajax/libs/vue.js"></script>
-		<script src="secured/assets/js/renda/renda.js"></script>		
-		<script src="secured/assets/js/tether.min.js"></script>
-		<script src="secured/assets/js/shepherd.min.js"></script>
-
+        <script src="secured/assets/js/renda/renda.js"></script>	
+		<script src="secured/controller/payday_tour.js"></script>
 		<script src="secured/assets/js/toastr.js"></script>
 		<script src="secured/assets/js/swipe.js"></script>
-
-		<script src="secured/model/constants.js"></script>
-		
-		<script src="secured/model/models.js"></script>
-
-		<script src="secured/model/config.js"></script>
-		
-		<script src="secured/services/login.js"></script>	
-		
-		<script src="secured/controller/app.js"></script>	
-
-		<script src="secured/controller/payday_tour.js"></script>
-		
-		
-		<script type="text/javascript">
-			$(document).bind("mobileinit", function() {
-				$.support.cors = true;
-				$.mobile.allowCrossDomainPages = true;
-			});
-		</script>
-		
-		
-	
-	</footer>
-
-</html> 
- 
+        <script src="secured/model/constants.js"></script>
+        <script src="secured/model/models.js"></script>
+        <script src="secured/model/config.js"></script>
+        <script src="secured/services/login.js"></script>	
+		<script src="secured/controller/app.js"></script>
+    </body>
+</html>
