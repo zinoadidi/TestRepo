@@ -115,13 +115,11 @@ var Renda = function Renda() {
             };
             if (httpReq.readyState == 4) {
                 var response = String(this.response);
-                if (this.status == 200 || this.status == 0) {
+                if (this.status == 200) {
                     if (this.response) {
                         if (response != '' && response != 'null' && response != ' ' && response != 'undefined' && response.length > 1) {
-                            
                             renda.updateElement(this.response, displayElem);
                             renda.updateUrl(page, '');
-                            
                             return false;
                         } else {
                             console.log('preflight:', this.response);
@@ -162,7 +160,7 @@ var Renda = function Renda() {
             };
             if (httpReq.readyState == 4) {
                 var response = String(this.response);
-                if (this.status == 200 || this.status == 0) {
+                if (this.status == 200) {
                     if (this.response) {
                         if (response != '' && response != 'null' && response != ' ' && response != 'undefined' && response.length > 1) {
                             renda.updateElement(this.response, displayElem);
@@ -533,10 +531,7 @@ var Renda = function Renda() {
         }
     };
     this.updateElement = function (content, elem) {
-
         $('#' + elem).html(content);
-
-        
     };
     this.fileToBase64 = function (file, onLoadCallback) {
         return new Promise(function (resolve, reject) {
@@ -576,5 +571,4 @@ if (!Object.prototype['forEach']) {
 }
 //export default 'Renda';
 var renda = new Renda();
-
 //# sourceMappingURL=renda.js.map

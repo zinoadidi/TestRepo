@@ -1,10 +1,10 @@
     
    $(document).ready(function(){ 
         //load extra files
-        goToTest();
+        //goToTest();
         //goToHttp();
         // live to test switch
-     
+        
         checklogin();   
         $("#loadDashboardBtn").click(function(){
             loadDashboardStatsDiv();
@@ -309,7 +309,7 @@
         return false;  
     }
     function checklogin(){
-        
+
       if (typeof(Storage) !== "undefined") {
             if(sessionStorage.loggedin){ 
                 var result = JSON.parse(sessionStorage.UserInfo)
@@ -348,13 +348,10 @@
                 }
                 return false;
             }else{
-                
-                
                 if (renda.Config.currentPage == 'dashboard') {
                     renda.page('login');
                     return false;
                 }else{
-                    
                     renda.page('splashscreen');
                 }
             }

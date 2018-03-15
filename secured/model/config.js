@@ -10,7 +10,7 @@
         registerPageHistory:true, 
         viewPath:'secured/views/',
         serverUrl:'http://prodapi.arm.com.ng:8000/pdiv/',
-        appMode:'debug',
+        appMode:'live',
         httpReqHeaders:{
             "Content-Type": "application/json",
             "Accept": "application/json",
