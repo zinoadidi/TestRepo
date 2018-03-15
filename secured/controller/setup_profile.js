@@ -19,7 +19,8 @@ var step = 0;
 		String(payday.user["ProgressStatus"]) != "Stage 2 Completed" ){
 			if(
 				String(payday.user["ProgressStatus"]) == "KYC Submitted" ||
-				String(payday.user["ProgressStatus"]) == "KYC Rejected"){
+				String(payday.user["ProgressStatus"]) == "KYC Rejected" ||
+				String(payday.user["ProgressStatus"]) == "KYC Updated"){
 					step2()	
 			
 				}else{
@@ -41,11 +42,15 @@ function step1(){
 	step = 1;
 	$('#step2').hide()
 	$('#step1').show()
+	if(String(payday.user["ProgressStatus"]) == "KYC Submitted" || String(payday.user["ProgressStatus"]) == "KYC Updated"){
+		step2()
+        return false
+	}
 }
 
 function step2(){
 	step = 2;
-	if(String(payday.user["ProgressStatus"]) == "KYC Submitted"){
+	if(String(payday.user["ProgressStatus"]) == "KYC Submitted" || String(payday.user["ProgressStatus"]) == "KYC Updated"){
 		alert('Your KYC is pending approval. You will not be able to perform any transaction until it is approved.')
         skip();
         return false
@@ -206,4 +211,8 @@ function updateStage(data){
 	    }
 	    
     }
+}
+
+function skipSpecial(){
+	if(confirm('Are you sure? You will be required to provide your KYC to withdraw your fund')){skip()}else{}
 }
