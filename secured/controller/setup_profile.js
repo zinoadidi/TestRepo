@@ -77,7 +77,7 @@ function updateStage(data){
 				payday.user = data.data;        
 			}
 	        if(step == 1){
-	            toastr.success('Profile Update Was Successful')
+	            toastr.success('Your details have been captured. Please proceed.')
 	            step2();
 	        }else if(step == 2){
 	            toastr.success('Document Submission Successful')

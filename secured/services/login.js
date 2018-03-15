@@ -26,7 +26,8 @@ var Login = function Login() {
                 return false;
             }
             //console.log('token request exceed maximum')
-            alert('token request exceed maximum');
+            //alert('token request exceed maximum');
+            alert('PayDay may be experiencing some difficulties performing your request, kindly restart the app and try again. If you are still seeing this message, kindly check that your internet connection is stable. If this problem persist, please contact admin for help.');
             stopLoad();
 
             return false;

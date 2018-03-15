@@ -87,7 +87,7 @@ function createCard(data,cardRegStep){
                      url = url.replace('https://paydayinvestor.ng/api/v1/','')
                      url = url.replace('http://paydayinvestor.ng/api/v1/','') */
                      //url = url.replace('tokinze/card/','card/tokinze/')
-                     console.log(url)       
+                     //console.log(url)       
                     // url = renda.Config.serverUrl+'paydaypayment/'+url;
                      //var oldAuthToken = renda.Config.httpRequestAuth.authToken
                      //renda.Config.httpRequestAuth.authToken = paydayWebAuthToken;  

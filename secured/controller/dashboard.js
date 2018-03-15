@@ -240,3 +240,93 @@ var httpReq = function httpReq(obj) {
       xhr.send(obj.body);
   });
 };
+
+function showWithdrawPopUp(){
+  $('#extendedWalletUI').show()
+  $('.extendWalletDivs').hide()
+  $('#walletWithdrawal').show()
+  $('.walletWithdrawExtras').hide()
+  $('#walletWithdrawExtrasOtp').hide()
+  $('.walletWithdrawExtrasHide').show()
+}
+
+function walletWithdrawal(data,option){
+  if (data) {
+      stopLoad()
+      try{
+          JSON.parse(data);
+      }catch(err){
+          if(data){
+              alert(data)            
+              
+          }else{
+              toastr.error('An error occured while performing request.')
+          }
+          console.dir(err);
+          return false;
+      }            
+      var result = JSON.parse(data);
+      //var result = USERDATA;
+      console.dir(result);
+      if (option == 'otp'){
+          result = modResult(result);
+          result.message = 'Please provide the OTP code that was sent to your email';
+          alert(result.message); 
+          showWalletWithdrawExtras()
+      }else{
+          result = modResult(result);
+          result.message = 'Redemption request has been submitted successful';
+          alert(result.message); 
+          startLoad()
+          renda.component('dashboard','myDashboard','dashboardDisplayDiv')
+      }
+      return false;
+  }else{
+      if(payday.user.IsKYCApproved == false &&  payday.user.ProgressStatus != 'Existing Customer'){
+          var confirm = window.confirm('You have not completed your registration. Please upload your KYC information to continue. If your KYC is pending approval, you can ignore this message. You will not be able to use this feature until your KYC is approved');
+          if(confirm){renda.page('setup_profile')}else{}
+          return false;
+      }
+      var UserId = sessionStorage.UserId;
+      var url = '';
+      var data = {};
+      switch (option) {
+          case 'otp':
+              data = {"UserId":UserId}
+              url = 'Utility/SendOTP';
+              break;
+          case 'withdrawal':
+              data = {
+                  "AppUserId":UserId,
+                  "Amount":$('#walletAmount').val(),
+                  "Reason":$('#walletReason').val(),
+                  "OTP":$('#walletOtp').val(),
+                  "RedemptionType":'WalletRedemption'
+              }
+              url = 'UserTransactions/RedemptionRequest';
+              if(data.OTP == '' || data.Amount == '' || data.Reason == ''){
+                  alert('Please Provide All Fields to Process Redemption')
+                  return false;
+              }else{
+
+              }
+              break;
+          default:
+              break;
+      }
+      if(url){
+          data = JSON.stringify(data)
+          renda.post(url,JSON.stringify(data),'walletWithdrawal',null,null,option)            
+      }else{
+          alert('invalid command. Please try again')
+      }
+  }
+  
+  return false;  
+}
+
+function showWalletWithdrawExtras(){
+  $('.walletWithdrawExtras').show()
+  $('#walletWithdrawExtrasOtp').show()    
+  $('.walletWithdrawExtrasHide').hide()
+}

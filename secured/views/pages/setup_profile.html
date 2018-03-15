@@ -404,7 +404,7 @@
             <form action="#" onsubmit="event.preventDefault();updateStage()" id="step2" method="post" class="w3-animate-right stages">
                 <img src="assets/images/pagination-3.png" class="img-responsive center paginated-tab" width="80%" >
                 <p class="welcome-text w3-card w3-border-bottom w3-border-black w3-center ">Hello <strong  class="capitalize">{{vm.Firstname}}</strong>, Please please provide your KYC detail to continue.</p>
-                <a class="register-here-link " onclick="skip()"><p class="center w3-large"><b>Skip this step? Go to dashboard >></b></p></a>                
+                <a class="register-here-link " onclick="if(confirm('Are you sure? You will be required to provide your KYC to withdraw your fund')){skip()}else{}"><p class="center w3-large"><b>Skip this step? Go to dashboard >></b></p></a>                
                 <div class="form-holder center ">
                 <div style="text-align: left"><h5>Identity</h5> </div>
                 <div class="form-group form-field-holder">
@@ -417,7 +417,8 @@
                             <option value="">Select Identification Type</option>
                             <option value="International passport">International passport</option>
                             <option value="Drivers Licence">Drivers Licence</option>
-                            <option value="Voters Card">Voters Card</option>
+                            <option value="International passport">International passport</option>
+                            <option value="National ID Card">National ID Card</option>
                         </select>
                     </div>
                 </div>

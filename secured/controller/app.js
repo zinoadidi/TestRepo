@@ -673,7 +673,7 @@ function sendEmail(option, data) {
     console.log('========mail send response')
     if(data['message']){
         sendAppLog('custom','Send Email'+'::'+data+'::'+renda.Config.currentPage);
-        if(renda.Config.currentPage == ''){
+        if(renda.Config.currentPage == 'register_otp'){
             alert('If you did not recieve the token that was sent to your email address, kindly tap resend token.')
             $('#resendUserTokenDiv').show()
         }

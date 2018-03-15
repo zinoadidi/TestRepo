@@ -17,4 +17,4 @@ var investment101WebView = '';
 
  var globalLinkVar = '';
  var loginClass = '';
-	
+var activateWalletPopUpOnLoad = false;
