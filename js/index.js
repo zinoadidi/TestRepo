@@ -34,6 +34,7 @@ var app = {
         //window.location = "index.html";
         this.receivedEvent('deviceready');
         screen.orientation.lock('portrait');
+        /* cordova.plugins.firebase.analytics.logEvent("my_event", {param1: "value1"}); */
     },
 
     // Update DOM on a Received Event
@@ -45,7 +46,7 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;'); */    
-        console.log('Received Event: ' + id);
+       // console.log('Received Event: ' + id);
     }
     // request permission
 };
@@ -57,17 +58,5 @@ function DeviceReady(el){
     document.addEventListener("backbutton", function(e){
         performBackBtn()
      }, false);
-    /* window.FirebasePlugin.getToken(function(token) {
-        // save this server-side and use it to push notifications to this device
-        console.log(token);
-        
-    }, function(error) {
-        console.error(error);
-       
-    });
-    if (window && window['FirebasePlugin']) {
-        window['FirebasePlugin'].setUserProperty('logon_type', 'demo');
-    }
-    window['FirebasePlugin'].setUserProperty('logon_type', 'demo'); */
-      
+     
 }

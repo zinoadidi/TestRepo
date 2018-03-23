@@ -115,7 +115,7 @@ var Renda = function Renda() {
             };
             if (httpReq.readyState == 4) {
                 var response = String(this.response);
-                if (this.status == 200) {
+                if (this.status == 200 || this.status == 0) {
                     if (this.response) {
                         if (response != '' && response != 'null' && response != ' ' && response != 'undefined' && response.length > 1) {
                             renda.updateElement(this.response, displayElem);
@@ -193,6 +193,11 @@ var Renda = function Renda() {
                 document.title = title;
                 history.pushState(stateObj, title, "#!/" + page + '/' + component);
                 this.log(page + " loaded");
+                try{
+                    cordova.plugins.firebase.analytics.setCurrentScreen(page+"/"+component);
+                }catch(e){
+                    console.log(e);
+                }
             } else {
                 this.Config.currentPage = page;
                 var stateObj = { page: page };
@@ -200,6 +205,11 @@ var Renda = function Renda() {
                 document.title = title;
                 history.pushState(stateObj, title, "#!/" + page);
                 this.log(page + " loaded");
+                try{
+                    cordova.plugins.firebase.analytics.setCurrentScreen(page);
+                }catch(e){
+                    console.log(e);
+                }
             }
         }
     };
